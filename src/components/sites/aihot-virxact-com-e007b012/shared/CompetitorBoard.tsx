@@ -333,7 +333,7 @@ export function CompetitorBoard() {
             <td colSpan={7} className="p-0">
               <div className="p-[16px_18px_20px] bg-mc-surface0 border-b border-mc-line">
                 <div className={SECTION_TITLE_CLASS}>
-                  ■ 性能(按研究类型，统一为 特异性 / 灵敏度 + 早期 + 癌前病变 + TOO)
+                  ■ 性能(特异性 / 灵敏度 + 检出分期 + TOO)
                   <PerfLegend />
                 </div>
                 <div className="flex flex-col gap-[9px] mb-[14px]">

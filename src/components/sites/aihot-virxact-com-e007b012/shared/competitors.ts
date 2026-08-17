@@ -53,7 +53,7 @@ export interface Study {
   name: string;
   /** 入组人群 / 例数 */
   pop: string;
-  /** 性能摘要：统一为 特异性 / 灵敏度 + 早期 + 癌前病变 + TOO */
+  /** 性能摘要：特异性 / 灵敏度 + 检出分期 + TOO */
   perf: string;
   /** 更新时间：文献发表或会议届次 */
   updatedAt: string;

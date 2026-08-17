@@ -29,16 +29,16 @@ Before opening a PR, make sure the project is green:
 npm run check   # lint + typecheck + build
 ```
 
-## Source-of-truth files & the sync scripts
+## Source-of-truth files & the sync script
 
-This is the most important thing to know. Two source files generate the platform-specific project instructions and `/clone-website` skill copies. Edit the source files rather than their generated copies.
+This is the most important thing to know. This project maintains agent configs for **Codex CLI and Kimi Code only**. `AGENTS.md` is the shared single source of truth and needs no generation step; the `/clone-website` skill has one canonical source whose copies are generated.
 
-| What                   | Edit this (source of truth)             | Then run                           |
-| ---------------------- | --------------------------------------- | ---------------------------------- |
-| Project instructions   | `AGENTS.md`                             | `bash scripts/sync-agent-rules.sh` |
-| `/clone-website` skill | `.claude/skills/clone-website/SKILL.md` | `node scripts/sync-skills.mjs`     |
+| What                   | Edit this (source of truth)            | Then run                       |
+| ---------------------- | -------------------------------------- | ------------------------------ |
+| Project instructions   | `AGENTS.md`                            | — (read natively, nothing to run) |
+| `/clone-website` skill | `.codex/skills/clone-website/SKILL.md` | `node scripts/sync-skills.mjs` |
 
-After editing a source file, run the matching sync command and commit the regenerated files along with your change. CI verifies that the generated files are in sync — if you forget to regenerate, CI will fail with a reminder.
+After editing the skill source, run the sync command and commit the regenerated files along with your change. CI verifies that the generated files are in sync — if you forget to regenerate, CI will fail with a reminder.
 
 ## Submitting a pull request
 

@@ -62,9 +62,9 @@ scripts/            # Asset download scripts
 ```
 
 ## MOST IMPORTANT NOTES
-- When launching Claude Code agent teams, ALWAYS have each teammate work in their own worktree branch and merge everyone's work at the end, resolving any merge conflicts smartly since you are basically serving the orchestrator role and have full context to our goals, work given, work achieved, and desired outcomes.
-- After editing `AGENTS.md`, run `bash scripts/sync-agent-rules.sh` to regenerate platform-specific instruction files.
-- After editing `.claude/skills/clone-website/SKILL.md`, run `node scripts/sync-skills.mjs` to regenerate the skill for all platforms.
+- When launching agent teams, ALWAYS have each teammate work in their own worktree branch and merge everyone's work at the end, resolving any merge conflicts smartly since you are basically serving the orchestrator role and have full context to our goals, work given, work achieved, and desired outcomes.
+- 本项目仅维护 Codex CLI 与 Kimi Code 两套 agent 配置:`.codex/` 与 `.kimi-code/`;`AGENTS.md` 为两者共享的单一事实源。
+- After editing `.codex/skills/clone-website/SKILL.md`, run `node scripts/sync-skills.mjs` to regenerate the skill for both platforms.
 - After editing `public/mced-skill/SKILL.md`, run `npm run skill:hash` to regenerate `SKILL.md.sha256` — the install command on the Agent 接入 page verifies it before writing.
 
 @docs/research/INSPECTION_GUIDE.md

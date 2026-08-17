@@ -27,6 +27,27 @@ yarn-error.log*
 *.swp
 *.swo
 
+# Agent 平台配置(本项目仅维护 Codex CLI 与 Kimi Code,其余不入库)
+.claude/
+.cline/
+.clinerules
+.continue/
+.cursor/
+.gemini/
+.kiro/
+.opencode/
+.roo/
+.windsurf/
+.windsurfrules
+.amazonq/
+.augment/
+.aider.conf.yml
+CLAUDE.md
+GEMINI.md
+.github/copilot-instructions.md
+.github/copilot-setup-steps.yml
+.github/skills/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -37,13 +58,6 @@ next-env.d.ts
 
 # Vercel
 .vercel
-
-# Local settings (not project config)
-.claude/settings.local.json
-
-# User-specific skills (not part of the template)
-.claude/skills/customize/
-.claude/skills/release/
 
 # Local temp files
 temp/

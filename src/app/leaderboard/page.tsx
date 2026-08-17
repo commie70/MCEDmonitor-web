@@ -5,7 +5,7 @@ import { ProspectiveTable } from "@/components/sites/aihot-virxact-com-e007b012/
 
 export const metadata: Metadata = {
   title: "早筛产品看板 · 早筛情报站",
-  description:"癌症早筛企业深度调研看板： 19 家国内外企业技术路线、产品布局、报证审批与性能对照(统一为 特异性 / 灵敏度 + 早期 + 癌前病变 + TOO)，数据来源于发表文献、监管审评资料与会议摘要。",};
+  description:"癌症早筛企业深度调研看板： 19 家国内外企业技术路线、产品布局、报证审批与性能对照(特异性 / 灵敏度 + 检出分期 + TOO)，数据来源于发表文献、监管审评资料与会议摘要。",};
 
 export default function Leaderboard() {
   return (

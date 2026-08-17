@@ -32,13 +32,11 @@ jobs:
       - name: Verify generated files are in sync
         shell: bash
         run: |
-          bash scripts/sync-agent-rules.sh
           node scripts/sync-skills.mjs
 
           if [[ -n "$(git status --porcelain=v1 --untracked-files=all)" ]]; then
-            echo "::error::Generated files are out of sync with their sources (AGENTS.md / SKILL.md)."
-            echo "Run the sync scripts locally and commit the result:"
-            echo "  bash scripts/sync-agent-rules.sh"
+            echo "::error::Generated files are out of sync with their source (.codex/skills/clone-website/SKILL.md)."
+            echo "Run the sync script locally and commit the result:"
             echo "  node scripts/sync-skills.mjs"
             git status --short
             git diff --stat
