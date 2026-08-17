@@ -76,7 +76,7 @@ export function HotLivePage() {
   }
 
   const events:HotEvent[] = report.stories.slice(0, 20).map((s) => ({
-    id: s.id,
+    id: s.items?.[0]?.id ?? s.id,
     title: s.title,
     badge: s.badges[0],
     stale: s.stale_month ?? null,
@@ -92,7 +92,7 @@ export function HotLivePage() {
       methodNote={
         <>
           榜单热度 = Σ(信道权重 × 0.5^(年龄 / 24h)) + 跨引擎命中加成(Brave / Tavily /
-          AnySearch / Firecrawl 每多一个信道命中 + 1.0)，检索命中频率越高排名越前；
+          AnySearch / Firecrawl / Exa 每多一个信道命中 + 1.0)，检索命中频率越高排名越前；
           窗口为当前时间倒推 14 天，同一事件多信源合并为故事线。标签含义：爆 = ≥3 信源且集中出现、新 = 12 小时内有更新、发酵中 = 跨 ≥2 天且 24 小时内仍活跃。
         </>
       }/>

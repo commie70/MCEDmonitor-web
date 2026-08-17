@@ -7,6 +7,7 @@
  *   市场动态 → Google News RSS
  *   官网动态 → Tavily Search(TAVILY_API_KEY，公司官网 / 权威媒体报道)
  *   国内动态 → AnySearch CLI(ANYSEARCH_API_KEY；公众号 / 行业媒体等中文信源)
+ *   补充检索 → Brave(BRAVE_API_KEY)/ Firecrawl(FIRECRAWL_API_KEY)/ Exa(EXA_API_KEY，可选)
  *   报证审批 → openFDA 器械库(pma/de novo)
  *   学术动态 → ASCO/ESMO/AACR 人工核查链接(无开放接口)
  *
@@ -16,6 +17,7 @@
  *   生成 中文摘要 / 相关性评分 / 关注理由；并生成当日 AI 日报。
  *
  * 用法： node scripts/mced-daily-monitor.mjs [--since YYYY-MM-DD] [--days N] [--skip-llm] [--limit-llm N]
+ *        [--skip-enrich] [--enrich-limit N] — 正文富化:Firecrawl 抓原页正文落盘到故事线首条目
  * 输出： public/monitor/daily-report.json；水位 scripts/monitor-state.json
  */
 
@@ -23,6 +25,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
+import { enrichReport } from "./lib-content-enrich.mjs";
+import { inferItemDate, staleMonthOf } from "./lib-stale.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = path.join(ROOT, "scripts", "monitor-sources.json");
@@ -41,7 +45,7 @@ const MAX_CLI_OUTPUT_BYTES = 4 * 1024 * 1024; // 子进程 stdout 累积上限
 const CLI_ENV_KEYS = ["PATH", "HOME", "LANG", "LC_ALL", "LC_CTYPE", "TMPDIR", "ANYSEARCH_API_KEY"];
 const LLM_MODEL = process.env.OPENAI_MONITOR_MODEL || "gpt-5.6-luna";
 const LLM_REASONING = process.env.OPENAI_MONITOR_REASONING || "xhigh";
-const CHANNEL_WEIGHT = { pubmed: 3, fda: 5,news: 2, tavily: 2.5,anysearch: 2.5, brave: 2.5, firecrawl: 2.5 };
+const CHANNEL_WEIGHT = { pubmed: 3, fda: 5,news: 2, tavily: 2.5,anysearch: 2.5, brave: 2.5, firecrawl: 2.5, exa: 2.5 };
 const ROLLING_WINDOW_DAYS = 31; // 监测窗口：当前时间倒推 1 个月
 const EN_MONTHS = { jan: 1, feb: 2, mar: 3,apr: 4, may: 5, jun: 6, jul: 7,aug: 8, sep: 9, oct: 10,nov: 11, dec: 12 };
 const STOPWORDS = new Set([
@@ -75,6 +79,7 @@ for (const w of watches) {
   if (w.official || w.domestic) {
     await collectBrave(w);
     await collectFirecrawl(w);
+    await collectExa(w);
   }
 }// ---------- L1 聚类 + 热度 ----------
 const manualTasks = buildManualTasks(watches);
@@ -134,6 +139,25 @@ const report = {
   digest,
   manual_tasks: manualTasks,
   errors,};
+
+// ---------- 正文富化(Firecrawl 抓原页落盘,--skip-enrich 可关) ----------
+if (!args.skipEnrich) {
+  const r = await enrichReport(report, { maxItems:args.enrichLimit ?? 12 });
+  console.log(
+    `[mced-monitor] enrich: ${r.enriched} ok / ${r.failed} failed${r.skipped ? "(无 FIRECRAWL_API_KEY,跳过)" : ""}`
+  );
+}
+
+// ---------- 旧文判定(富化后:正文 / 摘要头部显式日期 > URL 日期 > 采集端日期) ----------
+for (const s of stories) {
+  const dates = s.items
+    .map((it) => inferItemDate(it) || it.date || null)
+    .filter(Boolean)
+    .sort();
+  const latest = dates.length ? dates[dates.length - 1] : "";
+  s.last_seen = latest;
+  s.stale_month = staleMonthOf(latest, sinceMonth);
+}
 
 await fs.mkdir(path.dirname(OUT_PATH),{ recursive: true });
 await fs.writeFile(OUT_PATH, normalizeZhPunct(JSON.stringify(report,null, 2)), "utf8");
@@ -363,6 +387,37 @@ async function collectFirecrawl(w) {
   } catch (err) {
     errors.push({ company: w.company, channel: "firecrawl", message: String(err.message || err) });
   }
+}
+
+async function collectExa(w) {
+  if (!process.env.EXA_API_KEY) return; // 未配置 EXA_API_KEY 时静默跳过该信道
+  try {
+    const q = w.official || w.domestic;
+    const res = await throttledFetch("https://api.exa.ai/search", "Exa",{
+      method: "POST",
+      headers:{
+        "x-api-key":process.env.EXA_API_KEY,
+        "Content-Type": "application/json",}, body: JSON.stringify({
+        query: q,
+        numResults: 5,
+        contents:{ text:{ maxCharacters: 240 } },}),});
+    if (!res.ok) throw new Error(`Exa HTTP ${res.status}`);
+    const json = await res.json();
+    for (const r of (json.results || []).slice(0, 5)) {
+      items.push({
+        id: `exa:${stableId(r.url)}`,
+        company: w.company,product: w.product,
+        category: "market",
+        channel: "exa",
+        title: stripHtml(r.title || ""),
+        source: hostOf(r.url),
+        date: typeof r.publishedDate === "string" ? r.publishedDate.slice(0, 10) : "",
+        url: r.url,note: "",
+        snippet: stripHtml(r.text || "").slice(0, 240),});
+    }
+  } catch (err) {
+    errors.push({ company: w.company, channel: "exa", message: String(err.message || err) });
+  }
 }// ================= L1 聚类 + 热度 =================
 
 /** 关键词归位：监管 / 学术类新闻从 market 划入对应类别(确定性规则，可审计) */
@@ -374,28 +429,6 @@ function retagCategory(item) {
   if (/asco|esmo|aacr|wclc|摘要|abstract|会议|大会|poster/.test(t))
     return { ...item, category: "academic" };
   return item;
-}/**
- * 推断条目月份(用于「旧文」标记):
- * 优先 item.date；否则 URL 中的 / 2025/06/ 或 2025-06-12；否则文本中的「2025年6月」/「June 2025」。
- * 返回 "YYYY-MM" 或 null(无法推断)。
- */
-function inferMonth(url, title, snippet) {
-  const u = String(url || "");
-  let m = u.match(/(20\d{2})[\/\-_](0?[1-9]|1[0-2])(?:[\/\-_]|$)/);
-  if (m) return `${m[1]}-${m[2].padStart(2, "0")}`;
-  const text = `${title || ""} ${snippet || ""}`;
-  m = text.match(/(20\d{2})\s*年\s*(0?[1-9]|1[0-2])\s*月/);
-  if (m) return `${m[1]}-${m[2].padStart(2, "0")}`;
-  m = text.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+,?\s*(20\d{2})\b/i);
-  if (m) return `${m[2]}-${String(EN_MONTHS[m[1].slice(0, 3).toLowerCase()]).padStart(2, "0")}`;
-  m = text.match(/\b(20\d{2})-(0[1-9]|1[0-2])-\d{2}\b/);
-  if (m) return `${m[1]}-${m[2]}`;
-  return null;
-}
-
-function itemMonth(it) {
-  if (it.date) return it.date.slice(0, 7);
-  return inferMonth(it.url, it.title, it.snippet);
 }
 
 function tokensOf(title) {
@@ -483,7 +516,7 @@ function buildStories(flat, since) {
         spark,
         items: sorted.map((i) => ({
           id: i.id, category: i.category, channel: i.channel, title: i.title,
-          source: i.source, date: i.date, url: i.url,note: i.note || "",})),});
+          source: i.source, date: i.date, url: i.url,note: i.note || "", snippet: i.snippet || "",})),});
     }
   }
   return stories.sort((a, b) => b.heat - a.heat);
@@ -756,6 +789,8 @@ function parseArgs(argv) {
     else if (argv[i] === "--days") out.since = daysAgo(Number(argv[++i]) || 7);
     else if (argv[i] === "--skip-llm") out.skipLlm = true;
     else if (argv[i] === "--limit-llm") out.limitLlm = Number(argv[++i]) || 10;
+    else if (argv[i] === "--skip-enrich") out.skipEnrich = true;
+    else if (argv[i] === "--enrich-limit") out.enrichLimit = Number(argv[++i]) || 12;
   }
   return out;
 }

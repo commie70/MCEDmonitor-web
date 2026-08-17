@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Bookmark } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { NewsItem } from "./types";
@@ -91,15 +92,16 @@ export function ArticleCard({ item, variant, starred, onToggleStar }: ArticleCar
         </div>
       </div>
 
-      {/* 标题 */}
-      <span
+      {/* 标题 → 文章页 */}
+      <Link
+        href={`/items/${encodeURIComponent(item.id)}`}
         className={cn(
-          "block cursor-default text-[15.5px] leading-[1.5] font-bold text-[var(--text-0)] transition-[color_.12s] hover:text-[var(--accent-cyan-fg)]",
+          "block text-[15.5px] leading-[1.5] font-bold text-[var(--text-0)] transition-[color_.12s] hover:text-[var(--accent-cyan-fg)]",
           "max-[960px]:text-[14.5px] max-[960px]:leading-[1.55]",
         )}
       >
         {item.title}
-      </span>
+      </Link>
 
       {/* 摘要 */}
       {(item.summary?.length ?? 0) > 0 && (

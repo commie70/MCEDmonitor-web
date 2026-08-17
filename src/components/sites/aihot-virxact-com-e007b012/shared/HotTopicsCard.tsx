@@ -42,9 +42,12 @@ export function HotTopicsCard({ events }:{ events:HotEvent[] }) {
             >
               {index + 1}
             </span>
-            <span className="min-w-0 flex-1 truncate text-sm font-semibold leading-normal text-mc-ink">
+            <Link
+              href={`/items/${encodeURIComponent(event.id)}`}
+              className="min-w-0 flex-1 truncate text-sm font-semibold leading-normal text-mc-ink transition-colors hover:text-mc-cyan-fg"
+            >
               {event.title}
-            </span>
+            </Link>
             <span className="inline-flex flex-none items-center gap-1.5 text-[13px] font-semibold tabular-nums text-mc-ink2">
               {event.heat} 热度
             </span>

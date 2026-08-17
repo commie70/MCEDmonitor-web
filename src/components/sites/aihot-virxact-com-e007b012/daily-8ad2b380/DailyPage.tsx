@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ExternalLink, RefreshCw, SearchCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { safeHttpUrl } from "../shared/url";
 
 /** 远程链接白名单守卫:非 http(s) 链接降级为纯文本,阻断 javascript:/data: 等导航。 */
@@ -121,7 +122,7 @@ const CATEGORY_META: Record<
     desc: "PubMed(NCBI E-utilities)按公司 / 产品检索式自动监测",}, market:{
     label: "市场动态",
     tone: "bg-[color-mix(in_srgb,var(--accent-rose)_10%,transparent)] text-mc-rose-fg",
-    desc: "Google News RSS 按公司 / 产品检索词自动监测",},};
+    desc: "Google News RSS + Tavily / Brave / Firecrawl / Exa / AnySearch 多引擎自动监测",},};
 
 const CATEGORY_ORDER: MonitorItem["category"][] = [
   "regulatory",
@@ -318,12 +319,12 @@ export function DailyPage() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-[8px]">
-                            <RemoteLink
-                              url={story.items[0]?.url ?? ""}
+                            <Link
+                              href={`/items/${encodeURIComponent(story.items[0]?.id ?? story.id)}`}
                               className="text-[14px] font-bold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
                             >
                               {story.title}
-                            </RemoteLink>
+                            </Link>
                             {story.stale_month && (
                               <span
                                 className="rounded-[4px] bg-[color-mix(in_srgb,var(--accent-rose)_12%,transparent)] px-[7px] py-[1px] text-[10.5px] font-bold text-mc-rose-fg"
@@ -364,13 +365,13 @@ export function DailyPage() {
                           {story.sources_count > 1 && (
                             <div className="mt-[6px] text-[11.5px] text-mc-ink2">
                               另有 {story.sources_count - 1} 家信源报道：{story.items.slice(1, 4).map((it) => (
-                                <RemoteLink
+                                <Link
                                   key={it.id}
-                                  url={it.url}
+                                  href={`/items/${encodeURIComponent(it.id)}`}
                                   className="ml-[6px] text-mc-cyan-fg hover:underline"
                                 >
                                   {it.source}
-                                </RemoteLink>
+                                </Link>
                               ))}
                             </div>
                           )}
@@ -413,13 +414,13 @@ export function DailyPage() {
                     {CATEGORY_META[item.category].label}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <RemoteLink
-                      url={item.url}
+                    <Link
+                      href={`/items/${encodeURIComponent(item.id)}`}
                       className="inline-flex items-start gap-[5px] text-[14px] font-semibold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
                     >
                       <span className="min-w-0">{item.title}</span>
                       <ExternalLink size={13} className="mt-[3px] shrink-0 opacity-60" />
-                    </RemoteLink>
+                    </Link>
                     <div className="mt-[4px] flex flex-wrap items-center gap-x-[10px] gap-y-[2px] text-[11.5px] text-mc-ink2">
                       <span className="font-semibold text-mc-ink1">
                         {item.company}

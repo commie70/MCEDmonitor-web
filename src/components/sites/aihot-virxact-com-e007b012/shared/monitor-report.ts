@@ -24,6 +24,11 @@ export interface MonitorItem {
   date: string;
   url: string;
   note: string;
+  snippet?: string;
+  /** Firecrawl 抓回并清洗的信源 markdown 复制品(详情页正文) */
+  content?: string;
+  content_fetched_at?: string;
+  content_status?: string;
 }
 
 export interface MonitorStory {

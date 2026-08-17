@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Bookmark, Trash2 } from "lucide-react";
 import { useStarred } from "../shared/use-starred";
 
@@ -56,9 +57,12 @@ export function StarredPage() {
                   fill="currentColor"
                 />
                 <div className="min-w-0 flex-1">
-                  <span className="text-[14px] font-semibold leading-[1.5] text-mc-ink">
+                  <Link
+                    href={`/items/${encodeURIComponent(entry.id)}`}
+                    className="text-[14px] font-semibold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
+                  >
                     {entry.title}
-                  </span>
+                  </Link>
                   <div className="mt-[3px] flex flex-wrap gap-x-[10px] text-[11.5px] text-mc-ink2">
                     <span>{entry.source}</span>
                     <span className="tabular-nums">

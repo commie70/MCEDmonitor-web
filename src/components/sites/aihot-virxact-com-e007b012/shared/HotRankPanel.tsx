@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { HotBadge,HotEvent } from "./types";
 
 const MONO_STACK = "font-[ui-monospace,SFMono-Regular,Menlo,monospace]";
@@ -104,9 +105,12 @@ export function HotRankPanel({
 
               <div className="min-w-0 flex-1 max-[960px]:col-span-2">
                 <div className="flex flex-wrap items-baseline gap-2">
-                  <span className="font-bold leading-[1.5] text-mc-ink">
+                  <Link
+                    href={`/items/${encodeURIComponent(ev.id)}`}
+                    className="font-bold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
+                  >
                     {ev.title}
-                  </span>
+                  </Link>
                   {ev.badge ? <Badge label={ev.badge}/> :null}
                   {ev.stale ? (
                     <span
