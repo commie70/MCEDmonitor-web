@@ -1,0 +1,28 @@
+# 早筛情报站(mced-intel)
+
+> 癌症早筛竞品新闻监测与信息看板。面向 IVD 公司医学部、研发部、战略发展部员工。
+
+## 这是什么
+
+- 19 家早筛企业 × 五层证据研究库(性能数字均来自文献 / 会议原文，含出处与更新时间)
+- 每日自动监测： PubMed、Google News、openFDA、Tavily、AnySearch、Brave、Firecrawl
+- 故事线聚类 + 跨引擎命中热度 + AI 摘要 / 评分 / 日报
+
+## 接入路径(全部匿名只读，无需 API Key)
+
+- Agent Skill:`/mced-skill/SKILL.md`
+- MCP(JSON-RPC 2.0):`POST /api/mcp` — tools: get_top_stories / get_companies / get_company / search_items
+- RSS:`/feed.xml`(每日故事线前 20 条)
+- REST API v1:
+  - `GET /api/v1/companies` — 公司摘要列表
+  - `GET /api/v1/companies/{id}` — 单家完整性能库(含研究与出处)
+  - `GET /api/v1/prospective` — 前瞻队列性能对照(18 条)
+  - `GET /api/v1/stories` — 当前窗口故事线
+  - `GET /api/v1/items?category=regulatory|academic|research|market` — 原始命中
+  - `GET /api/v1/daily` — 当日 AI 日报 + 前 5 故事线
+
+## 注意
+
+- 摘要、评分、日报由 AI 生成；引用数字、性能或原话前，请回原文 URL 复核。
+- 性能数据引用自文献 / 会议原文并附出处；「旧文」标签表示最新可推断时间早于当前监测窗口。
+- 个人与组织内部使用免费；对外商业用途需先取得授权。

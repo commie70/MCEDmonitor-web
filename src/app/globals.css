@@ -115,16 +115,168 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}/* ==========================================================================
+   早筛情报站 — AIHOT 设计令牌(亮色 = :root 默认，暗色 = [data-theme="dark"])
+   取自目标站内联样式表原值，见 docs/research/aihot-virxact-com-e007b012/
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+  --bg-0: #f4f5f6;
+  --bg-1: #eff1f2;
+  --bg-2: #e2e4e7;
+  --surface-0: rgba(28, 39, 51, 0.025);
+  --surface-1: rgba(28, 39, 51, 0.04);
+  --surface-2: rgba(28, 39, 51, 0.06);
+  --surface-3: rgba(28, 39, 51, 0.09);
+  --surface-card: #ffffff;
+  --surface-card-hover: #ffffff;
+  --surface-elevated: #ffffff;
+  --text-0: #1c2733;
+  --text-1: #5c6672;
+  --text-2: #6b7684;
+  --text-soft-strong: rgba(28, 39, 51, 0.92);
+  --text-soft-medium: rgba(28, 39, 51, 0.55);
+  --border: #e2e4e7;
+  --border-strong: #d8dbdf;
+  --border-soft: #eceef0;
+  --border-emphasis: #8a94a2;
+  --border-card-subtle-solid: #c9cdd2;
+  --shadow: 0 12px 32px rgba(28, 39, 51, 0.12);
+  --shadow-soft: 0 4px 12px rgba(28, 39, 51, 0.06);
+  --shadow-card: 0 1px 2px rgba(28, 39, 51, 0.05);
+  --shadow-card-hover: 0 6px 18px rgba(28, 39, 51, 0.09);
+  --shadow-thumb: 0 1px 3px rgba(28, 39, 51, 0.14);
+  --accent-cyan:#135e6b;
+  --accent-amber: #b8873a;
+  --accent-rose: #b3402a;
+  --accent-emerald: #2f7d5c;
+  --accent-cyan-fg: #135e6b;
+  --accent-amber-fg: #7c5a24;
+  --accent-rose-fg: #b3402a;
+  --accent-emerald-fg: #2a6e51;
+  --rank-1: #b3402a;
+  --rank-2: #a3642f;
+  --rank-3: #96702e;
+  --rank-rest: #6b7684;
+  --note-fg: #42707c;
+  --note-bg: color-mix(in srgb, var(--note-fg) 6%, transparent);
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e2e4e7;
+  --scrim-overlay: rgba(0, 0, 0, 0.5);
+  --theme-accent: #135e6b;
+  --theme-accent-rgb: 19, 94, 107;
+  --theme-accent-hover: #0e4a54;
+  --theme-accent-contrast: #fcfcfd;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-0: #10151c;
+  --bg-1: #171d26;
+  --bg-2: #1b2230;
+  --surface-0: rgba(255, 255, 255, 0.03);
+  --surface-1: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --surface-3: rgba(255, 255, 255, 0.10);
+  --surface-card: #171d26;
+  --surface-card-hover: #1b2230;
+  --surface-elevated: #1b2230;
+  --text-0: #e8ebf2;
+  --text-1: #98a2b3;
+  --text-2: #7b869a;
+  --text-soft-strong: rgba(232, 235, 242, 0.85);
+  --text-soft-medium: rgba(232, 235, 242, 0.55);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border-emphasis: rgba(255, 255, 255, 0.22);
+  --border-card-subtle-solid: rgba(255, 255, 255, 0.14);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-card:none;
+  --shadow-card-hover:none;
+  --shadow-thumb: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --accent-cyan:#4fa3b3;
+  --accent-amber: #d3b26a;
+  --accent-rose: #d86a52;
+  --accent-emerald: #5fc79a;
+  --accent-cyan-fg: #6cb8c6;
+  --accent-amber-fg: #d3b26a;
+  --accent-rose-fg: #d86a52;
+  --accent-emerald-fg: #5fc79a;
+  --rank-1: #d86a52;
+  --rank-2: #d18a5e;
+  --rank-3: #d3b26a;
+  --rank-rest: #7b869a;
+  --note-fg: #8fb8a8;
+  --note-bg: color-mix(in srgb, var(--note-fg) 10%, transparent);
+  --sidebar-bg: #0c1117;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --scrim-overlay: rgba(0, 0, 0, 0.5);
+  --theme-accent: #4fa3b3;
+  --theme-accent-rgb: 79, 163, 179;
+  --theme-accent-hover: #6cb8c6;
+  --theme-accent-contrast: #10151c;
+}
+
+@theme inline {
+  --color-mc-page: var(--bg-0);
+  --color-mc-bg1: var(--bg-1);
+  --color-mc-bg2: var(--bg-2);
+  --color-mc-surface0: var(--surface-0);
+  --color-mc-surface1: var(--surface-1);
+  --color-mc-surface2: var(--surface-2);
+  --color-mc-surface3: var(--surface-3);
+  --color-mc-card: var(--surface-card);
+  --color-mc-card-hover: var(--surface-card-hover);
+  --color-mc-elev: var(--surface-elevated);
+  --color-mc-ink: var(--text-0);
+  --color-mc-ink1: var(--text-1);
+  --color-mc-ink2: var(--text-2);
+  --color-mc-soft-strong: var(--text-soft-strong);
+  --color-mc-soft-medium: var(--text-soft-medium);
+  --color-mc-line: var(--border);
+  --color-mc-line-strong: var(--border-strong);
+  --color-mc-line-soft: var(--border-soft);
+  --color-mc-emphasis: var(--border-emphasis);
+  --color-mc-card-line: var(--border-card-subtle-solid);
+  --color-mc-cyan: var(--accent-cyan);
+  --color-mc-cyan-fg: var(--accent-cyan-fg);
+  --color-mc-amber: var(--accent-amber);
+  --color-mc-amber-fg: var(--accent-amber-fg);
+  --color-mc-rose: var(--accent-rose);
+  --color-mc-rose-fg: var(--accent-rose-fg);
+  --color-mc-emerald: var(--accent-emerald);
+  --color-mc-emerald-fg: var(--accent-emerald-fg);
+  --color-mc-rank1: var(--rank-1);
+  --color-mc-rank2: var(--rank-2);
+  --color-mc-rank3: var(--rank-3);
+  --color-mc-rankrest: var(--rank-rest);
+  --color-mc-note: var(--note-fg);
+  --color-mc-note-bg: var(--note-bg);
+  --color-mc-sidebar: var(--sidebar-bg);
+  --color-mc-sidebar-line: var(--sidebar-border);
+  --color-mc-accent: var(--theme-accent);
+  --color-mc-accent-hover: var(--theme-accent-hover);
+  --color-mc-accent-contrast: var(--theme-accent-contrast);
+  --shadow-mc-card: var(--shadow-card);
+  --shadow-mc-card-hover: var(--shadow-card-hover);
+  --shadow-mc-soft: var(--shadow-soft);
+  --shadow-mc: var(--shadow);
+  --shadow-mc-thumb: var(--shadow-thumb);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+  }
+  body {
+    background: var(--bg-0);
+    color: var(--text-0);
   }
 }

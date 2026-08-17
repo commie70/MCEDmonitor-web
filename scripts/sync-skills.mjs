@@ -65,6 +65,9 @@ write('.github/skills/clone-website/SKILL.md', raw);
 // 3. Kiro — same SKILL.md format and $ARGUMENTS syntax
 write('.kiro/skills/clone-website/SKILL.md', raw);
 
+// 3b. Kimi Code — same SKILL.md format
+write('.kimi-code/skills/clone-website/SKILL.md', raw);
+
 // 4. Cline — Agent Skills format without Claude-only frontmatter/placeholders
 write('.cline/skills/clone-website/SKILL.md', agentSkill(body));
 
@@ -128,4 +131,4 @@ write(
   ) + '\n'
 );
 
-console.log('\nDone! 13 platform command/skill files generated from source skill.');
+console.log('\nDone! 14 platform command/skill files generated from source skill.');

@@ -1,0 +1,172 @@
+{
+  "window_days_first_run": 7,
+  "retmax_per_query": 8,
+  "watches": [
+    {
+      "company": "GRAIL",
+      "product": "Galleri®",
+      "fda_applicant": "GRAIL, INC.",
+      "pubmed": "\"Galleri\"[Title/Abstract] OR \"multi-cancer early detection\"[Title/Abstract] OR PATHFINDER[Title/Abstract]",
+      "news": "GRAIL Galleri",
+      "official": "GRAIL Galleri news announcement",
+      "domestic": null
+    },
+    {
+      "company": "Exact Sciences / Abbott",
+      "product": "Cancerguard™ / Cologuard Plus™",
+      "fda_applicant": "EXACT SCIENCES CORPORATION",
+      "pubmed": "Cancerguard[Title/Abstract] OR Cologuard[Title/Abstract] OR CancerSEEK[Title/Abstract]",
+      "news": "Exact Sciences Cologuard OR Cancerguard",
+      "official": "Exact Sciences Cancerguard OR Cologuard news",
+      "domestic": null
+    },
+    {
+      "company": "Guardant Health",
+      "product": "Shield™ / Shield™ MCD",
+      "fda_applicant": "GUARDANT HEALTH, INC.",
+      "pubmed": "\\\"Guardant Health\\\"[Title/Abstract] OR (Shield[Title] AND (colorectal[Title/Abstract] OR \\\"early detection\\\"[Title/Abstract] OR \\\"multi-cancer\\\"[Title/Abstract] OR Guardant[Title/Abstract]))",
+      "news": "Guardant Health Shield",
+      "official": "Guardant Health Shield MCD news",
+      "domestic": null
+    },
+    {
+      "company": "Freenome",
+      "product": "SimpleScreen CRC",
+      "fda_applicant": "FREENOME, INC.",
+      "pubmed": "Freenome[Title/Abstract] OR SimpleScreen[Title/Abstract]",
+      "news": "Freenome",
+      "official": "Freenome cancer screening news",
+      "domestic": null
+    },
+    {
+      "company": "Delfi Diagnostics",
+      "product": "FirstLook™ Lung",
+      "pubmed": "\"Delfi Diagnostics\"[Title/Abstract] OR \"FirstLook Lung\"[Title/Abstract] OR \"DNA fragmentome\"[Title/Abstract] OR (DELFI[Title/Abstract] AND (fragmentome[Title/Abstract] OR cancer[Title/Abstract]))",
+      "news": "Delfi Diagnostics",
+      "official": "Delfi Diagnostics FirstLook news",
+      "domestic": null
+    },
+    {
+      "company": "觅瑞 Mirxes",
+      "product": "觅小卫® / GASTROClear™",
+      "pubmed": "GASTROClear[Title/Abstract] OR Mirxes[Title/Abstract]",
+      "news": "Mirxes OR 觅瑞 GASTROClear",
+      "official": "Mirxes GASTROClear news",
+      "domestic": "觅瑞 GASTROClear 觅小卫 早筛 最新"
+    },
+    {
+      "company": "Epigenomics",
+      "product": "Epi proColon®",
+      "fda_applicant": "EPIGENOMICS AG",
+      "pubmed": "\"Epi proColon\"[Title/Abstract] OR (SEPT9[Title/Abstract] AND colorectal[Title/Abstract])",
+      "news": "Epigenomics proColon",
+      "official": "Epigenomics Epi proColon news",
+      "domestic": null
+    },
+    {
+      "company": "Geneoscopy",
+      "product": "ColoSense™",
+      "fda_applicant": "GENEOSCOPY, INC.",
+      "pubmed": "Geneoscopy[Title/Abstract] OR ColoSense[Title/Abstract] OR \"stool RNA\"[Title/Abstract]",
+      "news": "Geneoscopy ColoSense",
+      "official": "Geneoscopy ColoSense news",
+      "domestic": null
+    },
+    {
+      "company": "Gene Solutions",
+      "product": "SPOT-MAS™",
+      "pubmed": "SPOT-MAS[Title/Abstract] OR \"Gene Solutions\"[Title/Abstract] OR K-DETEK[Title/Abstract]",
+      "news": "Gene Solutions SPOT-MAS",
+      "official": "Gene Solutions SPOT-MAS cancer screening",
+      "domestic": null
+    },
+    {
+      "company": "世和基因",
+      "product": "CanScan® 鹰眼",
+      "pubmed": "CanScan[Title/Abstract] OR Geneseeq[Title/Abstract] OR NCT06011694[Title/Abstract]",
+      "news": "世和基因 OR Geneseeq CanScan",
+      "official": "Geneseeq CanScan MERCURY news",
+      "domestic": "世和基因 CanScan 鹰眼 早筛 最新"
+    },
+    {
+      "company": "燃石医学",
+      "product": "OverC™",
+      "pubmed": "OverC[Title/Abstract] OR \"Burning Rock\"[Title/Abstract]",
+      "news": "燃石医学 OR Burning Rock OverC",
+      "official": null,
+      "domestic": "燃石医学 OverC 早筛 最新"
+    },
+    {
+      "company": "鹍远基因",
+      "product": "PanSeer / PDACatch / GutSeer",
+      "pubmed": "PanSeer[Title/Abstract] OR Singlera[Title/Abstract] OR PDACatch[Title/Abstract]",
+      "news": "鹍远基因 OR Singlera PanSeer",
+      "official": null,
+      "domestic": "鹍远基因 PanSeer 早筛 最新"
+    },
+    {
+      "company": "和瑞基因",
+      "product": "莱思宁 (LiverScreening)",
+      "pubmed": "PreCar[Title/Abstract] OR \"Berry Oncology\"[Title/Abstract]",
+      "news": "和瑞基因 OR 莱思宁 OR Berry Oncology",
+      "official": null,
+      "domestic": "和瑞基因 莱思宁 肝癌早筛 最新"
+    },
+    {
+      "company": "诺辉健康",
+      "product": "常卫清®",
+      "pubmed": "ColoClear[Title/Abstract] OR \"New Horizon Health\"[Title/Abstract]",
+      "news": "诺辉健康 OR 常卫清 OR ColoClear",
+      "official": null,
+      "domestic": "诺辉健康 常卫清 早筛 最新"
+    },
+    {
+      "company": "泛生子",
+      "product": "HCCscreen™",
+      "pubmed": "HCCscreen[Title/Abstract] OR Genetron[Title/Abstract]",
+      "news": "泛生子 OR Genetron HCCscreen",
+      "official": null,
+      "domestic": "泛生子 HCCscreen 早筛 最新"
+    },
+    {
+      "company": "华大基因",
+      "product": "华常康",
+      "pubmed": "(BGI[Title] AND (methylation[Title/Abstract] OR screening[Title/Abstract]))",
+      "news": "华大基因 早筛 OR 华常康",
+      "official": null,
+      "domestic": "华大基因 早筛 华常康 最新"
+    },
+    {
+      "company": "吉因加",
+      "product": "吉早安®",
+      "pubmed": "GenePlus[Title/Abstract] AND (cancer[Title/Abstract] OR methylation[Title/Abstract])",
+      "news": "吉因加 吉早安 OR GenePlus",
+      "official": null,
+      "domestic": "吉因加 吉早安 早筛 最新"
+    },
+    {
+      "company": "臻和科技",
+      "product": "THEMIS / TOTEM",
+      "pubmed": "Genecast[Title/Abstract] OR ((THEMIS[Title/Abstract] OR TOTEM[Title/Abstract]) AND (methylation[Title/Abstract] OR cancer[Title/Abstract]))",
+      "news": "臻和科技 OR Genecast THEMIS",
+      "official": null,
+      "domestic": "臻和科技 THEMIS TOTEM 早筛 最新"
+    },
+    {
+      "company": "基准医疗",
+      "product": "UriFind® / PulmoSeek®",
+      "pubmed": "UriFind[Title/Abstract] OR PulmoSeek[Title/Abstract] OR AnchorDx[Title/Abstract]",
+      "news": "基准医疗 OR AnchorDx UriFind OR PulmoSeek",
+      "official": null,
+      "domestic": "基准医疗 UriFind PulmoSeek 最新"
+    },
+    {
+      "company": "行业总览",
+      "product": "MCED 领域",
+      "pubmed": "\"multi-cancer early detection\"[Title/Abstract] AND (prospective[Title/Abstract] OR screening[Title/Abstract] OR sensitivity[Title/Abstract])",
+      "news": null,
+      "official": null,
+      "domestic": null
+    }
+  ]
+}
