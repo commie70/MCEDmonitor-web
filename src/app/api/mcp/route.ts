@@ -1,70 +1,25 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { NextResponse } from "next/server";
 import { ALL_COMPETITORS } from "@/components/sites/aihot-virxact-com-e007b012/shared/competitors";
+import { readMonitorReport } from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
 
 export const dynamic = "force-dynamic";
 
 /**
  * MCP 原型 — 无状态 JSON-RPC 2.0 子集(仅 POST)。
  * 支持 initialize / tools/list / tools/call;notification 返回 202。
+ * 边界:请求体 ≤16KB、严格 JSON-RPC 2.0 信封校验、调度异常兜底。
  */
 
+const MAX_BODY_BYTES = 16 * 1024;
+
 interface JsonRpcRequest {
-  jsonrpc?: string;
+  jsonrpc: "2.0";
   id?: string | number | null;
-  method?: string;
-  params?:{
+  method: string;
+  params?: {
     name?: string;
     arguments?: Record<string, unknown>;
   };
-}
-
-interface MonitorItem {
-  id: string;
-  company: string;
-  product: string;
-  category: string;
-  channel: string;
-  title: string;
-  source: string;
-  date: string;
-  url: string;
-  note: string;
-}
-
-interface MonitorStory {
-  id: string;
-  company: string;
-  product: string;
-  title: string;
-  heat:number;
-  badges: string[];
-  sources_count:number;
-  categories: string[];
-  last_seen: string;
-  summary: string;
-  score:number;
-  reason: string;
-}
-
-interface MonitorReport {
-  generated_at: string;
-  window_since: string;
-  items: MonitorItem[];
-  stories: MonitorStory[];
-}
-
-async function readReport(): Promise<MonitorReport | null> {
-  try {
-    const raw = await readFile(
-      path.join(process.cwd(), "public", "monitor", "daily-report.json"),
-      "utf8"
-    );
-    return JSON.parse(raw) as MonitorReport;
-  } catch {
-    return null;
-  }
 }
 
 const TOOLS = [
@@ -110,12 +65,16 @@ function textContent(data: unknown) {
   return { content: [{ type: "text", text: JSON.stringify(data,null, 2) }] };
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
 async function callTool(
   name: string,args: Record<string, unknown>
 ): Promise<unknown> {
   switch (name) {
     case "get_top_stories":{
-      const report = await readReport();
+      const report = await readMonitorReport();
       if (!report) return { error: "monitor_report_missing", hint: "npm run monitor" };
       return {
         generated_at: report.generated_at,
@@ -142,9 +101,10 @@ async function callTool(
       return company;
     }
     case "search_items":{
-      const report = await readReport();
+      const report = await readMonitorReport();
       if (!report) return { error: "monitor_report_missing", hint: "npm run monitor" };
-      const query = typeof args.query === "string" ? args.query.toLowerCase() : "";
+      const query =
+        typeof args.query === "string" ? args.query.slice(0, 200).toLowerCase() : "";
       const category =
         typeof args.category === "string" ? args.category :null;
       const matches = report.items
@@ -162,13 +122,60 @@ async function callTool(
   }
 }
 
-export async function POST(request: Request) {
-  let body: JsonRpcRequest;
+/** 读取并校验有界 JSON-RPC 2.0 信封;任何一步不合法都直接返回错误响应。 */
+async function parseEnvelope(
+  request: Request
+): Promise<JsonRpcRequest | NextResponse> {
+  const contentType = (request.headers.get("content-type") ?? "").toLowerCase();
+  if (!contentType.includes("application/json")) {
+    return jsonError(null, -32600, "Invalid Request: content-type must be application/json", 415);
+  }
+  const declared = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > MAX_BODY_BYTES) {
+    return jsonError(null, -32600, "Invalid Request: body too large", 413);
+  }
+  let raw: string;
   try {
-    body = (await request.json()) as JsonRpcRequest;
+    raw = await request.text();
   } catch {
     return jsonError(null, -32700, "Parse error");
   }
+  if (Buffer.byteLength(raw, "utf8") > MAX_BODY_BYTES) {
+    return jsonError(null, -32600, "Invalid Request: body too large", 413);
+  }
+  let value: unknown;
+  try {
+    value = JSON.parse(raw);
+  } catch {
+    return jsonError(null, -32700, "Parse error");
+  }
+  if (!isPlainObject(value)) {
+    return jsonError(null, -32600, "Invalid Request: expected a JSON-RPC object");
+  }
+  if (value.jsonrpc !== "2.0") {
+    return jsonError(null, -32600, 'Invalid Request: jsonrpc must be "2.0"');
+  }
+  if (typeof value.method !== "string" || !value.method) {
+    return jsonError(null, -32600, "Invalid Request: method must be a non-empty string");
+  }
+  const id = value.id;
+  if (id !== undefined && id !== null && typeof id !== "string" && typeof id !== "number") {
+    return jsonError(null, -32600, "Invalid Request: id must be a string, number, or null");
+  }
+  return {
+    jsonrpc: "2.0",
+    id: id as string | number | null | undefined,
+    method: value.method,
+    params: isPlainObject(value.params)
+      ? (value.params as JsonRpcRequest["params"])
+      : undefined,
+  };
+}
+
+export async function POST(request: Request) {
+  const parsed = await parseEnvelope(request);
+  if (parsed instanceof NextResponse) return parsed;
+  const body = parsed;
 
   const id = body.id ?? null;
   const isNotification = body.id === undefined;
@@ -181,13 +188,19 @@ export async function POST(request: Request) {
     case "tools/list":
       return jsonResult(id,{ tools: TOOLS });
     case "tools/call":{
-      const name = body.params?.name ?? "";
-      const args = body.params?.arguments ?? {};
-      const result = await callTool(name,args);
-      if (result === null) {
-        return jsonError(id, -32602, `Unknown tool: ${name}`);
+      const name = typeof body.params?.name === "string" ? body.params.name : "";
+      const args = isPlainObject(body.params?.arguments)
+        ? (body.params.arguments as Record<string, unknown>)
+        : {};
+      try {
+        const result = await callTool(name,args);
+        if (result === null) {
+          return jsonError(id, -32602, `Unknown tool: ${name}`);
+        }
+        return jsonResult(id, textContent(result));
+      } catch {
+        return jsonError(id, -32603, "Internal error");
       }
-      return jsonResult(id, textContent(result));
     }
     case "notifications/initialized":
       return new Response(null,{ status: 202 });

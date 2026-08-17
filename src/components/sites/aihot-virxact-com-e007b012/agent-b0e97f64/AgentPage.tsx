@@ -23,8 +23,10 @@ const INSTALL_PROMPT = `请安装早筛情报站 Skill:${ORIGIN}/mced-skill/SKIL
 装完告诉我是否需要开启新会话。`;
 
 const UNIVERSAL_CMD = `mkdir -p ~/.agents/skills/mced-intel \\
-  && curl -fsSL ${ORIGIN}/mced-skill/SKILL.md \\
-     -o ~/.agents/skills/mced-intel/SKILL.md`;
+  && curl -fsSL ${ORIGIN}/mced-skill/SKILL.md -o /tmp/mced-intel-SKILL.md \\
+  && curl -fsSL ${ORIGIN}/mced-skill/SKILL.md.sha256 -o /tmp/mced-intel-SKILL.md.sha256 \\
+  && (cd /tmp && shasum -a 256 -c mced-intel-SKILL.md.sha256) \\
+  && mv /tmp/mced-intel-SKILL.md ~/.agents/skills/mced-intel/SKILL.md`;
 
 const CLAUDE_CMD = `mkdir -p ~/.claude/skills \\
   && ln -sfn ~/.agents/skills/mced-intel ~/.claude/skills/mced-intel`;
@@ -137,13 +139,13 @@ function SkillTab() {
           <div className="mt-[10px] text-[12px] font-bold text-mc-ink">Claude Code(软链到同一目录)</div>
           <CodeBlock copyText={CLAUDE_CMD}>{CLAUDE_CMD}</CodeBlock>
           <p className="mt-[8px] text-[11.5px] leading-[1.6] text-mc-ink2">
-            装一次即可被多个 Agent 发现；执行前请先审阅{" "}
+            装一次即可被多个 Agent 发现；安装命令会先下载并用 SHA-256 校验文件、一致才落盘；执行前请审阅{" "}
             <a href="/mced-skill/SKILL.md" className="text-mc-cyan-fg hover:underline">SKILL.md</a> 内容。
           </p>
         </Disclosure>
         <Disclosure title="更新已有 Skill">
           <p className="text-[12.5px] leading-[1.7] text-mc-ink1">
-            重新执行手动安装命令覆盖同一目录即可；或把更新提示词发给 Agent:
+            重新执行手动安装命令即可(同样经 SHA-256 校验后才覆盖);或把更新提示词发给 Agent:
             「把我的 mced-intel Skill 更新到最新版：{ORIGIN}/mced-skill/SKILL.md」。
             更新后开启新会话，用验证问题确认。
           </p>

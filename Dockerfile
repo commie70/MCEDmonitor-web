@@ -7,7 +7,8 @@
 # IMPORTANT: Node.js Version Maintenance
 # This Dockerfile defaults to Node.js 24.14.1-slim to match the repo's Node 24 baseline.
 # To ensure security and compatibility, update the NODE_VERSION ARG when the project's Node baseline changes.
-ARG NODE_VERSION=24.14.1-slim
+# 基础镜像按 digest 钉死(防 tag 被重指),升级时同步更新 tag 与 digest。
+ARG NODE_VERSION=24.14.1-slim@sha256:b506e7321f176aae77317f99d67a24b272c1f09f1d10f1761f2773447d8da26c
 
 FROM node:${NODE_VERSION} AS dependencies
 

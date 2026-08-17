@@ -20,7 +20,6 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HISTORY_PATH = path.join(ROOT, "scripts", "monitor-history.jsonl");
 const FEATURES_PATH = path.join(ROOT, "scripts", "changelog-features.json");
 const OUT_PATH = path.join(ROOT, "public", "changelog.json");
-const PKG_PATH = path.join(ROOT, "package.json");
 
 /** 站点按东八区出日报，分组日期同样按东八区切分 */
 const TZ = "Asia/Shanghai";
@@ -119,25 +118,6 @@ async function loadFeatureEntries() {
         tags: Array.isArray(f.tags)
           ? f.tags.filter((t) => typeof t === "string")
           : [],},}));
-}/** 向 package.json scripts 的 "monitor" 后追加 "changelog"(已存在则跳过) */
-async function ensurePkgScript() {
-  const pkg = await readJson(PKG_PATH,null);
-  if (!pkg || typeof pkg !== "object") return;
-  pkg.scripts ??= {};
-  if (pkg.scripts.changelog) return;
-  const next = {};
-  let inserted = false;
-  for (const [key, value] of Object.entries(pkg.scripts)) {
-    next[key] = value;
-    if (key === "monitor") {
-      next.changelog = "node scripts/build-changelog.mjs";
-      inserted = true;
-    }
-  }
-  if (!inserted) next.changelog = "node scripts/build-changelog.mjs";
-  pkg.scripts = next;
-  await fs.writeFile(PKG_PATH, JSON.stringify(pkg,null, 2) + "\n", "utf8");
-  console.log("[changelog] package.json 已追加 \"changelog\" 脚本");
 }
 
 const records = await loadHistory();
@@ -181,7 +161,6 @@ function normalizeZhPunct(input) {
 const out = { generated_at:new Date().toISOString(), groups };
 await fs.mkdir(path.dirname(OUT_PATH),{ recursive: true });
 await fs.writeFile(OUT_PATH, normalizeZhPunct(JSON.stringify(out,null, 2)) + "\n", "utf8");
-await ensurePkgScript();
 
 const total = groups.reduce((n, g) => n+g.entries.length, 0);
 console.log(

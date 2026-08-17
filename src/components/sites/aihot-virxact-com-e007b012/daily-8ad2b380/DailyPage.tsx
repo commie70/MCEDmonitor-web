@@ -3,6 +3,40 @@
 import { useEffect, useMemo, useState } from "react";
 import { ExternalLink, RefreshCw, SearchCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { safeHttpUrl } from "../shared/url";
+
+/** 远程链接白名单守卫:非 http(s) 链接降级为纯文本,阻断 javascript:/data: 等导航。 */
+function RemoteLink({
+  url,
+  className,
+  title,
+  children,
+}: {
+  url: string;
+  className?: string;
+  title?: string;
+  children: React.ReactNode;
+}) {
+  const href = safeHttpUrl(url);
+  if (!href) {
+    return (
+      <span className={className} title={title}>
+        {children}
+      </span>
+    );
+  }
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={className}
+      title={title}
+    >
+      {children}
+    </a>
+  );
+}
 
 interface MonitorItem {
   id: string;
@@ -284,14 +318,12 @@ export function DailyPage() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-[8px]">
-                            <a
-                              href={story.items[0]?.url}
-                              target="_blank"
-                              rel="noreferrer"
+                            <RemoteLink
+                              url={story.items[0]?.url ?? ""}
                               className="text-[14px] font-bold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
                             >
                               {story.title}
-                            </a>
+                            </RemoteLink>
                             {story.stale_month && (
                               <span
                                 className="rounded-[4px] bg-[color-mix(in_srgb,var(--accent-rose)_12%,transparent)] px-[7px] py-[1px] text-[10.5px] font-bold text-mc-rose-fg"
@@ -332,15 +364,13 @@ export function DailyPage() {
                           {story.sources_count > 1 && (
                             <div className="mt-[6px] text-[11.5px] text-mc-ink2">
                               另有 {story.sources_count - 1} 家信源报道：{story.items.slice(1, 4).map((it) => (
-                                <a
+                                <RemoteLink
                                   key={it.id}
-                                  href={it.url}
-                                  target="_blank"
-                                  rel="noreferrer"
+                                  url={it.url}
                                   className="ml-[6px] text-mc-cyan-fg hover:underline"
                                 >
                                   {it.source}
-                                </a>
+                                </RemoteLink>
                               ))}
                             </div>
                           )}
@@ -383,15 +413,13 @@ export function DailyPage() {
                     {CATEGORY_META[item.category].label}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noreferrer"
+                    <RemoteLink
+                      url={item.url}
                       className="inline-flex items-start gap-[5px] text-[14px] font-semibold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg"
                     >
                       <span className="min-w-0">{item.title}</span>
                       <ExternalLink size={13} className="mt-[3px] shrink-0 opacity-60" />
-                    </a>
+                    </RemoteLink>
                     <div className="mt-[4px] flex flex-wrap items-center gap-x-[10px] gap-y-[2px] text-[11.5px] text-mc-ink2">
                       <span className="font-semibold text-mc-ink1">
                         {item.company}
@@ -430,16 +458,14 @@ export function DailyPage() {
                     {company}
                   </span>
                   {tasks.map((t) => (
-                    <a
+                    <RemoteLink
                       key={t.channel}
-                      href={t.url}
-                      target="_blank"
-                      rel="noreferrer"
+                      url={t.url}
                       className="rounded-full border border-mc-line-strong bg-mc-card px-[10px] py-[3px] text-[11.5px] text-mc-ink1 transition-colors hover:border-mc-emphasis hover:text-mc-cyan-fg"
                       title={t.label}
                     >
                       {t.channel}
-                    </a>
+                    </RemoteLink>
                   ))}
                 </li>
               ))}

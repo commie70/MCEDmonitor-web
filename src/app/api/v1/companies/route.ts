@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ALL_COMPETITORS } from "@/components/sites/aihot-virxact-com-e007b012/shared/competitors";
+import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
 
 export const dynamic = "force-dynamic";
 
@@ -19,8 +20,12 @@ export function GET() {
     statusKeys: c.statusKeys,
     updatedAt: c.updatedAt,}));
 
-  return NextResponse.json({
-    generated_at:new Date().toISOString(),
-    count: companies.length,
-    companies,});
+  return NextResponse.json(
+    {
+      generated_at:new Date().toISOString(),
+      count: companies.length,
+      companies,
+    },
+    { headers: API_CACHE_HEADERS }
+  );
 }

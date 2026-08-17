@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ALL_COMPETITORS } from "@/components/sites/aihot-virxact-com-e007b012/shared/competitors";
+import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
 
 export const dynamic = "force-dynamic";
 
@@ -17,5 +18,5 @@ export async function GET(
     return NextResponse.json({ error: "not_found" },{ status: 404 });
   }
 
-  return NextResponse.json(company);
+  return NextResponse.json(company,{ headers: API_CACHE_HEADERS });
 }

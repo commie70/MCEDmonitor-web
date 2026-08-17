@@ -1,40 +1,13 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
+import {
+  readMonitorReport,
+  reportMissingResponse,
+} from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
+import {
+  API_CACHE_HEADERS,
+  safeHttpUrl,
+} from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
 
 export const dynamic = "force-dynamic";
-
-interface MonitorItem {
-  id: string;
-  url: string;
-}
-
-interface MonitorStory {
-  id: string;
-  company: string;
-  title: string;
-  sources_count:number;
-  last_seen: string;
-  items: MonitorItem[];
-  summary: string;
-}
-
-interface MonitorReport {
-  generated_at: string;
-  window_since: string;
-  stories: MonitorStory[];
-}
-
-async function readReport(): Promise<MonitorReport | null> {
-  try {
-    const raw = await readFile(
-      path.join(process.cwd(), "public", "monitor", "daily-report.json"),
-      "utf8"
-    );
-    return JSON.parse(raw) as MonitorReport;
-  } catch {
-    return null;
-  }
-}
 
 function escapeXml(value: string): string {
   return value
@@ -50,11 +23,9 @@ function toRfc822(value: string, fallback: string): string {
     return new Date(fallback).toUTCString();
   }
   return date.toUTCString();
-}/**
- * GET /feed.xml — RSS 2.0：监测故事线前 20 条。
- */
+}/** GET /feed.xml — RSS 2.0：监测故事线前 20 条(仅 http(s) 链接入 feed)。 */
 export async function GET() {
-  const report = await readReport();
+  const report = await readMonitorReport();
 
   if (!report) {
     return new Response("monitor_report_missing: run npm run monitor",{
@@ -65,7 +36,8 @@ export async function GET() {
   const items = report.stories
     .slice(0, 20)
     .map((story) => {
-      const link = story.items[0]?.url ?? "";
+      const link = safeHttpUrl(story.items[0]?.url);
+      if (!link) return null;
       const description =
         story.summary || `${story.company} · ${story.sources_count} 个信源`;
       return `    <item>
@@ -76,6 +48,7 @@ export async function GET() {
       <guid isPermaLink="false">${escapeXml(story.id)}</guid>
     </item>`;
     })
+    .filter(Boolean)
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -91,5 +64,8 @@ ${items}
 `;
 
   return new Response(xml,{
-    headers:{ "Content-Type": "application/rss+xml; charset=utf-8" },});
+    headers:{
+      "Content-Type": "application/rss+xml; charset=utf-8",
+      ...API_CACHE_HEADERS,
+    },});
 }

@@ -22,7 +22,7 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd -P)"
 SOURCE="$REPO_ROOT/AGENTS.md"
 
 if [[ ! -f "$SOURCE" ]]; then
@@ -32,17 +32,27 @@ fi
 
 # Resolve @file imports (Claude Code syntax) into inline content.
 # Lines like "@docs/research/INSPECTION_GUIDE.md" become the file's contents.
+# 安全边界:拒绝绝对路径 / .. 穿越 / 符号链接;解析后的真实路径必须仍位于仓库内。
 resolve_imports() {
   while IFS= read -r line || [[ -n "$line" ]]; do
     line="${line%$'\r'}"
     if [[ "$line" =~ ^@(.+)$ ]]; then
       local import_path="${BASH_REMATCH[1]}"
+      case "/$import_path" in
+        *"../"*|*"//"*)
+          echo "<!-- Import rejected (unsafe path): $import_path -->"
+          continue
+          ;;
+      esac
       local resolved="$REPO_ROOT/$import_path"
-      if [[ -f "$resolved" ]]; then
+      local dir phys
+      dir="$(dirname "$resolved")"
+      phys="$(cd "$dir" 2>/dev/null && pwd -P || true)"
+      if [[ -z "$phys" || "$phys" != "$REPO_ROOT"* || -L "$resolved" || ! -f "$resolved" ]]; then
+        echo "<!-- Import not found or rejected: $import_path -->"
+      else
         cat "$resolved"
         echo ""
-      else
-        echo "<!-- Import not found: $import_path -->"
       fi
     else
       echo "$line"
