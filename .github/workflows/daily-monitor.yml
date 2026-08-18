@@ -1,0 +1,70 @@
+name: Daily Monitor
+
+# 每日自动监测:采集 → 聚类 → AI 研判 → 正文富化 → 落盘提交推送。
+# push 到 master 后由 EdgeOne Pages 的 Git 集成自动重新部署。
+# 密钥全部来自仓库 Secrets,不落盘、不入库。
+
+on:
+  schedule:
+    # 每天 06:17(北京时间,UTC 22:17)运行
+    - cron: "17 22 * * *"
+  workflow_dispatch: # 支持手动触发(Actions → Daily Monitor → Run workflow)
+
+permissions:
+  contents: write # 需要把更新后的日报推回 master
+
+concurrency:
+  group: daily-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: true # 本任务要 push,凭证必须保留(与只读 CI 相反)
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run daily monitor (collect → cluster → LLM → enrich)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+        run: node scripts/mced-daily-monitor.mjs --limit-llm 12
+
+      - name: Rebuild changelog
+        run: node scripts/build-changelog.mjs
+
+      - name: Detect data changes
+        id: changes
+        run: |
+          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/changelog.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "监测数据无变化,跳过提交。"
+          fi
+
+      - name: Commit and push updated report
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/monitor/daily-report.json public/changelog.json scripts/monitor-history.jsonl scripts/monitor-state.json
+          git commit -m "chore(monitor): daily report $(date -u +%Y-%m-%d)"
+          git push origin HEAD:master
