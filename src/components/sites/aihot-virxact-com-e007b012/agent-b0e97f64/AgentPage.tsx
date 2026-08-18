@@ -6,10 +6,10 @@ import { CopyButton } from "./CopyButton";
 /**
  * Agent 接入 — 以模板站 aihot.virxact.com/agent 的真实结构与交互复现
  * (kimi-cu 实测：四选项分栏 + 折叠区块 + 共享许可区)。
- * 部署域名经 NEXT_PUBLIC_SITE_ORIGIN 覆盖，默认 gs-mced.vercel.app.
+ * 部署域名经 NEXT_PUBLIC_SITE_ORIGIN 覆盖，默认 gs-mced.geneseeq.com.
  */
 
-const ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://gs-mced.vercel.app";
+const ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://gs-mced.geneseeq.com";
 
 const CODE = "rounded bg-mc-surface2 px-[5px] py-[1px] text-[11.5px] text-mc-ink";
 const CARD = "rounded-xl border border-mc-line bg-mc-card shadow-mc-card";
@@ -44,6 +44,7 @@ const MCP_CONFIG = `{
 
 const CLAUDE_MCP_CMD = `claude mcp add --transport http mced-intel '${MCP_URL}'`;
 const CODEX_MCP_CMD = `codex mcp add mced-intel --url '${MCP_URL}'`;
+const SELF_INSTALL_CMD = `安装这里的MCP：${ORIGIN}/agent`;
 
 const MCP_TOOLS:{ name: string; desc: string }[] = [
   { name: "get_top_stories", desc: "当前监测窗口热度最高的前 10 条故事线(含 AI 摘要与评分)" },{ name: "get_companies", desc: "19 家受监测公司摘要列表(产品 / 路线 / 报证状态)" },{ name: "get_company", desc: "按 id 取单家完整性能库(研究 / 数字 / 出处 / 更新时间)" },{ name: "search_items", desc: "按关键词与类别检索原始命中条目(最多 10 条)" },];
@@ -85,13 +86,13 @@ function Disclosure({ title, children }:{ title: string; children: React.ReactNo
 function SkillTab() {
   return (
     <div>
-      <h2 className={H2}>装一次，之后直接用中文问</h2>
+      <h2 className={H2}>装好后，直接问</h2>
       <p className="mt-[6px] text-[13px] leading-[1.7] text-mc-ink1">
-        不用记端点也不用写代码。适合 Claude Code、Codex、Gemini CLI 这类支持 Agent Skills 的工具。
+        支持任何 Agents。推荐使用 Kimi / Codex / Pi。
       </p>
       <ol className="mt-[12px] grid grid-cols-3 gap-[14px] max-[960px]:grid-cols-1">
         {[
-          ["01", "把提示词发给 Agent", "安装器不猜平台、不覆盖别家 Skill，发现旧副本会停下来。"],
+          ["01", "把提示词发给 Agent", "手动操作是非遗程序员专属技能。"],
           ["02", "开个新会话", "多数 Agent 只在会话开始时扫描 Skill，当前对话不一定看到。"],
           ["03", "问一句验证", "看到监测窗口、中文摘要、相关性评分和站内链接，就算接上了。"],
         ].map(([n, t, d]) => (
@@ -105,7 +106,7 @@ function SkillTab() {
         ))}
       </ol>
 
-      <BlockTitle>安装提示词</BlockTitle>
+      <BlockTitle>跟你的 Agent 说：</BlockTitle>
       <CodeBlock copyText={INSTALL_PROMPT}>{INSTALL_PROMPT}</CodeBlock>
 
       <BlockTitle>验证问题</BlockTitle>
@@ -116,21 +117,6 @@ function SkillTab() {
         <span className="font-bold text-mc-ink1">成功的样子：</span>
         回答注明监测窗口(当前时间倒推 1 个月)、给出 5 条中文摘要与相关性评分，标题链接到早筛情报站的热点榜或原文。
       </p>
-
-      <h2 className={`${H2} mt-[24px]`}>装好后能直接这样问</h2>
-      <ul className="mt-[10px] grid grid-cols-2 gap-[8px] max-[960px]:grid-cols-1">
-        {[
-          ["过去两周早筛竞品最重要的 5 件事是什么?", "对接故事线热度榜"],
-          ["CanScan 的直接竞品谁在推进 FDA?", "对接公司库与报证审批分类"],
-          ["给我今天的早筛日报。", "对接每日 AI 日报与四类板块"],
-          ["觅瑞和燃石最新各自的监管进展?", "对接公司检索与类别过滤"],
-        ].map(([q,note]) => (
-          <li key={q} className="rounded-[8px] bg-mc-surface0 px-[12px] py-[8px]">
-            <div className="text-[12.5px] font-semibold text-mc-ink">「{q}」</div>
-            <div className="mt-[2px] text-[11px] text-mc-ink2">{note}</div>
-          </li>
-        ))}
-      </ul>
 
       <div className="mt-[14px] grid gap-[8px]">
         <Disclosure title="手动安装：选择当前平台">
@@ -173,7 +159,7 @@ function SkillTab() {
 function McpTab() {
   return (
     <div>
-      <h2 className={H2}>加一个地址， Agent 直接调用四个工具</h2>
+      <h2 className={H2}>MCP for Agents</h2>
       <p className="mt-[6px] text-[13px] leading-[1.7] text-mc-ink1">
         适合支持远程 MCP 的 Agent 与开发工具。标准 Streamable HTTP，匿名只读，不需要 token，也不会读取登录态；工具返回简洁文字与同一份结构化数据。
       </p>
@@ -182,17 +168,20 @@ function McpTab() {
       <BlockTitle>通用 MCP 配置</BlockTitle>
       <CodeBlock copyText={MCP_CONFIG}>{MCP_CONFIG}</CodeBlock>
 
-      <BlockTitle>Claude Code</BlockTitle>
-      <CodeBlock copyText={CLAUDE_MCP_CMD}>{CLAUDE_MCP_CMD}</CodeBlock>
+      <BlockTitle>让 Agent 自己装</BlockTitle>
+      <CodeBlock copyText={SELF_INSTALL_CMD}>{SELF_INSTALL_CMD}</CodeBlock>
 
       <BlockTitle>Codex</BlockTitle>
       <CodeBlock copyText={CODEX_MCP_CMD}>{CODEX_MCP_CMD}</CodeBlock>
 
+      <BlockTitle>Claude Code</BlockTitle>
+      <CodeBlock copyText={CLAUDE_MCP_CMD}>{CLAUDE_MCP_CMD}</CodeBlock>
+
       <p className="mt-[10px] text-[11.5px] leading-[1.6] text-mc-ink2">
-        不同客户端的配置入口名称可能不同；核心只需要 server 名称 mced-intel 与上面的 URL，不要填写 API Key。客户端若只接受本地命令而不支持远程 HTTP，需要先使用它自己的远程 MCP 代理。
+        不同客户端的配置入口名称可能不同；核心只需要 server 名称 mced-intel 与上面的 URL，不要填写 API Key。
       </p>
 
-      <h2 className={`${H2} mt-[24px]`}>连上后应看到这四个工具</h2>
+      <h2 className={`${H2} mt-[24px]`}>4 Tools</h2>
       <ul className="mt-[10px] grid grid-cols-2 gap-[8px] max-[960px]:grid-cols-1">
         {MCP_TOOLS.map((t) => (
           <li key={t.name} className="rounded-[8px] bg-mc-surface0 px-[12px] py-[8px]">
@@ -309,7 +298,7 @@ export function AgentPage() {
           让 Agent 直接使用早筛情报站
         </h1>
         <p className="mt-[6px] max-w-[860px] text-[12.5px] leading-[1.6] text-mc-ink2">
-          四条接入路径都是匿名只读、无需 API Key:Agent Skill、MCP、RSS、REST API v1。
+          匿名只读，无需 API Key:Skill、MCP、RSS、REST API。
         </p>
       </header>
 
@@ -364,32 +353,13 @@ export function AgentPage() {
       </nav>
 
       <p className="text-[11.5px] leading-[1.6] text-mc-ink2">
-        部署域名为 <span className={CODE}>{ORIGIN}</span>
-        (可用 NEXT_PUBLIC_SITE_ORIGIN 覆盖)；匿名只读，无账号与密钥。
+        <span className={CODE}>{ORIGIN}</span>
       </p>
 
       {tab === "skill" && <SkillTab />}
       {tab === "mcp" && <McpTab />}
       {tab === "rss" && <RssTab />}
       {tab === "rest" && <RestTab />}
-
-      {/* 共享许可区(模板同款 2×2) */}
-      <section className="mt-[16px]">
-        <h2 className={H2}>匿名接入，先确认用途许可</h2>
-        <div className="mt-[12px] grid grid-cols-2 gap-x-[28px] gap-y-[16px] max-[960px]:grid-cols-1">
-          {[
-            ["重要事实回原文核对", "摘要、评分与日报由 AI 生成。引用数字、政策或原话前，请使用返回的原文 URL 复核。"],
-            ["用途不同，许可不同", "个人与组织内部使用免费；对外商业产品、公开镜像、数据转售或批量再分发，须先取得书面授权。"],
-            ["按频率合同调用", "数据来自落盘报告(public/monitor/daily-report.json)，建议按你自己的调度间隔拉取并缓存；RSS 建议 30 分钟或更慢；收到 429 后按 Retry-After 退避。"],
-            ["稳定契约，不承诺 SLA", "v0.1 内不删除、不改名字段、不改变既有字段类型；关键链路请自行设置缓存、重试和降级。"],
-          ].map(([t, d]) => (
-            <div key={t}>
-              <div className="text-[13px] font-bold text-mc-ink">{t}</div>
-              <div className="mt-[3px] text-[12.5px] leading-[1.7] text-mc-ink1">{d}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* 页脚联系(模板同款) */}
       <footer className="mt-[8px] flex flex-wrap items-center gap-x-[16px] border-t border-mc-line-soft pt-[12px] text-[12px] text-mc-ink2">

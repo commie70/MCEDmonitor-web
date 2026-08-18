@@ -8,7 +8,7 @@
 把 `SKILL.md` 的 URL 交给支持 Agent Skills 的工具:
 
 ```
-https://<host>/mced-skill/SKILL.md
+https://gs-mced.geneseeq.com/mced-skill/SKILL.md
 ```
 
 或直接阅读 [`SKILL.md`](./SKILL.md) 获取全部端点与 curl 示例。
@@ -17,15 +17,15 @@ https://<host>/mced-skill/SKILL.md
 
 ```bash
 # REST:应返回竞品公司列表 JSON
-curl https://<host>/api/v1/companies
+curl https://gs-mced.geneseeq.com/api/v1/companies
 
 # MCP:应返回 4 个工具(get_top_stories / get_companies / get_company / search_items)
-curl -X POST https://<host>/api/mcp \
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 
 # RSS:应返回 RSS 2.0 XML
-curl https://<host>/feed.xml
+curl https://gs-mced.geneseeq.com/feed.xml
 ```
 
 ## 注意

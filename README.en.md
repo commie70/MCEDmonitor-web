@@ -6,7 +6,7 @@
 
 ---
 
-## Origin
+## How to Build
 
 1. **Blank template**: scaffolded from [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) (Next.js 16 + React 19 + Tailwind v4 + shadcn/ui).
 2. **Full-site clone**: using the template's `/clone-website` workflow (reconnaissance → design-token extraction → component specs → parallel build → assembly & QA), [AIHOT](https://aihot.virxact.com/) — an AI-industry news monitor inspired by the WeChat blog "数字生命卡兹克" — was faithfully recreated as a local Next.js codebase.
@@ -61,7 +61,7 @@ npm run skill:hash # recompute the Agent Skill SHA-256 (verified by the install 
 node scripts/enrich-content.mjs 24   # manually enrich more storylines with full text
 ```
 
-## Open interfaces (for agents and subscribers)
+## Open interfaces (for Agents and RSS)
 
 - `GET /api/v1/companies[/{id}]` — company summaries / full per-company performance profile
 - `GET /api/v1/prospective` — prospective-cohort performance table
@@ -70,7 +70,55 @@ node scripts/enrich-content.mjs 24   # manually enrich more storylines with full
 - `POST /api/mcp` — MCP (JSON-RPC 2.0 subset, 16 KB request cap)
 - `GET /feed.xml` — RSS 2.0
 
-## Project layout (excerpt)
+### MCP usage
+
+The MCP endpoint is anonymous and read-only: `POST https://gs-mced.geneseeq.com/api/mcp` (JSON-RPC 2.0 subset, request body ≤16 KB, no account or key required).
+
+**Connect (pick one):**
+
+```jsonc
+// mcp.json / your agent's MCP config
+{
+  "mcpServers": {
+    "mced-intel": { "type": "http", "url": "https://gs-mced.geneseeq.com/api/mcp" }
+  }
+}
+```
+
+Or just paste this line to your agent:
+
+```
+安装这里的MCP：https://gs-mced.geneseeq.com/agent
+```
+
+```bash
+# Codex CLI
+codex mcp add mced-intel --url 'https://gs-mced.geneseeq.com/api/mcp'
+
+# Claude Code
+claude mcp add --transport http mced-intel 'https://gs-mced.geneseeq.com/api/mcp'
+```
+
+**Available tools (tools/list):**
+
+| Tool | What it returns |
+| --- | --- |
+| `get_top_stories` | Top 10 storylines in the current window (with AI summaries and scores) |
+| `get_companies` | Summary list of the 19 tracked companies (product / route / regulatory status) |
+| `get_company` | Full performance profile of one company by id (studies / figures / sources / updated-at) |
+| `search_items` | Keyword + category search over raw items (up to 10 results) |
+
+**Smoke test with curl:**
+
+```bash
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_top_stories","arguments":{}}}'
+```
+
+RSS feed: `https://gs-mced.geneseeq.com/feed.xml`.
+
+## Project layout
 
 ```
 src/

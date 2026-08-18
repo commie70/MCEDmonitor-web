@@ -17,45 +17,45 @@ description: 查询癌症早筛竞品监测数据——公司/产品/性能/每�
 
 ```bash
 # 竞品公司摘要列表
-curl https://<host>/api/v1/companies
+curl https://gs-mced.geneseeq.com/api/v1/companies
 
 # 单个竞品完整档案(含研究性能、panel、信源)
-curl https://<host>/api/v1/companies/grail
+curl https://gs-mced.geneseeq.com/api/v1/companies/grail
 
 # 前瞻队列性能对照(非病例对照研究)
-curl https://<host>/api/v1/prospective
+curl https://gs-mced.geneseeq.com/api/v1/prospective
 
 # 每日监测故事线(按热度排序,含 AI 摘要与评分)
-curl https://<host>/api/v1/stories
+curl https://gs-mced.geneseeq.com/api/v1/stories
 
 # 监测条目流(可按分类过滤:regulatory|academic|research|market)
-curl "https://<host>/api/v1/items?category=regulatory"
+curl "https://gs-mced.geneseeq.com/api/v1/items?category=regulatory"
 
 # 每日摘要:AI 日报 + 热度前 5 故事线
-curl https://<host>/api/v1/daily
+curl https://gs-mced.geneseeq.com/api/v1/daily
 ```
 
 ### 2. MCP(JSON-RPC 2.0,POST)
 
-端点:`POST https://<host>/api/mcp`
+端点:`POST https://gs-mced.geneseeq.com/api/mcp`
 
 ```bash
 # 初始化
-curl -X POST https://<host>/api/mcp \
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize"}'
 
 # 列出工具
-curl -X POST https://<host>/api/mcp \
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'
 
 # 调用工具:get_top_stories / get_companies / get_company / search_items
-curl -X POST https://<host>/api/mcp \
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_top_stories","arguments":{}}}'
 
-curl -X POST https://<host>/api/mcp \
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"search_items","arguments":{"query":"FDA","category":"regulatory"}}}'
 ```
@@ -63,14 +63,14 @@ curl -X POST https://<host>/api/mcp \
 ### 3. RSS
 
 ```bash
-curl https://<host>/feed.xml
+curl https://gs-mced.geneseeq.com/feed.xml
 ```
 
 每日监测故事线前 20 条,适合接入阅读器或自动化流水线。
 
 ### 4. Agent Skill
 
-把 `https://<host>/mced-skill/SKILL.md`(即本文件)交给支持 Agent Skills 的
+把 `https://gs-mced.geneseeq.com/mced-skill/SKILL.md`(即本文件)交给支持 Agent Skills 的
 工具安装,即可获得上述全部端点的调用说明。
 
 ## 数据说明

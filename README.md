@@ -6,7 +6,7 @@
 
 ---
 
-## 项目由来
+## How to
 
 1. **空白模板**：本项目以 [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) 为脚手架(Next.js 16 + React 19 + Tailwind v4 + shadcn/ui)。
 2. **整站克隆**：用模板自带的 `/clone-website` 工作流(侦察 → 设计令牌提取 → 组件规格 → 并行构建 → 组装 QA)，将 [AIHOT](https://aihot.virxact.com/)(AI 圈资讯监测站，灵感源自公众号「数字生命卡兹克」)像素级复刻为本地 Next.js 代码库。
@@ -59,7 +59,7 @@ npm run skill:hash # 重算 Agent Skill 的 SHA-256(Agent 接入页安装命令�
 node scripts/enrich-content.mjs 24   # 手动补抓更多故事线正文
 ```
 
-## 开放接口(Agent / 用户可订阅)
+## 开放接口 (Agent / RSS 可订阅)
 
 - `GET /api/v1/companies[/{id}]` — 竞品公司摘要 / 单家完整性能库
 - `GET /api/v1/prospective` — 前瞻队列性能对照
@@ -68,7 +68,55 @@ node scripts/enrich-content.mjs 24   # 手动补抓更多故事线正文
 - `POST /api/mcp` — MCP(JSON-RPC 2.0 子集，16KB 请求上限)
 - `GET /feed.xml` — RSS 2.0
 
-## 项目结构(节选)
+### MCP 使用说明
+
+本站 MCP 端点为匿名只读:`POST https://gs-mced.geneseeq.com/api/mcp`(JSON-RPC 2.0 子集，请求体 ≤16KB，无需账号与密钥)。
+
+**接入方式(任选其一):**
+
+```jsonc
+// mcp.json / 各 Agent 的 MCP 配置
+{
+  "mcpServers": {
+    "mced-intel": { "type": "http", "url": "https://gs-mced.geneseeq.com/api/mcp" }
+  }
+}
+```
+
+或把这句话直接发给你的 Agent:
+
+```
+安装这里的MCP：https://gs-mced.geneseeq.com/agent
+```
+
+```bash
+# Codex CLI
+codex mcp add mced-intel --url 'https://gs-mced.geneseeq.com/api/mcp'
+
+# Claude Code
+claude mcp add --transport http mced-intel 'https://gs-mced.geneseeq.com/api/mcp'
+```
+
+**可用工具(tools/list):**
+
+| 工具 | 说明 |
+| --- | --- |
+| `get_top_stories` | 当前监测窗口热度最高的前 10 条故事线(含 AI 摘要与评分) |
+| `get_companies` | 19 家受监测公司摘要列表(产品 / 路线 / 报证状态) |
+| `get_company` | 按 id 取单家完整性能库(研究 / 数字 / 出处 / 更新时间) |
+| `search_items` | 按关键词与类别检索原始命中条目(最多 10 条) |
+
+**curl 自测:**
+
+```bash
+curl -X POST https://gs-mced.geneseeq.com/api/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_top_stories","arguments":{}}}'
+```
+
+RSS 订阅地址:`https://gs-mced.geneseeq.com/feed.xml`。
+
+## 项目结构
 
 ```
 src/
@@ -84,7 +132,7 @@ public/monitor/            # 落盘监测报告(daily-report.json)
 docs/                      # 克隆期侦察与设计参考资料
 ```
 
-## 致谢与许可
+## 致谢
 
 - 空白模板：[ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template)(MIT)
 - 设计原型：[AIHOT](https://aihot.virxact.com/) · 公众号「数字生命卡兹克」
