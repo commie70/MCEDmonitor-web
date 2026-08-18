@@ -47,7 +47,6 @@ const LLM_MODEL = process.env.OPENAI_MONITOR_MODEL || "gpt-5.6-luna";
 const LLM_REASONING = process.env.OPENAI_MONITOR_REASONING || "xhigh";
 const CHANNEL_WEIGHT = { pubmed: 3, fda: 5,news: 2, tavily: 2.5,anysearch: 2.5, brave: 2.5, firecrawl: 2.5, exa: 2.5 };
 const ROLLING_WINDOW_DAYS = 31; // 监测窗口：当前时间倒推 1 个月
-const EN_MONTHS = { jan: 1, feb: 2, mar: 3,apr: 4, may: 5, jun: 6, jul: 7,aug: 8, sep: 9, oct: 10,nov: 11, dec: 12 };
 const STOPWORDS = new Set([
   "the", "and", "for", "with", "from", "that", "this", "are", "was", "were", "has", "have",
   "inc", "ltd", "corp", "company", "news", "latest", "update", "announces", "announced",
@@ -498,17 +497,14 @@ function buildStories(flat, since) {
       if (sorted.length >= 3 && dates.length <= 3) badges.push("爆");
       if (ageLastH <= 12) badges.push("新");
       if (dates.length >= 2 && ageLastH <= 24) badges.push("发酵中");
-      // 「旧文」判定：故事线最新可推断月份早于窗口起点月份
-      const months = sorted.map(itemMonth).filter(Boolean).sort();
-      const latestMonth = months.length ? months[months.length - 1] :null;
-      const staleMonth = latestMonth && latestMonth < sinceMonth ? latestMonth :null;
       stories.push({
         id: `story:${stableId(company + lead.title)}`,
         company,product: lead.product,
         title: lead.title,
         heat: Math.round(heat * 10) / 10,
         badges,
-        stale_month: staleMonth,
+        // 旧文标记在富化后统一重算(写盘前的「旧文判定」段),此处先置 null
+        stale_month:null,
         sources_count: sorted.length,
         categories: [...new Set(sorted.map((i) => i.category))],
         first_seen: sorted[sorted.length - 1]?.date || "",
