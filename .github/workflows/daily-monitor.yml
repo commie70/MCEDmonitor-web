@@ -6,8 +6,8 @@ name: Daily Monitor
 
 on:
   schedule:
-    # 每天 06:17(北京时间,UTC 22:17)运行
-    - cron: "17 22 * * *"
+    # 每 3 天 06:17(北京时间,UTC 22:17)运行:每月 1/4/7/10/... 日
+    - cron: "17 22 */3 * *"
   workflow_dispatch: # 支持手动触发(Actions → Daily Monitor → Run workflow)
 
 permissions:
