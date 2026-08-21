@@ -9,7 +9,7 @@ const BADGE_BASE =
   "inline-block whitespace-nowrap rounded px-[7px] py-px text-[11px] font-bold leading-[1.6]";
 
 const BADGE_STYLES: Record<HotBadge, string> = {
-  "爆": "bg-[color-mix(in_srgb,var(--accent-rose-fg)_16%,transparent)] text-mc-rose-fg","新": "bg-[color-mix(in_srgb,var(--accent-cyan-fg)_14%,transparent)] text-mc-cyan-fg","发酵中": "bg-[color-mix(in_srgb,var(--accent-amber-fg)_16%,transparent)] text-mc-amber-fg",};
+  "新": "bg-[color-mix(in_srgb,var(--accent-cyan-fg)_14%,transparent)] text-mc-cyan-fg",};
 
 const RANK_COLORS = ["text-mc-rank1", "text-mc-rank2", "text-mc-rank3"];
 
@@ -147,12 +147,8 @@ export function HotRankPanel({
         {methodNote ?? (
           <>
             榜单热度 = 精选信源权重 + 讨论热度权重，按 24
-            小时半衰期衰减；同一事件的多信源报道在榜单合并计算。标签含义：<Badge label="爆" />
-            {" 短时间密集报道、"}
-            <Badge label="新" />
-            {" 首报 6 小时内、"}
-            <Badge label="发酵中" />
-            {" 信源仍在增加。演示数据，仅供设计预览。"}
+            小时半衰期衰减；同一事件的多信源报道在榜单合并计算。标签含义：<Badge label="新" />
+            {" 12 小时内有更新。演示数据，仅供设计预览。"}
           </>
         )}
       </p>

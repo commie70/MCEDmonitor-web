@@ -12,7 +12,7 @@
  *   学术动态 → ASCO/ESMO/AACR 人工核查链接(无开放接口)
  *
  * 加工(L1)：公司内标题相似度故事线聚类；热度 = Σ信道权重 × 0.5^(age_h/24);
- *   徽章：爆(≥3 信源且集中)/ 新(≤12h)/ 发酵中(跨≥2 天且仍活跃)；逐日趋势 spark。
+ *   徽章：新(≤12h)；逐日趋势 spark。
  * 加工(L2):LLM(默认 gpt-5.6-luna, reasoning xhigh,OPENAI_API_KEY)为高热故事
  *   生成 中文摘要 / 相关性评分 / 关注理由；并生成当日 AI 日报。
  *
@@ -485,7 +485,6 @@ function buildStories(flat, since) {
           if (idx >= 0 && idx < windowDays) spark[windowDays - 1 - idx] += 1;
         }
       }
-      const dates = [...new Set(sorted.map((i) => i.date).filter(Boolean))];
       const lastDated = sorted.find((i) => i.date);
       const ageLastH = lastDated
         ? (Date.now() - Date.parse(lastDated.date)) / 3600000
@@ -494,9 +493,7 @@ function buildStories(flat, since) {
       const channelCount = new Set(sorted.map((i) => i.channel)).size;
       heat += (channelCount - 1) * 1.0;
       const badges = [];
-      if (sorted.length >= 3 && dates.length <= 3) badges.push("爆");
       if (ageLastH <= 12) badges.push("新");
-      if (dates.length >= 2 && ageLastH <= 24) badges.push("发酵中");
       stories.push({
         id: `story:${stableId(company + lead.title)}`,
         company,product: lead.product,

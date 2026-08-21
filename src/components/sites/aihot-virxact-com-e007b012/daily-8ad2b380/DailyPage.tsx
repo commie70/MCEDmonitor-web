@@ -76,7 +76,7 @@ interface Story {
   product: string;
   title: string;
   heat:number;
-  badges: ("爆" | "新" | "发酵中")[];
+  badges: "新"[];
   /** 「旧文」月份(YYYY-MM，最新可推断证据早于监测窗口起点) */
   stale_month?: string | null;
   sources_count:number;

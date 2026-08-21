@@ -69,7 +69,7 @@ export interface DayGroupDef {
   weekday: string;
 }
 
-export type HotBadge = "爆" | "新" | "发酵中";
+export type HotBadge = "新";
 
 export interface HotEvent {
   id: string;

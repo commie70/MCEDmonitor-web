@@ -426,14 +426,12 @@ export const HOT_EVENTS:HotEvent[] = [
   {
     id: "h01",
     title: "GRAIL 公布 PATHFINDER 2 完整性能数据",
-    badge: "爆",
     source: "GRAIL：Newsroom（网页）",ago: "16小时前",
     heat: 106,
     spark: [12, 18, 26, 41, 55, 72, 88, 97, 106],
     sources: 6,},{
     id: "h02",
     title: "世和 DECIPHE-Omnia 登 Nature Medicine：MERCURY 多组学框架公开",
-    badge: "发酵中",
     source: "Nature Medicine（RSS）",ago: "20小时前",
     heat: 102,
     spark: [8, 15, 24, 38, 52, 66, 79, 90, 102],
@@ -447,7 +445,6 @@ export const HOT_EVENTS:HotEvent[] = [
     sources: 3,},{
     id: "h04",
     title: "ASCO 2026 早筛专场：MCED 前瞻数据集中交锋",
-    badge: "发酵中",
     source: "ASCO Daily News",ago: "1天前",
     heat: 72,
     spark: [22, 30, 38, 45, 52, 58, 63, 68, 72],
