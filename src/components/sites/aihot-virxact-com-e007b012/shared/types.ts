@@ -40,6 +40,8 @@ export interface NewsItem {
   source: string;
   /** 社交账号句柄，可选，如 "@GrailBio" */
   handle?: string;
+  /** 信源原文链接，可选(演示数据尽力回填真实信源) */
+  url?: string;
   sourceType: SourceType;
   category: CategoryKey;
   /** 是否编辑精选(精选页条目均为 true) */

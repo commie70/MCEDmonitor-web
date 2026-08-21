@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -386,9 +387,23 @@ function TopicCard({
             <div className="flex flex-col gap-[9px]">
               {t.news.map((item) => (
                 <div key={item.id}>
-                  <div className="text-[13px] font-semibold leading-[1.5] text-mc-ink">
-                    {item.title}
-                  </div>
+                  {item.url ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[13px] font-semibold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg hover:underline"
+                    >
+                      {item.title} ↗
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/items/${encodeURIComponent(item.id)}`}
+                      className="text-[13px] font-semibold leading-[1.5] text-mc-ink transition-colors hover:text-mc-cyan-fg hover:underline"
+                    >
+                      {item.title}
+                    </Link>
+                  )}
                   <div className="mt-[2px] text-[11px] text-mc-ink2">
                     {item.source} · {item.date}
                   </div>

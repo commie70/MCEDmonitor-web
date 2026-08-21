@@ -76,7 +76,7 @@ function fromDemo(item: (typeof ALL_ITEMS)[number]): ArticleView {
     id: item.id,
     title: item.title,
     source: item.source,
-    url: null,
+    url: safeHttpUrl(item.url),
     date: item.date,
     time: item.time,
     categoryLabel: CATEGORIES.find((c) => c.key === item.category)?.label,
