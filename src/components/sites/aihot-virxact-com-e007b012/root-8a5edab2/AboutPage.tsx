@@ -3,7 +3,7 @@
  */
 
 const LINKS:{ label: string; href: string }[] = [
-  { label: "Commie。的Github页", href: "https://github.com/commie70" },{ label: "世和早筛Github站", href: "https://github.com/canscan-gs" },{ label: "世和基因官网", href: "https://zh.geneseeq.com/" },];
+  { label: "世和早筛医学部 Github", href: "https://github.com/canscan-gs" },{ label: "世和基因官网", href: "https://zh.geneseeq.com/" },];
 
 const REPO_URL = "https://github.com/commie70/MCEDmonitor-web";
 
@@ -50,7 +50,7 @@ export function AboutPage() {
               className="inline-flex items-center gap-[6px] text-[13.5px] font-semibold text-mc-cyan-fg hover:underline"
             >
               <GithubIcon className="size-[14px]" />
-              Github ↗
+              本站Github ↗
             </a>
           </li>
           {LINKS.map((l) => (
