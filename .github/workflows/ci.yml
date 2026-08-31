@@ -53,5 +53,8 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
+      - name: Monitor pipeline tests
+        run: npm run monitor:test
+
       - name: Build
         run: npm run build

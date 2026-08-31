@@ -49,6 +49,7 @@ interface MonitorItem {
   date: string;
   url: string;
   note?: string;
+  event_id?: string;
 }
 
 interface ManualTask {
@@ -87,6 +88,16 @@ interface Story {
   summary?: string;
   score?:number;
   reason?: string;
+  publication_state?: "first" | "update" | "duplicate" | "backfill";
+  level?: "L1" | "L2" | "L3" | null;
+  evidence_confidence?: "high" | "medium" | "low";
+  review_status?: "not_required" | "pending" | "approved" | "rejected";
+  score_breakdown?: {
+    relevance: number;
+    impact: number;
+    actionability: number;
+    total: number;
+  };
 }
 
 interface MonitorDigest {
@@ -96,6 +107,7 @@ interface MonitorDigest {
 }
 
 interface MonitorReport {
+  schema_version?: number;
   generated_at: string;
   window_since: string;
   watches:number;
@@ -105,6 +117,11 @@ interface MonitorReport {
   digest: MonitorDigest | null;
   manual_tasks: ManualTask[];
   errors:{ company: string; channel: string; message: string }[];
+  views?: {
+    daily_event_ids: string[];
+    hot_event_ids: string[];
+    all_event_ids: string[];
+  };
 }
 
 const CATEGORY_META: Record<
@@ -113,16 +130,16 @@ const CATEGORY_META: Record<
   regulatory:{
     label: "报证审批",
     tone: "bg-[color-mix(in_srgb,var(--accent-emerald)_12%,transparent)] text-mc-emerald-fg",
-    desc: "openFDA 器械数据库(PMA / De Novo)自动命中 + NMPA / CMDE 人工核查通道",},academic:{
+    desc: "FDA / NMPA / CMDE 原始证据；监管结论须经人工复核后发布",},academic:{
     label: "学术动态",
     tone: "bg-[color-mix(in_srgb,var(--accent-cyan)_10%,transparent)] text-mc-cyan-fg",
-    desc: "ASCO / ESMO / AACR 摘要检索通道(会议摘要无开放接口，每日生成检索链接)",}, research:{
+    desc: "ASCO / ESMO / AACR 官方来源；无法自动获取时生成核查任务",}, research:{
     label: "新研究",
     tone: "bg-[color-mix(in_srgb,var(--accent-amber)_14%,transparent)] text-mc-amber-fg",
-    desc: "PubMed(NCBI E-utilities)按公司 / 产品检索式自动监测",}, market:{
+    desc: "PubMed / DOI / ClinicalTrials.gov 原始证据与结构化事实",}, market:{
     label: "市场动态",
     tone: "bg-[color-mix(in_srgb,var(--accent-rose)_10%,transparent)] text-mc-rose-fg",
-    desc: "Google News RSS + Tavily / Brave / Firecrawl / Exa / AnySearch 多引擎自动监测",},};
+    desc: "企业官网直接监控；AnySearch 仅发现候选，不直接进入日报",},};
 
 const CATEGORY_ORDER: MonitorItem["category"][] = [
   "regulatory",
@@ -158,7 +175,13 @@ export function DailyPage() {
       .catch(() => setFailed(true));
   },[]);
 
-  const items = report?.items ?? [];
+  const dailyIds = useMemo(
+    () => new Set(report?.views?.daily_event_ids ?? []),
+    [report]
+  );
+  const items = report?.views
+    ? report.items.filter((item) => item.event_id && dailyIds.has(item.event_id))
+    : report?.items ?? [];
 
   const storiesByCategory = useMemo(() => {
     const map: Record<MonitorItem["category"], Story[]> = {
@@ -166,10 +189,11 @@ export function DailyPage() {
       research: [],
       market: [],};
     for (const story of report?.stories ?? []) {
+      if (report?.views && !dailyIds.has(story.id)) continue;
       map[primaryCategory(story)].push(story);
     }
     return map;
-  },[report]);
+  },[report, dailyIds]);
 
   const scrollToCategory = (key: string) => {
     document
@@ -195,7 +219,7 @@ export function DailyPage() {
           监测日报
         </h1>
         <p className="mt-[5px] max-w-[900px] text-[12px] leading-[1.6] text-mc-ink2">
-          每日自动监测竞品榜 19 家企业与行业总览：报证审批、学术动态、新研究、市场动态。
+          增量监测 19 家企业与行业总览：先核验证据与事件，再计算重要性并生成日报。
           {report
             ? `本期窗口 ${report.window_since} 至今 · 生成于 ${fmtDateTime(report.generated_at)} · 监测 ${report.watches} 个对象`
             : "正在读取最新监测报告…"}
@@ -211,7 +235,7 @@ export function DailyPage() {
             <code className="rounded bg-mc-surface2 px-[6px] py-[2px] text-[12px] text-mc-ink">
               npm run monitor
             </code>{" "}
-            生成首份日报(PubMed + Google News + openFDA 三路自动监测，增量窗口自动续跑)，页面会自动读取{" "}
+            运行证据优先的增量流水线；账本校验通过并生成公开读模型后，页面会自动读取{" "}
             <code className="rounded bg-mc-surface2 px-[6px] py-[2px] text-[12px] text-mc-ink">
               public/monitor/daily-report.json
             </code>
@@ -276,7 +300,7 @@ export function DailyPage() {
             </section>
           )}
 
-          {/* 故事线聚类(L1)+ AI 研判(L2)：按四类分板块，锚点承接统计卡 */}
+          {/* 已核验发布事件：按四类分板块，锚点承接统计卡 */}
           {CATEGORY_ORDER.map((key) => {
             const meta = CATEGORY_META[key];
             const stories = storiesByCategory[key];
@@ -296,12 +320,12 @@ export function DailyPage() {
                     {meta.label}
                   </span>
                   <span className="text-[12px] text-mc-ink2">
-                    {stories.length} 条故事线 · 按热度排序 · 摘要 / 评分由 AI 生成
+                    {stories.length} 个发布事件 · 按等级 / 重要性 / 事件时间排序
                   </span>
                 </div>
                 {stories.length === 0 && (
                   <p className="p-[20px] text-center text-[12.5px] text-mc-ink2">
-                    本窗口内该类别暂无故事线命中。
+                    本期该类别暂无满足证据与复核门槛的首次发布或实质更新。
                   </p>
                 )}
                 <ul className="m-0 list-none p-[4px_0_6px]">
@@ -315,7 +339,7 @@ export function DailyPage() {
                           <span className="text-[18px] font-extrabold tabular-nums leading-none text-mc-cyan">
                             {story.heat}
                           </span>
-                          <span className="mt-[2px] block text-[10px] text-mc-ink2">热度</span>
+                          <span className="mt-[2px] block text-[10px] text-mc-ink2">重要性</span>
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-[8px]">
@@ -343,14 +367,30 @@ export function DailyPage() {
                             ))}
                             {typeof story.score === "number" && story.score > 0 && (
                               <span className="rounded-[4px] bg-[color-mix(in_srgb,var(--accent-emerald)_12%,transparent)] px-[7px] py-[1px] text-[10.5px] font-bold text-mc-emerald-fg">
-                                相关性 {story.score}
+                                重要性 {story.score}
+                              </span>
+                            )}
+                            {story.level && (
+                              <span className="rounded-[4px] bg-mc-surface2 px-[7px] py-[1px] text-[10.5px] font-bold text-mc-ink1">
+                                {story.level}
+                              </span>
+                            )}
+                            {story.evidence_confidence && (
+                              <span className="text-[10.5px] font-semibold text-mc-ink2">
+                                证据 {story.evidence_confidence === "high" ? "High" : story.evidence_confidence === "medium" ? "Medium" : "Low"}
                               </span>
                             )}
                           </div>
                           <div className="mt-[3px] text-[11.5px] text-mc-ink2">
-                            {story.company} · {story.product} · {story.sources_count} 家信源
+                            {story.company} · {story.product} · {story.sources_count} 个独立编辑主体
                             {story.last_seen && ` · 最新 ${story.last_seen}`}
                           </div>
+                          {story.score_breakdown && (
+                            <div className="mt-[4px] text-[11.5px] tabular-nums text-mc-ink2">
+                              相关性 {story.score_breakdown.relevance} · 竞争影响 {story.score_breakdown.impact} · 行动价值{" "}
+                              {story.score_breakdown.actionability}
+                            </div>
+                          )}
                           {story.summary && (
                             <p className="mt-[6px] text-[12.5px] leading-[1.65] text-mc-ink1">
                               {story.summary}
@@ -364,7 +404,7 @@ export function DailyPage() {
                           )}
                           {story.sources_count > 1 && (
                             <div className="mt-[6px] text-[11.5px] text-mc-ink2">
-                              另有 {story.sources_count - 1} 家信源报道：{story.items.slice(1, 4).map((it) => (
+                              另有 {story.sources_count - 1} 个独立编辑主体：{story.items.slice(1, 4).map((it) => (
                                 <Link
                                   key={it.id}
                                   href={`/items/${encodeURIComponent(it.id)}`}
@@ -388,10 +428,10 @@ export function DailyPage() {
           <section className="rounded-xl border border-mc-line bg-mc-card shadow-mc-card">
             <div className="flex items-center gap-[10px] border-b border-mc-line-soft px-4 py-[11px]">
               <span className="text-[15px] font-extrabold tracking-[0.04em] text-mc-ink">
-                本期命中
+                本期发布证据
               </span>
               <span className="text-[12px] text-mc-ink2">
-                {items.length} 条原始命中(未聚类)
+                {items.length} 份可追溯证据
               </span>
             </div>
             {items.length === 0 && (
@@ -481,34 +521,29 @@ export function DailyPage() {
             </div>
             <ul className="mt-[8px] list-none space-y-[4px] text-[12px] leading-[1.7] text-mc-ink1">
               <li>
-                · 自动信道： NCBI E-utilities(PubMed，新研究)、Google News
-                RSS(市场动态)、openFDA 器械库(报证审批，限有 FDA 路径公司)；
-                会议摘要与 NMPA 走人工核查通道。
+                · 发布面：企业官网、FDA / NMPA / CMDE、PubMed / DOI、ClinicalTrials.gov
+                与会议官网；AnySearch 只负责发现候选，不能直接进入日报。
               </li>
               <li>
-                · 增量机制：水位记在{" "}
+                · 增量机制：永久事件身份、事实版本和证据关系保存在{" "}
                 <code className="rounded bg-mc-surface2 px-[5px] py-[1px] text-mc-ink">
-                  scripts/monitor-state.json
+                  scripts/monitor-ledger.json
                 </code>
-                ，每次运行自上次成功时间起算；可用{" "}
-                <code className="rounded bg-mc-surface2 px-[5px] py-[1px] text-mc-ink">
-                  npm run monitor -- --days 14
-                </code>{" "}
-                手动回补窗口。
+                ；31 天窗口只控制页面视图，不再决定事件是否已出现。
               </li>
               <li>
-                · 每日定时(macOS cron 示例， 06:47 自动跑):{" "}
+                · 影子运行：默认命令只写 shadow-report；满足三个影子周期且覆盖七天后，才用{" "}
                 <code className="break-all rounded bg-mc-surface2 px-[5px] py-[1px] text-mc-ink">
-                  47 6 * * * cd 项目目录 && /usr/bin/env node
-                  scripts/mced-daily-monitor.mjs
+                  npm run monitor -- --mode publish
                 </code>
+                切换公开读模型。
               </li>
               <li>
                 · 监测对象与检索式维护在{" "}
                 <code className="rounded bg-mc-surface2 px-[5px] py-[1px] text-mc-ink">
                   scripts/monitor-sources.json
                 </code>
-                (竞品榜 19 家 + 行业总览)。
+                  (显式信源注册表 + 独立发现查询)。
               </li>
             </ul>
             {report.errors.length > 0 && (

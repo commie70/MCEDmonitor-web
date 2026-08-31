@@ -9,7 +9,8 @@ const BADGE_BASE =
   "inline-block whitespace-nowrap rounded px-[7px] py-px text-[11px] font-bold leading-[1.6]";
 
 const BADGE_STYLES: Record<HotBadge, string> = {
-  "新": "bg-[color-mix(in_srgb,var(--accent-cyan-fg)_14%,transparent)] text-mc-cyan-fg",};
+  "新": "bg-[color-mix(in_srgb,var(--accent-cyan-fg)_14%,transparent)] text-mc-cyan-fg",
+  "更新": "bg-[color-mix(in_srgb,var(--accent-amber)_14%,transparent)] text-mc-amber-fg",};
 
 const RANK_COLORS = ["text-mc-rank1", "text-mc-rank2", "text-mc-rank3"];
 
@@ -112,6 +113,11 @@ export function HotRankPanel({
                     {ev.title}
                   </Link>
                   {ev.badge ? <Badge label={ev.badge}/> :null}
+                  {ev.level ? (
+                    <span className="inline-block rounded-[4px] bg-mc-surface2 px-[7px] py-[1px] text-[11px] font-bold leading-[1.6] text-mc-ink1">
+                      {ev.level}
+                    </span>
+                  ) :null}
                   {ev.stale ? (
                     <span
                       className="inline-block rounded-[4px] bg-[color-mix(in_srgb,var(--accent-rose)_12%,transparent)] px-[7px] py-[1px] text-[11px] font-bold leading-[1.6] whitespace-nowrap text-mc-rose-fg"
@@ -136,7 +142,7 @@ export function HotRankPanel({
                 >
                   {ev.heat}
                 </span>
-                <span className="block text-xs text-mc-ink2">热度值</span>
+                <span className="block text-xs text-mc-ink2">重要性</span>
               </div>
             </li>
           ))}
@@ -146,9 +152,8 @@ export function HotRankPanel({
       <p className="mx-1 mt-[18px] text-xs leading-[1.75] text-mc-ink2">
         {methodNote ?? (
           <>
-            榜单热度 = 精选信源权重 + 讨论热度权重，按 24
-            小时半衰期衰减；同一事件的多信源报道在榜单合并计算。标签含义：<Badge label="新" />
-            {" 12 小时内有更新。演示数据，仅供设计预览。"}
+            榜单按 L1–L3、重要性总分和事件时间排序；重要性由相关性、竞争影响与行动价值三个固定档位相加。
+            标签含义：<Badge label="新" /> 首次发布，<Badge label="更新" /> 实质更新。
           </>
         )}
       </p>

@@ -25,7 +25,7 @@ interface JsonRpcRequest {
 const TOOLS = [
   {
     name: "get_top_stories",
-    description:"获取当前监测窗口内热度最高的前 10 条早筛竞品故事线(含 AI 摘要与评分)。",
+    description:"获取当前监测窗口内重要性最高的前 10 个已发布早筛竞品事件(含证据置信度与评分明细)。",
     inputSchema:{
       type: "object",properties:{},additionalProperties: false,},},{
     name: "get_companies",

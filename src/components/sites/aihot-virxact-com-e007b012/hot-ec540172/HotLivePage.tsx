@@ -26,12 +26,16 @@ interface Story {
   last_seen: string;
   spark:number[];
   items: StoryItem[];
+  level?: "L1" | "L2" | "L3" | null;
+  evidence_confidence?: "high" | "medium" | "low";
 }
 
 interface LiveReport {
+  schema_version?: number;
   generated_at: string;
   window_since: string;
   stories: Story[];
+  views?: { hot_event_ids: string[] };
 }
 
 function agoOf(date: string) {
@@ -75,26 +79,35 @@ export function HotLivePage() {
     return <p className="py-10 text-center text-[13px] text-mc-ink1">正在读取监测报告…</p>;
   }
 
-  const events:HotEvent[] = report.stories.slice(0, 20).map((s) => ({
+  const storyById = new Map(report.stories.map((story) => [story.id, story]));
+  const rankedStories = report.views?.hot_event_ids
+    ? report.views.hot_event_ids.map((id) => storyById.get(id)).filter((story): story is Story => Boolean(story))
+    : report.stories;
+  const events:HotEvent[] = rankedStories.slice(0, 20).map((s) => ({
     id: s.items?.[0]?.id ?? s.id,
     title: s.title,
     badge: s.badges[0],
     stale: s.stale_month ?? null,
     source: `${s.company} · ${s.items[0]?.source ?? "多信源"}${s.sources_count > 1 ? ` · 另有 ${s.sources_count - 1} 家信源` : ""}`,ago:agoOf(s.last_seen),
     heat: s.heat,
+    level: s.level,
+    evidenceConfidence: s.evidence_confidence,
     spark: s.spark,
     sources: s.sources_count,}));
 
   return (
     <HotRankPanel
       events={events}
-      heroDescription={`监测窗口 ${report.window_since} 至今，${report.stories.length} 条故事线按热度实时排序。`}
+      heroDescription={`监测窗口 ${report.window_since} 至今，${rankedStories.length} 个事件按重要性与事件时间排序。`}
       methodNote={
-        <>
-          榜单热度 = Σ(信道权重 × 0.5^(年龄 / 24h)) + 跨引擎命中加成(Brave / Tavily /
-          AnySearch / Firecrawl / Exa 每多一个信道命中 + 1.0)，检索命中频率越高排名越前；
-          窗口为当前时间倒推 14 天，同一事件多信源合并为故事线。标签含义：新 = 12 小时内有更新。
-        </>
+        report.schema_version === 2 ? (
+          <>
+            榜单按 L1–L3、重要性总分、事件时间依次排序；重要性由相关性、竞争影响、行动价值三个固定档位相加。
+            搜索引擎重复命中不增加分数；信源数按独立编辑主体计算。标签含义：新 = 首次发布，更新 = 实质更新。
+          </>
+        ) : (
+          <>当前仍展示切换前的兼容数据；新账本正在影子运行，达到验收门槛后切换。</>
+        )
       }/>
   );
 }

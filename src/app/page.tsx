@@ -6,6 +6,13 @@ import {
   dynamicDayGroups,
   shiftItemsToBase,} from "@/components/sites/aihot-virxact-com-e007b012/shared/data";
 import { fullDateLabel, todayCstIso } from "@/components/sites/aihot-virxact-com-e007b012/shared/dates";
+import { readMonitorReport } from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
+import {
+  monitorDayGroups,
+  monitorStoriesForView,
+  monitorStoryToHotEvent,
+  monitorStoryToNewsItem,
+} from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-view";
 
 export const metadata: Metadata = {
   title: "精选 · 早筛情报站",
@@ -14,14 +21,23 @@ export const metadata: Metadata = {
 // 时间戳跟随服务器(东八区)每次请求计算，不做静态预渲染
 export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default async function Home() {
   const today = todayCstIso();
+  const report = await readMonitorReport();
+  const usesLedgerReport = report?.schema_version === 2;
+  const liveStories = usesLedgerReport ? monitorStoriesForView(report, "daily") : [];
+  const liveItems = liveStories.map(monitorStoryToNewsItem).filter((item) => item.date);
+  const items = usesLedgerReport ? liveItems : shiftItemsToBase(FEATURED_ITEMS, today);
+  const hotEvents = usesLedgerReport
+    ? monitorStoriesForView(report, "hot").slice(0, 5).map(monitorStoryToHotEvent)
+    : undefined;
   return (
     <SiteShell>
       <FeaturedPage
         subtitle={`${fullDateLabel(today)} · 今日竞品重点动态`}
-        dayGroups={dynamicDayGroups(today)}
-        items={shiftItemsToBase(FEATURED_ITEMS, today)}/>
+        dayGroups={usesLedgerReport ? monitorDayGroups(items) : dynamicDayGroups(today)}
+        items={items}
+        hotEvents={hotEvents}/>
     </SiteShell>
   );
 }

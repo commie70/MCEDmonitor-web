@@ -4,7 +4,7 @@ import { HotLivePage } from "@/components/sites/aihot-virxact-com-e007b012/hot-e
 
 export const metadata: Metadata = {
   title: "竞品热点榜 · 早筛情报站",
-  description:"早筛竞品故事线热度榜：多信源聚类，按信道权重与 24 小时半衰期实时排序。",};
+  description:"早筛竞品事件重要性榜：按 L1–L3、重要性总分与事件时间排序，并展示独立证据主体。",};
 
 export default function Hot() {
   return (

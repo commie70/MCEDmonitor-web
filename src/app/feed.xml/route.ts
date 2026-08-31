@@ -1,7 +1,4 @@
-import {
-  readMonitorReport,
-  reportMissingResponse,
-} from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
+import { readMonitorReport } from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
 import {
   API_CACHE_HEADERS,
   safeHttpUrl,
@@ -33,7 +30,9 @@ export async function GET() {
       headers:{ "Content-Type": "text/plain; charset=utf-8" },});
   }
 
+  const dailyIds = new Set(report.views?.daily_event_ids ?? report.stories.map((story) => story.id));
   const items = report.stories
+    .filter((story) => dailyIds.has(story.id))
     .slice(0, 20)
     .map((story) => {
       const link = safeHttpUrl(story.items[0]?.url);

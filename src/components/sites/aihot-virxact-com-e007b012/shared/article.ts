@@ -1,6 +1,8 @@
 import {
   readMonitorReport,
   type MonitorItem,
+  type MonitorImportance,
+  type MonitorStory,
 } from "./monitor-report";
 import { ALL_ITEMS, CATEGORIES, HOT_EVENTS } from "./data";
 import { safeHttpUrl } from "./url";
@@ -27,6 +29,11 @@ export interface ArticleView {
   content?: string;
   contentFetchedAt?: string;
   note?: string;
+  publicationState?: "first" | "update" | "duplicate" | "backfill";
+  level?: "L1" | "L2" | "L3" | null;
+  evidenceConfidence?: "high" | "medium" | "low";
+  scoreBreakdown?: MonitorImportance;
+  reviewStatus?: "not_required" | "pending" | "approved" | "rejected";
 }
 
 const MONITOR_CATEGORY_LABELS: Record<string, string> = {
@@ -39,7 +46,17 @@ const MONITOR_CATEGORY_LABELS: Record<string, string> = {
 function fromMonitorItem(
   item: MonitorItem,
   company: string,
-  storyMeta?: { summary?: string; score?: number; reason?: string }
+  storyMeta?: Pick<
+    MonitorStory,
+    | "summary"
+    | "score"
+    | "reason"
+    | "publication_state"
+    | "level"
+    | "evidence_confidence"
+    | "score_breakdown"
+    | "review_status"
+  >
 ): ArticleView {
   return {
     id: item.id,
@@ -56,6 +73,11 @@ function fromMonitorItem(
     content: item.content || undefined,
     contentFetchedAt: item.content_fetched_at || undefined,
     note: item.note || undefined,
+    publicationState: storyMeta?.publication_state,
+    level: storyMeta?.level,
+    evidenceConfidence: storyMeta?.evidence_confidence,
+    scoreBreakdown: storyMeta?.score_breakdown,
+    reviewStatus: storyMeta?.review_status,
   };
 }
 
@@ -105,7 +127,12 @@ export async function findArticle(id: string): Promise<ArticleView | null> {
   const report = await readMonitorReport();
   if (report) {
     const direct = report.items.find((i) => i.id === id);
-    if (direct) return fromMonitorItem(direct, direct.company);
+    if (direct) {
+      const parent = report.stories.find(
+        (story) => story.id === direct.event_id || story.items.some((item) => item.id === direct.id)
+      );
+      return fromMonitorItem(direct, direct.company, parent);
+    }
     for (const story of report.stories) {
       const hit = story.items.find((i) => i.id === id);
       if (hit) {
@@ -113,15 +140,25 @@ export async function findArticle(id: string): Promise<ArticleView | null> {
           summary: story.summary,
           score: story.score,
           reason: story.reason,
+          publication_state: story.publication_state,
+          level: story.level,
+          evidence_confidence: story.evidence_confidence,
+          score_breakdown: story.score_breakdown,
+          review_status: story.review_status,
         });
       }
     }
-    const story = report.stories.find((s) => s.id === id);
+    const story = report.stories.find((s) => s.id === id || s.legacy_ids?.includes(id));
     if (story?.items[0]) {
       return fromMonitorItem(story.items[0], story.company, {
         summary: story.summary,
         score: story.score,
         reason: story.reason,
+        publication_state: story.publication_state,
+        level: story.level,
+        evidence_confidence: story.evidence_confidence,
+        score_breakdown: story.score_breakdown,
+        review_status: story.review_status,
       });
     }
   }
@@ -137,7 +174,14 @@ export function articleMarkdown(a: ArticleView): string {
   lines.push(`- 信源：${a.source}`);
   if (a.date) lines.push(`- 日期：${a.date}${a.time ? ` ${a.time}` : ""}`);
   if (a.categoryLabel) lines.push(`- 类别：${a.categoryLabel}`);
-  if (a.score != null) lines.push(`- 监测评分：${a.score}/100`);
+  if (a.score != null) lines.push(`- 重要性：${a.score}/100`);
+  if (a.level) lines.push(`- 情报等级：${a.level}`);
+  if (a.evidenceConfidence) lines.push(`- 证据置信度：${a.evidenceConfidence}`);
+  if (a.scoreBreakdown) {
+    lines.push(
+      `- 评分明细：相关性 ${a.scoreBreakdown.relevance} / 竞争影响 ${a.scoreBreakdown.impact} / 行动价值 ${a.scoreBreakdown.actionability}`
+    );
+  }
   if (a.url) lines.push(`- 原文：${a.url}`);
   lines.push("");
   for (const p of a.summary) lines.push(p, "");

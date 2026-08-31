@@ -17,7 +17,7 @@ export default function Leaderboard() {
           </h1>
           <p className="mt-[5px] max-w-[900px] text-[12px] leading-[1.6] text-mc-ink2">
             癌症早筛企业深度调研(聚焦多癌种液体活检)· 19 家国内外企业 · 锚定 世和基因
-            CanScan® 鹰眼 · 来源：发表文献、监管审评资料(NMPA / CMDE、FDA、HSA、CE)及会议摘要，国内性能不采公司官网口径 · 点击任意企业行展开性能与测序参数 · 调研基线 2026-06-25，信源核验 2026-08-16
+            CanScan® 鹰眼 · 来源：发表文献、监管审评资料(NMPA / CMDE、FDA、HSA、CE)及会议摘要，国内性能优先采用原文 / 注册资料 · 点击企业行展开性能与测序参数，点击“打开证据”查看结构化证据页 · 全量核验更新至 2026-08-31
           </p>
           <hr className="mt-[10px] mb-[8px] border-0 border-t border-mc-line-soft" />
         </header>

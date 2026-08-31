@@ -20,6 +20,8 @@ function scoreColorClass(score:number): string {
   return "text-[var(--text-2)]";
 }
 
+const CONFIDENCE_LABEL = { high: "High", medium: "Medium", low: "Low" } as const;
+
 export function ArticleCard({ item, variant, starred, onToggleStar }: ArticleCardProps) {
   const isFeatured = variant === "featured";
   const showBadge = isFeatured && item.featured;
@@ -59,6 +61,21 @@ export function ArticleCard({ item, variant, starred, onToggleStar }: ArticleCar
               精选
             </span>
           )}
+          {item.publicationState && ["first", "update"].includes(item.publicationState) && (
+            <span className="rounded-[3px] bg-[color-mix(in_srgb,var(--accent-cyan)_12%,transparent)] px-[7px] py-[3px] text-[10.5px] font-semibold leading-none text-mc-cyan-fg">
+              {item.publicationState === "first" ? "新" : "更新"}
+            </span>
+          )}
+          {item.level && (
+            <span className="rounded-[3px] bg-mc-surface2 px-[6px] py-[3px] text-[10.5px] font-bold leading-none text-mc-ink1">
+              {item.level}
+            </span>
+          )}
+          {item.evidenceConfidence && (
+            <span className="text-[10.5px] font-semibold text-mc-ink2">
+              证据 {CONFIDENCE_LABEL[item.evidenceConfidence]}
+            </span>
+          )}
         </div>
         <div className="flex shrink-0 items-center gap-[6px]">
           <span
@@ -69,8 +86,17 @@ export function ArticleCard({ item, variant, starred, onToggleStar }: ArticleCar
             )}
           >
             <span className="size-[5px] rounded-full bg-current" />
-            监测评分 {item.score}/100
+            重要性 {item.score}/100
           </span>
+          {item.scoreBreakdown && (
+            <span
+              className="hidden text-[10.5px] tabular-nums text-mc-ink2 min-[1100px]:inline"
+              title={`相关性：${item.scoreBreakdown.rationales?.relevance || "—"}\n竞争影响：${item.scoreBreakdown.rationales?.impact || "—"}\n行动价值：${item.scoreBreakdown.rationales?.actionability || "—"}`}
+            >
+              相关 {item.scoreBreakdown.relevance} · 影响 {item.scoreBreakdown.impact} · 行动{" "}
+              {item.scoreBreakdown.actionability}
+            </span>
+          )}
           <button
             type="button"
             aria-pressed={starred}

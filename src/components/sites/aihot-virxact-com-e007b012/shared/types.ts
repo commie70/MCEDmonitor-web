@@ -20,6 +20,23 @@ export type SourceType =
   | "social" // 社交媒体
   | "media"; // 行业媒体
 
+export type PublicationState = "first" | "update" | "duplicate" | "backfill";
+export type IntelligenceLevel = "L1" | "L2" | "L3";
+export type EvidenceConfidence = "high" | "medium" | "low";
+
+export interface ImportanceBreakdown {
+  relevance: number;
+  impact: number;
+  actionability: number;
+  total: number;
+  level: IntelligenceLevel | null;
+  rationales?: {
+    relevance: string;
+    impact: string;
+    actionability: string;
+  };
+}
+
 export interface CategoryDef {
   key: CategoryKey;
   label: string;
@@ -48,6 +65,11 @@ export interface NewsItem {
   featured: boolean;
   /** 监测评分 0-100 */
   score:number;
+  publicationState?: PublicationState;
+  level?: IntelligenceLevel | null;
+  evidenceConfidence?: EvidenceConfidence;
+  scoreBreakdown?: ImportanceBreakdown;
+  reviewStatus?: "not_required" | "pending" | "approved" | "rejected";
   title: string;
   /** 摘要段(可多段) */
   summary?: string[];
@@ -69,7 +91,7 @@ export interface DayGroupDef {
   weekday: string;
 }
 
-export type HotBadge = "新";
+export type HotBadge = "新" | "更新";
 
 export interface HotEvent {
   id: string;
@@ -82,6 +104,8 @@ export interface HotEvent {
   /** "16小时前" */
   ago: string;
   heat:number;
+  level?: IntelligenceLevel | null;
+  evidenceConfidence?: EvidenceConfidence;
   /** 迷你趋势折线数据(由左到右) */
   spark:number[];
   /** 关联信源数 */

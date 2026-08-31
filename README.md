@@ -16,27 +16,46 @@
 
 | 板块 | 说明 |
 | --- | --- |
-| 精选 / 全部动态 | 编辑精选与全量时间线，日期随服务器(东八区)自动前移 |
-| 热点榜 | 监测窗口内故事线按热度排序：Σ(信道权重 × 半衰期)+ 跨引擎命中加成 |
-| 监测日报 | 报证审批 / 学术动态 / 新研究 / 市场动态四类故事线，AI 摘要与评分，旧文红色时间戳标记 |
+| 精选 / 全部动态 | 日报投影与完整发布事件时间线；日期随服务器(东八区)自动前移 |
+| 热点榜 | 监测窗口内事件按 L1–L3、重要性总分、事件时间排序；搜索引擎重复不加分 |
+| 监测日报 | 仅展示本期首次发布 / 实质更新且达到 L1/L2、通过证据与人工复核门禁的事件 |
 | 早筛产品看板 | 19 家国内外企业技术路线、报证进度、性能对照(特异性 / 灵敏度 + 检出分期 + TOO)，数据均出自发表文献、监管审评资料与会议摘要 |
 | 主题 | 公司与产品 / 技术方向 / 研究类型三维聚合 |
 | 文章详情页 | 卡片点击进入，Firecrawl 抓回原页正文并清洗为 Markdown 渲染，附「打开原文」与「导出 Markdown」 |
 | Agent 接入 | 竞品数据库以 Agent Skill / MCP / RSS / REST API 四种形态开放 |
 | 收藏 / 更新日志 / 反馈 / 关于 | 收藏仅存本机浏览器;更新日志由构建脚本自动生成 |
 
-## 监测管线(`npm run monitor`)
+## 增量监测管线(`npm run monitor`)
 
 ```
-PubMed / Google News / openFDA / Tavily / AnySearch / Brave / Firecrawl / Exa
-  → L1 公司内标题相似度故事线聚类，热度 = Σ信道权重 × 0.5^(age/24h) + 跨引擎命中加成
-  → L2 LLM(gpt-5.6-luna，xhigh)中文摘要、相关性评分、关注理由、当日 AI 日报
-  → Firecrawl 正文富化(故事线首条目抓原页落盘)
-  → 发布日期推断(正文头部 > URL > 采集端)，早于窗口起点标记「旧文」
-  → public/monitor/daily-report.json(31 天滚动窗口)
+固定权威 / 可信信源 + AnySearch 单一发现面
+  → 规范 URL、正文 SHA-256、信源编辑主体与日期
+  → 公司 + 产品 + 事件类型 + 事件日期确定性召回
+  → 同事件 / 实质更新判断，合并到 scripts/monitor-ledger.json
+  → 权威原始证据或两个可信独立信源门禁
+  → Qwen 固定档位判断；高风险由 GLM 独立复核，冲突由 Kimi 仲裁
+  → 程序相加重要性：相关性 0/10/20/30 + 影响 0/15/30/40/50 + 行动 0/10/20
+  → L1/L2/L3 + 人工复核门禁 → 可重建的公开读模型
 ```
 
-密钥经环境变量提供：`OPENAI_API_KEY`、`TAVILY_API_KEY`、`ANYSEARCH_API_KEY`、`BRAVE_API_KEY`、`FIRECRAWL_API_KEY`、`EXA_API_KEY`(可选)，均不入库。
+`scripts/monitor-ledger.json` 是事件身份、事实版本和证据关系的唯一事实源；31 天窗口只控制页面查询，不参与“是否已出现”的判断。单个信源或模型失败只让对应候选保持 `pending`；账本读取、Schema 校验或事务写入失败会终止整次运行并保留最后有效账本和报告。
+
+### Provider 配置与部署后修改
+
+密钥只从环境变量或 GitHub Actions Secrets 读取，禁止写入仓库。四家模型使用 OpenAI-compatible `chat/completions`，base URL 与模型 ID 集中由环境变量控制：
+
+| 职责 | Base URL | API key | 可选模型覆盖 |
+| --- | --- | --- | --- |
+| Qwen 默认处理 | `QWEN_BASE_URL` | `QWEN_API_KEY` | `QWEN_MONITOR_MODEL` |
+| DeepSeek 视觉 | `DEEPSEEK_BASE_URL` | `DEEPSEEK_API_KEY` | `DEEPSEEK_VISION_MODEL` |
+| GLM 独立复核 | `GLM_BASE_URL` | `GLM_API_KEY` | `GLM_REVIEW_MODEL` |
+| Kimi 仲裁 / 综合 | `KIMI_BASE_URL` | `MOONSHOT_API_KEY` | `KIMI_SYNTHESIS_MODEL` |
+
+四个 base URL 已在代码中提供默认值，仍可通过表中的环境变量覆盖。发现服务默认使用 `https://api.anysearch.com/mcp`；`ANYSEARCH_API_KEY` 可选，`ANYSEARCH_BASE_URL` 可覆盖。`FIRECRAWL_API_KEY` 仅用于已知证据 URL 的正文抓取。
+
+部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再手动运行 `Daily Monitor`。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。
+
+当前默认 `shadow`：新流水线写 `public/monitor/shadow-report.json`，旧生成器暂时维持公开 `daily-report.json`。先用 `npm run monitor:acceptance` 对 120 个固定输入和四家 provider 契约做真实验收；之后至少三个验收通过的影子周期覆盖七天，`npm run monitor -- --mode publish` 才会解除硬门禁。GitHub Actions 手动运行时勾选 `run_acceptance` 可生成验收记录。
 
 ## 技术栈
 
@@ -52,8 +71,12 @@ npm run dev        # 开发服务器
 npm run build      # 生产构建
 npm run lint       # ESLint
 npm run typecheck  # TypeScript
-npm run check      # lint + typecheck + build
-npm run monitor    # 跑一遍每日监测(参数见 scripts/mced-daily-monitor.mjs 头部注释)
+npm test           # Node 内置测试(含 120 个固定验收输入)
+npm run check      # lint + typecheck + test + build
+npm run monitor    # 新账本流水线，默认 shadow
+npm run monitor:legacy # 影子期旧公开报告生成器
+npm run monitor:review -- --event <id> --approve # 最小人工复核 CLI
+npm run monitor:acceptance # 120 案例 + 四家 provider 真实契约验收
 npm run changelog  # 由监测历史生成 public/changelog.json
 npm run skill:hash # 重算 Agent Skill 的 SHA-256(Agent 接入页安装命令校验用)
 node scripts/enrich-content.mjs 24   # 手动补抓更多故事线正文
@@ -63,8 +86,8 @@ node scripts/enrich-content.mjs 24   # 手动补抓更多故事线正文
 
 - `GET /api/v1/companies[/{id}]` — 竞品公司摘要 / 单家完整性能库
 - `GET /api/v1/prospective` — 前瞻队列性能对照
-- `GET /api/v1/stories` · `GET /api/v1/items` — 监测故事线 / 原始条目(支持分页)
-- `GET /api/v1/daily` — 当日 AI 日报 + 高热故事线
+- `GET /api/v1/stories` · `GET /api/v1/items` — 发布事件 / 可追溯证据(支持分页，旧字段兼容一个周期)
+- `GET /api/v1/daily` — 当日 AI 日报 + 本期 L1/L2 首次发布 / 实质更新
 - `POST /api/mcp` — MCP(JSON-RPC 2.0 子集，16KB 请求上限)
 - `GET /feed.xml` — RSS 2.0
 
@@ -101,7 +124,7 @@ claude mcp add --transport http mced-intel 'https://gs-mced.geneseeq.com/api/mcp
 
 | 工具 | 说明 |
 | --- | --- |
-| `get_top_stories` | 当前监测窗口热度最高的前 10 条故事线(含 AI 摘要与评分) |
+| `get_top_stories` | 当前监测窗口重要性最高的前 10 个发布事件(含证据置信度与评分明细) |
 | `get_companies` | 19 家受监测公司摘要列表(产品 / 路线 / 报证状态) |
 | `get_company` | 按 id 取单家完整性能库(研究 / 数字 / 出处 / 更新时间) |
 | `search_items` | 按关键词与类别检索原始命中条目(最多 10 条) |
@@ -123,12 +146,19 @@ src/
   app/                 # 路由：页面 + /api/v1/* + /api/mcp + /feed.xml + /items/[id]
   components/sites/    # 页面组件(按模板站拓扑组织)+ shared/(数据与工具)
 scripts/
-  mced-daily-monitor.mjs   # 每日监测主脚本
+  mced-daily-monitor.mjs   # 增量证据优先编排入口
+  mced-daily-monitor-legacy.mjs # 影子期旧公开报告生成器
+  lib-monitor-ledger.mjs   # 事件身份、证据门禁、四态、评分与事务写入
+  lib-monitor-llm.mjs      # 固定模型职责、严格 Schema 与选择性 MoA
+  monitor-ledger.json      # Git 管理的唯一事实源
+  monitor-acceptance.json  # 发布硬门禁使用的验收记录
+  review-monitor-event.mjs # 最小人工复核 CLI
   lib-content-enrich.mjs   # Firecrawl 正文抓取与清洗
   lib-stale.mjs            # 发布日期推断(旧文判定)
   build-changelog.mjs      # 更新日志构建
   sync-skills.mjs          # 同步 clone-website 技能到 Codex / Kimi
-public/monitor/            # 落盘监测报告(daily-report.json)
+tests/                     # 120 个固定验收输入 + node:test
+public/monitor/            # 公开报告 + 影子报告
 docs/                      # 克隆期侦察与设计参考资料
 ```
 

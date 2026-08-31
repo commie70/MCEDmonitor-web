@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { CATEGORIES, TOP_HOT } from "../shared/data";
-import type { DayGroupDef, NewsItem } from "../shared/types";
+import type { DayGroupDef, HotEvent, NewsItem } from "../shared/types";
 import { FeedHeader } from "../shared/FeedHeader";
 import { HotTopicsCard } from "../shared/HotTopicsCard";
 import { TimelineFeed } from "../shared/TimelineFeed";
@@ -17,10 +17,12 @@ function matches(item: NewsItem, search: string) {
 export function FeaturedPage({
   subtitle,
   dayGroups,
-  items,}:{
+  items,
+  hotEvents = TOP_HOT,}:{
   subtitle: string;
   dayGroups: DayGroupDef[];
   items: NewsItem[];
+  hotEvents?: HotEvent[];
 }) {
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
@@ -45,7 +47,7 @@ export function FeaturedPage({
         onCategoryChange={setCategory}
         searchValue={search}
         onSearchChange={setSearch}/>
-      <HotTopicsCard events={TOP_HOT}/>
+      <HotTopicsCard events={hotEvents}/>
       <TimelineFeed items={filtered} dayGroups={dayGroups} variant="featured" />
     </div>
   );

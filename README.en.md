@@ -16,9 +16,9 @@
 
 | Section | What it does |
 | --- | --- |
-| Featured / All News | Curated picks and full timeline; dates follow server time (UTC+8) |
-| Hot Board | Storylines ranked by heat: Σ(channel weight × half-life decay) + cross-engine hit bonus |
-| Daily Monitor | Regulatory / academic / research / market storylines with AI summaries and relevance scores; stale items carry a red month tag |
+| Featured / All News | Daily projection and full published-event timeline; dates follow server time (UTC+8) |
+| Hot Board | Events in the monitoring window ranked by L1–L3 level, importance score, and event date; duplicate search hits do not increase rank |
+| Daily Monitor | Only first publications or material updates at L1/L2 that pass evidence and human-review gates |
 | Product Leaderboard | 19 companies worldwide: technology routes, regulatory status, and performance (specificity / sensitivity + stage-at-detection + TOO), all sourced from publications, regulatory reviews, and conference abstracts |
 | Topics | Aggregation by company & product, technology route, and study type |
 | Article Pages | Every card links to an in-site article page: the source page is fetched with Firecrawl, cleaned to Markdown, and rendered, with "Open original" and "Export Markdown" actions |
@@ -28,17 +28,34 @@
 ## Monitoring pipeline (`npm run monitor`)
 
 ```
-PubMed / Google News / openFDA / Tavily / AnySearch / Brave / Firecrawl / Exa
-  → L1 title-similarity storyline clustering per company;
-    heat = Σ(channel weight × 0.5^(age/24h)) + cross-engine hit bonus
-  → L2 LLM (gpt-5.6-luna, xhigh): Chinese summary, relevance score, why-it-matters, daily digest
-  → Firecrawl full-text enrichment (lead item of top storylines)
-  → publish-date inference (content head > URL > collector date); items older
-    than the window start are tagged as stale
-  → public/monitor/daily-report.json (rolling 31-day window)
+Fixed authoritative/trusted sources + AnySearch as the single discovery surface
+  → canonical URL, body SHA-256, editorial owner, and event date
+  → deterministic recall by company + product + event type + event date
+  → same-event/material-update decision and merge into scripts/monitor-ledger.json
+  → authoritative primary evidence or two independent trusted owners
+  → fixed Qwen role; independent GLM review for high-risk cases; Kimi arbitration on conflict
+  → programmatic importance sum: relevance 0/10/20/30 + impact 0/15/30/40/50 + actionability 0/10/20
+  → L1/L2/L3 + human-review gate → rebuildable public read model
 ```
 
-API keys come from environment variables — `OPENAI_API_KEY`, `TAVILY_API_KEY`, `ANYSEARCH_API_KEY`, `BRAVE_API_KEY`, `FIRECRAWL_API_KEY`, `EXA_API_KEY` (optional) — and are never committed.
+`scripts/monitor-ledger.json` is the sole source of truth for event identity, fact versions, and evidence relationships. The 31-day window only affects page queries and never determines whether an event has appeared before. A source or model failure leaves only that candidate `pending`; ledger read, schema validation, or transactional-write failures stop the run while preserving the last valid ledger and reports.
+
+### Provider configuration and post-deployment changes
+
+Keys are read only from environment variables or GitHub Actions Secrets and must never be committed. All four model providers use an OpenAI-compatible `chat/completions` endpoint:
+
+| Role | Base URL | API key | Optional model override |
+| --- | --- | --- | --- |
+| Default Qwen analysis | `QWEN_BASE_URL` | `QWEN_API_KEY` | `QWEN_MONITOR_MODEL` |
+| DeepSeek vision | `DEEPSEEK_BASE_URL` | `DEEPSEEK_API_KEY` | `DEEPSEEK_VISION_MODEL` |
+| Independent GLM review | `GLM_BASE_URL` | `GLM_API_KEY` | `GLM_REVIEW_MODEL` |
+| Kimi arbitration / synthesis | `KIMI_BASE_URL` | `MOONSHOT_API_KEY` | `KIMI_SYNTHESIS_MODEL` |
+
+All four base URLs have code defaults and remain overridable through the environment variables in the table. Discovery defaults to `https://api.anysearch.com/mcp`; `ANYSEARCH_API_KEY` is optional and `ANYSEARCH_BASE_URL` can override the endpoint. `FIRECRAWL_API_KEY` is used only to fetch content from known evidence URLs.
+
+To change a provider URL or model after deployment, change the URL/model **Variables** and API-key **Secrets** under GitHub repository `Settings → Secrets and variables → Actions`, then manually run `Daily Monitor`. For Vercel, EdgeOne, or Docker, update the runtime environment variables and redeploy. The pipeline never silently substitutes one model for another.
+
+The default is currently `shadow`: the new pipeline writes `public/monitor/shadow-report.json`, while the legacy generator continues to maintain the public `daily-report.json`. First run `npm run monitor:acceptance` against the 120 frozen inputs and all four live provider contracts. The `npm run monitor -- --mode publish` hard gate opens only after at least three accepted shadow runs span seven days. For a manual GitHub Actions run, enable `run_acceptance` to generate the acceptance record.
 
 ## Tech stack
 
@@ -54,8 +71,12 @@ npm run dev        # dev server
 npm run build      # production build
 npm run lint       # ESLint
 npm run typecheck  # TypeScript
-npm run check      # lint + typecheck + build
-npm run monitor    # run the daily monitor (flags documented in the script header)
+npm test           # Node built-in tests, including 120 frozen acceptance inputs
+npm run check      # lint + typecheck + test + build
+npm run monitor    # evidence ledger pipeline; defaults to shadow mode
+npm run monitor:legacy # legacy public-report generator during shadow rollout
+npm run monitor:review -- --event <id> --approve # minimal human-review CLI
+npm run monitor:acceptance # 120 cases + four live provider contracts
 npm run changelog  # rebuild public/changelog.json from monitor history
 npm run skill:hash # recompute the Agent Skill SHA-256 (verified by the install command)
 node scripts/enrich-content.mjs 24   # manually enrich more storylines with full text
@@ -65,8 +86,8 @@ node scripts/enrich-content.mjs 24   # manually enrich more storylines with full
 
 - `GET /api/v1/companies[/{id}]` — company summaries / full per-company performance profile
 - `GET /api/v1/prospective` — prospective-cohort performance table
-- `GET /api/v1/stories` · `GET /api/v1/items` — storylines / raw items (paginated)
-- `GET /api/v1/daily` — today's AI digest + top storylines
+- `GET /api/v1/stories` · `GET /api/v1/items` — published events / traceable evidence (paginated; legacy fields remain temporarily compatible)
+- `GET /api/v1/daily` — today's AI digest + first/material-update L1/L2 events
 - `POST /api/mcp` — MCP (JSON-RPC 2.0 subset, 16 KB request cap)
 - `GET /feed.xml` — RSS 2.0
 
@@ -103,7 +124,7 @@ claude mcp add --transport http mced-intel 'https://gs-mced.geneseeq.com/api/mcp
 
 | Tool | What it returns |
 | --- | --- |
-| `get_top_stories` | Top 10 storylines in the current window (with AI summaries and scores) |
+| `get_top_stories` | Top 10 published events in the current window (with evidence confidence and importance breakdown) |
 | `get_companies` | Summary list of the 19 tracked companies (product / route / regulatory status) |
 | `get_company` | Full performance profile of one company by id (studies / figures / sources / updated-at) |
 | `search_items` | Keyword + category search over raw items (up to 10 results) |
@@ -125,12 +146,19 @@ src/
   app/                 # routes: pages + /api/v1/* + /api/mcp + /feed.xml + /items/[id]
   components/sites/    # page components (mirroring the template topology) + shared/
 scripts/
-  mced-daily-monitor.mjs   # daily monitor entry point
+  mced-daily-monitor.mjs   # incremental evidence-first orchestrator
+  mced-daily-monitor-legacy.mjs # legacy public generator during shadow rollout
+  lib-monitor-ledger.mjs   # identity, evidence gates, four states, scoring, transactional writes
+  lib-monitor-llm.mjs      # fixed model roles, strict schemas, and selective MoA
+  monitor-ledger.json      # Git-managed sole source of truth
+  monitor-acceptance.json  # acceptance record used by the publish hard gate
+  review-monitor-event.mjs # minimal human-review CLI
   lib-content-enrich.mjs   # Firecrawl full-text fetch & cleaning
   lib-stale.mjs            # publish-date inference (stale detection)
   build-changelog.mjs      # changelog builder
   sync-skills.mjs          # sync the clone-website skill to Codex / Kimi
-public/monitor/            # persisted monitor report (daily-report.json)
+tests/                     # 120 frozen acceptance inputs + node:test suite
+public/monitor/            # public and shadow read models
 docs/                      # recon & design references from the cloning phase
 ```
 

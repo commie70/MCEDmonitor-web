@@ -70,6 +70,11 @@ export default async function ItemPage({ params }: PageProps) {
             </span>
           )}
           {article.company && <span>{article.company}</span>}
+          {article.publicationState && ["first", "update"].includes(article.publicationState) && (
+            <span>{article.publicationState === "first" ? "新" : "更新"}</span>
+          )}
+          {article.level && <span>{article.level}</span>}
+          {article.evidenceConfidence && <span>证据 {article.evidenceConfidence}</span>}
           {(article.date || article.time) && (
             <span className="tabular-nums normal-case">
               {article.date}
@@ -100,10 +105,17 @@ export default async function ItemPage({ params }: PageProps) {
           />
           {article.score != null && (
             <span className="ml-auto text-[12px] font-semibold tabular-nums text-mc-emerald-fg">
-              监测评分 {article.score}/100
+              重要性 {article.score}/100
             </span>
           )}
         </div>
+
+        {article.scoreBreakdown && (
+          <p className="mt-[8px] text-[11.5px] tabular-nums text-mc-ink2">
+            相关性 {article.scoreBreakdown.relevance} · 竞争影响 {article.scoreBreakdown.impact} · 行动价值{" "}
+            {article.scoreBreakdown.actionability}
+          </p>
+        )}
 
         {article.summary.length > 0 && (
           <div className="mt-[16px] grid gap-[10px] text-[14px] leading-[1.75] text-mc-ink1">

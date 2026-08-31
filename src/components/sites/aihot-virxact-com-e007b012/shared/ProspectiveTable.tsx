@@ -2,6 +2,7 @@
 
 import { Fragment, useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   PF1,
@@ -9,17 +10,18 @@ import {
   PF1_TOT,
   PROS_TIER_ORDER,
   PROSPECTIVE,
-  ROUTE_COLORS,} from "./competitors";
+  ROUTE_COLORS,
+  studyEvidenceHref,} from "./competitors";
 import type { Pf1Cell, ProspectiveRow } from "./competitors";
 
 type SegKey = "all" | "mced" | "single";
-type SortKey = "spec" | "sens" | "early" | "too";
+type SortKey = "spec" | "sens";
 type SortState = { key: SortKey; dir: "desc" | "asc" } | null;
 
 const SEGMENTS:{ key: SegKey; label: string }[] = [
   { key: "all", label: "全部" },{ key: "mced", label: "只看 MCED" },{ key: "single", label: "只看单癌种" },];
 
-/** 研究类型徽章色调(前瞻页无病例对照， rose 不出现) */
+/** 研究类型徽章色调 */
 const TYPE_BADGE: Record<ProspectiveRow["type"], string> = {
   RCT: "bg-mc-ink text-mc-page","前瞻队列": "bg-[color-mix(in_srgb,var(--accent-emerald)_12%,transparent)] text-mc-emerald-fg","前瞻注册": "bg-[color-mix(in_srgb,var(--accent-cyan)_10%,transparent)] text-mc-cyan-fg",
   "前瞻 + 回顾注册汇总":
@@ -263,6 +265,15 @@ export function ProspectiveTable() {
             <span className="block text-[10.5px] font-normal text-mc-ink2 mt-[4px] max-w-[165px] whitespace-normal leading-[1.45]">
               {r.study}
             </span>
+            {r.evidenceRef && (
+              <Link
+                href={studyEvidenceHref(r.evidenceRef)}
+                onClick={(event) => event.stopPropagation()}
+                className="mt-[5px] inline-flex text-[10.5px] font-semibold text-mc-cyan-fg hover:underline"
+              >
+                打开证据
+              </Link>
+            )}
           </td>
           <td className="p-[10px_12px] align-top">
             {r.mced ? (
@@ -348,16 +359,16 @@ export function ProspectiveTable() {
     <div className="mt-[30px]">
       <div className="flex items-baseline gap-[12px] flex-wrap">
         <h2 className="text-[18px] font-extrabold text-mc-ink">
-          前瞻队列性能对照
+          前瞻与注册研究性能对照
         </h2>
         <span className="text-[11.5px] font-semibold px-[10px] py-[2px] rounded-[9px] bg-mc-bg2 text-mc-ink1">
-          非病例对照 · 可外推真实筛查
+          真实筛查、注册与干预场景 · 按研究定义解读
         </span>
       </div>
       <p className="text-[12.5px] text-mc-ink1 mt-[6px] mb-[13px] leading-[1.6]">
-        仅收录前瞻队列 / 前瞻注册 / 前瞻干预 / RCT
-        证据等级的研究(病例对照见上表企业详情)。特异性 / 灵敏度统一为整体口径，早期列标注 I 期或进展期癌前病变， TOO 标注 top-1 /
-        top-2。
+        收录前瞻队列、注册研究、前瞻干预和 RCT；混合注册汇总单独标记。
+        各研究的人群、终点与性能分母不同，不能把有症状转诊、无症状筛查、RCT stage shift
+        和病例富集的注册汇总直接横向排名。早期 / 癌前列保留原研究定义，TOO 标注 top-1 或 top-2。
       </p>
 
       <div className="flex gap-[18px] items-center flex-wrap mb-[12px]">
@@ -377,7 +388,7 @@ export function ProspectiveTable() {
           ))}
         </div>
         <span className="text-[11.5px] text-mc-ink2">
-          点击表头可按 特异性 / 灵敏度 / 早期 / TOO 排序
+          仅可按整体特异性与整体灵敏度排序；定义不一的早期 / 癌前和 TOO 指标不排序
         </span>
       </div>
 
@@ -393,8 +404,8 @@ export function ProspectiveTable() {
                 <th className={TH_BASE}>入组人群·例数</th>
                 {renderSortableTh("特异性", "spec")}
                 {renderSortableTh("灵敏度", "sens")}
-                {renderSortableTh("早期", "early")}
-                {renderSortableTh("TOO", "too")}
+                <th className={TH_BASE}>早期 / 癌前指标</th>
+                <th className={TH_BASE}>TOO</th>
                 <th className={TH_BASE}>更新</th>
               </tr>
             </thead>
@@ -420,10 +431,9 @@ export function ProspectiveTable() {
       </div>
 
       <p className="text-[11.5px] text-mc-ink1 mt-[13px] leading-[1.7]">
-        前瞻对照口径：特异性 / 灵敏度为整体 episode
-        或个体水平(各研究定义见原文)；早期列优先取 I 期(或 0–II 期 / 癌前病变，见副注);TOO 为 top-1 或 top-2 已注明。金陵队列灵敏度为论文口径；AACR
-        2024 中期为 97.8%/55.2%。SYMPLIFY
-        为有症状转诊人群，与无症状筛查不可直接相比。
+        口径说明：特异性 / 灵敏度可能为 episode、个体或人口校正口径，以每行副注和证据页为准；
+        “早期 / 癌前”可能表示 I 期灵敏度、stage 0/I、进展期癌前病变灵敏度或检出病例的分期构成，故不排序。
+        SYMPLIFY 为有症状转诊人群；NHS-Galleri 的 stage shift 是人群效果终点；二者均不能与无症状单臂筛查直接比较。
       </p>
     </div>
   );

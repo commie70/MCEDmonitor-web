@@ -1,172 +1,1528 @@
 {
-  "window_days_first_run": 7,
+  "schema_version": 1,
+  "release_mode": "shadow",
   "retmax_per_query": 8,
-  "watches": [
+  "discovery_provider": {
+    "provider": "anysearch",
+    "source_id": "discovery:anysearch",
+    "command_env": "MCED_ANYSEARCH_COMMAND",
+    "api_key_env": "ANYSEARCH_API_KEY",
+    "enabled": true
+  },
+  "sources": [
     {
+      "source_id": "fda:openfda-device",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_device",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "nmpa:medical-device",
+      "editorial_owner": "国家药品监督管理局",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "regulator",
+      "url": "https://www.nmpa.gov.cn/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "cmde:medical-device",
+      "editorial_owner": "国家药品监督管理局医疗器械技术审评中心",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "regulator",
+      "url": "https://www.cmde.org.cn/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "nih:clinicaltrials",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "journal",
+      "url": "https://clinicaltrials.gov/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "crossref:doi",
+      "editorial_owner": "Crossref",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "journal",
+      "url": "https://doi.org/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "publication"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "conference:asco",
+      "editorial_owner": "ASCO",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "conference",
+      "url": "https://meetings.asco.org/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "conference:esmo",
+      "editorial_owner": "ESMO",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "conference",
+      "url": "https://www.esmo.org/meeting-calendar",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "conference:aacr",
+      "editorial_owner": "AACR",
+      "tier": "authoritative",
+      "type": "manual_registry",
+      "source_type": "conference",
+      "url": "https://www.aacr.org/meeting/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:grail",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "\"Galleri\"[Title/Abstract] OR \"multi-cancer early detection\"[Title/Abstract] OR PATHFINDER[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "GRAIL"
+        ],
+        "products": [
+          "Galleri®"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:grail",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "GRAIL, INC.",
+      "coverage": {
+        "companies": [
+          "GRAIL"
+        ],
+        "products": [
+          "Galleri®"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:grail",
+      "editorial_owner": "GRAIL",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://grail.com/news-center/",
+      "coverage": {
+        "companies": [
+          "GRAIL"
+        ],
+        "products": [
+          "Galleri®"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:exact-sciences-abbott",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "Cancerguard[Title/Abstract] OR Cologuard[Title/Abstract] OR CancerSEEK[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "Exact Sciences / Abbott"
+        ],
+        "products": [
+          "Cancerguard™ / Cologuard Plus™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:exact-sciences-abbott",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "EXACT SCIENCES CORPORATION",
+      "coverage": {
+        "companies": [
+          "Exact Sciences / Abbott"
+        ],
+        "products": [
+          "Cancerguard™ / Cologuard Plus™"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:exact-sciences-abbott",
+      "editorial_owner": "Exact Sciences / Abbott",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.exactsciences.com/news-events/press-releases",
+      "coverage": {
+        "companies": [
+          "Exact Sciences / Abbott"
+        ],
+        "products": [
+          "Cancerguard™ / Cologuard Plus™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:guardant-health",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "\\\"Guardant Health\\\"[Title/Abstract] OR (Shield[Title] AND (colorectal[Title/Abstract] OR \\\"early detection\\\"[Title/Abstract] OR \\\"multi-cancer\\\"[Title/Abstract] OR Guardant[Title/Abstract]))",
+      "coverage": {
+        "companies": [
+          "Guardant Health"
+        ],
+        "products": [
+          "Shield™ / Shield™ MCD"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:guardant-health",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "GUARDANT HEALTH, INC.",
+      "coverage": {
+        "companies": [
+          "Guardant Health"
+        ],
+        "products": [
+          "Shield™ / Shield™ MCD"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:guardant-health",
+      "editorial_owner": "Guardant Health",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://investors.guardanthealth.com/press-releases/default.aspx",
+      "coverage": {
+        "companies": [
+          "Guardant Health"
+        ],
+        "products": [
+          "Shield™ / Shield™ MCD"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:freenome",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "Freenome[Title/Abstract] OR SimpleScreen[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "Freenome"
+        ],
+        "products": [
+          "SimpleScreen CRC"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:freenome",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "FREENOME, INC.",
+      "coverage": {
+        "companies": [
+          "Freenome"
+        ],
+        "products": [
+          "SimpleScreen CRC"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:freenome",
+      "editorial_owner": "Freenome",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.freenome.com/newsroom/",
+      "coverage": {
+        "companies": [
+          "Freenome"
+        ],
+        "products": [
+          "SimpleScreen CRC"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:delfi-diagnostics",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "\"Delfi Diagnostics\"[Title/Abstract] OR \"FirstLook Lung\"[Title/Abstract] OR \"DNA fragmentome\"[Title/Abstract] OR (DELFI[Title/Abstract] AND (fragmentome[Title/Abstract] OR cancer[Title/Abstract]))",
+      "coverage": {
+        "companies": [
+          "Delfi Diagnostics"
+        ],
+        "products": [
+          "FirstLook™ Lung"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:delfi-diagnostics",
+      "editorial_owner": "DELFI Diagnostics",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://delfidiagnostics.com/about-us/newsroom/",
+      "coverage": {
+        "companies": [
+          "Delfi Diagnostics"
+        ],
+        "products": [
+          "FirstLook™ Lung"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:mirxes",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "GASTROClear[Title/Abstract] OR Mirxes[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "觅瑞 Mirxes"
+        ],
+        "products": [
+          "觅小卫® / GASTROClear™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:mirxes",
+      "editorial_owner": "MiRXES",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.mirxes.com/media-releases-overview/",
+      "coverage": {
+        "companies": [
+          "觅瑞 Mirxes"
+        ],
+        "products": [
+          "觅小卫® / GASTROClear™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:epigenomics",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "\"Epi proColon\"[Title/Abstract] OR (SEPT9[Title/Abstract] AND colorectal[Title/Abstract])",
+      "coverage": {
+        "companies": [
+          "Epigenomics"
+        ],
+        "products": [
+          "Epi proColon®"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:epigenomics",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "EPIGENOMICS AG",
+      "coverage": {
+        "companies": [
+          "Epigenomics"
+        ],
+        "products": [
+          "Epi proColon®"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:epigenomics",
+      "editorial_owner": "Epigenomics AG",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.epigenomics.com/category/press-releases/",
+      "coverage": {
+        "companies": [
+          "Epigenomics"
+        ],
+        "products": [
+          "Epi proColon®"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:geneoscopy",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "Geneoscopy[Title/Abstract] OR ColoSense[Title/Abstract] OR \"stool RNA\"[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "Geneoscopy"
+        ],
+        "products": [
+          "ColoSense™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "openfda:geneoscopy",
+      "editorial_owner": "U.S. Food and Drug Administration",
+      "tier": "authoritative",
+      "type": "openfda_query",
+      "source_type": "regulator",
+      "url": "https://api.fda.gov/device/",
+      "applicant": "GENEOSCOPY, INC.",
+      "coverage": {
+        "companies": [
+          "Geneoscopy"
+        ],
+        "products": [
+          "ColoSense™"
+        ],
+        "event_types": [
+          "regulatory_decision"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:geneoscopy",
+      "editorial_owner": "Geneoscopy",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.geneoscopy.com/press-releases/",
+      "coverage": {
+        "companies": [
+          "Geneoscopy"
+        ],
+        "products": [
+          "ColoSense™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:gene-solutions",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "SPOT-MAS[Title/Abstract] OR \"Gene Solutions\"[Title/Abstract] OR K-DETEK[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "Gene Solutions"
+        ],
+        "products": [
+          "SPOT-MAS™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:gene-solutions",
+      "editorial_owner": "Gene Solutions",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://genesolutions.com/news/",
+      "coverage": {
+        "companies": [
+          "Gene Solutions"
+        ],
+        "products": [
+          "SPOT-MAS™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e4b896e5928ce59f",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "CanScan[Title/Abstract] OR Geneseeq[Title/Abstract] OR NCT06011694[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "世和基因"
+        ],
+        "products": [
+          "CanScan® 鹰眼"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e4b896e5928ce59f",
+      "editorial_owner": "Geneseeq",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://na.geneseeq.com/our-news/",
+      "coverage": {
+        "companies": [
+          "世和基因"
+        ],
+        "products": [
+          "CanScan® 鹰眼"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e78783e79fb3e58c",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "OverC[Title/Abstract] OR \"Burning Rock\"[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "燃石医学"
+        ],
+        "products": [
+          "OverC™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e78783e79fb3e58c",
+      "editorial_owner": "Burning Rock Biotech",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://ir.brbiotech.com/news-events/news-releases",
+      "coverage": {
+        "companies": [
+          "燃石医学"
+        ],
+        "products": [
+          "OverC™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e9b98de8bf9ce59f",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "PanSeer[Title/Abstract] OR Singlera[Title/Abstract] OR PDACatch[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "鹍远基因"
+        ],
+        "products": [
+          "PanSeer / PDACatch / GutSeer"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e9b98de8bf9ce59f",
+      "editorial_owner": "Singlera Genomics",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.singlera.com/newsroom",
+      "coverage": {
+        "companies": [
+          "鹍远基因"
+        ],
+        "products": [
+          "PanSeer / PDACatch / GutSeer"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e5928ce7919ee59f",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "PreCar[Title/Abstract] OR \"Berry Oncology\"[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "和瑞基因"
+        ],
+        "products": [
+          "莱思宁 (LiverScreening)"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e5928ce7919ee59f",
+      "editorial_owner": "Berry Genomics / Berry Oncology",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.berrygenomics.com/",
+      "coverage": {
+        "companies": [
+          "和瑞基因"
+        ],
+        "products": [
+          "莱思宁 (LiverScreening)"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e8afbae8be89e581",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "ColoClear[Title/Abstract] OR \"New Horizon Health\"[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "诺辉健康"
+        ],
+        "products": [
+          "常卫清®"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e8afbae8be89e581",
+      "editorial_owner": "New Horizon Health",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.newhorizonbio.com/",
+      "coverage": {
+        "companies": [
+          "诺辉健康"
+        ],
+        "products": [
+          "常卫清®"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e6b39be7949fe5ad",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "HCCscreen[Title/Abstract] OR Genetron[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "泛生子"
+        ],
+        "products": [
+          "HCCscreen™"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e6b39be7949fe5ad",
+      "editorial_owner": "Genetron Health",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.genetronhealth.com/en/about.html",
+      "coverage": {
+        "companies": [
+          "泛生子"
+        ],
+        "products": [
+          "HCCscreen™"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e58d8ee5a4a7e59f",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "(BGI[Title] AND (methylation[Title/Abstract] OR screening[Title/Abstract]))",
+      "coverage": {
+        "companies": [
+          "华大基因"
+        ],
+        "products": [
+          "华常康"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e58d8ee5a4a7e59f",
+      "editorial_owner": "BGI Genomics",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.bgi.com/global/news",
+      "coverage": {
+        "companies": [
+          "华大基因"
+        ],
+        "products": [
+          "华常康"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e59089e59ba0e58a",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "GenePlus[Title/Abstract] AND (cancer[Title/Abstract] OR methylation[Title/Abstract])",
+      "coverage": {
+        "companies": [
+          "吉因加"
+        ],
+        "products": [
+          "吉早安®"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e59089e59ba0e58a",
+      "editorial_owner": "GenePlus",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.geneplus.cn/",
+      "coverage": {
+        "companies": [
+          "吉因加"
+        ],
+        "products": [
+          "吉早安®"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e887bbe5928ce7a7",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "Genecast[Title/Abstract] OR ((THEMIS[Title/Abstract] OR TOTEM[Title/Abstract]) AND (methylation[Title/Abstract] OR cancer[Title/Abstract]))",
+      "coverage": {
+        "companies": [
+          "臻和科技"
+        ],
+        "products": [
+          "THEMIS / TOTEM"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e887bbe5928ce7a7",
+      "editorial_owner": "Genecast",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.genecast.com.cn/",
+      "coverage": {
+        "companies": [
+          "臻和科技"
+        ],
+        "products": [
+          "THEMIS / TOTEM"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e59fbae58786e58c",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "UriFind[Title/Abstract] OR PulmoSeek[Title/Abstract] OR AnchorDx[Title/Abstract]",
+      "coverage": {
+        "companies": [
+          "基准医疗"
+        ],
+        "products": [
+          "UriFind® / PulmoSeek®"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "official:e59fbae58786e58c",
+      "editorial_owner": "AnchorDx",
+      "tier": "authoritative",
+      "type": "official_web",
+      "source_type": "official",
+      "url": "https://www.anchordx.com/news/",
+      "coverage": {
+        "companies": [
+          "基准医疗"
+        ],
+        "products": [
+          "UriFind® / PulmoSeek®"
+        ],
+        "event_types": [
+          "product_launch",
+          "partnership",
+          "corporate",
+          "conference_disclosure"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "pubmed:e8a18ce4b89ae680",
+      "editorial_owner": "U.S. National Library of Medicine",
+      "tier": "authoritative",
+      "type": "pubmed_query",
+      "source_type": "journal",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "query": "\"multi-cancer early detection\"[Title/Abstract] AND (prospective[Title/Abstract] OR screening[Title/Abstract] OR sensitivity[Title/Abstract])",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "MCED 领域"
+        ],
+        "event_types": [
+          "publication",
+          "clinical_readout"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:genomeweb",
+      "editorial_owner": "GenomeWeb",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.genomeweb.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:medtech-dive",
+      "editorial_owner": "MedTech Dive",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.medtechdive.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:fierce-biotech",
+      "editorial_owner": "Fierce Biotech",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.fiercebiotech.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:stat",
+      "editorial_owner": "STAT",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.statnews.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:cancer-letter",
+      "editorial_owner": "The Cancer Letter",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://cancerletter.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:scmp",
+      "editorial_owner": "South China Morning Post",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.scmp.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "trusted:patient-care-online",
+      "editorial_owner": "Patient Care Online",
+      "tier": "trusted",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.patientcareonline.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "source_id": "discovery:pr-newswire",
+      "editorial_owner": "PR Newswire",
+      "tier": "discovery",
+      "type": "web_whitelist",
+      "source_type": "media",
+      "url": "https://www.prnewswire.com/",
+      "coverage": {
+        "companies": [
+          "*"
+        ],
+        "products": [
+          "*"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
+    }
+  ],
+  "discovery_queries": [
+    {
+      "query_id": "discovery:grail",
       "company": "GRAIL",
       "product": "Galleri®",
-      "fda_applicant": "GRAIL, INC.",
-      "pubmed": "\"Galleri\"[Title/Abstract] OR \"multi-cancer early detection\"[Title/Abstract] OR PATHFINDER[Title/Abstract]",
-      "news": "GRAIL Galleri",
-      "official": "GRAIL Galleri news announcement",
-      "domestic": null
+      "query": "GRAIL Galleri 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:exact-sciences-abbott",
       "company": "Exact Sciences / Abbott",
       "product": "Cancerguard™ / Cologuard Plus™",
-      "fda_applicant": "EXACT SCIENCES CORPORATION",
-      "pubmed": "Cancerguard[Title/Abstract] OR Cologuard[Title/Abstract] OR CancerSEEK[Title/Abstract]",
-      "news": "Exact Sciences Cologuard OR Cancerguard",
-      "official": "Exact Sciences Cancerguard OR Cologuard news",
-      "domestic": null
+      "query": "Exact Sciences / Abbott Cancerguard / Cologuard Plus 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:guardant-health",
       "company": "Guardant Health",
       "product": "Shield™ / Shield™ MCD",
-      "fda_applicant": "GUARDANT HEALTH, INC.",
-      "pubmed": "\\\"Guardant Health\\\"[Title/Abstract] OR (Shield[Title] AND (colorectal[Title/Abstract] OR \\\"early detection\\\"[Title/Abstract] OR \\\"multi-cancer\\\"[Title/Abstract] OR Guardant[Title/Abstract]))",
-      "news": "Guardant Health Shield",
-      "official": "Guardant Health Shield MCD news",
-      "domestic": null
+      "query": "Guardant Health Shield / Shield MCD 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:freenome",
       "company": "Freenome",
       "product": "SimpleScreen CRC",
-      "fda_applicant": "FREENOME, INC.",
-      "pubmed": "Freenome[Title/Abstract] OR SimpleScreen[Title/Abstract]",
-      "news": "Freenome",
-      "official": "Freenome cancer screening news",
-      "domestic": null
+      "query": "Freenome SimpleScreen CRC 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:delfi-diagnostics",
       "company": "Delfi Diagnostics",
       "product": "FirstLook™ Lung",
-      "pubmed": "\"Delfi Diagnostics\"[Title/Abstract] OR \"FirstLook Lung\"[Title/Abstract] OR \"DNA fragmentome\"[Title/Abstract] OR (DELFI[Title/Abstract] AND (fragmentome[Title/Abstract] OR cancer[Title/Abstract]))",
-      "news": "Delfi Diagnostics",
-      "official": "Delfi Diagnostics FirstLook news",
-      "domestic": null
+      "query": "Delfi Diagnostics FirstLook Lung 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:mirxes",
       "company": "觅瑞 Mirxes",
       "product": "觅小卫® / GASTROClear™",
-      "pubmed": "GASTROClear[Title/Abstract] OR Mirxes[Title/Abstract]",
-      "news": "Mirxes OR 觅瑞 GASTROClear",
-      "official": "Mirxes GASTROClear news",
-      "domestic": "觅瑞 GASTROClear 觅小卫 早筛 最新"
+      "query": "觅瑞 Mirxes 觅小卫 / GASTROClear 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:epigenomics",
       "company": "Epigenomics",
       "product": "Epi proColon®",
-      "fda_applicant": "EPIGENOMICS AG",
-      "pubmed": "\"Epi proColon\"[Title/Abstract] OR (SEPT9[Title/Abstract] AND colorectal[Title/Abstract])",
-      "news": "Epigenomics proColon",
-      "official": "Epigenomics Epi proColon news",
-      "domestic": null
+      "query": "Epigenomics Epi proColon 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:geneoscopy",
       "company": "Geneoscopy",
       "product": "ColoSense™",
-      "fda_applicant": "GENEOSCOPY, INC.",
-      "pubmed": "Geneoscopy[Title/Abstract] OR ColoSense[Title/Abstract] OR \"stool RNA\"[Title/Abstract]",
-      "news": "Geneoscopy ColoSense",
-      "official": "Geneoscopy ColoSense news",
-      "domestic": null
+      "query": "Geneoscopy ColoSense 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:gene-solutions",
       "company": "Gene Solutions",
       "product": "SPOT-MAS™",
-      "pubmed": "SPOT-MAS[Title/Abstract] OR \"Gene Solutions\"[Title/Abstract] OR K-DETEK[Title/Abstract]",
-      "news": "Gene Solutions SPOT-MAS",
-      "official": "Gene Solutions SPOT-MAS cancer screening",
-      "domestic": null
+      "query": "Gene Solutions SPOT-MAS 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e4b896e5928ce59f",
       "company": "世和基因",
       "product": "CanScan® 鹰眼",
-      "pubmed": "CanScan[Title/Abstract] OR Geneseeq[Title/Abstract] OR NCT06011694[Title/Abstract]",
-      "news": "世和基因 OR Geneseeq CanScan",
-      "official": "Geneseeq CanScan MERCURY news",
-      "domestic": "世和基因 CanScan 鹰眼 早筛 最新"
+      "query": "世和基因 CanScan 鹰眼 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e78783e79fb3e58c",
       "company": "燃石医学",
       "product": "OverC™",
-      "pubmed": "OverC[Title/Abstract] OR \"Burning Rock\"[Title/Abstract]",
-      "news": "燃石医学 OR Burning Rock OverC",
-      "official": null,
-      "domestic": "燃石医学 OverC 早筛 最新"
+      "query": "燃石医学 OverC 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e9b98de8bf9ce59f",
       "company": "鹍远基因",
       "product": "PanSeer / PDACatch / GutSeer",
-      "pubmed": "PanSeer[Title/Abstract] OR Singlera[Title/Abstract] OR PDACatch[Title/Abstract]",
-      "news": "鹍远基因 OR Singlera PanSeer",
-      "official": null,
-      "domestic": "鹍远基因 PanSeer 早筛 最新"
+      "query": "鹍远基因 PanSeer / PDACatch / GutSeer 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e5928ce7919ee59f",
       "company": "和瑞基因",
       "product": "莱思宁 (LiverScreening)",
-      "pubmed": "PreCar[Title/Abstract] OR \"Berry Oncology\"[Title/Abstract]",
-      "news": "和瑞基因 OR 莱思宁 OR Berry Oncology",
-      "official": null,
-      "domestic": "和瑞基因 莱思宁 肝癌早筛 最新"
+      "query": "和瑞基因 莱思宁 (LiverScreening) 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e8afbae8be89e581",
       "company": "诺辉健康",
       "product": "常卫清®",
-      "pubmed": "ColoClear[Title/Abstract] OR \"New Horizon Health\"[Title/Abstract]",
-      "news": "诺辉健康 OR 常卫清 OR ColoClear",
-      "official": null,
-      "domestic": "诺辉健康 常卫清 早筛 最新"
+      "query": "诺辉健康 常卫清 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e6b39be7949fe5ad",
       "company": "泛生子",
       "product": "HCCscreen™",
-      "pubmed": "HCCscreen[Title/Abstract] OR Genetron[Title/Abstract]",
-      "news": "泛生子 OR Genetron HCCscreen",
-      "official": null,
-      "domestic": "泛生子 HCCscreen 早筛 最新"
+      "query": "泛生子 HCCscreen 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e58d8ee5a4a7e59f",
       "company": "华大基因",
       "product": "华常康",
-      "pubmed": "(BGI[Title] AND (methylation[Title/Abstract] OR screening[Title/Abstract]))",
-      "news": "华大基因 早筛 OR 华常康",
-      "official": null,
-      "domestic": "华大基因 早筛 华常康 最新"
+      "query": "华大基因 华常康 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e59089e59ba0e58a",
       "company": "吉因加",
       "product": "吉早安®",
-      "pubmed": "GenePlus[Title/Abstract] AND (cancer[Title/Abstract] OR methylation[Title/Abstract])",
-      "news": "吉因加 吉早安 OR GenePlus",
-      "official": null,
-      "domestic": "吉因加 吉早安 早筛 最新"
+      "query": "吉因加 吉早安 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e887bbe5928ce7a7",
       "company": "臻和科技",
       "product": "THEMIS / TOTEM",
-      "pubmed": "Genecast[Title/Abstract] OR ((THEMIS[Title/Abstract] OR TOTEM[Title/Abstract]) AND (methylation[Title/Abstract] OR cancer[Title/Abstract]))",
-      "news": "臻和科技 OR Genecast THEMIS",
-      "official": null,
-      "domestic": "臻和科技 THEMIS TOTEM 早筛 最新"
+      "query": "臻和科技 THEMIS / TOTEM 癌症 早筛 最新 news",
+      "enabled": true
     },
     {
+      "query_id": "discovery:e59fbae58786e58c",
       "company": "基准医疗",
       "product": "UriFind® / PulmoSeek®",
-      "pubmed": "UriFind[Title/Abstract] OR PulmoSeek[Title/Abstract] OR AnchorDx[Title/Abstract]",
-      "news": "基准医疗 OR AnchorDx UriFind OR PulmoSeek",
-      "official": null,
-      "domestic": "基准医疗 UriFind PulmoSeek 最新"
-    },
-    {
-      "company": "行业总览",
-      "product": "MCED 领域",
-      "pubmed": "\"multi-cancer early detection\"[Title/Abstract] AND (prospective[Title/Abstract] OR screening[Title/Abstract] OR sensitivity[Title/Abstract])",
-      "news": null,
-      "official": null,
-      "domestic": null
+      "query": "基准医疗 UriFind / PulmoSeek 癌症 早筛 最新 news",
+      "enabled": true
     }
   ]
 }

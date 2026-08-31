@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "generated_at": null,
+  "golden_fixture_sha256": "fa7f0b72dd7c539b774cd8df56c52c639da58a71af2e6002b39d27cc06b88f1e",
+  "passed": false,
+  "provider_configuration": {},
+  "deterministic_suite": {
+    "passed": false
+  },
+  "provider_smoke": {
+    "qwen": false,
+    "deepseek": false,
+    "glm": false,
+    "kimi": false
+  },
+  "semantic_matching": {
+    "total": 30,
+    "true_positive": 0,
+    "false_positive": 0,
+    "false_negative": 0,
+    "true_negative": 0,
+    "precision": 0,
+    "recall": 0,
+    "predictions": []
+  },
+  "thresholds": {
+    "deterministic_suite": true,
+    "semantic_precision_min": 0.98,
+    "semantic_recall_min": 0.95,
+    "all_provider_smokes": true
+  },
+  "error": {
+    "name": "AcceptancePending",
+    "message": "Live provider acceptance has not run. Configure all four providers, then run npm run monitor:acceptance."
+  }
+}

@@ -9,7 +9,7 @@ import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/v1/stories — 监测故事线(按热度排序,含 AI 摘要与评分);?offset=/limit= 分页(limit ≤100,默认 50)。
+ * GET /api/v1/stories — 发布事件账本投影(按等级、重要性、事件时间排序);?offset=/limit= 分页(limit ≤100,默认 50)。
  */
 export async function GET(request: Request) {
   const report = await readMonitorReport();

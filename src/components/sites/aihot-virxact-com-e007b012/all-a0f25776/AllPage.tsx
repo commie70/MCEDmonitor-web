@@ -48,7 +48,7 @@ export function AllPage({
       <TimelineFeed items={filtered} dayGroups={dayGroups} variant="all" />
       {filtered.length > 0 && (
         <p className="py-[18px] pb-2 text-center text-xs text-mc-ink2">
-          已展示全部 {filtered.length} 条演示数据
+          已展示全部 {filtered.length} 条事件
         </p>
       )}
     </div>

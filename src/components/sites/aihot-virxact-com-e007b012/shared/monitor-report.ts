@@ -29,6 +29,26 @@ export interface MonitorItem {
   content?: string;
   content_fetched_at?: string;
   content_status?: string;
+  event_id?: string;
+  event_type?: string;
+  editorial_owner?: string;
+  source_type?: string;
+  occurred_at?: string | null;
+  published_at?: string | null;
+  discovered_at?: string;
+}
+
+export interface MonitorImportance {
+  relevance: number;
+  impact: number;
+  actionability: number;
+  total: number;
+  level: "L1" | "L2" | "L3" | null;
+  rationales?: {
+    relevance: string;
+    impact: string;
+    actionability: string;
+  };
 }
 
 export interface MonitorStory {
@@ -37,7 +57,7 @@ export interface MonitorStory {
   product: string;
   title: string;
   heat: number;
-  badges: string[];
+  badges: ("新" | "更新")[];
   sources_count: number;
   categories: string[];
   first_seen: string;
@@ -48,6 +68,23 @@ export interface MonitorStory {
   score: number;
   reason: string;
   stale_month?: string;
+  legacy_ids?: string[];
+  event_type?: string;
+  publication_state?: "first" | "update" | "duplicate" | "backfill";
+  level?: "L1" | "L2" | "L3" | null;
+  evidence_confidence?: "high" | "medium" | "low";
+  score_breakdown?: MonitorImportance;
+  review_status?: "not_required" | "pending" | "approved" | "rejected";
+  occurred_at?: string | null;
+  published_at?: string | null;
+  discovered_at?: string;
+  evidence_summary?: {
+    id: string;
+    editorial_owner: string;
+    source_id: string;
+    tier: string;
+    url: string;
+  }[];
 }
 
 export interface MonitorDigest {
@@ -57,12 +94,35 @@ export interface MonitorDigest {
 }
 
 export interface MonitorReport {
+  schema_version?: number;
   generated_at: string;
   window_since: string;
   categories: MonitorCategory[];
   items: MonitorItem[];
   stories: MonitorStory[];
   digest: MonitorDigest | null;
+  watches?: number;
+  manual_tasks?: {
+    company: string;
+    channel: string;
+    category: string;
+    label: string;
+    url: string;
+  }[];
+  errors?: {
+    candidate_id?: string | null;
+    source_id?: string;
+    stage?: string;
+    error_category?: string;
+    message: string;
+    retry_count?: number;
+  }[];
+  views?: {
+    daily_event_ids: string[];
+    hot_event_ids: string[];
+    all_event_ids: string[];
+  };
+  metrics?: Record<string, unknown>;
 }
 
 const REPORT_PATH = path.join(

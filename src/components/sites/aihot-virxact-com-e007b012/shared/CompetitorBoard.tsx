@@ -2,11 +2,13 @@
 
 import { Fragment, useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   ALL_COMPETITORS,
   ROUTE_COLORS,
   STUDY_TONE,
+  studyEvidenceHref,
   type Competitor,
   type RouteKey,
   type StatusTone,} from "./competitors";
@@ -115,6 +117,7 @@ const CANCER_OPTIONS = [
   "宫颈",
   "子宫内膜",
   "胆管",
+  "浆细胞肿瘤",
   "淋巴瘤",
   "膀胱",
   "头颈",
@@ -362,9 +365,13 @@ export function CompetitorBoard() {
                           更新：{s.updatedAt}
                         </div>
                         {s.evidence && (
-                          <div className="break-all text-[10.5px] text-mc-ink2 [font-family:ui-monospace,SFMono-Regular,Menlo,monospace] opacity-75">
-                            证据：{s.evidence}
-                          </div>
+                          <Link
+                            href={studyEvidenceHref({ companyId: c.id, studyIndex: i })}
+                            onClick={(event) => event.stopPropagation()}
+                            className="mt-[5px] inline-flex rounded-md border border-mc-line-strong bg-mc-card px-[9px] py-[3px] text-[10.5px] font-semibold text-mc-cyan-fg hover:bg-mc-surface1"
+                          >
+                            打开证据
+                          </Link>
                         )}
                       </div>
                     </div>

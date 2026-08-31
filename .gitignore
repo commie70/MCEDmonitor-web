@@ -64,5 +64,6 @@ temp/
 
 # Local agent/session artifacts
 .playwright-mcp/
+.codegraph/
 .kimi-code/
 auth-qr.png

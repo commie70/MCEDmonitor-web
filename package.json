@@ -32,9 +32,15 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
     "monitor": "node scripts/mced-daily-monitor.mjs",
+    "monitor:legacy": "node scripts/mced-daily-monitor-legacy.mjs",
+    "monitor:migrate": "node scripts/migrate-monitor-ledger.mjs",
+    "monitor:review": "node scripts/review-monitor-event.mjs",
+    "monitor:acceptance": "node scripts/evaluate-monitor-acceptance.mjs",
+    "monitor:test": "node --test tests/monitor-pipeline.test.mjs",
     "changelog": "node scripts/build-changelog.mjs",
-    "check": "npm run lint && npm run typecheck && npm run build",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
     "skill:hash": "cd public/mced-skill && shasum -a 256 SKILL.md | awk '{print $1\"  SKILL.md\"}' > SKILL.md.sha256"
   },
   "dependencies": {

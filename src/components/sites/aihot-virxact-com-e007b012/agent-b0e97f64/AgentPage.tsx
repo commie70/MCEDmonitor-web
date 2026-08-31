@@ -12,7 +12,6 @@ import { CopyButton } from "./CopyButton";
 const ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://gs-mced.geneseeq.com";
 
 const CODE = "rounded bg-mc-surface2 px-[5px] py-[1px] text-[11.5px] text-mc-ink";
-const CARD = "rounded-xl border border-mc-line bg-mc-card shadow-mc-card";
 const H2 = "text-[19px] font-extrabold tracking-[-0.01em] text-mc-ink";
 
 type TabKey = "skill" | "mcp" | "rss" | "rest";
@@ -47,10 +46,10 @@ const CODEX_MCP_CMD = `codex mcp add mced-intel --url '${MCP_URL}'`;
 const SELF_INSTALL_CMD = `安装这里的MCP：${ORIGIN}/agent`;
 
 const MCP_TOOLS:{ name: string; desc: string }[] = [
-  { name: "get_top_stories", desc: "当前监测窗口热度最高的前 10 条故事线(含 AI 摘要与评分)" },{ name: "get_companies", desc: "19 家受监测公司摘要列表(产品 / 路线 / 报证状态)" },{ name: "get_company", desc: "按 id 取单家完整性能库(研究 / 数字 / 出处 / 更新时间)" },{ name: "search_items", desc: "按关键词与类别检索原始命中条目(最多 10 条)" },];
+  { name: "get_top_stories", desc: "当前监测窗口重要性最高的前 10 个发布事件(含证据置信度与评分明细)" },{ name: "get_companies", desc: "19 家受监测公司摘要列表(产品 / 路线 / 报证状态)" },{ name: "get_company", desc: "按 id 取单家完整性能库(研究 / 数字 / 出处 / 更新时间)" },{ name: "search_items", desc: "按关键词与类别检索事件证据(最多 10 条)" },];
 
 const REST_ENDPOINTS:{ method: string; path: string; desc: string }[] = [
-  { method: "GET",path: "/api/v1/companies", desc: "公司摘要列表(19 家，含路线 / 报证 / 更新时间)" },{ method: "GET",path: "/api/v1/companies/{id}", desc: "单家完整性能库：研究、数字、出处、更新时间" },{ method: "GET",path: "/api/v1/prospective", desc: "前瞻队列性能对照(18 条，非病例对照)" },{ method: "GET",path: "/api/v1/stories", desc: "当前窗口故事线：热度、徽章、AI 摘要 / 评分 / 关注理由" },{ method: "GET",path: "/api/v1/items", desc: "原始命中；支持 ?category=regulatory|academic|research|market" },{ method: "GET",path: "/api/v1/daily", desc: "当日 AI 日报 + 前 5 条高热故事线" },];
+  { method: "GET",path: "/api/v1/companies", desc: "公司摘要列表(19 家，含路线 / 报证 / 更新时间)" },{ method: "GET",path: "/api/v1/companies/{id}", desc: "单家完整性能库：研究、数字、出处、更新时间" },{ method: "GET",path: "/api/v1/prospective", desc: "前瞻队列性能对照(18 条，非病例对照)" },{ method: "GET",path: "/api/v1/stories", desc: "发布事件：重要性、等级、证据置信度、评分明细" },{ method: "GET",path: "/api/v1/items", desc: "事件证据；支持 ?category=regulatory|academic|research|market" },{ method: "GET",path: "/api/v1/daily", desc: "当日 AI 日报 + 前 5 个 L1/L2 新增 / 更新事件" },];
 
 function CodeBlock({ children, copyText, label }:{ children: string; copyText?: string; label?: string }) {
   return (
@@ -94,7 +93,7 @@ function SkillTab() {
         {[
           ["01", "把提示词发给 Agent", "手动操作是非遗程序员专属技能。"],
           ["02", "开个新会话", "多数 Agent 只在会话开始时扫描 Skill，当前对话不一定看到。"],
-          ["03", "问一句验证", "看到监测窗口、中文摘要、相关性评分和站内链接，就算接上了。"],
+          ["03", "问一句验证", "看到监测窗口、中文摘要、重要性等级、证据置信度和站内链接，就算接上了。"],
         ].map(([n, t, d]) => (
           <li key={n} className="flex gap-[10px]">
             <span className="text-[13px] font-extrabold tabular-nums text-mc-cyan">{n}</span>
@@ -115,7 +114,7 @@ function SkillTab() {
       </CodeBlock>
       <p className="mt-[8px] text-[11.5px] leading-[1.6] text-mc-ink2">
         <span className="font-bold text-mc-ink1">成功的样子：</span>
-        回答注明监测窗口(当前时间倒推 1 个月)、给出 5 条中文摘要与相关性评分，标题链接到早筛情报站的热点榜或原文。
+        回答注明监测窗口(当前时间倒推 1 个月)、给出 5 条中文摘要、重要性等级与证据置信度，标题链接到早筛情报站的热点榜或原文。
       </p>
 
       <div className="mt-[14px] grid gap-[8px]">
@@ -139,7 +138,7 @@ function SkillTab() {
         <Disclosure title="做得到，和暂时做不到的">
           <ul className="grid gap-[6px] text-[12.5px] leading-[1.7] text-mc-ink1">
             <li>· 原生窗口为当前时间倒推 1 个月；更早的历史检索请用 <span className={CODE}>/api/v1/items</span> 搭配自己的关键词。</li>
-            <li>· 返回 AI 摘要、相关性评分、关注理由与原文链接；<span className={CODE}>/api/v1/companies/{"{id}"}</span> 可取单家完整性能库。</li>
+            <li>· 返回 AI 摘要、重要性、证据置信度、关注理由与原文链接；<span className={CODE}>/api/v1/companies/{"{id}"}</span> 可取单家完整性能库。</li>
             <li>· 当前没有按 ID 获取单篇正文的 API，没有写接口；NMPA 与会议摘要只有检索链接通道。</li>
           </ul>
         </Disclosure>
@@ -201,7 +200,7 @@ function McpTab() {
       </CodeBlock>
       <p className="mt-[8px] text-[11.5px] leading-[1.6] text-mc-ink2">
         <span className="font-bold text-mc-ink1">成功的样子：</span>
-        返回 JSON-RPC result,content 里是前 10 条高热故事线的 JSON(热度、徽章、AI 摘要、相关性评分)。
+        返回 JSON-RPC result,content 里是前 10 个发布事件的 JSON(重要性、等级、证据置信度、AI 摘要与评分明细)。
       </p>
 
       <div className="mt-[14px]">
@@ -229,7 +228,7 @@ function RssTab() {
           <div className="min-w-0 flex-1">
             <div className="text-[13px] font-bold text-mc-ink">竞品监测故事线</div>
             <div className="mt-[2px] text-[11.5px] leading-[1.5] text-mc-ink2">
-              每日热度最高的 20 条故事线：标题、AI 摘要、信源与原文链接。
+              每日重要性最高的 20 个发布事件：标题、AI 摘要、证据主体与原文链接。
             </div>
           </div>
           <code className={`${CODE} break-all`}>{ORIGIN}/feed.xml</code>

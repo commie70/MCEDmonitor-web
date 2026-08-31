@@ -25,13 +25,13 @@ curl https://gs-mced.geneseeq.com/api/v1/companies/grail
 # 前瞻队列性能对照(非病例对照研究)
 curl https://gs-mced.geneseeq.com/api/v1/prospective
 
-# 每日监测故事线(按热度排序,含 AI 摘要与评分)
+# 发布事件(按等级、重要性和事件时间排序，含证据置信度与评分明细)
 curl https://gs-mced.geneseeq.com/api/v1/stories
 
 # 监测条目流(可按分类过滤:regulatory|academic|research|market)
 curl "https://gs-mced.geneseeq.com/api/v1/items?category=regulatory"
 
-# 每日摘要:AI 日报 + 热度前 5 故事线
+# 每日摘要：AI 日报 + 本期 L1/L2 首次发布 / 实质更新
 curl https://gs-mced.geneseeq.com/api/v1/daily
 ```
 

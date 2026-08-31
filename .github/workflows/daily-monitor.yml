@@ -1,6 +1,6 @@
 name: Daily Monitor
 
-# 每日自动监测:采集 → 聚类 → AI 研判 → 正文富化 → 落盘提交推送。
+# 每日自动监测:新账本流水线影子运行 + 旧生成器维持公开报告，直到 ADR 切换门槛满足。
 # push 到 master 后由 EdgeOne Pages 的 Git 集成自动重新部署。
 # 密钥全部来自仓库 Secrets,不落盘、不入库。
 
@@ -8,7 +8,13 @@ on:
   schedule:
     # 每 3 天 06:17(北京时间,UTC 22:17)运行:每月 1/4/7/10/... 日
     - cron: "17 22 */3 * *"
-  workflow_dispatch: # 支持手动触发(Actions → Daily Monitor → Run workflow)
+  workflow_dispatch:
+    inputs:
+      run_acceptance:
+        description: "运行四家 provider 的 120 案例验收（会产生模型调用）"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write # 需要把更新后的日报推回 master
@@ -37,7 +43,43 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Run daily monitor (collect → cluster → LLM → enrich)
+      - name: Run live provider acceptance
+        if: inputs.run_acceptance == true
+        env:
+          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
+          DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_VISION_MODEL: ${{ vars.DEEPSEEK_VISION_MODEL }}
+          GLM_BASE_URL: ${{ vars.GLM_BASE_URL }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_REVIEW_MODEL: ${{ vars.GLM_REVIEW_MODEL }}
+          KIMI_BASE_URL: ${{ vars.KIMI_BASE_URL }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          KIMI_SYNTHESIS_MODEL: ${{ vars.KIMI_SYNTHESIS_MODEL }}
+        run: npm run monitor:acceptance
+
+      - name: Run evidence-first monitor in shadow mode
+        env:
+          ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
+          ANYSEARCH_BASE_URL: ${{ vars.ANYSEARCH_BASE_URL }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
+          DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_VISION_MODEL: ${{ vars.DEEPSEEK_VISION_MODEL }}
+          GLM_BASE_URL: ${{ vars.GLM_BASE_URL }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_REVIEW_MODEL: ${{ vars.GLM_REVIEW_MODEL }}
+          KIMI_BASE_URL: ${{ vars.KIMI_BASE_URL }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          KIMI_SYNTHESIS_MODEL: ${{ vars.KIMI_SYNTHESIS_MODEL }}
+        run: node scripts/mced-daily-monitor.mjs --mode shadow
+
+      - name: Keep legacy public report during shadow acceptance
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
@@ -45,7 +87,7 @@ jobs:
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
           EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
-        run: node scripts/mced-daily-monitor.mjs --limit-llm 12
+        run: node scripts/mced-daily-monitor-legacy.mjs --limit-llm 12
 
       - name: Rebuild changelog
         run: node scripts/build-changelog.mjs
@@ -53,7 +95,7 @@ jobs:
       - name: Detect data changes
         id: changes
         run: |
-          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/changelog.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
+          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/monitor/shadow-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -65,6 +107,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/monitor/daily-report.json public/changelog.json scripts/monitor-history.jsonl scripts/monitor-state.json
+          git add public/monitor/daily-report.json public/monitor/shadow-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json
           git commit -m "chore(monitor): daily report $(date -u +%Y-%m-%d)"
           git push origin HEAD:master

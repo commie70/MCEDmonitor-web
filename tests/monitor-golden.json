@@ -1,0 +1,1561 @@
+{
+  "schema_version": 1,
+  "frozen_from": {
+    "report_generated_at": "2026-08-19T22:43:51.241Z",
+    "report_git_commit": "e903a195",
+    "note": "人工确定标签；URL 输入由冻结报告机械摘录，不由新实现反向生成。"
+  },
+  "counts": {
+    "url_duplicates": 40,
+    "semantic_event_pairs": 30,
+    "history_states": 30,
+    "importance": 20,
+    "total": 120
+  },
+  "url_duplicates": [
+    {
+      "id": "url-01",
+      "expected_canonical": "http://inewsweek.cn/kj/2025-11-11/27513.shtml",
+      "urls": [
+        "http://www.inewsweek.cn/kj/2025-11-11/27513.shtml",
+        "http://www.inewsweek.cn/kj/2025-11-11/27513.shtml"
+      ],
+      "legacy_ids": [
+        "exa:awrcjw",
+        "firecrawl:awrcjw"
+      ]
+    },
+    {
+      "id": "url-02",
+      "expected_canonical": "https://360dx.com/topic/mirxes",
+      "urls": [
+        "https://www.360dx.com/topic/mirxes",
+        "https://www.360dx.com/topic/mirxes"
+      ],
+      "legacy_ids": [
+        "firecrawl:bu84zc",
+        "tavily:bu84zc"
+      ]
+    },
+    {
+      "id": "url-03",
+      "expected_canonical": "https://360zhyx.com/home-research-index-rid-78884.shtml",
+      "urls": [
+        "https://www.360zhyx.com/home-research-index-rid-78884.shtml",
+        "https://www.360zhyx.com/home-research-index-rid-78884.shtml"
+      ],
+      "legacy_ids": [
+        "exa:14xzynd",
+        "firecrawl:14xzynd"
+      ]
+    },
+    {
+      "id": "url-04",
+      "expected_canonical": "https://anchordx.com/",
+      "urls": [
+        "https://www.anchordx.com/",
+        "https://www.anchordx.com/"
+      ],
+      "legacy_ids": [
+        "exa:15tzz3g",
+        "firecrawl:15tzz3g"
+      ]
+    },
+    {
+      "id": "url-05",
+      "expected_canonical": "https://berrygenomics.com/cmscontent/180.html",
+      "urls": [
+        "https://www.berrygenomics.com/cmscontent/180.html",
+        "https://www.berrygenomics.com/cmscontent/180.html"
+      ],
+      "legacy_ids": [
+        "exa:10aax6x",
+        "firecrawl:10aax6x"
+      ]
+    },
+    {
+      "id": "url-06",
+      "expected_canonical": "https://bgi.com/businessfield2/%E5%8D%8E%E5%B8%B8%E5%BA%B7%C2%AE%E7%B2%AA%E4%BE%BFdna%E7%94%B2%E5%9F%BA%E5%8C%96%E6%A3%80%E6%B5%8B",
+      "urls": [
+        "https://www.bgi.com/businessfield2/%E5%8D%8E%E5%B8%B8%E5%BA%B7%C2%AE%E7%B2%AA%E4%BE%BFdna%E7%94%B2%E5%9F%BA%E5%8C%96%E6%A3%80%E6%B5%8B",
+        "https://www.bgi.com/businessfield2/%E5%8D%8E%E5%B8%B8%E5%BA%B7%C2%AE%E7%B2%AA%E4%BE%BFdna%E7%94%B2%E5%9F%BA%E5%8C%96%E6%A3%80%E6%B5%8B"
+      ],
+      "legacy_ids": [
+        "exa:a9f9it",
+        "firecrawl:a9f9it"
+      ]
+    },
+    {
+      "id": "url-07",
+      "expected_canonical": "https://bgi.com/news/2023121901",
+      "urls": [
+        "https://www.bgi.com/news/2023121901",
+        "https://www.bgi.com/news/2023121901"
+      ],
+      "legacy_ids": [
+        "exa:1myqt2i",
+        "firecrawl:1myqt2i"
+      ]
+    },
+    {
+      "id": "url-08",
+      "expected_canonical": "https://biochain.com/news/epigenomics-and-biochain-announce-approval-of-epi-procolon-in-china",
+      "urls": [
+        "https://www.biochain.com/news/epigenomics-and-biochain-announce-approval-of-epi-procolon-in-china/",
+        "https://www.biochain.com/news/epigenomics-and-biochain-announce-approval-of-epi-procolon-in-china"
+      ],
+      "legacy_ids": [
+        "firecrawl:1tmnzno",
+        "tavily:iabrpf"
+      ]
+    },
+    {
+      "id": "url-09",
+      "expected_canonical": "https://brbiotech.com/cn/news/details/4725",
+      "urls": [
+        "https://www.brbiotech.com/cn/news/details/4725",
+        "https://www.brbiotech.com/cn/news/details/4725"
+      ],
+      "legacy_ids": [
+        "exa:1wsozw2",
+        "firecrawl:1wsozw2"
+      ]
+    },
+    {
+      "id": "url-10",
+      "expected_canonical": "https://cancerletter.com/news-analysis/20260306_1",
+      "urls": [
+        "https://cancerletter.com/news-analysis/20260306_1/",
+        "https://cancerletter.com/news-analysis/20260306_1"
+      ],
+      "legacy_ids": [
+        "firecrawl:v0e9kf",
+        "tavily:17nw3oa"
+      ]
+    },
+    {
+      "id": "url-11",
+      "expected_canonical": "https://clinicallab.com/blood-based-multi-cancer-detection-test-shows-high-accuracy-in-nature-medicine-study-28357",
+      "urls": [
+        "https://www.clinicallab.com/blood-based-multi-cancer-detection-test-shows-high-accuracy-in-nature-medicine-study-28357",
+        "https://www.clinicallab.com/blood-based-multi-cancer-detection-test-shows-high-accuracy-in-nature-medicine-study-28357"
+      ],
+      "legacy_ids": [
+        "exa:wkiz6i",
+        "firecrawl:wkiz6i"
+      ]
+    },
+    {
+      "id": "url-12",
+      "expected_canonical": "https://delfidiagnostics.com/about-us/newsroom",
+      "urls": [
+        "https://delfidiagnostics.com/about-us/newsroom/",
+        "https://delfidiagnostics.com/about-us/newsroom"
+      ],
+      "legacy_ids": [
+        "firecrawl:1csomv0",
+        "tavily:o4e8zf"
+      ]
+    },
+    {
+      "id": "url-13",
+      "expected_canonical": "https://epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs",
+      "urls": [
+        "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs/",
+        "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs/",
+        "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs"
+      ],
+      "legacy_ids": [
+        "exa:1fytpzj",
+        "firecrawl:1fytpzj",
+        "tavily:190k58a"
+      ]
+    },
+    {
+      "id": "url-14",
+      "expected_canonical": "https://exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test",
+      "urls": [
+        "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test",
+        "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test",
+        "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test"
+      ],
+      "legacy_ids": [
+        "exa:jkpn2p",
+        "firecrawl:jkpn2p",
+        "tavily:jkpn2p"
+      ]
+    },
+    {
+      "id": "url-15",
+      "expected_canonical": "https://finance.sina.com.cn/roll/2025-08-07/doc-infkcweu9028775.shtml?froms=ggmp",
+      "urls": [
+        "https://finance.sina.com.cn/roll/2025-08-07/doc-infkcweu9028775.shtml?froms=ggmp",
+        "https://finance.sina.com.cn/roll/2025-08-07/doc-infkcweu9028775.shtml?froms=ggmp"
+      ],
+      "legacy_ids": [
+        "exa:1uvby38",
+        "firecrawl:1uvby38"
+      ]
+    },
+    {
+      "id": "url-16",
+      "expected_canonical": "https://finance.yahoo.com/news/guardant-health-launches-shield-multi-120500633.html",
+      "urls": [
+        "https://finance.yahoo.com/news/guardant-health-launches-shield-multi-120500633.html",
+        "https://finance.yahoo.com/news/guardant-health-launches-shield-multi-120500633.html"
+      ],
+      "legacy_ids": [
+        "firecrawl:15x9i3p",
+        "tavily:15x9i3p"
+      ]
+    },
+    {
+      "id": "url-17",
+      "expected_canonical": "https://freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc",
+      "urls": [
+        "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/",
+        "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/"
+      ],
+      "legacy_ids": [
+        "brave:116em3",
+        "exa:116em3"
+      ]
+    },
+    {
+      "id": "url-18",
+      "expected_canonical": "https://geneoscopy.com/cms-grants-medicare-coverage-for-colosense",
+      "urls": [
+        "https://www.geneoscopy.com/cms-grants-medicare-coverage-for-colosense/",
+        "https://www.geneoscopy.com/cms-grants-medicare-coverage-for-colosense/",
+        "https://www.geneoscopy.com/cms-grants-medicare-coverage-for-colosense"
+      ],
+      "legacy_ids": [
+        "exa:g9twn",
+        "firecrawl:g9twn",
+        "tavily:1qjv50y"
+      ]
+    },
+    {
+      "id": "url-19",
+      "expected_canonical": "https://geneoscopy.com/geneoscopys-colosense-test-included-as-a-preferred-option-in-the-american-cancer-society",
+      "urls": [
+        "https://www.geneoscopy.com/geneoscopys-colosense-test-included-as-a-preferred-option-in-the-american-cancer-society/",
+        "https://www.geneoscopy.com/geneoscopys-colosense-test-included-as-a-preferred-option-in-the-american-cancer-society"
+      ],
+      "legacy_ids": [
+        "firecrawl:1rxk7o3",
+        "tavily:1xzyvou"
+      ]
+    },
+    {
+      "id": "url-20",
+      "expected_canonical": "https://genesolutions.com/our-test/spot-mas",
+      "urls": [
+        "https://genesolutions.com/our-test/spot-mas",
+        "https://genesolutions.com/our-test/spot-mas",
+        "https://genesolutions.com/our-test/spot-mas"
+      ],
+      "legacy_ids": [
+        "exa:fg2iw5",
+        "firecrawl:fg2iw5",
+        "tavily:fg2iw5"
+      ]
+    },
+    {
+      "id": "url-21",
+      "expected_canonical": "https://grail.com/news-center",
+      "urls": [
+        "https://grail.com/news-center/",
+        "https://grail.com/news-center"
+      ],
+      "legacy_ids": [
+        "firecrawl:18dxwpt",
+        "tavily:hvd7v8"
+      ]
+    },
+    {
+      "id": "url-22",
+      "expected_canonical": "https://grail.com/press-releases/grail-reports-second-quarter-2026-financial-results",
+      "urls": [
+        "https://grail.com/press-releases/grail-reports-second-quarter-2026-financial-results/",
+        "https://grail.com/press-releases/grail-reports-second-quarter-2026-financial-results/"
+      ],
+      "legacy_ids": [
+        "exa:ppjarw",
+        "brave:ppjarw"
+      ]
+    },
+    {
+      "id": "url-23",
+      "expected_canonical": "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx",
+      "urls": [
+        "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx",
+        "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx",
+        "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx"
+      ],
+      "legacy_ids": [
+        "exa:1akylh4",
+        "firecrawl:1akylh4",
+        "tavily:1akylh4"
+      ]
+    },
+    {
+      "id": "url-24",
+      "expected_canonical": "https://ir.labcorp.com/news-releases/news-release-details/labcorp-announces-launch-epi-procolonr-test-colorectal-cancer",
+      "urls": [
+        "https://ir.labcorp.com/news-releases/news-release-details/labcorp-announces-launch-epi-procolonr-test-colorectal-cancer",
+        "https://ir.labcorp.com/news-releases/news-release-details/labcorp-announces-launch-epi-procolonr-test-colorectal-cancer"
+      ],
+      "legacy_ids": [
+        "firecrawl:h29m0d",
+        "tavily:h29m0d"
+      ]
+    },
+    {
+      "id": "url-25",
+      "expected_canonical": "https://mirxes.com/",
+      "urls": [
+        "https://www.mirxes.com/",
+        "https://www.mirxes.com"
+      ],
+      "legacy_ids": [
+        "firecrawl:16yqcbj",
+        "tavily:e7bv3e"
+      ]
+    },
+    {
+      "id": "url-26",
+      "expected_canonical": "https://mirxes.com/insights/the-genesis-of-gastroclear",
+      "urls": [
+        "https://www.mirxes.com/insights/the-genesis-of-gastroclear/",
+        "https://www.mirxes.com/insights/the-genesis-of-gastroclear"
+      ],
+      "legacy_ids": [
+        "firecrawl:1s34nua",
+        "tavily:di9yh"
+      ]
+    },
+    {
+      "id": "url-27",
+      "expected_canonical": "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution",
+      "urls": [
+        "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution/",
+        "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution"
+      ],
+      "legacy_ids": [
+        "firecrawl:hg0ye7",
+        "tavily:1cdlq7e"
+      ]
+    },
+    {
+      "id": "url-28",
+      "expected_canonical": "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine",
+      "urls": [
+        "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine/",
+        "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine/",
+        "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine"
+      ],
+      "legacy_ids": [
+        "exa:1n2o4g7",
+        "firecrawl:1n2o4g7",
+        "tavily:etl6z6"
+      ]
+    },
+    {
+      "id": "url-29",
+      "expected_canonical": "https://patientcareonline.com/view/freenome-lung-cancer-blood-test-receives-fda-breakthrough-device-status",
+      "urls": [
+        "https://www.patientcareonline.com/view/freenome-lung-cancer-blood-test-receives-fda-breakthrough-device-status",
+        "https://www.patientcareonline.com/view/freenome-lung-cancer-blood-test-receives-fda-breakthrough-device-status"
+      ],
+      "legacy_ids": [
+        "exa:18cclq7",
+        "brave:18cclq7"
+      ]
+    },
+    {
+      "id": "url-30",
+      "expected_canonical": "https://patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation",
+      "urls": [
+        "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation",
+        "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation",
+        "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation"
+      ],
+      "legacy_ids": [
+        "brave:1vdtifh",
+        "firecrawl:1vdtifh",
+        "tavily:1vdtifh"
+      ]
+    },
+    {
+      "id": "url-31",
+      "expected_canonical": "https://prnewswire.com/news-releases/delfi-diagnostics-launches-firstlook-lung-an-accessible-accurate-new-way-to-enhance-lung-cancer-screening-through-a-routine-blood-test-301950006.html",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/delfi-diagnostics-launches-firstlook-lung-an-accessible-accurate-new-way-to-enhance-lung-cancer-screening-through-a-routine-blood-test-301950006.html",
+        "https://www.prnewswire.com/news-releases/delfi-diagnostics-launches-firstlook-lung-an-accessible-accurate-new-way-to-enhance-lung-cancer-screening-through-a-routine-blood-test-301950006.html",
+        "https://www.prnewswire.com/news-releases/delfi-diagnostics-launches-firstlook-lung-an-accessible-accurate-new-way-to-enhance-lung-cancer-screening-through-a-routine-blood-test-301950006.html"
+      ],
+      "legacy_ids": [
+        "exa:1ci8jj2",
+        "firecrawl:1ci8jj2",
+        "tavily:1ci8jj2"
+      ]
+    },
+    {
+      "id": "url-32",
+      "expected_canonical": "https://prnewswire.com/news-releases/delfi-diagnostics-to-present-first-clinical-utility-data-for-blood-based-lung-cancer-screening-at-ats-2026-international-conference-302749727.html",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/delfi-diagnostics-to-present-first-clinical-utility-data-for-blood-based-lung-cancer-screening-at-ats-2026-international-conference-302749727.html",
+        "https://www.prnewswire.com/news-releases/delfi-diagnostics-to-present-first-clinical-utility-data-for-blood-based-lung-cancer-screening-at-ats-2026-international-conference-302749727.html"
+      ],
+      "legacy_ids": [
+        "exa:1gq91gf",
+        "tavily:1gq91gf"
+      ]
+    },
+    {
+      "id": "url-33",
+      "expected_canonical": "https://prnewswire.com/news-releases/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine-302465978.html",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine-302465978.html",
+        "https://www.prnewswire.com/news-releases/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine-302465978.html"
+      ],
+      "legacy_ids": [
+        "firecrawl:1argq98",
+        "tavily:1argq98"
+      ]
+    },
+    {
+      "id": "url-34",
+      "expected_canonical": "https://prnewswire.com/news-releases/grail-announces-fda-advisory-committee-meeting-to-review-premarket-approval-application-for-the-galleri-multi-cancer-early-detection-test-302846154.html",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/grail-announces-fda-advisory-committee-meeting-to-review-premarket-approval-application-for-the-galleri-multi-cancer-early-detection-test-302846154.html",
+        "https://www.prnewswire.com/news-releases/grail-announces-fda-advisory-committee-meeting-to-review-premarket-approval-application-for-the-galleri-multi-cancer-early-detection-test-302846154.html"
+      ],
+      "legacy_ids": [
+        "exa:1fjfzko",
+        "brave:1fjfzko"
+      ]
+    },
+    {
+      "id": "url-35",
+      "expected_canonical": "https://prnewswire.com/news-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting-302786216.html",
+      "urls": [
+        "https://www.prnewswire.com/news-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting-302786216.html",
+        "https://www.prnewswire.com/news-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting-302786216.html"
+      ],
+      "legacy_ids": [
+        "firecrawl:1r2cyg1",
+        "tavily:1r2cyg1"
+      ]
+    },
+    {
+      "id": "url-36",
+      "expected_canonical": "https://scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer",
+      "urls": [
+        "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer",
+        "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer",
+        "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer"
+      ],
+      "legacy_ids": [
+        "exa:15wzokq",
+        "firecrawl:15wzokq",
+        "tavily:15wzokq"
+      ]
+    },
+    {
+      "id": "url-37",
+      "expected_canonical": "https://singlera.com.cn/keyanchengguo/250.html",
+      "urls": [
+        "https://www.singlera.com.cn/keyanchengguo/250.html",
+        "https://www.singlera.com.cn/keyanchengguo/250.html"
+      ],
+      "legacy_ids": [
+        "exa:1x7lvfm",
+        "firecrawl:1x7lvfm"
+      ]
+    },
+    {
+      "id": "url-38",
+      "expected_canonical": "https://spotmas.com/",
+      "urls": [
+        "https://spotmas.com/",
+        "https://spotmas.com/"
+      ],
+      "legacy_ids": [
+        "exa:oufk1n",
+        "firecrawl:oufk1n"
+      ]
+    },
+    {
+      "id": "url-39",
+      "expected_canonical": "https://spotmas.com/what-is-the-spot-mas-test",
+      "urls": [
+        "https://spotmas.com/what-is-the-spot-mas-test/",
+        "https://spotmas.com/what-is-the-spot-mas-test/"
+      ],
+      "legacy_ids": [
+        "exa:1y80jdf",
+        "firecrawl:1y80jdf"
+      ]
+    },
+    {
+      "id": "url-40",
+      "expected_canonical": "https://statnews.com/2025/09/11/exact-sciences-cancerguard-liquid-biopsy-multi-cancer-test",
+      "urls": [
+        "https://www.statnews.com/2025/09/11/exact-sciences-cancerguard-liquid-biopsy-multi-cancer-test/",
+        "https://www.statnews.com/2025/09/11/exact-sciences-cancerguard-liquid-biopsy-multi-cancer-test"
+      ],
+      "legacy_ids": [
+        "firecrawl:i9l1px",
+        "tavily:16tcuwo"
+      ]
+    }
+  ],
+  "semantic_event_pairs": [
+    {
+      "id": "event-same-01",
+      "expected": "same_event",
+      "company": "Guardant Health",
+      "left": {
+        "title": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership",
+        "url": "https://finance.yahoo.com/news/guardant-health-launches-shield-multi-120500633.html"
+      },
+      "right": {
+        "title": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership | Guardant Health Investor Relations",
+        "url": "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx"
+      }
+    },
+    {
+      "id": "event-same-02",
+      "expected": "same_event",
+      "company": "世和基因",
+      "left": {
+        "title": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...",
+        "url": "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine/"
+      },
+      "right": {
+        "title": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in Nature Medicine",
+        "url": "https://www.prnewswire.com/news-releases/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine-302465978.html"
+      }
+    },
+    {
+      "id": "event-same-03",
+      "expected": "same_event",
+      "company": "Exact Sciences / Abbott",
+      "left": {
+        "title": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ...",
+        "url": "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test"
+      },
+      "right": {
+        "title": "Exact Sciences launches Cancerguard, a liquid biopsy cancer test | STAT",
+        "url": "https://www.statnews.com/2025/09/11/exact-sciences-cancerguard-liquid-biopsy-multi-cancer-test"
+      }
+    },
+    {
+      "id": "event-same-04",
+      "expected": "same_event",
+      "company": "GRAIL",
+      "left": {
+        "title": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL",
+        "url": "https://grail.com/press-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting/"
+      },
+      "right": {
+        "title": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting",
+        "url": "https://www.prnewswire.com/news-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting-302786216.html"
+      }
+    },
+    {
+      "id": "event-same-05",
+      "expected": "same_event",
+      "company": "Epigenomics",
+      "left": {
+        "title": "​​​​​​​Epigenomics decides to restructure to minimize costs",
+        "url": "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs/"
+      },
+      "right": {
+        "title": "​​​​​​​Epigenomics decides to restructure to minimize costs - epigenomics",
+        "url": "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs"
+      }
+    },
+    {
+      "id": "event-same-06",
+      "expected": "same_event",
+      "company": "Guardant Health",
+      "left": {
+        "title": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online",
+        "url": "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation"
+      },
+      "right": {
+        "title": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation",
+        "url": "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation"
+      }
+    },
+    {
+      "id": "event-same-07",
+      "expected": "same_event",
+      "company": "Gene Solutions",
+      "left": {
+        "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com",
+        "url": "https://www.rutlandherald.com/features/health/a-defining-milestone-for-gene-solutions-spot-mas-multi-cancer-screening-test-receives-u-s/article_fc365b13-a3db-521e-ac82-dbf063598cc3.html"
+      },
+      "right": {
+        "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation – Asia News Network",
+        "url": "https://asianews.network/a-defining-milestone-for-gene-solutions-spot-mas-multi-cancer-screening-test-receives-u-s-fda-breakthrough-device-designation/"
+      }
+    },
+    {
+      "id": "event-same-08",
+      "expected": "same_event",
+      "company": "觅瑞 Mirxes",
+      "left": {
+        "title": "Mirxes wins China's approval to launch groundbreaking blood test ...",
+        "url": "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer"
+      },
+      "right": {
+        "title": "Mirxes wins China’s approval to launch groundbreaking blood test for gastric cancer | South China Morning Post",
+        "url": "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer"
+      }
+    },
+    {
+      "id": "event-same-09",
+      "expected": "same_event",
+      "company": "Freenome",
+      "left": {
+        "title": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening",
+        "url": "https://www.targetedonc.com/view/fda-breakthrough-device-freenome-simplescreen-lung"
+      },
+      "right": {
+        "title": "Freenome Lung Cancer Blood Test Receives FDA Breakthrough Device Status | Patient Care Online",
+        "url": "https://www.patientcareonline.com/view/freenome-lung-cancer-blood-test-receives-fda-breakthrough-device-status"
+      }
+    },
+    {
+      "id": "event-same-10",
+      "expected": "same_event",
+      "company": "Freenome",
+      "left": {
+        "title": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome",
+        "url": "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/"
+      },
+      "right": {
+        "title": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome",
+        "url": "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/"
+      }
+    },
+    {
+      "id": "event-same-11",
+      "expected": "same_event",
+      "company": "臻和科技",
+      "left": {
+        "title": "AACR | 臻和科技发布多癌种早筛研究数据",
+        "url": "https://www.iivd.net/portal.php?aid=28819&mobile=1&mod=view"
+      },
+      "right": {
+        "title": "AACR | 臻和科技发布多癌种早筛研究数据",
+        "url": "https://www.iivd.net/portal.php?mod"
+      }
+    },
+    {
+      "id": "event-same-12",
+      "expected": "same_event",
+      "company": "华大基因",
+      "left": {
+        "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+        "url": "https://www.bgi.com/news/2023121901"
+      },
+      "right": {
+        "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+        "url": "https://www.bgi.com/news/2023121901"
+      }
+    },
+    {
+      "id": "event-same-13",
+      "expected": "same_event",
+      "company": "吉因加",
+      "left": {
+        "title": "基于液体活检技术的多癌种联合筛查专家共识（2025版）",
+        "url": "https://finance.sina.com.cn/roll/2025-08-07/doc-infkcweu9028775.shtml?froms=ggmp"
+      },
+      "right": {
+        "title": "《基于液体活检技术的多癌种联合筛查专家共识（2025版）》——“吉早安”引领技术转化应用_中华网",
+        "url": "https://m.tech.china.com/hea/articles/20250807/202508071711328.html"
+      }
+    },
+    {
+      "id": "event-same-14",
+      "expected": "same_event",
+      "company": "世和基因",
+      "left": {
+        "title": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company",
+        "url": "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution"
+      },
+      "right": {
+        "title": "FDA Grants Breakthrough Device Designation for Geneseeq's Multi ...",
+        "url": "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution/"
+      }
+    },
+    {
+      "id": "event-same-15",
+      "expected": "same_event",
+      "company": "燃石医学",
+      "left": {
+        "title": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解",
+        "url": "https://www.brbiotech.com/cn/news/details/4725"
+      },
+      "right": {
+        "title": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解",
+        "url": "https://www.brbiotech.com/cn/news/details/4725"
+      }
+    },
+    {
+      "id": "event-different-01",
+      "expected": "different_event",
+      "company": "Delfi Diagnostics",
+      "left": {
+        "title": "Delfi launches lung cancer blood test based on DNA fragmentation | MedTech Dive",
+        "occurred_at": "2023-10-09"
+      },
+      "right": {
+        "title": "Delfi Diagnostics Gains NY State Approval for Blood-Based ...",
+        "occurred_at": "2026-05-28"
+      }
+    },
+    {
+      "id": "event-different-02",
+      "expected": "different_event",
+      "company": "Epigenomics",
+      "left": {
+        "title": "​​​​​​​Epigenomics decides to restructure to minimize costs",
+        "occurred_at": "2023-02-15"
+      },
+      "right": {
+        "title": "Epigenomics receives FDA approval for Epi proColon",
+        "occurred_at": "2016-04-13"
+      }
+    },
+    {
+      "id": "event-different-03",
+      "expected": "different_event",
+      "company": "Exact Sciences / Abbott",
+      "left": {
+        "title": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ...",
+        "occurred_at": "2025-09-10"
+      },
+      "right": {
+        "title": "Exact Sciences’ legacy cancer diagnostics data hit in cyberattack",
+        "occurred_at": "2026-08-19"
+      }
+    },
+    {
+      "id": "event-different-04",
+      "expected": "different_event",
+      "company": "Freenome",
+      "left": {
+        "title": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening",
+        "occurred_at": "2026-08-12"
+      },
+      "right": {
+        "title": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome",
+        "occurred_at": "2026-07-27"
+      }
+    },
+    {
+      "id": "event-different-05",
+      "expected": "different_event",
+      "company": "GRAIL",
+      "left": {
+        "title": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL",
+        "occurred_at": "2026-05-30"
+      },
+      "right": {
+        "title": "GRAIL Reports Second Quarter 2026 Financial Results - GRAIL",
+        "occurred_at": "2026-08-05"
+      }
+    },
+    {
+      "id": "event-different-06",
+      "expected": "different_event",
+      "company": "Gene Solutions",
+      "left": {
+        "title": "SPOT-MAS ctDNA Screening for Early Cancer Detection | Gene Solutions Singapore",
+        "occurred_at": null
+      },
+      "right": {
+        "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com",
+        "occurred_at": "2026-07-20"
+      }
+    },
+    {
+      "id": "event-different-07",
+      "expected": "different_event",
+      "company": "Geneoscopy",
+      "left": {
+        "title": "Geneoscopy's ColoSense® Test Included as a Preferred Option in the American Cancer Society Colorectal Cancer Screening Guidelines Update - Geneoscopy - Transforming Gastrointestinal Health",
+        "occurred_at": "2026-05-27"
+      },
+      "right": {
+        "title": "CMS Grants Medicare Coverage for ColoSense ...",
+        "occurred_at": "2026-06-08"
+      }
+    },
+    {
+      "id": "event-different-08",
+      "expected": "different_event",
+      "company": "Guardant Health",
+      "left": {
+        "title": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership",
+        "occurred_at": "2026-03-16"
+      },
+      "right": {
+        "title": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online",
+        "occurred_at": "2025-06-04"
+      }
+    },
+    {
+      "id": "event-different-09",
+      "expected": "different_event",
+      "company": "世和基因",
+      "left": {
+        "title": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...",
+        "occurred_at": "2025-05-28"
+      },
+      "right": {
+        "title": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company",
+        "occurred_at": null
+      }
+    },
+    {
+      "id": "event-different-10",
+      "expected": "different_event",
+      "company": "华大基因",
+      "left": {
+        "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+        "occurred_at": "2023-12-17"
+      },
+      "right": {
+        "title": "喜讯！华大基因粪便多靶点基因甲基化检测项目获ISO 15189认可！",
+        "occurred_at": "2025-03-14"
+      }
+    },
+    {
+      "id": "event-different-11",
+      "expected": "different_event",
+      "company": "吉因加",
+      "left": {
+        "title": "基于液体活检技术的多癌种联合筛查专家共识（2025版）",
+        "occurred_at": "2025-08-07"
+      },
+      "right": {
+        "title": "吉因加吉早安™重磅上市，开启人人可及的多癌早筛时代！ - 中华网",
+        "occurred_at": "2024-01"
+      }
+    },
+    {
+      "id": "event-different-12",
+      "expected": "different_event",
+      "company": "基准医疗",
+      "left": {
+        "title": "基准医疗：引领精准医疗，造福千家万户",
+        "occurred_at": null
+      },
+      "right": {
+        "title": "国研首个尿路上皮癌辅助诊断试剂盒（UriFind）获批上市",
+        "occurred_at": "2024-02-02"
+      }
+    },
+    {
+      "id": "event-different-13",
+      "expected": "different_event",
+      "company": "燃石医学",
+      "left": {
+        "title": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解",
+        "occurred_at": "2022-05-20"
+      },
+      "right": {
+        "title": "创新医疗器械特别审查申请审查结果公示（2026年第13号）-合规查查-CIO在线",
+        "occurred_at": "2026-08-10"
+      }
+    },
+    {
+      "id": "event-different-14",
+      "expected": "different_event",
+      "company": "臻和科技",
+      "left": {
+        "title": "AACR | 臻和科技发布多癌种早筛研究数据",
+        "occurred_at": "2022-04-12"
+      },
+      "right": {
+        "title": "Nat Commun | 臻和科技多癌种早检新技术亮相国际著名期刊",
+        "occurred_at": "2023-10-26"
+      }
+    },
+    {
+      "id": "event-different-15",
+      "expected": "different_event",
+      "company": "觅瑞 Mirxes",
+      "left": {
+        "title": "Mirxes wins China's approval to launch groundbreaking blood test ...",
+        "occurred_at": "2025-10-09"
+      },
+      "right": {
+        "title": "The genesis of GASTROClear - Mirxes",
+        "occurred_at": "2019-05"
+      }
+    }
+  ],
+  "history_states": [
+    {
+      "id": "history-first-01",
+      "expected": "first",
+      "source_story_id": "story:1gb6fz3",
+      "candidate": {
+        "company": "Exact Sciences / Abbott",
+        "product": "Cancerguard™ / Cologuard Plus™",
+        "title": "Exact Sciences’ legacy cancer diagnostics data hit in cyberattack",
+        "url": "https://madison.com/news/local/business/health-care/article_f24baf47-d080-4d71-a79d-6ef7feaa0ccb.html",
+        "occurred_at": "2026-08-17T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-02",
+      "expected": "first",
+      "source_story_id": "story:xtnbtz",
+      "candidate": {
+        "company": "GRAIL",
+        "product": "Galleri®",
+        "title": "Embracing multicancer early detection testing to achieve earlier diagnoses and optimize care: The impact of a nurse practitioner-focused educational activity.",
+        "url": "https://doi.org/10.1097/JXX.0000000000001351",
+        "occurred_at": "2026-08-18T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-03",
+      "expected": "first",
+      "source_story_id": "story:1l7dvmu",
+      "candidate": {
+        "company": "世和基因",
+        "product": "CanScan® 鹰眼",
+        "title": "Mercury Systems Reports Q4 and Fiscal Year 2026 Financial Results in SEC Filing",
+        "url": "https://kalkinemedia.com/us/news/announcements/mercury-systems-reports-q4-and-fiscal-year-2026-financial-results-in-sec-filing",
+        "occurred_at": "2026-08-19T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-04",
+      "expected": "first",
+      "source_story_id": "story:1ugutbd",
+      "candidate": {
+        "company": "世和基因",
+        "product": "CanScan® 鹰眼",
+        "title": "Homepage - Portland Mercury",
+        "url": "https://www.portlandmercury.com/",
+        "occurred_at": "2026-08-20T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-05",
+      "expected": "first",
+      "source_story_id": "story:15icwrp",
+      "candidate": {
+        "company": "诺辉健康",
+        "product": "常卫清®",
+        "title": "趙建銘玩多線再爆「新歡身分」! 許芊芊老公氣炸揚言要提告 陳幸妤冷回兩字：告啊 曝曾帶阿扁至趙建銘診所卻被當空氣 酸像踏入別人地盤｜TVBS新聞 @TVBSNEWS01 - YouTube",
+        "url": "https://www.youtube.com/watch?v=sgiyDJlgCm4",
+        "occurred_at": "2026-08-21T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-06",
+      "expected": "first",
+      "source_story_id": "story:1de0n2x",
+      "candidate": {
+        "company": "吉因加",
+        "product": "吉早安®",
+        "title": "Latest Telugu News | Breaking News Telugu | Telugu News Today | News in Telugu - Eenadu",
+        "url": "https://www.eenadu.net/",
+        "occurred_at": "2026-08-22T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-07",
+      "expected": "first",
+      "source_story_id": "story:47qsai",
+      "candidate": {
+        "company": "臻和科技",
+        "product": "THEMIS / TOTEM",
+        "title": "THEMIS-E Level 1 Probe State Data - Unnamed resource - NASA Open Data Portal",
+        "url": "https://data.nasa.gov/dataset/themis-e-level-1-probe-state-data-09910/resource/11242119-e25b-409e-93b4-d822f50c4752",
+        "occurred_at": "2026-08-23T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-first-08",
+      "expected": "first",
+      "source_story_id": "story:1aq958r",
+      "candidate": {
+        "company": "臻和科技",
+        "product": "THEMIS / TOTEM",
+        "title": "Totem CMMC Review (2026): Pricing, HRDN-IT & What to Verify",
+        "url": "https://thedefensecompliancereport.com/totem-cmmc-review/",
+        "occurred_at": "2026-08-24T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-update-01",
+      "expected": "update",
+      "source_story_id": "story:1abvz5n",
+      "seed": {
+        "fact_value": "baseline-0",
+        "content": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership"
+      },
+      "candidate": {
+        "company": "Guardant Health",
+        "product": "Shield™ / Shield™ MCD",
+        "title": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership",
+        "url": "https://finance.yahoo.com/news/guardant-health-launches-shield-multi-120500633.html",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-0",
+        "content": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership\n新增关键事实 0"
+      }
+    },
+    {
+      "id": "history-update-02",
+      "expected": "update",
+      "source_story_id": "story:wsxwyw",
+      "seed": {
+        "fact_value": "baseline-1",
+        "content": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ..."
+      },
+      "candidate": {
+        "company": "世和基因",
+        "product": "CanScan® 鹰眼",
+        "title": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...",
+        "url": "https://na.geneseeq.com/geneseeqs-breakthrough-cancer-detection-blood-test-published-in-nature-medicine/",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-1",
+        "content": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...\n新增关键事实 1"
+      }
+    },
+    {
+      "id": "history-update-03",
+      "expected": "update",
+      "source_story_id": "story:rruo90",
+      "seed": {
+        "fact_value": "baseline-2",
+        "content": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ..."
+      },
+      "candidate": {
+        "company": "Exact Sciences / Abbott",
+        "product": "Cancerguard™ / Cologuard Plus™",
+        "title": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ...",
+        "url": "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-2",
+        "content": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ...\n新增关键事实 2"
+      }
+    },
+    {
+      "id": "history-update-04",
+      "expected": "update",
+      "source_story_id": "story:j3w4yl",
+      "seed": {
+        "fact_value": "baseline-3",
+        "content": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL"
+      },
+      "candidate": {
+        "company": "GRAIL",
+        "product": "Galleri®",
+        "title": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL",
+        "url": "https://grail.com/press-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting/",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-3",
+        "content": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL\n新增关键事实 3"
+      }
+    },
+    {
+      "id": "history-update-05",
+      "expected": "update",
+      "source_story_id": "story:dqnujj",
+      "seed": {
+        "fact_value": "baseline-4",
+        "content": "​​​​​​​Epigenomics decides to restructure to minimize costs"
+      },
+      "candidate": {
+        "company": "Epigenomics",
+        "product": "Epi proColon®",
+        "title": "​​​​​​​Epigenomics decides to restructure to minimize costs",
+        "url": "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs/",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-4",
+        "content": "​​​​​​​Epigenomics decides to restructure to minimize costs\n新增关键事实 4"
+      }
+    },
+    {
+      "id": "history-update-06",
+      "expected": "update",
+      "source_story_id": "story:1ywup0w",
+      "seed": {
+        "fact_value": "baseline-5",
+        "content": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online"
+      },
+      "candidate": {
+        "company": "Guardant Health",
+        "product": "Shield™ / Shield™ MCD",
+        "title": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online",
+        "url": "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-5",
+        "content": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online\n新增关键事实 5"
+      }
+    },
+    {
+      "id": "history-update-07",
+      "expected": "update",
+      "source_story_id": "story:1d8n7ba",
+      "seed": {
+        "fact_value": "baseline-6",
+        "content": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com"
+      },
+      "candidate": {
+        "company": "Gene Solutions",
+        "product": "SPOT-MAS™",
+        "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com",
+        "url": "https://www.rutlandherald.com/features/health/a-defining-milestone-for-gene-solutions-spot-mas-multi-cancer-screening-test-receives-u-s/article_fc365b13-a3db-521e-ac82-dbf063598cc3.html",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-6",
+        "content": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com\n新增关键事实 6"
+      }
+    },
+    {
+      "id": "history-update-08",
+      "expected": "update",
+      "source_story_id": "story:1j3dnab",
+      "seed": {
+        "fact_value": "baseline-7",
+        "content": "Mirxes wins China's approval to launch groundbreaking blood test ..."
+      },
+      "candidate": {
+        "company": "觅瑞 Mirxes",
+        "product": "觅小卫® / GASTROClear™",
+        "title": "Mirxes wins China's approval to launch groundbreaking blood test ...",
+        "url": "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "material-update-7",
+        "content": "Mirxes wins China's approval to launch groundbreaking blood test ...\n新增关键事实 7"
+      }
+    },
+    {
+      "id": "history-duplicate-01",
+      "expected": "duplicate",
+      "source_story_id": "story:iwn036",
+      "seed": {
+        "fact_value": "same-0",
+        "content": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening"
+      },
+      "candidate": {
+        "company": "Freenome",
+        "product": "SimpleScreen CRC",
+        "title": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening",
+        "url": "https://www.targetedonc.com/view/fda-breakthrough-device-freenome-simplescreen-lung",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-0",
+        "content": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening"
+      }
+    },
+    {
+      "id": "history-duplicate-02",
+      "expected": "duplicate",
+      "source_story_id": "story:ntho86",
+      "seed": {
+        "fact_value": "same-1",
+        "content": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome"
+      },
+      "candidate": {
+        "company": "Freenome",
+        "product": "SimpleScreen CRC",
+        "title": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome",
+        "url": "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-1",
+        "content": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome"
+      }
+    },
+    {
+      "id": "history-duplicate-03",
+      "expected": "duplicate",
+      "source_story_id": "story:d3ie7z",
+      "seed": {
+        "fact_value": "same-2",
+        "content": "AACR | 臻和科技发布多癌种早筛研究数据"
+      },
+      "candidate": {
+        "company": "臻和科技",
+        "product": "THEMIS / TOTEM",
+        "title": "AACR | 臻和科技发布多癌种早筛研究数据",
+        "url": "https://www.iivd.net/portal.php?aid=28819&mobile=1&mod=view",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-2",
+        "content": "AACR | 臻和科技发布多癌种早筛研究数据"
+      }
+    },
+    {
+      "id": "history-duplicate-04",
+      "expected": "duplicate",
+      "source_story_id": "story:15983fp",
+      "seed": {
+        "fact_value": "same-3",
+        "content": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康"
+      },
+      "candidate": {
+        "company": "华大基因",
+        "product": "华常康",
+        "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+        "url": "https://www.bgi.com/news/2023121901",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-3",
+        "content": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康"
+      }
+    },
+    {
+      "id": "history-duplicate-05",
+      "expected": "duplicate",
+      "source_story_id": "story:oyxtp2",
+      "seed": {
+        "fact_value": "same-4",
+        "content": "基于液体活检技术的多癌种联合筛查专家共识（2025版）"
+      },
+      "candidate": {
+        "company": "吉因加",
+        "product": "吉早安®",
+        "title": "基于液体活检技术的多癌种联合筛查专家共识（2025版）",
+        "url": "https://finance.sina.com.cn/roll/2025-08-07/doc-infkcweu9028775.shtml?froms=ggmp",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-4",
+        "content": "基于液体活检技术的多癌种联合筛查专家共识（2025版）"
+      }
+    },
+    {
+      "id": "history-duplicate-06",
+      "expected": "duplicate",
+      "source_story_id": "story:d22zob",
+      "seed": {
+        "fact_value": "same-5",
+        "content": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company"
+      },
+      "candidate": {
+        "company": "世和基因",
+        "product": "CanScan® 鹰眼",
+        "title": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company",
+        "url": "https://na.geneseeq.com/fda-grants-breakthrough-designation-for-geneseeqs-multi-cancer-early-detection-solution",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-5",
+        "content": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company"
+      }
+    },
+    {
+      "id": "history-duplicate-07",
+      "expected": "duplicate",
+      "source_story_id": "story:1cdn80b",
+      "seed": {
+        "fact_value": "same-6",
+        "content": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解"
+      },
+      "candidate": {
+        "company": "燃石医学",
+        "product": "OverC™",
+        "title": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解",
+        "url": "https://www.brbiotech.com/cn/news/details/4725",
+        "occurred_at": "2026-08-20T00:00:00.000Z",
+        "fact_value": "same-6",
+        "content": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解"
+      }
+    },
+    {
+      "id": "history-backfill-01",
+      "expected": "backfill",
+      "source_story_id": "story:1c43yb8",
+      "candidate": {
+        "company": "Epigenomics",
+        "product": "Epi proColon®",
+        "title": "Epigenomics receives FDA approval for Epi proColon",
+        "url": "https://www.reuters.com/article/business/healthcare-pharmaceuticals/epigenomics-receives-fda-approval-for-epi-procolon-idUSASM000363/",
+        "occurred_at": "2016-04-13T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-02",
+      "expected": "backfill",
+      "source_story_id": "story:dqnujj",
+      "candidate": {
+        "company": "Epigenomics",
+        "product": "Epi proColon®",
+        "title": "​​​​​​​Epigenomics decides to restructure to minimize costs",
+        "url": "https://www.epigenomics.com/%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8B%E2%80%8Bepigenomics-decides-to-restructure-to-minimize-costs/",
+        "occurred_at": "2023-02-15T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-03",
+      "expected": "backfill",
+      "source_story_id": "story:14nl2ot",
+      "candidate": {
+        "company": "Epigenomics",
+        "product": "Epi proColon®",
+        "title": "LabCorp Announces the Launch of the Epi proColon® Test for Colorectal Cancer Screening | Labcorp",
+        "url": "https://ir.labcorp.com/news-releases/news-release-details/labcorp-announces-launch-epi-procolonr-test-colorectal-cancer",
+        "occurred_at": "2016-05-09T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-04",
+      "expected": "backfill",
+      "source_story_id": "story:15983fp",
+      "candidate": {
+        "company": "华大基因",
+        "product": "华常康",
+        "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+        "url": "https://www.bgi.com/news/2023121901",
+        "occurred_at": "2023-12-17T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-05",
+      "expected": "backfill",
+      "source_story_id": "story:1cdn80b",
+      "candidate": {
+        "company": "燃石医学",
+        "product": "OverC™",
+        "title": "喜讯| 燃石医学OverC™多癌种早检试剂盒荣获欧盟CE资质了解",
+        "url": "https://www.brbiotech.com/cn/news/details/4725",
+        "occurred_at": "2022-05-20T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-06",
+      "expected": "backfill",
+      "source_story_id": "story:1cey6xa",
+      "candidate": {
+        "company": "觅瑞 Mirxes",
+        "product": "觅小卫® / GASTROClear™",
+        "title": "The genesis of GASTROClear - Mirxes",
+        "url": "https://www.mirxes.com/insights/the-genesis-of-gastroclear",
+        "occurred_at": "2019-05-01T00:00:00.000Z"
+      }
+    },
+    {
+      "id": "history-backfill-07",
+      "expected": "backfill",
+      "source_story_id": "story:1et4z4k",
+      "candidate": {
+        "company": "鹍远基因",
+        "product": "PanSeer / PDACatch / GutSeer",
+        "title": "ctDNA甲基化泛癌早筛技术比常规诊断早4年发现肿瘤信号",
+        "url": "https://www.singlera.com.cn/keyanchengguo/250.html",
+        "occurred_at": "2020-07-21T00:00:00.000Z"
+      }
+    }
+  ],
+  "importance": [
+    {
+      "id": "importance-01",
+      "source_story_id": "story:1abvz5n",
+      "title": "Guardant Health Launches Shield Multi-Cancer Detection (MCD) Test in Multiple Markets in Asia with Manulife Partnership",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-02",
+      "source_story_id": "story:wsxwyw",
+      "title": "Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-03",
+      "source_story_id": "story:1t5peic",
+      "title": "SPOT-MAS ctDNA Screening for Early Cancer Detection | Gene Solutions Singapore",
+      "relevance": 30,
+      "impact": 15,
+      "actionability": 10,
+      "expected_total": 55,
+      "expected_level": "L3"
+    },
+    {
+      "id": "importance-04",
+      "source_story_id": "story:rruo90",
+      "title": "Exact Sciences Launches Cancerguard, First-of-Its-Kind ...",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-05",
+      "source_story_id": "story:j3w4yl",
+      "title": "GRAIL Reports Full Results From NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting - GRAIL",
+      "relevance": 30,
+      "impact": 50,
+      "actionability": 20,
+      "expected_total": 100,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-06",
+      "source_story_id": "story:dqnujj",
+      "title": "​​​​​​​Epigenomics decides to restructure to minimize costs",
+      "relevance": 10,
+      "impact": 15,
+      "actionability": 10,
+      "expected_total": 35,
+      "expected_level": null
+    },
+    {
+      "id": "importance-07",
+      "source_story_id": "story:1c43yb8",
+      "title": "Epigenomics receives FDA approval for Epi proColon",
+      "relevance": 20,
+      "impact": 30,
+      "actionability": 10,
+      "expected_total": 60,
+      "expected_level": "L2"
+    },
+    {
+      "id": "importance-08",
+      "source_story_id": "story:1ywup0w",
+      "title": "Guardant Health's Shield Mutlicancer Detection Blood Test Granted FDA Breakthrough Device Designation | Patient Care Online",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-09",
+      "source_story_id": "story:1d8n7ba",
+      "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation | Health | rutlandherald.com",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-10",
+      "source_story_id": "story:1j3dnab",
+      "title": "Mirxes wins China's approval to launch groundbreaking blood test ...",
+      "relevance": 20,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 80,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-11",
+      "source_story_id": "story:iwn036",
+      "title": "FDA Grants Breakthrough Device Designation to Blood-Based Lung Cancer Screening",
+      "relevance": 20,
+      "impact": 40,
+      "actionability": 10,
+      "expected_total": 70,
+      "expected_level": "L2"
+    },
+    {
+      "id": "importance-12",
+      "source_story_id": "story:1cqzrp1",
+      "title": "FDA Approves Shield Blood Test for Colorectal Cancer Screening | Targeted Oncology - Immunotherapy, Biomarkers, and Cancer Pathways",
+      "relevance": 20,
+      "impact": 15,
+      "actionability": 10,
+      "expected_total": 45,
+      "expected_level": "L3"
+    },
+    {
+      "id": "importance-13",
+      "source_story_id": "story:ntho86",
+      "title": "FDA Approves Freenome’s SimpleScreen™ CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S. - Freenome",
+      "relevance": 20,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 80,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-14",
+      "source_story_id": "story:d3ie7z",
+      "title": "AACR | 臻和科技发布多癌种早筛研究数据",
+      "relevance": 20,
+      "impact": 30,
+      "actionability": 10,
+      "expected_total": 60,
+      "expected_level": "L2"
+    },
+    {
+      "id": "importance-15",
+      "source_story_id": "story:15983fp",
+      "title": "全新出发！华常康®粪便DNA甲基化检测助力肠道健康",
+      "relevance": 20,
+      "impact": 15,
+      "actionability": 10,
+      "expected_total": 45,
+      "expected_level": "L3"
+    },
+    {
+      "id": "importance-16",
+      "source_story_id": "story:1rhrhh9",
+      "title": "PreCar项目_肿瘤早诊_贝瑞基因| 北京贝瑞和康生物技术有限公司",
+      "relevance": 10,
+      "impact": 15,
+      "actionability": 10,
+      "expected_total": 35,
+      "expected_level": null
+    },
+    {
+      "id": "importance-17",
+      "source_story_id": "story:oyxtp2",
+      "title": "基于液体活检技术的多癌种联合筛查专家共识（2025版）",
+      "relevance": 20,
+      "impact": 30,
+      "actionability": 10,
+      "expected_total": 60,
+      "expected_level": "L2"
+    },
+    {
+      "id": "importance-18",
+      "source_story_id": "story:d22zob",
+      "title": "FDA Grants Breakthrough Device Designation for Geneseeq’s Multi-cancer Early Detection Solution - Geneseeq Technology Inc. | A Precision Oncology Company",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-19",
+      "source_story_id": "story:1oog0qn",
+      "title": "GRAIL presses on with Galleri test despite missed primary endpoint in pivotal study Where GRAIL sees signals of benefit in the subgroups, screening experts see signs of overdiagnosis - The Cancer Letter",
+      "relevance": 30,
+      "impact": 40,
+      "actionability": 20,
+      "expected_total": 90,
+      "expected_level": "L1"
+    },
+    {
+      "id": "importance-20",
+      "source_story_id": "story:js852s",
+      "title": "News Center - GRAIL",
+      "relevance": 10,
+      "impact": 0,
+      "actionability": 0,
+      "expected_total": 10,
+      "expected_level": null
+    }
+  ]
+}

@@ -49,7 +49,7 @@ export function HotTopicsCard({ events }:{ events:HotEvent[] }) {
               {event.title}
             </Link>
             <span className="inline-flex flex-none items-center gap-1.5 text-[13px] font-semibold tabular-nums text-mc-ink2">
-              {event.heat} 热度
+              {event.heat} 重要性
             </span>
           </li>
         ))}

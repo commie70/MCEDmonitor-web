@@ -8,21 +8,33 @@ import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/v1/daily — 每日监测摘要： AI 日报 + 热度前 5 故事线(精简字段)。
+ * GET /api/v1/daily — 每日监测摘要：首次发布/实质更新且达到 L1/L2、通过证据与复核门禁的事件。
  */
 export async function GET() {
   const report = await readMonitorReport();
   if (!report) return reportMissingResponse();
 
-  const topStories = report.stories.slice(0, 5).map((s) => ({
-    id: s.id,
-    title: s.title,
-    company: s.company,
-    heat: s.heat,
-    badges: s.badges,
-    summary: s.summary,
-    score: s.score,
-    reason: s.reason,}));
+  const dailyIds = new Set(
+    report.views?.daily_event_ids ?? report.stories.map((story) => story.id)
+  );
+  const topStories = report.stories
+    .filter((story) => dailyIds.has(story.id))
+    .slice(0, 5)
+    .map((story) => ({
+      id: story.id,
+      title: story.title,
+      company: story.company,
+      heat: story.heat,
+      badges: story.badges,
+      summary: story.summary,
+      score: story.score,
+      reason: story.reason,
+      publication_state: story.publication_state,
+      level: story.level,
+      evidence_confidence: story.evidence_confidence,
+      score_breakdown: story.score_breakdown,
+      review_status: story.review_status,
+    }));
 
   return NextResponse.json(
     {
