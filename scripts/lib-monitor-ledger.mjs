@@ -1,9 +1,12 @@
 import { createHash, randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { publicErrorCode } from "./lib-network-security.mjs";
 
 export const LEDGER_SCHEMA_VERSION = 1;
 export const MONITORING_BASELINE = "2026-08-16T17:20:18.787Z";
+const MAX_LEDGER_RECORDS = 100_000;
+const MAX_LEDGER_BYTES = 64 * 1024 * 1024;
 
 export const EVENT_TYPES = new Set([
   "regulatory_decision",
@@ -42,6 +45,7 @@ const TRACKING_PARAMETERS = new Set([
   "referrer",
   "source",
 ]);
+const SENSITIVE_URL_PARAMETERS = new Set(["access_token", "api_key", "apikey", "auth", "key", "password", "signature", "token"]);
 
 const CATEGORY_BY_EVENT_TYPE = {
   regulatory_decision: "regulatory",
@@ -101,8 +105,10 @@ export function sha256(value) {
 }
 
 export function normalizeUrl(rawUrl) {
+  assert(typeof rawUrl === "string" && Buffer.byteLength(rawUrl, "utf8") <= 2048, "evidence URL is too long");
   const url = new URL(rawUrl);
   assert(url.protocol === "http:" || url.protocol === "https:", "evidence URL must use http(s)");
+  assert(!url.username && !url.password, "evidence URL must not contain credentials");
 
   url.hash = "";
   url.hostname = url.hostname.toLowerCase().replace(/^www\./, "");
@@ -112,6 +118,7 @@ export function normalizeUrl(rawUrl) {
   if (url.pathname !== "/") url.pathname = url.pathname.replace(/\/+$/, "");
 
   for (const key of [...url.searchParams.keys()]) {
+    assert(!SENSITIVE_URL_PARAMETERS.has(key.toLowerCase()), "evidence URL must not contain credential parameters");
     if (key.toLowerCase().startsWith("utm_") || TRACKING_PARAMETERS.has(key.toLowerCase())) {
       url.searchParams.delete(key);
     }
@@ -293,6 +300,10 @@ export function validateLedger(ledger) {
   assert(Array.isArray(ledger.candidates), "ledger.candidates must be an array");
   assert(Array.isArray(ledger.evidence), "ledger.evidence must be an array");
   assert(Array.isArray(ledger.events), "ledger.events must be an array");
+  assert(ledger.evidence.length <= MAX_LEDGER_RECORDS, "ledger.evidence exceeds retention budget");
+  assert(ledger.events.length <= MAX_LEDGER_RECORDS, "ledger.events exceeds retention budget");
+  assert(ledger.candidates.length <= MAX_LEDGER_RECORDS, "ledger.candidates exceeds retention budget");
+  assert(estimatedJsonBytes(ledger, MAX_LEDGER_BYTES) <= MAX_LEDGER_BYTES, "ledger exceeds serialized size budget");
 
   const sourceRuns = ledger.source_runs ?? {};
   assert(isObject(sourceRuns), "ledger.source_runs must be an object");
@@ -424,6 +435,35 @@ export function validateLedger(ledger) {
     }
   }
   return ledger;
+}
+
+export function estimatedJsonBytes(value, stopAfter, depth = 0, ancestors = new Set()) {
+  if (depth > 32) return stopAfter + 1;
+  if (typeof value === "string") return Buffer.byteLength(JSON.stringify(value), "utf8");
+  if (!value || typeof value !== "object") {
+    const serialized = JSON.stringify(value);
+    return Buffer.byteLength(serialized === undefined ? "null" : serialized, "utf8");
+  }
+  if (ancestors.has(value)) return stopAfter + 1;
+  ancestors.add(value);
+  const indent = 2 * (depth + 1);
+  let bytes = 2;
+  if (Array.isArray(value)) {
+    if (value.length) bytes += value.length + 1 + (value.length - 1) + value.length * indent + 2 * depth;
+    for (let index = 0; index < value.length && bytes <= stopAfter; index++) {
+      bytes += estimatedJsonBytes(value[index], stopAfter - bytes, depth + 1, ancestors);
+    }
+  } else {
+    const entries = Object.entries(value).filter((entry) => entry[1] !== undefined);
+    if (entries.length) bytes += entries.length + 1 + (entries.length - 1) + entries.length * indent + 2 * depth;
+    for (const [key, item] of entries) {
+      bytes += Buffer.byteLength(JSON.stringify(key), "utf8") + 2;
+      bytes += estimatedJsonBytes(item, stopAfter - bytes, depth + 1, ancestors);
+      if (bytes > stopAfter) break;
+    }
+  }
+  ancestors.delete(value);
+  return bytes;
 }
 
 function authoritySupports(evidence, eventType) {
@@ -857,10 +897,10 @@ export function mergeCandidates(ledger, candidates, { matcherResults = new Map()
         status: "pending",
         stage: "merge_failed",
         error_category: error?.name || "merge_error",
-        error_message: String(error?.message || error),
+        error_message: error?.name || "merge_error",
         retry_count: (ledger.candidates.find((item) => item.id === candidate.id)?.retry_count || 0) + 1,
       });
-      results.push({ candidate_id: candidate.id, status: "failed", reason: String(error?.message || error), event: null });
+      results.push({ candidate_id: candidate.id, status: "failed", reason: error?.name || "merge_error", event: null });
     }
   }
   return { metrics, results };
@@ -869,7 +909,7 @@ export function mergeCandidates(ledger, candidates, { matcherResults = new Map()
 export function eventIsPublic(event) {
   if (event.evidence_confidence === "low") return false;
   if (!event.importance.level) return false;
-  if (event.review_status === "rejected") return false;
+  if (!["approved", "not_required"].includes(event.review_status)) return false;
   return true;
 }
 
@@ -971,6 +1011,21 @@ function eventToStory(event, evidence, generatedAt, windowDays) {
   };
 }
 
+function publicErrors(errors) {
+  return errors.slice(0, 100).map((error) => ({
+    candidate_id: /^[A-Za-z0-9:_-]{1,120}$/.test(String(error.candidate_id || ""))
+      ? error.candidate_id
+      : null,
+    source_id: String(error.source_id || "unknown").replace(/[^A-Za-z0-9:_.-]+/g, "_").slice(0, 120),
+    stage: String(error.stage || "unknown").replace(/[^A-Za-z0-9_-]+/g, "_").slice(0, 64),
+    error_code: publicErrorCode(
+      new Error(String(error.error_code || error.error_category || "")),
+      "request_failed"
+    ),
+    retry_count: Number.isInteger(error.retry_count) ? error.retry_count : 0,
+  }));
+}
+
 export function projectPublicReport(
   ledger,
   {
@@ -1018,7 +1073,7 @@ export function projectPublicReport(
     stories,
     digest,
     manual_tasks: manualTasks,
-    errors,
+    errors: publicErrors(errors),
     views: {
       daily_event_ids: dailyIds,
       hot_event_ids: hotIds,

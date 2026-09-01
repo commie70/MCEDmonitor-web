@@ -10,6 +10,7 @@ import {
   createEmptyLedger,
   eventIsDailyEligible,
   eventIsPublic,
+  estimatedJsonBytes,
   importanceFrom,
   loadLedger,
   mergeCandidate,
@@ -81,6 +82,20 @@ test("all 40 canonical URL duplicate groups merge exactly", () => {
     merged++;
   }
   assert.equal(merged / golden.url_duplicates.length, 1);
+});
+
+test("canonical evidence URLs reject credentials, secret parameters, and oversized values", () => {
+  assert.throws(() => normalizeUrl("https://user:secret@example.com/article"), /credentials/);
+  assert.throws(() => normalizeUrl("https://example.com/article?api_key=secret"), /credential parameters/);
+  assert.throws(() => normalizeUrl(`https://example.com/${"x".repeat(2048)}`), /too long/);
+});
+
+test("ledger size accounting includes JSON escaping and pretty-print whitespace", () => {
+  const value = { text: "\0\\\"\n", nested: ["a", "b"] };
+  assert.equal(
+    estimatedJsonBytes(value, Number.MAX_SAFE_INTEGER),
+    Buffer.byteLength(JSON.stringify(value, null, 2), "utf8")
+  );
 });
 
 test("importance is programmatically summed and levelled for all 20 labels", () => {
@@ -185,6 +200,41 @@ test("publication and daily gates separate evidence, level, state, and review", 
   assert.equal(eventIsDailyEligible({ ...baseEvent, publication_state: "duplicate" }), false);
   assert.equal(eventIsDailyEligible({ ...baseEvent, importance: { level: "L3" } }), false);
   assert.equal(eventIsDailyEligible({ ...baseEvent, review_status: "pending" }), false);
+  assert.equal(eventIsPublic({ ...baseEvent, review_status: "pending" }), false);
+  assert.equal(eventIsPublic({ ...baseEvent, review_status: "approved" }), true);
+});
+
+test("public reports retain only stable error codes", () => {
+  const report = projectPublicReport(createEmptyLedger(), {
+    errors: [{
+      candidate_id: "https://user:pass@example.com/?token=sk-secret",
+      source_id: "provider /Users/private",
+      stage: "collection",
+      error_category: "provider_error",
+      message: "Bearer sk-secret /Users/private/project https://user:pass@example.com",
+    }],
+  });
+  const serialized = JSON.stringify(report.errors);
+  assert.equal(report.errors[0].error_code, "provider_error");
+  assert.doesNotMatch(serialized, /sk-secret|\/Users\/private|user:pass/);
+  assert.equal(Object.hasOwn(report.errors[0], "message"), false);
+  assert.equal(report.errors[0].candidate_id, null);
+});
+
+test("pending-review events are absent from every public projection", () => {
+  const entry = golden.history_states.find((item) => item.expected === "first");
+  const ledger = createEmptyLedger();
+  const merged = mergeCandidate(ledger, candidateFromCase(entry, {
+    event_type: "regulatory_decision",
+    importance: { relevance: 30, impact: 50, actionability: 20 },
+  }));
+  assert.equal(merged.event.review_status, "pending");
+  const report = projectPublicReport(ledger, { generatedAt: "2026-08-30T00:00:00.000Z" });
+  assert.deepEqual(report.stories, []);
+  assert.deepEqual(report.items, []);
+  assert.deepEqual(report.views.daily_event_ids, []);
+  assert.deepEqual(report.views.hot_event_ids, []);
+  assert.deepEqual(report.views.all_event_ids, []);
 });
 
 test("public projection preserves compatibility aliases while adding audit fields", () => {
@@ -498,6 +548,22 @@ test("the fixed Qwen path emits strict structured output and audit records", asy
   assert.equal(result.analyses.length, 4);
   assert.equal(requests.every((request) => request.url === "https://qwen.invalid/v1/chat/completions"), true);
   assert.equal(requests.every((request) => request.body.response_format.json_schema.strict === true), true);
+});
+
+test("oversized model fields are rejected before audit persistence", async () => {
+  const llm = createMonitorLlm({
+    env: configuredEnv,
+    fetchImpl: async () => jsonResponse({
+      relevant: true,
+      uncertain: false,
+      reason: "x".repeat(9 * 1024),
+      evidence_refs: ["evd-1"],
+    }),
+  });
+  await assert.rejects(
+    llm.analyzeCandidate({ id: "evd-1", title: "bounded provider response" }),
+    /model_result_string_too_large/
+  );
 });
 
 test("the DeepSeek vision role uses JSON Output with local strict validation", async () => {

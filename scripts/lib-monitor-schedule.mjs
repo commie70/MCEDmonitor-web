@@ -1,3 +1,5 @@
+import { publicErrorCode } from "./lib-network-security.mjs";
+
 function sourceRuns(ledger) {
   if (!ledger.source_runs || typeof ledger.source_runs !== "object" || Array.isArray(ledger.source_runs)) {
     ledger.source_runs = {};
@@ -47,7 +49,7 @@ export function recordSourceFailure(ledger, source, checkedAt, error, { cursorAt
     next_due_at: previous.next_due_at || null,
     consecutive_failures: Number(previous.consecutive_failures || 0) + 1,
     first_failure_at: previous.first_failure_at || checkedAt,
-    last_error: String(error?.message || error || "unknown error").slice(0, 500),
+    last_error: publicErrorCode(error),
     item_count: Number.isInteger(previous.item_count) ? previous.item_count : 0,
   };
   return runs[source.source_id];

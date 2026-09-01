@@ -1,6 +1,9 @@
 const DEFAULT_BASE_URL = "https://api.weixinzs.org/api";
 const PAGE_SIZE = 50;
 const MAX_PAGES = 100;
+const MAX_ARTICLES = 500;
+const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
+import { fetchPublic, readCappedBody, validatePublicUrl } from "./lib-network-security.mjs";
 
 function isObject(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -71,8 +74,11 @@ function toIso(value) {
 
 function safeArticleUrl(value) {
   try {
-    const url = new URL(String(value || ""));
+    const raw = String(value || "");
+    if (Buffer.byteLength(raw, "utf8") > 2048) return null;
+    const url = new URL(raw);
     if (!["http:", "https:"].includes(url.protocol) || url.hostname !== "mp.weixin.qq.com") return null;
+    if (url.username || url.password) return null;
     url.protocol = "https:";
     url.hash = "";
     return url.toString();
@@ -85,16 +91,18 @@ async function requestJson(fetchImpl, url, apiKey, label) {
   let lastError;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const response = await fetchImpl(url, {
+      const request = fetchImpl === globalThis.fetch ? fetchPublic : fetchImpl;
+      const response = await request(url, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
         signal: AbortSignal.timeout(30_000),
+        redirect: "manual",
       });
-      if (response.ok) return await response.json();
-      const detail = (await response.text().catch(() => "")).replace(/\s+/g, " ").slice(0, 240);
+      if (response.ok) return JSON.parse(await readCappedBody(response, `${label}_response`, MAX_RESPONSE_BYTES));
+      const detail = (await readCappedBody(response, `${label}_error`, 8 * 1024).catch(() => "")).replace(/\s+/g, " ").slice(0, 240);
       const error = new Error(`${label} HTTP ${response.status}${detail ? `: ${detail}` : ""}`);
       if (response.status < 500 || attempt === 1) throw error;
       lastError = error;
@@ -147,6 +155,7 @@ export async function collectWeixinArticles({
 
   const endpoint = new URL(String(baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "") + "/");
   if (endpoint.protocol !== "https:") throw new Error("WEIXINZS_BASE_URL must use HTTPS");
+  if (fetchImpl === globalThis.fetch) await validatePublicUrl(endpoint);
 
   const subscriptionPayload = await requestJson(
     fetchImpl,
@@ -187,6 +196,7 @@ export async function collectWeixinArticles({
     if (articleError) throw new Error(`${source.source_id} articles: ${articleError}`);
     const articles = responseItems(payload, ["articles", "items", "list", "records"]);
     if (!articles) throw new Error(`${source.source_id} articles response schema is invalid`);
+    if (articles.length > PAGE_SIZE) throw new Error(`${source.source_id} article page exceeds ${PAGE_SIZE} items`);
     const pagination = pageInfo(payload, page);
     if (!pagination) throw new Error(`${source.source_id} articles pagination schema is invalid`);
     if (pagination.totalPages > MAX_PAGES) {
@@ -198,10 +208,10 @@ export async function collectWeixinArticles({
       const username = accountUsername(article) || accountUsername(subscription);
       const expected = expectedAccounts.get(username);
       const articleUrl = safeArticleUrl(article.url || article.articleUrl || article.article_url);
-      const title = String(article.title || "").trim();
+      const title = String(article.title || "").trim().slice(0, 500);
       if (!expected || !articleUrl || !title || seenUrls.has(articleUrl)) continue;
       seenUrls.add(articleUrl);
-      const owner = accountName(article) || accountName(subscription) || expected.name;
+      const owner = String(accountName(article) || accountName(subscription) || expected.name).slice(0, 200);
       const articleId = article.id ?? article.articleId ?? article.article_id;
       hits.push({
         company: source.coverage.companies.find((value) => value !== "*") || "待识别",
@@ -224,6 +234,7 @@ export async function collectWeixinArticles({
         has_new_content_cursor: true,
         legacy_ids: articleId === undefined || articleId === null ? [] : [`weixinzs:${articleId}`],
       });
+      if (hits.length > MAX_ARTICLES) throw new Error(`${source.source_id} exceeds ${MAX_ARTICLES} retained articles`);
     }
     if (!pagination.hasNext) break;
     if (page === MAX_PAGES) throw new Error(`${source.source_id} pagination exceeds ${MAX_PAGES} pages`);

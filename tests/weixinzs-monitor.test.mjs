@@ -225,7 +225,7 @@ test("source cadence persists success and retries failures on the next scheduler
   assert.equal(isSourceDue(source, ledger, "2026-09-07T00:06:00.000Z"), true);
   assert.equal(ledger.source_runs[source.source_id].consecutive_failures, 1);
   assert.equal(ledger.source_runs[source.source_id].cursor_at, "2026-09-01T00:00:00.000Z");
-  assert.match(ledger.source_runs[source.source_id].last_error, /HTTP 503/);
+  assert.equal(ledger.source_runs[source.source_id].last_error, "http_503");
 });
 
 test("source health raises a coverage gap after three failures and clears on success", () => {

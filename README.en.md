@@ -55,9 +55,9 @@ All four base URLs have code defaults and remain overridable through the environ
 
 WeChat monitoring uses WeixinZS for four fixed accounts: 早筛网, 有趣的胖子万里挑一, 循因缉药, and 诊断科学. It polls every 144 hours for posts published after subscription. Set `WEIXINZS_API_KEY`; optionally override the default `https://api.weixinzs.org/api` with `WEIXINZS_BASE_URL`. The API does not backfill pre-subscription history. WeChat posts remain `discovery` candidates and cannot by themselves substantiate regulatory, clinical-performance, or study claims.
 
-To change a provider URL or model after deployment, change the URL/model **Variables** and API-key **Secrets** under GitHub repository `Settings → Secrets and variables → Actions`, then manually run `Daily Monitor`. WeChat monitoring requires `WEIXINZS_API_KEY` as a **Repository secret**; add `WEIXINZS_BASE_URL` as a **Repository variable** only when overriding the endpoint. For Vercel, EdgeOne, or Docker, update the runtime environment variables and redeploy. The pipeline never silently substitutes one model for another.
+To change a provider URL or model after deployment, change the URL/model **Variables** and API-key **Secrets** under GitHub repository `Settings → Secrets and variables → Actions`, then dispatch the default-branch workflow from an authenticated `gh` CLI: `gh api --method POST repos/commie70/MCEDmonitor-web/dispatches -f event_type=daily-monitor`. WeChat monitoring requires `WEIXINZS_API_KEY` as a **Repository secret**; add `WEIXINZS_BASE_URL` as a **Repository variable** only when overriding the endpoint. For Vercel, EdgeOne, or Docker, update the runtime environment variables and redeploy. The pipeline never silently substitutes one model for another.
 
-The default is currently `shadow`: the new pipeline writes `public/monitor/shadow-report.json`, while the legacy generator continues to maintain the public `daily-report.json`. First run `npm run monitor:acceptance` against the 120 frozen inputs and all four live provider contracts. The `npm run monitor -- --mode publish` hard gate opens only after at least three accepted shadow runs span seven days. For a manual GitHub Actions run, enable `run_acceptance` to generate the acceptance record.
+The default is currently `shadow`: the new pipeline writes the ignored local artifact `.monitor/shadow-report.json`, while the legacy generator continues to maintain the public `daily-report.json`. First run `npm run monitor:acceptance` against the 120 frozen inputs and all four live provider contracts. The `npm run monitor -- --mode publish` hard gate opens only after at least three accepted shadow runs span seven days. To generate an acceptance record in GitHub Actions, dispatch `gh api --method POST repos/commie70/MCEDmonitor-web/dispatches -f event_type=daily-monitor-acceptance`; this event always runs the default-branch workflow and accepts no selectable ref.
 
 ## Tech stack
 
@@ -160,7 +160,7 @@ scripts/
   build-changelog.mjs      # changelog builder
   sync-skills.mjs          # sync the clone-website skill to Codex / Kimi
 tests/                     # 120 frozen acceptance inputs + node:test suite
-public/monitor/            # public and shadow read models
+public/monitor/            # public report; shadow output stays in local .monitor/
 docs/                      # recon & design references from the cloning phase
 ```
 

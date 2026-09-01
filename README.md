@@ -55,9 +55,9 @@
 
 微信公众号通过 WeixinZS 固定监控“早筛网”“有趣的胖子万里挑一”“循因缉药”“诊断科学”，每 144 小时查询一次订阅后新文章。配置 `WEIXINZS_API_KEY`，可选用 `WEIXINZS_BASE_URL` 覆盖默认的 `https://api.weixinzs.org/api`。该接口不回填订阅前历史文章；公众号只生成 `discovery` 候选，不能单独证明获批、临床性能或研究结论。
 
-部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再手动运行 `Daily Monitor`。微信公众号监控须把 `WEIXINZS_API_KEY` 建为 **Repository secret**；若要换接口地址，把 `WEIXINZS_BASE_URL` 建为 **Repository variable**。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。
+部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再从已认证的 `gh` CLI 向默认分支发送 `repository_dispatch`：`gh api --method POST repos/commie70/MCEDmonitor-web/dispatches -f event_type=daily-monitor`。微信公众号监控须把 `WEIXINZS_API_KEY` 建为 **Repository secret**；若要换接口地址，把 `WEIXINZS_BASE_URL` 建为 **Repository variable**。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。
 
-当前默认 `shadow`：新流水线写 `public/monitor/shadow-report.json`，旧生成器暂时维持公开 `daily-report.json`。先用 `npm run monitor:acceptance` 对 120 个固定输入和四家 provider 契约做真实验收；之后至少三个验收通过的影子周期覆盖七天，`npm run monitor -- --mode publish` 才会解除硬门禁。GitHub Actions 手动运行时勾选 `run_acceptance` 可生成验收记录。
+当前默认 `shadow`：新流水线写本地忽略目录 `.monitor/shadow-report.json`，旧生成器暂时维持公开 `daily-report.json`。先用 `npm run monitor:acceptance` 对 120 个固定输入和四家 provider 契约做真实验收；之后至少三个验收通过的影子周期覆盖七天，`npm run monitor -- --mode publish` 才会解除硬门禁。需要在 GitHub Actions 中同时生成验收记录时，发送 `gh api --method POST repos/commie70/MCEDmonitor-web/dispatches -f event_type=daily-monitor-acceptance`；该事件始终使用默认分支工作流，不接受可选 ref。
 
 ## 技术栈
 
@@ -160,7 +160,7 @@ scripts/
   build-changelog.mjs      # 更新日志构建
   sync-skills.mjs          # 同步 clone-website 技能到 Codex / Kimi
 tests/                     # 120 个固定验收输入 + node:test
-public/monitor/            # 公开报告 + 影子报告
+public/monitor/            # 公开报告；影子报告仅写入本地 .monitor/
 docs/                      # 克隆期侦察与设计参考资料
 ```
 

@@ -12,7 +12,7 @@ import {
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const LEDGER_PATH = path.join(ROOT, "scripts", "monitor-ledger.json");
 const REPORT_PATH = path.join(ROOT, "public", "monitor", "daily-report.json");
-const SHADOW_PATH = path.join(ROOT, "public", "monitor", "shadow-report.json");
+const SHADOW_PATH = path.join(ROOT, ".monitor", "shadow-report.json");
 
 const args = parseArgs(process.argv.slice(2));
 if (!args.eventId || !args.decision) {

@@ -20281,117 +20281,117 @@
     {
       "company": "觅瑞 Mirxes",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "世和基因",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "燃石医学",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "鹍远基因",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "和瑞基因",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "诺辉健康",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "泛生子",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "华大基因",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "吉因加",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "臻和科技",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "基准医疗",
       "channel": "anysearch",
-      "message": "spawn /Users/redspectre/miniforge3/bin/python ENOENT"
+      "error_code": "historical_error"
     },
     {
       "company": "Freenome",
       "channel": "llm",
-      "message": "llm-story:Freenome HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "世和基因",
       "channel": "llm",
-      "message": "llm-story：世和基因 HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Gene Solutions",
       "channel": "llm",
-      "message": "llm-story:Gene Solutions HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "觅瑞 Mirxes",
       "channel": "llm",
-      "message": "llm-story：觅瑞 Mirxes HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Guardant Health",
       "channel": "llm",
-      "message": "llm-story:Guardant Health HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Exact Sciences / Abbott",
       "channel": "llm",
-      "message": "llm-story:Exact Sciences / Abbott HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Delfi Diagnostics",
       "channel": "llm",
-      "message": "llm-story:Delfi Diagnostics HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Guardant Health",
       "channel": "llm",
-      "message": "llm-story:Guardant Health HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Epigenomics",
       "channel": "llm",
-      "message": "llm-story:Epigenomics HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Epigenomics",
       "channel": "llm",
-      "message": "llm-story:Epigenomics HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Geneoscopy",
       "channel": "llm",
-      "message": "llm-story:Geneoscopy HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     },
     {
       "company": "Geneoscopy",
       "channel": "llm",
-      "message": "llm-story:Geneoscopy HTTP 401 {\n  \"error\": {\n    \"message\": \"Incorrect API key provided: sk-svcac*********************************************************************************************"
+      "error_code": "historical_error"
     }
   ]
 }

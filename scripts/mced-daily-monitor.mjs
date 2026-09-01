@@ -41,6 +41,12 @@ import {
 } from "./lib-monitor-schedule.mjs";
 import { collectWeixinArticles } from "./lib-weixinzs-monitor.mjs";
 import { inferItemDate } from "./lib-stale.mjs";
+import {
+  fetchPublic,
+  readCappedBody,
+  publicErrorCode,
+  validatePublicUrl,
+} from "./lib-network-security.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = path.join(ROOT, "scripts", "monitor-sources.json");
@@ -49,17 +55,18 @@ const HISTORY_PATH = path.join(ROOT, "scripts", "monitor-history.jsonl");
 const ACCEPTANCE_PATH = path.join(ROOT, "scripts", "monitor-acceptance.json");
 const GOLDEN_PATH = path.join(ROOT, "tests", "monitor-golden.json");
 const REPORT_PATH = path.join(ROOT, "public", "monitor", "daily-report.json");
-const SHADOW_REPORT_PATH = path.join(ROOT, "public", "monitor", "shadow-report.json");
+const SHADOW_REPORT_PATH = path.join(ROOT, ".monitor", "shadow-report.json");
 
 const ANYSEARCH_DEFAULT_URL = "https://api.anysearch.com/mcp";
 const ANYSEARCH_CLIENT = "mced-monitor/3.0";
 const FETCH_TIMEOUT_MS = 30_000;
-const MAX_FETCH_BODY_BYTES = 8 * 1024 * 1024;
 const FETCH_GAP_MS = 350;
 const MAX_RETRIES = 3;
 const MAX_OFFICIAL_LINKS = 8;
 const MAX_DISCOVERY_RESULTS = 5;
 const MAX_CONTENT_CHARS = 12_000;
+const MAX_COLLECTED_HITS = 2_000;
+const MAX_RETRY_HITS = 500;
 
 let lastRequestAt = 0;
 const args = validateMonitorRunOptions(parseArgs(process.argv.slice(2)));
@@ -72,11 +79,11 @@ main().catch(async (error) => {
     status: "fatal",
     stage: error.stage || "orchestration",
     error_category: error.name || "Error",
-    message: String(error.message || error).slice(0, 500),
+    error_code: publicErrorCode(error, error.stage || "orchestration"),
     duration_ms: Date.now() - startedAt,
   };
   await fs.appendFile(HISTORY_PATH, `${JSON.stringify(failure)}\n`, "utf8").catch(() => {});
-  console.error(`[mced-monitor] fatal: ${failure.message}`);
+  console.error(`[mced-monitor] fatal: ${failure.error_code}`);
   process.exitCode = 1;
 });
 
@@ -105,7 +112,9 @@ async function main() {
   );
 
   const collectedAt = Date.now();
-  const hits = [...pendingRetryHits(ledger), ...(await collectHits(context))];
+  const retryHits = pendingRetryHits(ledger).slice(0, MAX_RETRY_HITS);
+  const hits = [...retryHits, ...(await collectHits(context))];
+  if (hits.length > MAX_COLLECTED_HITS) throw new Error("collected_hit_budget_exceeded");
   context.timings.collection_ms = Date.now() - collectedAt;
 
   const processedAt = Date.now();
@@ -266,7 +275,8 @@ async function collectHits(context) {
           discoveredAt: runAt,
         });
       }
-      hits.push(...collected);
+      if (hits.length + collected.length > MAX_COLLECTED_HITS) throw new Error("collected_hit_budget_exceeded");
+      for (const hit of collected) hits.push(hit);
       recordSourceSuccess(context.ledger, source, runAt, collected.length);
     } catch (error) {
       recordSourceFailure(context.ledger, source, runAt, error, { cursorAt });
@@ -290,7 +300,9 @@ async function collectHits(context) {
   if (!args.skipDiscovery && context.registry.discovery_provider?.enabled) {
     for (const query of context.registry.discovery_queries.filter((entry) => entry.enabled)) {
       try {
-        hits.push(...(await collectAnySearch(query, context)));
+        const discovered = await collectAnySearch(query, context);
+        if (hits.length + discovered.length > MAX_COLLECTED_HITS) throw new Error("collected_hit_budget_exceeded");
+        for (const hit of discovered) hits.push(hit);
       } catch (error) {
         context.coverageGaps.push(query.query_id);
         context.errors.push(runError("discovery", query.query_id, error));
@@ -301,34 +313,39 @@ async function collectHits(context) {
 }
 
 async function collectPubMed(source, context) {
+  const retmax = Math.min(Number(context.registry.retmax_per_query || 8), 50);
   const query = `(${source.query}) AND ("${context.collectionSince}"[Date - Publication] : "3000"[Date - Publication])`;
   const searchUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi");
   searchUrl.search = new URLSearchParams({
     db: "pubmed",
     retmode: "json",
     sort: "pub date",
-    retmax: String(context.registry.retmax_per_query || 8),
+    retmax: String(retmax),
     term: query,
   });
   const idsJson = await fetchJson(searchUrl, source.source_id);
-  const ids = idsJson.esearchresult?.idlist || [];
+  const ids = (idsJson.esearchresult?.idlist || [])
+    .map(String)
+    .filter((id) => /^\d{1,12}$/.test(id))
+    .slice(0, retmax);
   if (!ids.length) return [];
 
   const summaryUrl = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi");
   summaryUrl.search = new URLSearchParams({ db: "pubmed", retmode: "json", id: ids.join(",") });
   const summary = await fetchJson(summaryUrl, source.source_id);
   const result = summary.result || {};
-  return (result.uids || []).flatMap((uid) => {
+  return (result.uids || []).map(String).filter((uid) => ids.includes(uid)).slice(0, retmax).flatMap((uid) => {
     const document = result[uid];
     if (!document) return [];
-    const doi = (document.articleids || []).find((entry) => entry.idtype === "doi");
+    const doiValue = String((document.articleids || []).slice(0, 50).find((entry) => entry.idtype === "doi")?.value || "");
+    const doi = /^10\.\d{4,9}\/[-._;()/:A-Z0-9]{1,240}$/i.test(doiValue) ? doiValue : null;
     return [
       {
         company: source.coverage.companies[0],
         product: source.coverage.products[0],
-        title: stripHtml(document.title || ""),
-        url: doi ? `https://doi.org/${doi.value}` : `https://pubmed.ncbi.nlm.nih.gov/${uid}/`,
-        source_label: document.fulljournalname || document.source || "PubMed",
+        title: stripHtml(document.title || "").slice(0, 500),
+        url: doi ? `https://doi.org/${doi}` : `https://pubmed.ncbi.nlm.nih.gov/${uid}/`,
+        source_label: String(document.fulljournalname || document.source || "PubMed").slice(0, 200),
         published_at: toIso(document.pubdate),
         discovered_at: runAt,
         snippet: `PMID ${uid}`,
@@ -353,20 +370,20 @@ async function collectOpenFda(source, context) {
       search
     )}&sort=decision_date:desc&limit=8`;
     const json = await fetchJson(url, source.source_id, { tolerate404: true });
-    for (const result of json?.results || []) {
-      const pma = result.pma_number || result.pma_submission_number || "";
+    for (const result of (json?.results || []).slice(0, 8)) {
+      const pma = String(result.pma_number || result.pma_submission_number || "").slice(0, 100);
       hits.push({
         company: source.coverage.companies[0],
         product: source.coverage.products[0],
         title: `${result.tradename || source.coverage.products[0]} — ${
           result.decision_code || result.decision || "FDA 审评动态"
-        }`,
+        }`.slice(0, 500),
         url: `https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=${encodeURIComponent(pma)}`,
         source_label: `openFDA ${endpoint === "pma" ? "PMA" : "De Novo"} (${pma || "—"})`,
         published_at: toIso(result.decision_date),
         discovered_at: runAt,
-        snippet: result.generic_name || "",
-        content: JSON.stringify(result),
+        snippet: String(result.generic_name || "").slice(0, 2000),
+        content: JSON.stringify(result).slice(0, MAX_CONTENT_CHARS),
         source,
         event_type_hint: "regulatory_decision",
         has_new_content_cursor: true,
@@ -427,13 +444,15 @@ async function collectAnySearch(query, context) {
     }),
   });
   if (!response.ok) throw new Error(`AnySearch HTTP ${response.status}`);
-  const payload = await response.json();
+  const payload = JSON.parse(await readCappedBody(response, `${query.query_id}_response`));
   if (payload.error) throw new Error(payload.error.message || "AnySearch RPC error");
   const markdown = (payload.result?.content || [])
+    .slice(0, 20)
     .filter((item) => item.type === "text")
-    .map((item) => item.text)
-    .join("\n");
-  return parseAnySearchMarkdown(markdown).map((result) => ({
+    .map((item) => String(item.text || "").slice(0, 10_000))
+    .join("\n")
+    .slice(0, 120_000);
+  return parseAnySearchMarkdown(markdown).slice(0, MAX_DISCOVERY_RESULTS).map((result) => ({
     company: query.company,
     product: query.product,
     title: result.title,
@@ -459,7 +478,13 @@ async function enrichHits(hits, context) {
       continue;
     }
     try {
-      const content = await fetchEvidenceContent(hit.url);
+      await validatePublicUrl(hit.url);
+    } catch (error) {
+      context.errors.push(runError("url_validation", hit.source.source_id, error));
+      continue;
+    }
+    try {
+      const content = await fetchEvidenceContent(hit.url, { allowDirectFallback: hit.source.tier !== "discovery" });
       const inferred = inferItemDate({
         url: hit.url,
         title: hit.title,
@@ -473,7 +498,7 @@ async function enrichHits(hits, context) {
         published_at: dateFromHit || normalizeInferredDate(inferred),
       });
     } catch (error) {
-      context.errors.push(runError("content", hit.source.source_id, error, hit.url));
+      context.errors.push(runError("content", hit.source.source_id, error));
       enriched.push({ ...hit, published_at: dateFromHit, content_status: "failed" });
     }
   }
@@ -658,7 +683,7 @@ async function processCandidate(candidate, context) {
     recordPendingCandidate(context.ledger, base, {
       stage: "model_processing",
       errorCategory: error.name || "model_error",
-      errorMessage: String(error.message || error).slice(0, 500),
+      errorMessage: publicErrorCode(error, "model_processing_failed"),
       analyses: base.analyses,
     });
     context.errors.push(runError("model_processing", base.source.source_id, error, base.id));
@@ -718,7 +743,7 @@ function extractOfficialLinks(html, baseUrl) {
     const title = stripHtml(decodeEntities(match[2]));
     if (title.length < 12 || /^(read more|learn more|view all|more|next|previous|home|news)$/i.test(title)) continue;
     try {
-      links.set(normalizeUrl(url), { title: title.slice(0, 300), url: url.href });
+      links.set(normalizeUrl(url.href), { title: title.slice(0, 300), url: url.href });
     } catch {
       // Ignore malformed links from external HTML.
     }
@@ -726,14 +751,15 @@ function extractOfficialLinks(html, baseUrl) {
   return [...links.values()];
 }
 
-async function fetchEvidenceContent(url) {
+async function fetchEvidenceContent(url, { allowDirectFallback = true } = {}) {
   if (process.env.FIRECRAWL_API_KEY) {
     try {
       return await scrapeMarkdown(url);
     } catch {
-      // The known URL remains the evidence target; direct fetch is the same role, not a model fallback.
+      if (!allowDirectFallback) throw new Error("discovery_content_fetch_failed");
     }
   }
+  if (!allowDirectFallback) throw new Error("discovery_content_fetch_unavailable");
   const html = await fetchText(url, "evidence-content");
   return cleanScrapedMarkdown(stripHtml(html).slice(0, MAX_CONTENT_CHARS));
 }
@@ -756,7 +782,7 @@ async function throttledFetch(url, label, init = {}) {
     const gap = Date.now() - lastRequestAt;
     if (gap < FETCH_GAP_MS) await sleep(FETCH_GAP_MS - gap);
     lastRequestAt = Date.now();
-    const response = await fetch(url, {
+    const response = await fetchPublic(url, {
       ...init,
       headers: {
         "User-Agent": "mced-intel-monitor/3.0 (evidence-first competitor monitoring)",
@@ -773,30 +799,18 @@ async function throttledFetch(url, label, init = {}) {
   throw new Error(`${label} request failed`);
 }
 
-async function readCappedBody(response, label) {
-  const declared = Number(response.headers.get("content-length"));
-  if (Number.isFinite(declared) && declared > MAX_FETCH_BODY_BYTES) {
-    throw new Error(`${label} body too large (${declared}B)`);
-  }
-  const text = await response.text();
-  if (Buffer.byteLength(text, "utf8") > MAX_FETCH_BODY_BYTES) {
-    throw new Error(`${label} body too large`);
-  }
-  return text;
-}
-
 function parseAnySearchMarkdown(markdown) {
   const results = [];
   const pattern = /###\s*\d+\.\s*(.+?)\n-\s*\*\*URL\*\*:\s*(\S+)\n([\s\S]*?)(?=\n###|\n##|$)/g;
   let match;
   while ((match = pattern.exec(markdown))) {
     results.push({
-      title: match[1].replace(/\.\.\.$/, "").trim(),
+      title: match[1].replace(/\.\.\.$/, "").trim().slice(0, 500),
       url: match[2].trim(),
       snippet: match[3].replace(/\s+/g, " ").trim().slice(0, 500),
     });
   }
-  return results.filter((result) => result.title && /^https?:/.test(result.url));
+  return results.filter((result) => result.title && /^https:/.test(result.url));
 }
 
 function buildManualTasks(registry) {
@@ -820,7 +834,7 @@ function runError(stage, sourceId, error, candidateId = null) {
     source_id: sourceId,
     stage,
     error_category: error.name || "Error",
-    message: String(error.message || error).slice(0, 500),
+    error_code: publicErrorCode(error, stage),
     retry_count: 0,
   };
 }
