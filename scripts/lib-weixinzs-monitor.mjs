@@ -72,7 +72,9 @@ function toIso(value) {
 function safeArticleUrl(value) {
   try {
     const url = new URL(String(value || ""));
-    if (url.protocol !== "https:" || url.hostname !== "mp.weixin.qq.com") return null;
+    if (!["http:", "https:"].includes(url.protocol) || url.hostname !== "mp.weixin.qq.com") return null;
+    url.protocol = "https:";
+    url.hash = "";
     return url.toString();
   } catch {
     return null;

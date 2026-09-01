@@ -70,7 +70,7 @@ test("WeixinZS collector verifies the fixed subscriptions and maps new posts to 
             title: "多癌早筛研究发布最新前瞻性队列结果",
             summary: "研究团队公布多癌检测队列摘要。",
             coverUrl: "https://mmbiz.qpic.cn/cover.jpg",
-            url: "https://mp.weixin.qq.com/s/new-diagnostics-science-article",
+            url: "http://mp.weixin.qq.com/s/new-diagnostics-science-article#rd",
             publishTime: "2026-09-01T02:03:04.000Z",
             sourceName: "诊断科学",
             subscriptionId: 1758,
