@@ -54,6 +54,16 @@ const CATEGORY_BY_EVENT_TYPE = {
   other: "market",
 };
 
+const RETRYABLE_CANDIDATE_STAGES = new Set([
+  "model_configuration",
+  "content_extraction",
+  "model_processing",
+  "screen_conflict",
+  "extraction_conflict",
+  "importance_conflict",
+  "event_match_conflict",
+]);
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -129,6 +139,27 @@ function normalizeFingerprintPart(value) {
     .trim();
 }
 
+function normalizedFactValue(value) {
+  if (Array.isArray(value)) return value.map(normalizedFactValue);
+  if (isObject(value)) {
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([key, child]) => [key.normalize("NFKC").trim().toLowerCase(), normalizedFactValue(child)])
+    );
+  }
+  if (typeof value === "string") return value.normalize("NFKC").trim().replace(/\s+/g, " ");
+  return value;
+}
+
+function materialFactHash(candidate) {
+  if (!isObject(candidate.facts)) return null;
+  const facts = Object.fromEntries(
+    Object.entries(candidate.facts).filter(([, value]) => value !== null && value !== undefined && value !== "")
+  );
+  return Object.keys(facts).length ? sha256(JSON.stringify(normalizedFactValue(facts))) : null;
+}
+
 export function eventFingerprint(candidate) {
   const eventDate = String(candidate.occurred_at || candidate.published_at || "").slice(0, 10);
   return [
@@ -194,6 +225,7 @@ export function createEmptyLedger({ baseline = MONITORING_BASELINE } = {}) {
     monitoring_baseline: baseline,
     last_successful_run_at: null,
     last_publication_event_ids: [],
+    source_runs: {},
     candidates: [],
     evidence: [],
     events: [],
@@ -226,6 +258,25 @@ export function validateSourceRegistry(registry) {
       assert(EVENT_TYPES.has(eventType), `${label}.coverage.event_types contains invalid ${eventType}`);
     }
     assert(typeof source.enabled === "boolean", `${label}.enabled must be boolean`);
+    if (source.poll_interval_hours !== undefined) {
+      assert(
+        Number.isFinite(source.poll_interval_hours) && source.poll_interval_hours > 0,
+        `${label}.poll_interval_hours must be a positive number`
+      );
+    }
+    if (source.type === "weixinzs_articles") {
+      assert(source.tier === "discovery", `${label} WeixinZS sources must use discovery tier`);
+      assert(Array.isArray(source.accounts) && source.accounts.length > 0, `${label}.accounts is required`);
+      const usernames = new Set();
+      for (const [accountIndex, account] of source.accounts.entries()) {
+        const accountLabel = `${label}.accounts[${accountIndex}]`;
+        assert(isObject(account), `${accountLabel} must be an object`);
+        assert(nonEmptyString(account.name), `${accountLabel}.name is required`);
+        assert(/^gh_[A-Za-z0-9]+$/.test(account.username), `${accountLabel}.username is invalid`);
+        assert(!usernames.has(account.username), `${accountLabel}.username must be unique`);
+        usernames.add(account.username);
+      }
+    }
   }
   return registry;
 }
@@ -242,6 +293,29 @@ export function validateLedger(ledger) {
   assert(Array.isArray(ledger.candidates), "ledger.candidates must be an array");
   assert(Array.isArray(ledger.evidence), "ledger.evidence must be an array");
   assert(Array.isArray(ledger.events), "ledger.events must be an array");
+
+  const sourceRuns = ledger.source_runs ?? {};
+  assert(isObject(sourceRuns), "ledger.source_runs must be an object");
+  for (const [sourceId, run] of Object.entries(sourceRuns)) {
+    const label = `source_runs[${sourceId}]`;
+    assert(nonEmptyString(sourceId), "source_runs keys must be non-empty");
+    assert(isObject(run), `${label} must be an object`);
+    optionalIso(run.last_checked_at, `${label}.last_checked_at`);
+    assert(run.last_checked_at, `${label}.last_checked_at is required`);
+    optionalIso(run.last_success_at, `${label}.last_success_at`);
+    optionalIso(run.cursor_at, `${label}.cursor_at`);
+    optionalIso(run.next_due_at, `${label}.next_due_at`);
+    optionalIso(run.first_failure_at, `${label}.first_failure_at`);
+    assert(
+      Number.isInteger(run.consecutive_failures) && run.consecutive_failures >= 0,
+      `${label}.consecutive_failures is invalid`
+    );
+    if (run.consecutive_failures > 0) {
+      assert(run.first_failure_at, `${label}.first_failure_at is required after a failure`);
+    }
+    assert(run.last_error === null || typeof run.last_error === "string", `${label}.last_error is invalid`);
+    assert(Number.isInteger(run.item_count) && run.item_count >= 0, `${label}.item_count is invalid`);
+  }
 
   const evidenceIds = new Set();
   for (const [index, evidence] of ledger.evidence.entries()) {
@@ -334,6 +408,17 @@ export function validateLedger(ledger) {
       assert(evidenceIds.has(id), `${label} references missing evidence ${id}`);
     }
     validateAnalyses(candidate.analyses, `${label}.analyses`);
+    if (candidate.retry_payload !== undefined && candidate.retry_payload !== null) {
+      assert(isObject(candidate.retry_payload), `${label}.retry_payload must be an object`);
+      assert(nonEmptyString(candidate.retry_payload.url), `${label}.retry_payload.url is required`);
+      assert(isObject(candidate.retry_payload.source), `${label}.retry_payload.source is required`);
+    }
+    assert(
+      candidate.material_fact_hash === null ||
+        candidate.material_fact_hash === undefined ||
+        /^[a-f0-9]{64}$/.test(candidate.material_fact_hash),
+      `${label}.material_fact_hash is invalid`
+    );
     if (candidate.status === "promoted") {
       assert(eventIds.has(candidate.event_id), `${label} references missing event ${candidate.event_id}`);
     }
@@ -372,8 +457,7 @@ function requiresHumanReview(candidate, importance) {
 }
 
 function factsHash(facts) {
-  const sorted = Object.fromEntries(Object.entries(facts || {}).sort(([a], [b]) => a.localeCompare(b)));
-  return sha256(JSON.stringify(sorted));
+  return sha256(JSON.stringify(normalizedFactValue(facts || {})));
 }
 
 function hasMaterialChange(event, candidate) {
@@ -419,6 +503,11 @@ function createEvidence(candidate, identity) {
 }
 
 function upsertCandidateRecord(ledger, candidate, patch) {
+  const retryOf = candidate.retry_of_candidate_id;
+  if (nonEmptyString(retryOf) && retryOf !== candidate.id) {
+    const retryIndex = ledger.candidates.findIndex((item) => item.id === retryOf);
+    if (retryIndex >= 0) ledger.candidates.splice(retryIndex, 1);
+  }
   const existing = ledger.candidates.find((item) => item.id === candidate.id);
   const next = {
     id: candidate.id,
@@ -428,6 +517,7 @@ function upsertCandidateRecord(ledger, candidate, patch) {
     url: candidate.url,
     event_type: candidate.event_type,
     fingerprint: eventFingerprint(candidate),
+    material_fact_hash: materialFactHash(candidate),
     discovered_at: normalizeDateTime(candidate.discovered_at) || new Date().toISOString(),
     status: "pending",
     stage: "collected",
@@ -441,6 +531,36 @@ function upsertCandidateRecord(ledger, candidate, patch) {
   if (existing) Object.assign(existing, next);
   else ledger.candidates.push(next);
   return next;
+}
+
+function candidateRetryPayload(candidate) {
+  return {
+    company: candidate.company,
+    product: candidate.product,
+    title: candidate.title,
+    url: candidate.url,
+    source_label: candidate.source_label,
+    published_at: candidate.published_at,
+    discovered_at: candidate.discovered_at,
+    snippet: candidate.snippet,
+    content: candidate.content,
+    content_status: candidate.content_status,
+    source: candidate.source,
+    event_type_hint: candidate.event_type_hint || candidate.event_type,
+    has_new_content_cursor: Boolean(candidate.has_new_content_cursor),
+    legacy_ids: Array.isArray(candidate.legacy_ids) ? candidate.legacy_ids : [],
+  };
+}
+
+export function pendingRetryHits(ledger) {
+  return ledger.candidates
+    .filter((candidate) => candidate.status === "pending")
+    .filter((candidate) => RETRYABLE_CANDIDATE_STAGES.has(candidate.stage))
+    .filter((candidate) => isObject(candidate.retry_payload))
+    .map((candidate) => ({
+      ...candidate.retry_payload,
+      retry_of_candidate_id: candidate.id,
+    }));
 }
 
 export function recordPendingCandidate(
@@ -461,6 +581,7 @@ export function recordPendingCandidate(
     error_category: errorCategory,
     error_message: errorMessage,
     analyses,
+    retry_payload: candidateRetryPayload(candidate),
     retry_count: (existing?.retry_count || 0) + (incrementRetry ? 1 : 0),
   });
 }
@@ -543,14 +664,14 @@ function normalizeImportance(candidate) {
   return importanceFrom({ relevance: 0, impact: 0, actionability: 0 });
 }
 
-function makeFactRevision(candidate, evidenceId, now) {
+function makeFactRevision(candidate, evidenceIds, now) {
   return {
     id: `rev_${randomUUID()}`,
     recorded_at: now,
     facts: candidate.facts || {},
     summary: String(candidate.summary || ""),
     reason: String(candidate.reason || ""),
-    evidence_ids: [evidenceId],
+    evidence_ids: [...new Set(Array.isArray(evidenceIds) ? evidenceIds : [evidenceIds])],
   };
 }
 
@@ -595,16 +716,37 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
   let event = findEventForCandidate(ledger, candidate, evidence, matcherResult);
   if (event) {
     const evidenceWasPresent = event.evidence_ids.includes(evidence.id);
-    if (!evidenceWasPresent) event.evidence_ids.push(evidence.id);
-
-    const relatedEvidence = ledger.evidence.filter((item) => event.evidence_ids.includes(item.id));
-    event.evidence_confidence = computeEvidenceConfidence(relatedEvidence, event.event_type);
-    event.analyses.push(...(candidate.analyses || []));
-    event.discovered_at = normalizeDateTime(candidate.discovered_at) || event.discovered_at;
-
     const material = !evidenceWasPresent && hasMaterialChange(event, candidate);
     if (material) {
-      event.fact_revisions.push(makeFactRevision(candidate, evidence.id, now));
+      const fingerprint = eventFingerprint(candidate);
+      const supportingRecords = ledger.candidates.filter(
+        (item) =>
+          item.fingerprint === fingerprint &&
+          (item.id === record.id ||
+            (record.material_fact_hash &&
+              item.material_fact_hash === record.material_fact_hash &&
+              item.status === "pending" &&
+              item.stage === "evidence_gate"))
+      );
+      const supportingEvidenceIds = [
+        ...new Set(supportingRecords.flatMap((item) => item.evidence_ids || [])),
+      ];
+      const supportingEvidence = ledger.evidence.filter((item) => supportingEvidenceIds.includes(item.id));
+      const updateConfidence = computeEvidenceConfidence(supportingEvidence, event.event_type);
+      if (updateConfidence === "low") {
+        record.status = "pending";
+        record.stage = "evidence_gate";
+        record.error_category = "insufficient_update_evidence";
+        validateLedger(ledger);
+        return { status: "pending", reason: "insufficient_update_evidence", event };
+      }
+
+      event.evidence_ids = [...new Set([...event.evidence_ids, ...supportingEvidenceIds])];
+      const relatedEvidence = ledger.evidence.filter((item) => event.evidence_ids.includes(item.id));
+      event.evidence_confidence = computeEvidenceConfidence(relatedEvidence, event.event_type);
+      event.analyses.push(...(candidate.analyses || []));
+      event.discovered_at = normalizeDateTime(candidate.discovered_at) || event.discovered_at;
+      event.fact_revisions.push(makeFactRevision(candidate, supportingEvidenceIds, now));
       event.publication_state = "update";
       event.title = candidate.title || event.title;
       event.occurred_at = normalizeDateTime(candidate.occurred_at) || event.occurred_at;
@@ -612,13 +754,22 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
       event.importance = normalizeImportance(candidate);
       event.review_status = requiresHumanReview(candidate, event.importance) ? "pending" : "not_required";
       event.last_material_update_at = now;
-      record.status = "promoted";
-      record.stage = "merged_update";
-      record.event_id = event.id;
+      for (const supportingRecord of supportingRecords) {
+        supportingRecord.status = "promoted";
+        supportingRecord.stage = "merged_update";
+        supportingRecord.event_id = event.id;
+        supportingRecord.error_category = null;
+      }
       rememberPublication(ledger, event);
       validateLedger(ledger);
       return { status: "update", reason: "material_facts_changed", event };
     }
+
+    if (!evidenceWasPresent) event.evidence_ids.push(evidence.id);
+    const relatedEvidence = ledger.evidence.filter((item) => event.evidence_ids.includes(item.id));
+    event.evidence_confidence = computeEvidenceConfidence(relatedEvidence, event.event_type);
+    event.analyses.push(...(candidate.analyses || []));
+    event.discovered_at = normalizeDateTime(candidate.discovered_at) || event.discovered_at;
 
     record.status = "promoted";
     record.stage = "merged_duplicate";
@@ -628,7 +779,15 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
   }
 
   const fingerprint = eventFingerprint(candidate);
-  const relatedRecords = ledger.candidates.filter((item) => item.fingerprint === fingerprint);
+  const relatedRecords = ledger.candidates.filter(
+    (item) =>
+      item.fingerprint === fingerprint &&
+      (item.id === record.id ||
+        (record.material_fact_hash &&
+          item.material_fact_hash === record.material_fact_hash &&
+          item.status === "pending" &&
+          item.stage === "evidence_gate"))
+  );
   const relatedEvidenceIds = [
     ...new Set(relatedRecords.flatMap((item) => item.evidence_ids || [])),
   ];
@@ -662,7 +821,7 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
     publication_state: publicationState,
     first_published_at: publicationState === "first" ? now : null,
     last_material_update_at: now,
-    fact_revisions: [makeFactRevision(candidate, evidence.id, now)],
+    fact_revisions: [makeFactRevision(candidate, relatedEvidenceIds, now)],
     evidence_ids: relatedEvidenceIds,
     importance,
     evidence_confidence: confidence,

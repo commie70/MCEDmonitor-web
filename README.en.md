@@ -28,7 +28,7 @@
 ## Monitoring pipeline (`npm run monitor`)
 
 ```
-Fixed authoritative/trusted sources + AnySearch as the single discovery surface
+Fixed authoritative/trusted sources + AnySearch / WeChat discovery surfaces
   → canonical URL, body SHA-256, editorial owner, and event date
   → deterministic recall by company + product + event type + event date
   → same-event/material-update decision and merge into scripts/monitor-ledger.json
@@ -46,14 +46,16 @@ Keys are read only from environment variables or GitHub Actions Secrets and must
 
 | Role | Base URL | API key | Optional model override |
 | --- | --- | --- | --- |
-| Default Qwen analysis | `QWEN_BASE_URL` | `QWEN_API_KEY` | `QWEN_MONITOR_MODEL` |
+| Default Qwen analysis | `DASHSCOPE_BASE_URL` | `DASHSCOPE_API_KEY` | `QWEN_MONITOR_MODEL` |
 | DeepSeek vision | `DEEPSEEK_BASE_URL` | `DEEPSEEK_API_KEY` | `DEEPSEEK_VISION_MODEL` |
 | Independent GLM review | `GLM_BASE_URL` | `GLM_API_KEY` | `GLM_REVIEW_MODEL` |
 | Kimi arbitration / synthesis | `KIMI_BASE_URL` | `MOONSHOT_API_KEY` | `KIMI_SYNTHESIS_MODEL` |
 
 All four base URLs have code defaults and remain overridable through the environment variables in the table. Discovery defaults to `https://api.anysearch.com/mcp`; `ANYSEARCH_API_KEY` is optional and `ANYSEARCH_BASE_URL` can override the endpoint. `FIRECRAWL_API_KEY` is used only to fetch content from known evidence URLs.
 
-To change a provider URL or model after deployment, change the URL/model **Variables** and API-key **Secrets** under GitHub repository `Settings → Secrets and variables → Actions`, then manually run `Daily Monitor`. For Vercel, EdgeOne, or Docker, update the runtime environment variables and redeploy. The pipeline never silently substitutes one model for another.
+WeChat monitoring uses WeixinZS for four fixed accounts: 早筛网, 有趣的胖子万里挑一, 循因缉药, and 诊断科学. It polls every 144 hours for posts published after subscription. Set `WEIXINZS_API_KEY`; optionally override the default `https://api.weixinzs.org/api` with `WEIXINZS_BASE_URL`. The API does not backfill pre-subscription history. WeChat posts remain `discovery` candidates and cannot by themselves substantiate regulatory, clinical-performance, or study claims.
+
+To change a provider URL or model after deployment, change the URL/model **Variables** and API-key **Secrets** under GitHub repository `Settings → Secrets and variables → Actions`, then manually run `Daily Monitor`. WeChat monitoring requires `WEIXINZS_API_KEY` as a **Repository secret**; add `WEIXINZS_BASE_URL` as a **Repository variable** only when overriding the endpoint. For Vercel, EdgeOne, or Docker, update the runtime environment variables and redeploy. The pipeline never silently substitutes one model for another.
 
 The default is currently `shadow`: the new pipeline writes `public/monitor/shadow-report.json`, while the legacy generator continues to maintain the public `daily-report.json`. First run `npm run monitor:acceptance` against the 120 frozen inputs and all four live provider contracts. The `npm run monitor -- --mode publish` hard gate opens only after at least three accepted shadow runs span seven days. For a manual GitHub Actions run, enable `run_acceptance` to generate the acceptance record.
 

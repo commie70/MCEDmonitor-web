@@ -15,6 +15,8 @@ import {
   mergeCandidate,
   normalizeUrl,
   projectPublicReport,
+  pendingRetryHits,
+  recordPendingCandidate,
   validateLedger,
 } from "../scripts/lib-monitor-ledger.mjs";
 import {
@@ -228,6 +230,172 @@ test("duplicate evidence does not erase a material publication or republish it n
   assert.deepEqual(nextRunReport.views.daily_event_ids, []);
 });
 
+test("discovery-only evidence cannot create a material update on an existing verified event", () => {
+  const entry = golden.history_states.find((item) => item.expected === "update");
+  const ledger = createEmptyLedger();
+  const seeded = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-verified-seed`,
+      content: entry.seed.content,
+      facts: { key_fact: entry.seed.fact_value },
+    })
+  );
+  assert.equal(seeded.status, "first");
+
+  const discovery = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-wechat`,
+      url: `${entry.candidate.url}?source=wechat`,
+      source: {
+        source_id: "discovery:weixinzs:test",
+        editorial_owner: "诊断科学",
+        tier: "discovery",
+        authority_scope: [],
+        source_type: "media",
+      },
+    }),
+    { matcherResult: { relation: "same_event", event_id: seeded.event.id } }
+  );
+
+  assert.equal(discovery.status, "pending");
+  assert.equal(seeded.event.fact_revisions.length, 1);
+  assert.equal(seeded.event.publication_state, "first");
+});
+
+test("a material update requires new authoritative evidence or two new trusted owners", () => {
+  const entry = golden.history_states.find((item) => item.expected === "update");
+  const ledger = createEmptyLedger();
+  const seeded = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-gate-seed`,
+      content: entry.seed.content,
+      facts: { key_fact: entry.seed.fact_value },
+    })
+  );
+  const trustedCandidate = (owner, suffix) =>
+    candidateFromCase(entry, {
+      id: `${entry.id}-${suffix}`,
+      url: `${entry.candidate.url.replace(/\/$/, "")}/${suffix}`,
+      source: {
+        source_id: `trusted:${suffix}`,
+        editorial_owner: owner,
+        tier: "trusted",
+        authority_scope: [],
+        source_type: "media",
+      },
+    });
+
+  const first = mergeCandidate(ledger, trustedCandidate("Trusted A", "trusted-a"), {
+    matcherResult: { relation: "same_event", event_id: seeded.event.id },
+  });
+  assert.equal(first.status, "pending");
+  const second = mergeCandidate(ledger, trustedCandidate("Trusted B", "trusted-b"), {
+    matcherResult: { relation: "same_event", event_id: seeded.event.id },
+  });
+  assert.equal(second.status, "update");
+  assert.equal(seeded.event.fact_revisions.length, 2);
+  assert.equal(seeded.event.fact_revisions.at(-1).evidence_ids.length, 2);
+});
+
+test("two trusted owners with conflicting facts cannot corroborate an update", () => {
+  const entry = golden.history_states.find((item) => item.expected === "update");
+  const ledger = createEmptyLedger();
+  const seeded = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-conflict-seed`,
+      content: entry.seed.content,
+      facts: { sensitivity: "70%" },
+    })
+  );
+  const conflictingCandidate = (owner, suffix, sensitivity) =>
+    candidateFromCase(entry, {
+      id: `${entry.id}-conflict-${suffix}`,
+      url: `${entry.candidate.url.replace(/\/$/, "")}/conflict-${suffix}`,
+      facts: { sensitivity },
+      source: {
+        source_id: `trusted:conflict-${suffix}`,
+        editorial_owner: owner,
+        tier: "trusted",
+        authority_scope: [],
+        source_type: "media",
+      },
+    });
+
+  const first = mergeCandidate(ledger, conflictingCandidate("Trusted A", "a", "80%"), {
+    matcherResult: { relation: "same_event", event_id: seeded.event.id },
+  });
+  const second = mergeCandidate(ledger, conflictingCandidate("Trusted B", "b", "90%"), {
+    matcherResult: { relation: "same_event", event_id: seeded.event.id },
+  });
+
+  assert.equal(first.status, "pending");
+  assert.equal(second.status, "pending");
+  assert.equal(seeded.event.fact_revisions.length, 1);
+  assert.deepEqual(seeded.event.fact_revisions[0].facts, { sensitivity: "70%" });
+});
+
+test("fact formatting differences do not create a material update", () => {
+  const entry = golden.history_states.find((item) => item.expected === "update");
+  const ledger = createEmptyLedger();
+  const seeded = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-normalized-seed`,
+      facts: { Sensitivity: "80%" },
+    })
+  );
+  const authoritative = mergeCandidate(
+    ledger,
+    candidateFromCase(entry, {
+      id: `${entry.id}-normalized-followup`,
+      url: `${entry.candidate.url.replace(/\/$/, "")}/normalized-followup`,
+      facts: { sensitivity: "  80%  " },
+    }),
+    { matcherResult: { relation: "same_event", event_id: seeded.event.id } }
+  );
+
+  assert.equal(authoritative.status, "duplicate");
+  assert.equal(seeded.event.fact_revisions.length, 1);
+  assert.equal(seeded.event.publication_state, "first");
+});
+
+test("pre-merge pending candidates retain a bounded retry payload and are replayable", () => {
+  const entry = golden.history_states[0];
+  const ledger = createEmptyLedger();
+  const candidate = candidateFromCase(entry, {
+    id: "retryable-wechat-candidate",
+    content: "",
+    content_status: "failed",
+  });
+  recordPendingCandidate(ledger, candidate, {
+    stage: "content_extraction",
+    errorCategory: "content_failed",
+  });
+
+  const retries = pendingRetryHits(ledger);
+  assert.equal(retries.length, 1);
+  assert.equal(retries[0].url, candidate.url);
+  assert.equal(retries[0].source.source_id, candidate.source.source_id);
+  assert.equal(retries[0].retry_of_candidate_id, candidate.id);
+  assert.equal(Object.hasOwn(retries[0], "importance"), false);
+
+  recordPendingCandidate(
+    ledger,
+    {
+      ...retries[0],
+      id: "retryable-wechat-successor",
+      event_type: retries[0].event_type_hint,
+    },
+    { stage: "model_processing", errorCategory: "model_error" }
+  );
+  assert.equal(ledger.candidates.some((item) => item.id === candidate.id), false);
+  assert.equal(ledger.candidates.length, 1);
+});
+
 test("ledger validation and load reject corruption without rewriting it", async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mced-ledger-test-"));
   const ledgerPath = path.join(dir, "ledger.json");
@@ -277,8 +445,8 @@ function jsonResponse(value, status = 200) {
 }
 
 const configuredEnv = {
-  QWEN_BASE_URL: "https://qwen.invalid/v1",
-  QWEN_API_KEY: "test-qwen",
+  DASHSCOPE_BASE_URL: "https://qwen.invalid/v1",
+  DASHSCOPE_API_KEY: "test-qwen",
   DEEPSEEK_BASE_URL: "https://deepseek.invalid/v1",
   DEEPSEEK_API_KEY: "test-deepseek",
   GLM_BASE_URL: "https://glm.invalid/v1",
@@ -364,7 +532,7 @@ test("missing provider URL or key is explicit and does not switch models", async
   const llm = createMonitorLlm({ env: {}, fetchImpl: async () => assert.fail("fetch must not run") });
   await assert.rejects(
     () => llm.analyzeCandidate({ title: "test" }),
-    /provider_configuration_missing:qwen:QWEN_API_KEY/
+    /provider_configuration_missing:qwen:DASHSCOPE_API_KEY/
   );
 });
 

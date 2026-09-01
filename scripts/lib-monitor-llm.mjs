@@ -4,8 +4,8 @@ export const MODEL_ROLES = Object.freeze({
   qwen: {
     provider: "qwen",
     model: "qwen3.8-flash",
-    key_env: "QWEN_API_KEY",
-    base_url_env: "QWEN_BASE_URL",
+    key_env: "DASHSCOPE_API_KEY",
+    base_url_env: "DASHSCOPE_BASE_URL",
     base_url: "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
     model_env: "QWEN_MONITOR_MODEL",
     structured_output: "json_schema",

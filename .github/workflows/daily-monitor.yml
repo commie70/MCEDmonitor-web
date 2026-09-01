@@ -46,8 +46,8 @@ jobs:
       - name: Run live provider acceptance
         if: inputs.run_acceptance == true
         env:
-          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
-          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -65,8 +65,10 @@ jobs:
           ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
           ANYSEARCH_BASE_URL: ${{ vars.ANYSEARCH_BASE_URL }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
-          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          WEIXINZS_BASE_URL: ${{ vars.WEIXINZS_BASE_URL }}
+          WEIXINZS_API_KEY: ${{ secrets.WEIXINZS_API_KEY }}
+          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

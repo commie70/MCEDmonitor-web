@@ -28,7 +28,7 @@
 ## 增量监测管线(`npm run monitor`)
 
 ```
-固定权威 / 可信信源 + AnySearch 单一发现面
+固定权威 / 可信信源 + AnySearch / 微信公众号候选发现面
   → 规范 URL、正文 SHA-256、信源编辑主体与日期
   → 公司 + 产品 + 事件类型 + 事件日期确定性召回
   → 同事件 / 实质更新判断，合并到 scripts/monitor-ledger.json
@@ -46,14 +46,16 @@
 
 | 职责 | Base URL | API key | 可选模型覆盖 |
 | --- | --- | --- | --- |
-| Qwen 默认处理 | `QWEN_BASE_URL` | `QWEN_API_KEY` | `QWEN_MONITOR_MODEL` |
+| Qwen 默认处理 | `DASHSCOPE_BASE_URL` | `DASHSCOPE_API_KEY` | `QWEN_MONITOR_MODEL` |
 | DeepSeek 视觉 | `DEEPSEEK_BASE_URL` | `DEEPSEEK_API_KEY` | `DEEPSEEK_VISION_MODEL` |
 | GLM 独立复核 | `GLM_BASE_URL` | `GLM_API_KEY` | `GLM_REVIEW_MODEL` |
 | Kimi 仲裁 / 综合 | `KIMI_BASE_URL` | `MOONSHOT_API_KEY` | `KIMI_SYNTHESIS_MODEL` |
 
 四个 base URL 已在代码中提供默认值，仍可通过表中的环境变量覆盖。发现服务默认使用 `https://api.anysearch.com/mcp`；`ANYSEARCH_API_KEY` 可选，`ANYSEARCH_BASE_URL` 可覆盖。`FIRECRAWL_API_KEY` 仅用于已知证据 URL 的正文抓取。
 
-部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再手动运行 `Daily Monitor`。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。
+微信公众号通过 WeixinZS 固定监控“早筛网”“有趣的胖子万里挑一”“循因缉药”“诊断科学”，每 144 小时查询一次订阅后新文章。配置 `WEIXINZS_API_KEY`，可选用 `WEIXINZS_BASE_URL` 覆盖默认的 `https://api.weixinzs.org/api`。该接口不回填订阅前历史文章；公众号只生成 `discovery` 候选，不能单独证明获批、临床性能或研究结论。
+
+部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再手动运行 `Daily Monitor`。微信公众号监控须把 `WEIXINZS_API_KEY` 建为 **Repository secret**；若要换接口地址，把 `WEIXINZS_BASE_URL` 建为 **Repository variable**。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。
 
 当前默认 `shadow`：新流水线写 `public/monitor/shadow-report.json`，旧生成器暂时维持公开 `daily-report.json`。先用 `npm run monitor:acceptance` 对 120 个固定输入和四家 provider 契约做真实验收；之后至少三个验收通过的影子周期覆盖七天，`npm run monitor -- --mode publish` 才会解除硬门禁。GitHub Actions 手动运行时勾选 `run_acceptance` 可生成验收记录。
 

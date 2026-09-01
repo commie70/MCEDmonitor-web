@@ -22,6 +22,7 @@ import {
   loadLedger,
   mergeCandidate,
   normalizeUrl,
+  pendingRetryHits,
   projectPublicReport,
   recallCandidateEvents,
   recordPendingCandidate,
@@ -31,6 +32,14 @@ import {
   validateSourceRegistry,
 } from "./lib-monitor-ledger.mjs";
 import { createMonitorLlm, providerConfiguration } from "./lib-monitor-llm.mjs";
+import {
+  isSourceDue,
+  recordSourceFailure,
+  recordSourceSuccess,
+  sourceHasCoverageGap,
+  validateMonitorRunOptions,
+} from "./lib-monitor-schedule.mjs";
+import { collectWeixinArticles } from "./lib-weixinzs-monitor.mjs";
 import { inferItemDate } from "./lib-stale.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -53,7 +62,7 @@ const MAX_DISCOVERY_RESULTS = 5;
 const MAX_CONTENT_CHARS = 12_000;
 
 let lastRequestAt = 0;
-const args = parseArgs(process.argv.slice(2));
+const args = validateMonitorRunOptions(parseArgs(process.argv.slice(2)));
 const startedAt = Date.now();
 const runAt = new Date().toISOString();
 
@@ -96,7 +105,7 @@ async function main() {
   );
 
   const collectedAt = Date.now();
-  const hits = await collectHits(context);
+  const hits = [...pendingRetryHits(ledger), ...(await collectHits(context))];
   context.timings.collection_ms = Date.now() - collectedAt;
 
   const processedAt = Date.now();
@@ -219,15 +228,61 @@ async function collectHits(context) {
   if (args.skipCollection) return [];
   const hits = [];
   for (const source of context.registry.sources.filter((entry) => entry.enabled)) {
+    const supported =
+      source.type === "pubmed_query" ||
+      source.type === "openfda_query" ||
+      (source.type === "official_web" && !args.skipOfficial) ||
+      source.type === "weixinzs_articles";
+    if (!supported || !isSourceDue(source, context.ledger, runAt)) continue;
+    let cursorAt = null;
     try {
-      if (source.type === "pubmed_query") {
-        hits.push(...(await collectPubMed(source, context)));
-      } else if (source.type === "openfda_query") {
-        hits.push(...(await collectOpenFda(source, context)));
-      } else if (source.type === "official_web" && !args.skipOfficial) {
-        hits.push(...(await collectOfficialWeb(source, context)));
+      let collected = [];
+      if (["pubmed_query", "openfda_query", "weixinzs_articles"].includes(source.type)) {
+        const sourceRun = context.ledger.source_runs?.[source.source_id];
+        cursorAt =
+          sourceRun?.cursor_at ||
+          sourceRun?.last_success_at ||
+          `${context.collectionSince}T00:00:00.000Z`;
       }
+      if (source.type === "pubmed_query") {
+        collected = await collectPubMed(source, {
+          ...context,
+          collectionSince: cursorAt.slice(0, 10),
+        });
+      } else if (source.type === "openfda_query") {
+        collected = await collectOpenFda(source, {
+          ...context,
+          collectionSince: cursorAt.slice(0, 10),
+        });
+      } else if (source.type === "official_web") {
+        collected = await collectOfficialWeb(source, context);
+      } else if (source.type === "weixinzs_articles") {
+        collected = await collectWeixinArticles({
+          source,
+          apiKey: process.env[source.api_key_env || "WEIXINZS_API_KEY"],
+          baseUrl: process.env.WEIXINZS_BASE_URL,
+          since: cursorAt,
+          until: runAt,
+          discoveredAt: runAt,
+        });
+      }
+      hits.push(...collected);
+      recordSourceSuccess(context.ledger, source, runAt, collected.length);
     } catch (error) {
+      recordSourceFailure(context.ledger, source, runAt, error, { cursorAt });
+      if (
+        sourceHasCoverageGap(source, context.ledger) &&
+        !context.coverageGaps.includes(source.source_id)
+      ) {
+        context.coverageGaps.push(source.source_id);
+        context.errors.push(
+          runError(
+            "coverage",
+            source.source_id,
+            new Error("source failed at least three consecutive collection attempts")
+          )
+        );
+      }
       context.errors.push(runError("collection", source.source_id, error));
     }
   }
