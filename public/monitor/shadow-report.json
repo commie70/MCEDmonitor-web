@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-19T22:43:51.241Z",
-  "window_since": "2026-07-19",
+  "generated_at": "2026-09-01T01:17:09.903Z",
+  "window_since": "2026-08-01",
   "watches": 20,
   "categories": [
     {
@@ -774,7 +774,7 @@
       "first_seen": "2026-07-20",
       "last_seen": "2026-07-20",
       "spark": [
-        1,
+        0,
         0,
         0,
         0,
@@ -1343,20 +1343,20 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -1792,20 +1792,20 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -2225,683 +2225,1009 @@
       "stale_month": null
     }
   ],
-  "digest": {
-    "markdown": "整体看，近期竞品焦点集中在FDA突破性认定、前瞻性临床证据及商业化渠道，但多条资料并非当日新闻，个别监管信息仍待核实。\n· Guardant Health：7月20日Shield MCD获FDA突破性器械认定，监管预期升温；其“结直肠癌筛查获批”说法主体及时效混杂，需核实。\n· Gene Solutions：7月20日SPOT-MAS获FDA突破性器械认定，新加坡推广内容属常青资料，体现其国际化布局。\n· Freenome：8月13日血液肺癌筛查获FDA突破性器械认定，单癌种赛道监管推进加快。\n· GRAIL：5月30日公布NHS-Galleri完整结果，称可降低IV期诊断，强化MCED临床与商业影响。\n· 世和基因：2025年《Nature Medicine》发表多癌早筛研究，虽非当日动态，仍是重要学术与证据资产。\n趋势判断：行业竞争正从概念宣传转向监管路径、临床终点与支付渠道协同，需关注突破性认定能否转化为获批及真实世界获益。",
-    "model": "gpt-5.6-luna",
-    "generated_at": "2026-08-19T22:43:51.241Z"
-  },
+  "digest": null,
   "manual_tasks": [
     {
       "company": "GRAIL",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20GRAIL%20Galleri"
+      "label": "国家药品监督管理局 · GRAIL Galleri®",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "GRAIL",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=GRAIL%20Galleri"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · GRAIL Galleri®",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "GRAIL",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · GRAIL Galleri®",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "GRAIL",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · GRAIL Galleri®",
+      "url": "https://doi.org/"
     },
     {
       "company": "GRAIL",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20GRAIL%20Galleri"
+      "label": "ASCO · GRAIL Galleri®",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "GRAIL",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20GRAIL%20Galleri"
+      "label": "ESMO · GRAIL Galleri®",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "GRAIL",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20GRAIL%20Galleri"
+      "label": "AACR · GRAIL Galleri®",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Exact Sciences / Abbott",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Exact%20Sciences%20%2F%20Abbott%20Cancerguard%20%2F%20Cologuard%20Plus"
+      "label": "国家药品监督管理局 · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Exact Sciences / Abbott",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Exact%20Sciences%20%2F%20Abbott%20Cancerguard%20%2F%20Cologuard%20Plus"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Exact Sciences / Abbott",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Exact Sciences / Abbott",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://doi.org/"
     },
     {
       "company": "Exact Sciences / Abbott",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Exact%20Sciences%20%2F%20Abbott%20Cancerguard%20%2F%20Cologuard%20Plus"
+      "label": "ASCO · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Exact Sciences / Abbott",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Exact%20Sciences%20%2F%20Abbott%20Cancerguard%20%2F%20Cologuard%20Plus"
+      "label": "ESMO · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Exact Sciences / Abbott",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Exact%20Sciences%20%2F%20Abbott%20Cancerguard%20%2F%20Cologuard%20Plus"
+      "label": "AACR · Exact Sciences / Abbott Cancerguard™ / Cologuard Plus™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Guardant Health",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Guardant%20Health%20Shield%20%2F%20Shield%20MCD"
+      "label": "国家药品监督管理局 · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Guardant Health",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Guardant%20Health%20Shield%20%2F%20Shield%20MCD"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Guardant Health",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Guardant Health",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://doi.org/"
     },
     {
       "company": "Guardant Health",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Guardant%20Health%20Shield%20%2F%20Shield%20MCD"
+      "label": "ASCO · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Guardant Health",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Guardant%20Health%20Shield%20%2F%20Shield%20MCD"
+      "label": "ESMO · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Guardant Health",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Guardant%20Health%20Shield%20%2F%20Shield%20MCD"
+      "label": "AACR · Guardant Health Shield™ / Shield™ MCD",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Freenome",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Freenome%20SimpleScreen%20CRC"
+      "label": "国家药品监督管理局 · Freenome SimpleScreen CRC",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Freenome",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Freenome%20SimpleScreen%20CRC"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Freenome SimpleScreen CRC",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Freenome",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Freenome SimpleScreen CRC",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Freenome",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Freenome SimpleScreen CRC",
+      "url": "https://doi.org/"
     },
     {
       "company": "Freenome",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Freenome%20SimpleScreen%20CRC"
+      "label": "ASCO · Freenome SimpleScreen CRC",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Freenome",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Freenome%20SimpleScreen%20CRC"
+      "label": "ESMO · Freenome SimpleScreen CRC",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Freenome",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Freenome%20SimpleScreen%20CRC"
+      "label": "AACR · Freenome SimpleScreen CRC",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Delfi Diagnostics",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Delfi%20Diagnostics%20FirstLook%20Lung"
+      "label": "国家药品监督管理局 · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Delfi Diagnostics",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Delfi%20Diagnostics%20FirstLook%20Lung"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Delfi Diagnostics",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Delfi Diagnostics",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://doi.org/"
     },
     {
       "company": "Delfi Diagnostics",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Delfi%20Diagnostics%20FirstLook%20Lung"
+      "label": "ASCO · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Delfi Diagnostics",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Delfi%20Diagnostics%20FirstLook%20Lung"
+      "label": "ESMO · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Delfi Diagnostics",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Delfi%20Diagnostics%20FirstLook%20Lung"
+      "label": "AACR · Delfi Diagnostics FirstLook™ Lung",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "觅瑞 Mirxes",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E8%A7%85%E7%91%9E%20Mirxes%20%E8%A7%85%E5%B0%8F%E5%8D%AB%20%2F%20GASTROClear"
+      "label": "国家药品监督管理局 · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "觅瑞 Mirxes",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E8%A7%85%E7%91%9E%20Mirxes%20%E8%A7%85%E5%B0%8F%E5%8D%AB%20%2F%20GASTROClear"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "觅瑞 Mirxes",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "觅瑞 Mirxes",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://doi.org/"
     },
     {
       "company": "觅瑞 Mirxes",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E8%A7%85%E7%91%9E%20Mirxes%20%E8%A7%85%E5%B0%8F%E5%8D%AB%20%2F%20GASTROClear"
+      "label": "ASCO · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "觅瑞 Mirxes",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E8%A7%85%E7%91%9E%20Mirxes%20%E8%A7%85%E5%B0%8F%E5%8D%AB%20%2F%20GASTROClear"
+      "label": "ESMO · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "觅瑞 Mirxes",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E8%A7%85%E7%91%9E%20Mirxes%20%E8%A7%85%E5%B0%8F%E5%8D%AB%20%2F%20GASTROClear"
+      "label": "AACR · 觅瑞 Mirxes 觅小卫® / GASTROClear™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Epigenomics",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Epigenomics%20Epi%20proColon"
+      "label": "国家药品监督管理局 · Epigenomics Epi proColon®",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Epigenomics",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Epigenomics%20Epi%20proColon"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Epigenomics Epi proColon®",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Epigenomics",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Epigenomics Epi proColon®",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Epigenomics",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Epigenomics Epi proColon®",
+      "url": "https://doi.org/"
     },
     {
       "company": "Epigenomics",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Epigenomics%20Epi%20proColon"
+      "label": "ASCO · Epigenomics Epi proColon®",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Epigenomics",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Epigenomics%20Epi%20proColon"
+      "label": "ESMO · Epigenomics Epi proColon®",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Epigenomics",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Epigenomics%20Epi%20proColon"
+      "label": "AACR · Epigenomics Epi proColon®",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Geneoscopy",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Geneoscopy%20ColoSense"
+      "label": "国家药品监督管理局 · Geneoscopy ColoSense™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Geneoscopy",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Geneoscopy%20ColoSense"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Geneoscopy ColoSense™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Geneoscopy",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Geneoscopy ColoSense™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Geneoscopy",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Geneoscopy ColoSense™",
+      "url": "https://doi.org/"
     },
     {
       "company": "Geneoscopy",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Geneoscopy%20ColoSense"
+      "label": "ASCO · Geneoscopy ColoSense™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Geneoscopy",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Geneoscopy%20ColoSense"
+      "label": "ESMO · Geneoscopy ColoSense™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Geneoscopy",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Geneoscopy%20ColoSense"
+      "label": "AACR · Geneoscopy ColoSense™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "Gene Solutions",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20Gene%20Solutions%20SPOT-MAS"
+      "label": "国家药品监督管理局 · Gene Solutions SPOT-MAS™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "Gene Solutions",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=Gene%20Solutions%20SPOT-MAS"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · Gene Solutions SPOT-MAS™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "Gene Solutions",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · Gene Solutions SPOT-MAS™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "Gene Solutions",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · Gene Solutions SPOT-MAS™",
+      "url": "https://doi.org/"
     },
     {
       "company": "Gene Solutions",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20Gene%20Solutions%20SPOT-MAS"
+      "label": "ASCO · Gene Solutions SPOT-MAS™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "Gene Solutions",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20Gene%20Solutions%20SPOT-MAS"
+      "label": "ESMO · Gene Solutions SPOT-MAS™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "Gene Solutions",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20Gene%20Solutions%20SPOT-MAS"
+      "label": "AACR · Gene Solutions SPOT-MAS™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "世和基因",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E4%B8%96%E5%92%8C%E5%9F%BA%E5%9B%A0%20CanScan%20%E9%B9%B0%E7%9C%BC"
+      "label": "国家药品监督管理局 · 世和基因 CanScan® 鹰眼",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "世和基因",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E4%B8%96%E5%92%8C%E5%9F%BA%E5%9B%A0%20CanScan%20%E9%B9%B0%E7%9C%BC"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 世和基因 CanScan® 鹰眼",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "世和基因",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 世和基因 CanScan® 鹰眼",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "世和基因",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 世和基因 CanScan® 鹰眼",
+      "url": "https://doi.org/"
     },
     {
       "company": "世和基因",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E4%B8%96%E5%92%8C%E5%9F%BA%E5%9B%A0%20CanScan%20%E9%B9%B0%E7%9C%BC"
+      "label": "ASCO · 世和基因 CanScan® 鹰眼",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "世和基因",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E4%B8%96%E5%92%8C%E5%9F%BA%E5%9B%A0%20CanScan%20%E9%B9%B0%E7%9C%BC"
+      "label": "ESMO · 世和基因 CanScan® 鹰眼",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "世和基因",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E4%B8%96%E5%92%8C%E5%9F%BA%E5%9B%A0%20CanScan%20%E9%B9%B0%E7%9C%BC"
+      "label": "AACR · 世和基因 CanScan® 鹰眼",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "燃石医学",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E7%87%83%E7%9F%B3%E5%8C%BB%E5%AD%A6%20OverC"
+      "label": "国家药品监督管理局 · 燃石医学 OverC™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "燃石医学",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E7%87%83%E7%9F%B3%E5%8C%BB%E5%AD%A6%20OverC"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 燃石医学 OverC™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "燃石医学",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 燃石医学 OverC™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "燃石医学",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 燃石医学 OverC™",
+      "url": "https://doi.org/"
     },
     {
       "company": "燃石医学",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E7%87%83%E7%9F%B3%E5%8C%BB%E5%AD%A6%20OverC"
+      "label": "ASCO · 燃石医学 OverC™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "燃石医学",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E7%87%83%E7%9F%B3%E5%8C%BB%E5%AD%A6%20OverC"
+      "label": "ESMO · 燃石医学 OverC™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "燃石医学",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E7%87%83%E7%9F%B3%E5%8C%BB%E5%AD%A6%20OverC"
+      "label": "AACR · 燃石医学 OverC™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "鹍远基因",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E9%B9%8D%E8%BF%9C%E5%9F%BA%E5%9B%A0%20PanSeer%20%2F%20PDACatch%20%2F%20GutSeer"
+      "label": "国家药品监督管理局 · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "鹍远基因",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E9%B9%8D%E8%BF%9C%E5%9F%BA%E5%9B%A0%20PanSeer%20%2F%20PDACatch%20%2F%20GutSeer"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "鹍远基因",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "鹍远基因",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://doi.org/"
     },
     {
       "company": "鹍远基因",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E9%B9%8D%E8%BF%9C%E5%9F%BA%E5%9B%A0%20PanSeer%20%2F%20PDACatch%20%2F%20GutSeer"
+      "label": "ASCO · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "鹍远基因",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E9%B9%8D%E8%BF%9C%E5%9F%BA%E5%9B%A0%20PanSeer%20%2F%20PDACatch%20%2F%20GutSeer"
+      "label": "ESMO · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "鹍远基因",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E9%B9%8D%E8%BF%9C%E5%9F%BA%E5%9B%A0%20PanSeer%20%2F%20PDACatch%20%2F%20GutSeer"
+      "label": "AACR · 鹍远基因 PanSeer / PDACatch / GutSeer",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "和瑞基因",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E5%92%8C%E7%91%9E%E5%9F%BA%E5%9B%A0%20%E8%8E%B1%E6%80%9D%E5%AE%81%20(LiverScreening)"
+      "label": "国家药品监督管理局 · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "和瑞基因",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E5%92%8C%E7%91%9E%E5%9F%BA%E5%9B%A0%20%E8%8E%B1%E6%80%9D%E5%AE%81%20(LiverScreening)"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "和瑞基因",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "和瑞基因",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://doi.org/"
     },
     {
       "company": "和瑞基因",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E5%92%8C%E7%91%9E%E5%9F%BA%E5%9B%A0%20%E8%8E%B1%E6%80%9D%E5%AE%81%20(LiverScreening)"
+      "label": "ASCO · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "和瑞基因",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E5%92%8C%E7%91%9E%E5%9F%BA%E5%9B%A0%20%E8%8E%B1%E6%80%9D%E5%AE%81%20(LiverScreening)"
+      "label": "ESMO · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "和瑞基因",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E5%92%8C%E7%91%9E%E5%9F%BA%E5%9B%A0%20%E8%8E%B1%E6%80%9D%E5%AE%81%20(LiverScreening)"
+      "label": "AACR · 和瑞基因 莱思宁 (LiverScreening)",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "诺辉健康",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%20%E5%B8%B8%E5%8D%AB%E6%B8%85"
+      "label": "国家药品监督管理局 · 诺辉健康 常卫清®",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "诺辉健康",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%20%E5%B8%B8%E5%8D%AB%E6%B8%85"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 诺辉健康 常卫清®",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "诺辉健康",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 诺辉健康 常卫清®",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "诺辉健康",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 诺辉健康 常卫清®",
+      "url": "https://doi.org/"
     },
     {
       "company": "诺辉健康",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%20%E5%B8%B8%E5%8D%AB%E6%B8%85"
+      "label": "ASCO · 诺辉健康 常卫清®",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "诺辉健康",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%20%E5%B8%B8%E5%8D%AB%E6%B8%85"
+      "label": "ESMO · 诺辉健康 常卫清®",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "诺辉健康",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%20%E5%B8%B8%E5%8D%AB%E6%B8%85"
+      "label": "AACR · 诺辉健康 常卫清®",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "泛生子",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E6%B3%9B%E7%94%9F%E5%AD%90%20HCCscreen"
+      "label": "国家药品监督管理局 · 泛生子 HCCscreen™",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "泛生子",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E6%B3%9B%E7%94%9F%E5%AD%90%20HCCscreen"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 泛生子 HCCscreen™",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "泛生子",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 泛生子 HCCscreen™",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "泛生子",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 泛生子 HCCscreen™",
+      "url": "https://doi.org/"
     },
     {
       "company": "泛生子",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E6%B3%9B%E7%94%9F%E5%AD%90%20HCCscreen"
+      "label": "ASCO · 泛生子 HCCscreen™",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "泛生子",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E6%B3%9B%E7%94%9F%E5%AD%90%20HCCscreen"
+      "label": "ESMO · 泛生子 HCCscreen™",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "泛生子",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E6%B3%9B%E7%94%9F%E5%AD%90%20HCCscreen"
+      "label": "AACR · 泛生子 HCCscreen™",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "华大基因",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E5%8D%8E%E5%A4%A7%E5%9F%BA%E5%9B%A0%20%E5%8D%8E%E5%B8%B8%E5%BA%B7"
+      "label": "国家药品监督管理局 · 华大基因 华常康",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "华大基因",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E5%8D%8E%E5%A4%A7%E5%9F%BA%E5%9B%A0%20%E5%8D%8E%E5%B8%B8%E5%BA%B7"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 华大基因 华常康",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "华大基因",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 华大基因 华常康",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "华大基因",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 华大基因 华常康",
+      "url": "https://doi.org/"
     },
     {
       "company": "华大基因",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E5%8D%8E%E5%A4%A7%E5%9F%BA%E5%9B%A0%20%E5%8D%8E%E5%B8%B8%E5%BA%B7"
+      "label": "ASCO · 华大基因 华常康",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "华大基因",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E5%8D%8E%E5%A4%A7%E5%9F%BA%E5%9B%A0%20%E5%8D%8E%E5%B8%B8%E5%BA%B7"
+      "label": "ESMO · 华大基因 华常康",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "华大基因",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E5%8D%8E%E5%A4%A7%E5%9F%BA%E5%9B%A0%20%E5%8D%8E%E5%B8%B8%E5%BA%B7"
+      "label": "AACR · 华大基因 华常康",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "吉因加",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E5%90%89%E5%9B%A0%E5%8A%A0%20%E5%90%89%E6%97%A9%E5%AE%89"
+      "label": "国家药品监督管理局 · 吉因加 吉早安®",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "吉因加",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E5%90%89%E5%9B%A0%E5%8A%A0%20%E5%90%89%E6%97%A9%E5%AE%89"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 吉因加 吉早安®",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "吉因加",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 吉因加 吉早安®",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "吉因加",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 吉因加 吉早安®",
+      "url": "https://doi.org/"
     },
     {
       "company": "吉因加",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E5%90%89%E5%9B%A0%E5%8A%A0%20%E5%90%89%E6%97%A9%E5%AE%89"
+      "label": "ASCO · 吉因加 吉早安®",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "吉因加",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E5%90%89%E5%9B%A0%E5%8A%A0%20%E5%90%89%E6%97%A9%E5%AE%89"
+      "label": "ESMO · 吉因加 吉早安®",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "吉因加",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E5%90%89%E5%9B%A0%E5%8A%A0%20%E5%90%89%E6%97%A9%E5%AE%89"
+      "label": "AACR · 吉因加 吉早安®",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "臻和科技",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E8%87%BB%E5%92%8C%E7%A7%91%E6%8A%80%20THEMIS%20%2F%20TOTEM"
+      "label": "国家药品监督管理局 · 臻和科技 THEMIS / TOTEM",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "臻和科技",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E8%87%BB%E5%92%8C%E7%A7%91%E6%8A%80%20THEMIS%20%2F%20TOTEM"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 臻和科技 THEMIS / TOTEM",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "臻和科技",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 臻和科技 THEMIS / TOTEM",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "臻和科技",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 臻和科技 THEMIS / TOTEM",
+      "url": "https://doi.org/"
     },
     {
       "company": "臻和科技",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E8%87%BB%E5%92%8C%E7%A7%91%E6%8A%80%20THEMIS%20%2F%20TOTEM"
+      "label": "ASCO · 臻和科技 THEMIS / TOTEM",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "臻和科技",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E8%87%BB%E5%92%8C%E7%A7%91%E6%8A%80%20THEMIS%20%2F%20TOTEM"
+      "label": "ESMO · 臻和科技 THEMIS / TOTEM",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "臻和科技",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E8%87%BB%E5%92%8C%E7%A7%91%E6%8A%80%20THEMIS%20%2F%20TOTEM"
+      "label": "AACR · 臻和科技 THEMIS / TOTEM",
+      "url": "https://www.aacr.org/meeting/"
     },
     {
       "company": "基准医疗",
-      "channel": "NMPA",
+      "channel": "国家药品监督管理局",
       "category": "regulatory",
-      "label": "NMPA/CMDE 审评公示检索",
-      "url": "https://www.google.com/search?q=site%3Anmpa.gov.cn%20OR%20site%3Acmde.org.cn%20%E5%9F%BA%E5%87%86%E5%8C%BB%E7%96%97%20UriFind%20%2F%20PulmoSeek"
+      "label": "国家药品监督管理局 · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://www.nmpa.gov.cn/"
     },
     {
       "company": "基准医疗",
-      "channel": "Scholar",
-      "category": "research",
-      "label": "Google Scholar 近一年",
-      "url": "https://scholar.google.com/scholar?as_ylo=2026&q=%E5%9F%BA%E5%87%86%E5%8C%BB%E7%96%97%20UriFind%20%2F%20PulmoSeek"
+      "channel": "国家药品监督管理局医疗器械技术审评中心",
+      "category": "regulatory",
+      "label": "国家药品监督管理局医疗器械技术审评中心 · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://www.cmde.org.cn/"
+    },
+    {
+      "company": "基准医疗",
+      "channel": "U.S. National Library of Medicine",
+      "category": "academic",
+      "label": "U.S. National Library of Medicine · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://clinicaltrials.gov/"
+    },
+    {
+      "company": "基准医疗",
+      "channel": "Crossref",
+      "category": "academic",
+      "label": "Crossref · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://doi.org/"
     },
     {
       "company": "基准医疗",
       "channel": "ASCO",
       "category": "academic",
-      "label": "ASCO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Ameetings.asco.org%20OR%20site%3Aascopubs.org%20%E5%9F%BA%E5%87%86%E5%8C%BB%E7%96%97%20UriFind%20%2F%20PulmoSeek"
+      "label": "ASCO · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://meetings.asco.org/"
     },
     {
       "company": "基准医疗",
       "channel": "ESMO",
       "category": "academic",
-      "label": "ESMO 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aannalsofoncology.org%20OR%20site%3Aesmo.org%20abstract%20%E5%9F%BA%E5%87%86%E5%8C%BB%E7%96%97%20UriFind%20%2F%20PulmoSeek"
+      "label": "ESMO · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://www.esmo.org/meeting-calendar"
     },
     {
       "company": "基准医疗",
       "channel": "AACR",
       "category": "academic",
-      "label": "AACR 摘要检索",
-      "url": "https://www.google.com/search?q=site%3Aaacrjournals.org%20abstract%20%E5%9F%BA%E5%87%86%E5%8C%BB%E7%96%97%20UriFind%20%2F%20PulmoSeek"
+      "label": "AACR · 基准医疗 UriFind® / PulmoSeek®",
+      "url": "https://www.aacr.org/meeting/"
     }
   ],
-  "errors": [],
+  "errors": [
+    {
+      "candidate_id": null,
+      "source_id": "official:guardant-health",
+      "stage": "collection",
+      "error_category": "Error",
+      "message": "official:guardant-health HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "official:e59fbae58786e58c",
+      "stage": "collection",
+      "error_category": "Error",
+      "message": "official:e59fbae58786e58c HTTP 404",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://investors.guardanthealth.com/press-releases/press-releases/2026/Guardant-Health-Launches-Shield-Multi-Cancer-Detection-MCD-Test-in-Multiple-Markets-in-Asia-with-Manulife-Partnership/default.aspx",
+      "source_id": "official:guardant-health",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://investors.guardanthealth.com/press-releases/press-releases/2025/FDA-Grants-Breakthrough-Device-Designation-to-Guardant-Healths-Shield-Multi-Cancer-Detection-MCD-Test/default.aspx",
+      "source_id": "official:guardant-health",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://www.cityofhope.org/about-city-of-hope/newsroom/city-of-hope-and-delfi-diagnostics-announce-collaboration-to-improve-lung-cancer-screening-rates",
+      "source_id": "discovery:anysearch:cityofhope.org",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://www.biochain.com/news/epigenomics-and-biochain-announce-approval-of-epi-procolon-in-china/",
+      "source_id": "discovery:anysearch:biochain.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://investors.bio-rad.com/press-releases/news-details/2025/Geneoscopy-Closes-105M-in-Series-C-Funding-Round-to-Power-Next-Generation-of-Gastrointestinal-Diagnostic-Tests-Bio-Rad-Leads-Investment-to-Support-Launch-of-ColoSense-2025-IG5zHnpTEr/default.aspx",
+      "source_id": "discovery:anysearch:investors.bio-rad.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://spotmas.com/",
+      "source_id": "discovery:anysearch:spotmas.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    }
+  ],
   "views": {
     "daily_event_ids": [],
     "hot_event_ids": [
-      "evt_99917bdb-50f1-4819-8b6f-f900742b64d3",
       "evt_6b6ed72b-ad7a-421a-9da7-7e5fc2c588f9",
       "evt_4bb31630-f0c8-4910-8c42-e05cd7021f66"
     ],
@@ -2917,8 +3243,70 @@
     ]
   },
   "metrics": {
-    "migration": true,
-    "imported_items": 327,
-    "imported_stories": 228
+    "collected_hits": 212,
+    "canonical_duplicates": 3,
+    "first": 0,
+    "update": 0,
+    "duplicate": 0,
+    "backfill": 0,
+    "pending": 209,
+    "rejected": 0,
+    "failed": 0,
+    "moa_escalations": 0,
+    "model_calls": 0,
+    "provider_configuration": {
+      "qwen": {
+        "provider": "qwen",
+        "model": "qwen3.8-flash",
+        "base_url": "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        "configured": false,
+        "required_env": [
+          "QWEN_API_KEY"
+        ],
+        "optional_base_url_env": "QWEN_BASE_URL"
+      },
+      "vision": {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash-vision-exp",
+        "base_url": "https://api.deepseek.com",
+        "configured": false,
+        "required_env": [
+          "DEEPSEEK_API_KEY"
+        ],
+        "optional_base_url_env": "DEEPSEEK_BASE_URL"
+      },
+      "reviewer": {
+        "provider": "glm",
+        "model": "glm-5.3-flash",
+        "base_url": "https://open.bigmodel.cn/api/paas/v4",
+        "configured": false,
+        "required_env": [
+          "GLM_API_KEY"
+        ],
+        "optional_base_url_env": "GLM_BASE_URL"
+      },
+      "synthesizer": {
+        "provider": "kimi",
+        "model": "kimi-k3",
+        "base_url": "https://api.moonshot.cn/v1",
+        "configured": false,
+        "required_env": [
+          "MOONSHOT_API_KEY"
+        ],
+        "optional_base_url_env": "KIMI_BASE_URL"
+      }
+    },
+    "acceptance_passed": false,
+    "acceptance_fixture_sha256": "fa7f0b72dd7c539b774cd8df56c52c639da58a71af2e6002b39d27cc06b88f1e",
+    "collection_ms": 72072,
+    "processing_ms": 785999,
+    "total_ms": 858118,
+    "coverage_gaps": 0,
+    "candidate_total": 209,
+    "event_total": 228,
+    "evidence_total": 327,
+    "review_backlog": 0,
+    "errors": 8,
+    "estimated_model_cost": null
   }
 }
