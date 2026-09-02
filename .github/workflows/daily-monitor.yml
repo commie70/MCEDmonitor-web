@@ -87,7 +87,9 @@ jobs:
 
       - name: Keep legacy public report during shadow acceptance
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}

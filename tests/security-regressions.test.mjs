@@ -171,6 +171,19 @@ test("network clients parse only stream-capped response bodies", async () => {
   }
 });
 
+test("daily monitoring uses DashScope Qwen and does not depend on OpenAI credentials", async () => {
+  const workflow = await fs.readFile(path.join(ROOT, ".github/workflows/daily-monitor.yml"), "utf8");
+  const legacy = await fs.readFile(path.join(ROOT, "scripts/mced-daily-monitor-legacy.mjs"), "utf8");
+  for (const source of [workflow, legacy]) {
+    assert.doesNotMatch(source, /OPENAI_API_KEY|OPENAI_MONITOR_MODEL|OPENAI_MONITOR_REASONING|api\.openai\.com/);
+  }
+  assert.match(workflow, /DASHSCOPE_API_KEY: \$\{\{ secrets\.DASHSCOPE_API_KEY \}\}/);
+  assert.match(workflow, /QWEN_MONITOR_MODEL: \$\{\{ vars\.QWEN_MONITOR_MODEL \}\}/);
+  assert.match(legacy, /process\.env\.DASHSCOPE_API_KEY/);
+  assert.match(legacy, /process\.env\.QWEN_MONITOR_MODEL/);
+  assert.match(legacy, /DASHSCOPE_BASE_URL/);
+});
+
 test("official-link normalization preserves valid URL objects as href strings", async () => {
   const source = await fs.readFile(path.join(ROOT, "scripts/mced-daily-monitor.mjs"), "utf8");
   assert.match(source, /links\.set\(normalizeUrl\(url\.href\)/);

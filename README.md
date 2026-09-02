@@ -53,6 +53,8 @@
 
 四个 base URL 已在代码中提供默认值，仍可通过表中的环境变量覆盖。发现服务默认使用 `https://api.anysearch.com/mcp`；`ANYSEARCH_API_KEY` 可选，`ANYSEARCH_BASE_URL` 可覆盖。`FIRECRAWL_API_KEY` 仅用于已知证据 URL 的正文抓取。
 
+证据优先流水线和影子验收期内维持公开日报的旧兼容生成器都使用同一组 Qwen 配置：`DASHSCOPE_API_KEY`、`QWEN_MONITOR_MODEL` 与可选的 `DASHSCOPE_BASE_URL`。项目不再读取 `OPENAI_API_KEY`；删除 GitHub Actions 中同名的 Repository variable 或 Repository secret 不影响监控。
+
 微信公众号通过 WeixinZS 固定监控“早筛网”“有趣的胖子万里挑一”“循因缉药”“诊断科学”，每 144 小时查询一次订阅后新文章。配置 `WEIXINZS_API_KEY`，可选用 `WEIXINZS_BASE_URL` 覆盖默认的 `https://api.weixinzs.org/api`。该接口不回填订阅前历史文章；公众号只生成 `discovery` 候选，不能单独证明获批、临床性能或研究结论。
 
 部署后要改 provider URL 或模型时，不改代码：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 中修改对应 **Variables**（URL / 模型 ID）和 **Secrets**（API key），再从已认证的 `gh` CLI 向默认分支发送 `repository_dispatch`：`gh api --method POST repos/commie70/MCEDmonitor-web/dispatches -f event_type=daily-monitor`。微信公众号监控须把 `WEIXINZS_API_KEY` 建为 **Repository secret**；若要换接口地址，把 `WEIXINZS_BASE_URL` 建为 **Repository variable**。Vercel、EdgeOne 或 Docker 部署同样修改运行环境变量后重新部署。流水线不会因某家失败而静默切换到另一模型。

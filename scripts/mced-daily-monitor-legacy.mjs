@@ -13,7 +13,7 @@
  *
  * 加工(L1)：公司内标题相似度故事线聚类；热度 = Σ信道权重 × 0.5^(age_h/24);
  *   徽章：新(≤12h)；逐日趋势 spark。
- * 加工(L2):LLM(默认 gpt-5.6-luna, reasoning xhigh,OPENAI_API_KEY)为高热故事
+ * 加工(L2):Qwen(QWEN_MONITOR_MODEL,DASHSCOPE_API_KEY)为高热故事
  *   生成 中文摘要 / 相关性评分 / 关注理由；并生成当日 AI 日报。
  *
  * 用法： node scripts/mced-daily-monitor.mjs [--since YYYY-MM-DD] [--days N] [--skip-llm] [--limit-llm N]
@@ -46,8 +46,8 @@ const MAX_LEGACY_ITEMS = 2_000;
 const MAX_PUBLIC_REPORT_BYTES = 32 * 1024 * 1024;
 // 子进程环境白名单:只传运行所需变量,不泄露其余密钥
 const CLI_ENV_KEYS = ["PATH", "HOME", "LANG", "LC_ALL", "LC_CTYPE", "TMPDIR", "ANYSEARCH_API_KEY"];
-const LLM_MODEL = process.env.OPENAI_MONITOR_MODEL || "gpt-5.6-luna";
-const LLM_REASONING = process.env.OPENAI_MONITOR_REASONING || "xhigh";
+const DASHSCOPE_BASE_URL = process.env.DASHSCOPE_BASE_URL || "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1";
+const LLM_MODEL = process.env.QWEN_MONITOR_MODEL || "qwen3.8-flash";
 const CHANNEL_WEIGHT = { pubmed: 3, fda: 5,news: 2, tavily: 2.5,anysearch: 2.5, brave: 2.5, firecrawl: 2.5, exa: 2.5 };
 const ROLLING_WINDOW_DAYS = 31; // 监测窗口：当前时间倒推 1 个月
 const STOPWORDS = new Set([
@@ -117,15 +117,15 @@ const categories = [
 
 // ---------- L2 LLM 增强 ----------
 let digest = null;
-if (!args.skipLlm && process.env.OPENAI_API_KEY && stories.length) {
+if (!args.skipLlm && process.env.DASHSCOPE_API_KEY && stories.length) {
   const topN = stories.slice(0,args.limitLlm ?? 10);
   for (const story of topN) {
     const ai = await llmJudgeStory(story);
     if (ai) Object.assign(story,ai);
   }
   digest = await llmDigest(topN.filter((s) => s.summary));
-} else if (!process.env.OPENAI_API_KEY) {
-  console.warn("[mced-monitor] OPENAI_API_KEY 缺失，跳过 L2");
+} else if (!process.env.DASHSCOPE_API_KEY) {
+  console.warn("[mced-monitor] DASHSCOPE_API_KEY 缺失，跳过 L2");
 }// ---------- 报告 ----------
 /** 中文标点归一化:汉字相邻的半角 , : ; . → 全角;汉字相邻的 / + 前后补空格(URL/域名占位保护) */
 function normalizeZhPunct(input) {
@@ -548,7 +548,6 @@ async function llmJudgeStory(story) {
     .join("\n");
   const body = {
     model: LLM_MODEL,
-    reasoning_effort: LLM_REASONING,
     response_format:{ type: "json_object" }, messages: [
       {
         role: "system",
@@ -557,7 +556,7 @@ async function llmJudgeStory(story) {
         role: "user",
         content: `<untrusted_feed_data>\n公司：${oneLine(story.company, 60)}(${oneLine(story.product, 60)})\n故事线标题：${oneLine(story.title, 200)}\n信源：\n${titles}\n</untrusted_feed_data>\n\n输出 JSON:{"summary":"≤80字中文客观摘要","score":0-100与早筛竞品监测的相关性(纯噪声0-20、弱相关30-50、值得关注60-75、重要动态80-95、里程碑96-100),"reason":"≤50字，为什么世和应关注"}`,},],};
   try {
-    const json = await openaiChat(body, `llm-story:${story.company}`);
+    const json = await qwenChat(body, `llm-story:${story.company}`);
     const text = json.choices?.[0]?.message?.content || "";
     const parsed = JSON.parse(text);
     return {
@@ -580,7 +579,6 @@ async function llmDigest(topStories) {
     .join("\n");
   const body = {
     model: LLM_MODEL,
-    reasoning_effort: LLM_REASONING,
     messages: [
       {
         role: "system",
@@ -588,7 +586,7 @@ async function llmDigest(topStories) {
         role: "user",
         content: `基于以下当日高热故事线，写 200-350 字中文日报：开头一句总览，然后 3-5 条要点(每条一行，以「· 」开头，含公司名与一句点评)，结尾一句趋势判断。注意：标注「日期不详」的条目多为常青资料而非当日新闻，表述时不要写成"今日发生"。纯文本，不用标题和加粗。\n\n<untrusted_feed_data>\n${briefs}\n</untrusted_feed_data>`,},],};
   try {
-    const json = await openaiChat(body, "llm-digest");
+    const json = await qwenChat(body, "llm-digest");
     return {
       markdown: (json.choices?.[0]?.message?.content?.trim() || "").slice(0, 1500),
       model: LLM_MODEL,
@@ -599,11 +597,12 @@ async function llmDigest(topStories) {
   }
 }
 
-async function openaiChat(body, label) {
-  const res = await throttledFetch("https://api.openai.com/v1/chat/completions", label,{
+async function qwenChat(body, label) {
+  const endpoint = new URL("chat/completions", `${DASHSCOPE_BASE_URL.replace(/\/+$/, "")}/`);
+  const res = await throttledFetch(endpoint, label,{
     method: "POST",
     headers:{
-      Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,
+      Authorization:`Bearer ${process.env.DASHSCOPE_API_KEY}`,
       "Content-Type": "application/json",}, body: JSON.stringify(body),}, 120000);
   if (!res.ok) {
     throw new Error(`${label}_http_${res.status}`);
