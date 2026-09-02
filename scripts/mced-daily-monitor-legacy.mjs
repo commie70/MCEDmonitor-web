@@ -27,6 +27,7 @@ import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { enrichReport } from "./lib-content-enrich.mjs";
 import { inferItemDate, staleMonthOf } from "./lib-stale.mjs";
+import { fetchPublic, publicErrorCode, readCappedBody as readStreamCappedBody } from "./lib-network-security.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONFIG_PATH = path.join(ROOT, "scripts", "monitor-sources.json");
@@ -41,6 +42,8 @@ const MAX_RETRIES = 4;
 const MAX_RETRY_WAIT_MS = 60_000; // Retry-After 上限,防止上游拖死整个串行任务
 const MAX_FETCH_BODY_BYTES = 8 * 1024 * 1024; // 单条上游响应体积上限
 const MAX_CLI_OUTPUT_BYTES = 4 * 1024 * 1024; // 子进程 stdout 累积上限
+const MAX_LEGACY_ITEMS = 2_000;
+const MAX_PUBLIC_REPORT_BYTES = 32 * 1024 * 1024;
 // 子进程环境白名单:只传运行所需变量,不泄露其余密钥
 const CLI_ENV_KEYS = ["PATH", "HOME", "LANG", "LC_ALL", "LC_CTYPE", "TMPDIR", "ANYSEARCH_API_KEY"];
 const LLM_MODEL = process.env.OPENAI_MONITOR_MODEL || "gpt-5.6-luna";
@@ -65,6 +68,26 @@ const sinceMonth = since.slice(0, 7);
 const watches = config.watches || [];
 const items = [];
 const errors = [];
+
+function recordError(company, channel, error) {
+  errors.push({ company, channel, error_code: publicErrorCode(error, `${channel}_failed`) });
+}
+
+function pushItem(item) {
+  if (!httpUrl(item.url)) return;
+  if (items.length >= MAX_LEGACY_ITEMS) throw new Error("legacy_item_budget_exceeded");
+  items.push({
+    ...item,
+    id: oneLine(item.id, 200),
+    company: oneLine(item.company, 200),
+    product: oneLine(item.product, 200),
+    title: oneLine(item.title, 500),
+    source: oneLine(item.source, 200),
+    note: oneLine(item.note, 2_000),
+    snippet: oneLine(item.snippet, 2_000),
+    url: String(item.url),
+  });
+}
 
 console.log(`[mced-monitor] window since ${since},${watches.length} watches`);
 
@@ -159,7 +182,11 @@ for (const s of stories) {
 }
 
 await fs.mkdir(path.dirname(OUT_PATH),{ recursive: true });
-await fs.writeFile(OUT_PATH, normalizeZhPunct(JSON.stringify(report,null, 2)), "utf8");
+const serializedReport = normalizeZhPunct(JSON.stringify(report,null, 2));
+if (Buffer.byteLength(serializedReport, "utf8") > MAX_PUBLIC_REPORT_BYTES) {
+  throw new Error("public_report_budget_exceeded");
+}
+await fs.writeFile(OUT_PATH, serializedReport, "utf8");
 await fs.writeFile(
   STATE_PATH, JSON.stringify({ lastRunAt:new Date().toISOString() },null, 2),
   "utf8"
@@ -201,23 +228,23 @@ async function collectPubMed(w) {
       "ESummary"
     );
     const result = sumJson.result || {};
-    for (const uid of result.uids || []) {
+    for (const uid of (result.uids || []).slice(0, 50)) {
       const doc = result[uid];
       if (!doc) continue;
       const doi = (doc.articleids || []).find((x) => x.idtype === "doi");
-      items.push({
+      pushItem({
         id: `pmid:${doc.uid}`,
         company: w.company,product: w.product,
         category: "research",
         channel: "pubmed",
-        title: stripHtml(doc.title || ""),
-        source: doc.fulljournalname || doc.source || "PubMed",
+        title: oneLine(stripHtml(doc.title || ""), 500),
+        source: oneLine(doc.fulljournalname || doc.source || "PubMed", 200),
         date:normalizeDate(doc.pubdate),
         url: doi ? `https://doi.org/${doi.value}` : `https://pubmed.ncbi.nlm.nih.gov/${doc.uid}/`,
         note: `PMID ${doc.uid}`,});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "pubmed", message: String(err.message || err) });
+    recordError(w.company, "pubmed", err);
   }
 }
 
@@ -229,18 +256,18 @@ async function collectNews(w) {
     );
     for (const it of parseRssItems(xml).slice(0, 5)) {
       if (it.date && it.date < since) continue;
-      items.push({
+      pushItem({
         id: `news:${stableId(it.title + it.link)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "news",
-        title: it.title,
+        title: oneLine(it.title, 500),
         source: it.source || "Google News",
         date: it.date || "",
         url: it.link,note: "",});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "news", message: String(err.message || err) });
+    recordError(w.company, "news", err);
   }
 }
 
@@ -254,26 +281,26 @@ async function collectFda(w) {
         true
       );
       if (!json) continue;
-      for (const r of json.results || []) {
-        items.push({
+      for (const r of (json.results || []).slice(0, 5)) {
+        pushItem({
           id: `fda:${r.pma_number || r.pma_submission_number || stableId(JSON.stringify(r))}`,
           company: w.company,product: w.product,
           category: "regulatory",
           channel: "fda",
-          title: `${r.tradename || w.product} — ${r.decision_code || r.decision || "FDA 审评动态"}`,
+          title: oneLine(`${r.tradename || w.product} — ${r.decision_code || r.decision || "FDA 审评动态"}`, 500),
           source: `openFDA ${ep === "pma" ? "PMA" : "De Novo"}(${r.pma_number || "—"})`,
           date:normalizeDate(r.decision_date),
           url: `https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=${r.pma_number || ""}`,note: r.generic_name || "",});
       }
     } catch (err) {
-      errors.push({ company: w.company, channel: `fda-${ep}`, message: String(err.message || err) });
+      recordError(w.company, `fda-${ep}`, err);
     }
   }
 }
 
 async function collectTavily(w) {
   if (!process.env.TAVILY_API_KEY) {
-    errors.push({ company: w.company, channel: "tavily", message: "TAVILY_API_KEY 缺失" });
+    recordError(w.company, "tavily", "configuration_missing");
     return;
   }
   try {
@@ -286,23 +313,23 @@ async function collectTavily(w) {
         days: Math.max(1, Math.ceil((Date.now() - new Date(since)) / 86400000)),
         search_depth: "basic",}),});
     if (!res.ok) throw new Error(`Tavily HTTP ${res.status}`);
-    const json = await res.json();
-    for (const r of json.results || []) {
+    const json = JSON.parse(await readStreamCappedBody(res, "tavily_response", MAX_FETCH_BODY_BYTES));
+    for (const r of (json.results || []).slice(0, 5)) {
       const date = normalizeDate(r.published_date || "");
       // 旧文保留展示(条目标注「旧」)，不再按窗口剔除
-      items.push({
+      pushItem({
         id: `tavily:${stableId(r.url)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "tavily",
-        title: stripHtml(r.title || ""),
+        title: oneLine(stripHtml(r.title || ""), 500),
         source: hostOf(r.url),
         date,
         url: r.url,note: "",
         snippet: stripHtml((r.content || "").slice(0, 240)),});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "tavily", message: String(err.message || err) });
+    recordError(w.company, "tavily", err);
   }
 }
 
@@ -310,25 +337,25 @@ async function collectAnySearch(w) {
   try {
     const out = await runCli(ANYSEARCH_PYTHON, [ANYSEARCH_CLI, "search", w.domestic, "--max_results", "4"]);
     for (const r of parseAnySearchMarkdown(out).slice(0, 4)) {
-      items.push({
+      pushItem({
         id: `anysearch:${stableId(r.url)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "anysearch",
-        title: r.title,
+        title: oneLine(r.title, 500),
         source: hostOf(r.url),
         date: "",
         url: r.url,note: "",
         snippet: r.snippet.slice(0, 240),});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "anysearch", message: String(err.message || err) });
+    recordError(w.company, "anysearch", err);
   }
 }
 
 async function collectBrave(w) {
   if (!process.env.BRAVE_API_KEY) {
-    errors.push({ company: w.company, channel: "brave", message: "BRAVE_API_KEY 缺失" });
+    recordError(w.company, "brave", "configuration_missing");
     return;
   }
   try {
@@ -337,29 +364,29 @@ async function collectBrave(w) {
     const res = await throttledFetch(url, "Brave",{
       headers:{ "X-Subscription-Token":process.env.BRAVE_API_KEY, Accept: "application/json" },});
     if (!res.ok) throw new Error(`Brave HTTP ${res.status}`);
-    const json = await res.json();
+    const json = JSON.parse(await readStreamCappedBody(res, "brave_response", MAX_FETCH_BODY_BYTES));
     for (const r of (json.web?.results || []).slice(0, 5)) {
       const date = normalizeDate(r.age || "");
       // 旧文保留展示(条目标注「旧」)，不再按窗口剔除
-      items.push({
+      pushItem({
         id: `brave:${stableId(r.url)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "brave",
-        title: stripHtml(r.title || ""),
+        title: oneLine(stripHtml(r.title || ""), 500),
         source: hostOf(r.url),
         date,
         url: r.url,note: "",
         snippet: stripHtml(r.description || "").slice(0, 240),});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "brave", message: String(err.message || err) });
+    recordError(w.company, "brave", err);
   }
 }
 
 async function collectFirecrawl(w) {
   if (!process.env.FIRECRAWL_API_KEY) {
-    errors.push({ company: w.company, channel: "firecrawl", message: "FIRECRAWL_API_KEY 缺失" });
+    recordError(w.company, "firecrawl", "configuration_missing");
     return;
   }
   try {
@@ -370,21 +397,21 @@ async function collectFirecrawl(w) {
         Authorization:`Bearer ${process.env.FIRECRAWL_API_KEY}`,
         "Content-Type": "application/json",}, body: JSON.stringify({ query: q, limit: 5 }),});
     if (!res.ok) throw new Error(`Firecrawl HTTP ${res.status}`);
-    const json = await res.json();
+    const json = JSON.parse(await readStreamCappedBody(res, "firecrawl_response", MAX_FETCH_BODY_BYTES));
     for (const r of (json.data?.web || []).slice(0, 5)) {
-      items.push({
+      pushItem({
         id: `firecrawl:${stableId(r.url)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "firecrawl",
-        title: stripHtml(r.title || ""),
+        title: oneLine(stripHtml(r.title || ""), 500),
         source: hostOf(r.url),
         date: "",
         url: r.url,note: "",
         snippet: stripHtml(r.description || "").slice(0, 240),});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "firecrawl", message: String(err.message || err) });
+    recordError(w.company, "firecrawl", err);
   }
 }
 
@@ -401,21 +428,21 @@ async function collectExa(w) {
         numResults: 5,
         contents:{ text:{ maxCharacters: 240 } },}),});
     if (!res.ok) throw new Error(`Exa HTTP ${res.status}`);
-    const json = await res.json();
+    const json = JSON.parse(await readStreamCappedBody(res, "exa_response", MAX_FETCH_BODY_BYTES));
     for (const r of (json.results || []).slice(0, 5)) {
-      items.push({
+      pushItem({
         id: `exa:${stableId(r.url)}`,
         company: w.company,product: w.product,
         category: "market",
         channel: "exa",
-        title: stripHtml(r.title || ""),
+        title: oneLine(stripHtml(r.title || ""), 500),
         source: hostOf(r.url),
         date: typeof r.publishedDate === "string" ? r.publishedDate.slice(0, 10) : "",
         url: r.url,note: "",
         snippet: stripHtml(r.text || "").slice(0, 240),});
     }
   } catch (err) {
-    errors.push({ company: w.company, channel: "exa", message: String(err.message || err) });
+    recordError(w.company, "exa", err);
   }
 }// ================= L1 聚类 + 热度 =================
 
@@ -538,7 +565,7 @@ async function llmJudgeStory(story) {
       score: clampScore(parsed.score),
       reason: oneLine(parsed.reason, 120),};
   } catch (err) {
-    errors.push({ company: story.company, channel: "llm", message: String(err.message || err) });
+    recordError(story.company, "llm", err);
     return null;
   }
 }
@@ -567,7 +594,7 @@ async function llmDigest(topStories) {
       model: LLM_MODEL,
       generated_at:new Date().toISOString(),};
   } catch (err) {
-    errors.push({ company: "日报", channel: "llm", message: String(err.message || err) });
+    recordError("日报", "llm", err);
     return null;
   }
 }
@@ -579,10 +606,9 @@ async function openaiChat(body, label) {
       Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,
       "Content-Type": "application/json",}, body: JSON.stringify(body),}, 120000);
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`${label} HTTP ${res.status} ${text.slice(0, 160)}`);
+    throw new Error(`${label}_http_${res.status}`);
   }
-  return res.json();
+  return JSON.parse(await readStreamCappedBody(res, `${label}_response`, MAX_FETCH_BODY_BYTES));
 }// ================= manual tasks =================
 
 function buildManualTasks(watches) {
@@ -611,17 +637,9 @@ async function fetchText(url, label) {
   return readCappedBody(res, label);
 }
 
-/** 读完整个 body 前先看声明长度,读完再校验实际长度,双重封顶 */
+/** Stream and reject decoded bytes before allocating the complete body. */
 async function readCappedBody(res, label) {
-  const declared = Number(res.headers.get("content-length"));
-  if (Number.isFinite(declared) && declared > MAX_FETCH_BODY_BYTES) {
-    throw new Error(`${label} body too large (${declared}B)`);
-  }
-  const text = await res.text();
-  if (text.length > MAX_FETCH_BODY_BYTES) {
-    throw new Error(`${label} body too large (${text.length} chars)`);
-  }
-  return text;
+  return readStreamCappedBody(res, label, MAX_FETCH_BODY_BYTES);
 }
 
 /** 单行化并限长:防止换行注入污染 prompt 结构,或超长字段拖垮输出 */
@@ -638,7 +656,12 @@ function clampScore(v) {
 /** 仅接受 http(s) 协议 URL */
 function httpUrl(v) {
   try {
+    if (typeof v !== "string" || Buffer.byteLength(v, "utf8") > 2048) return false;
     const u = new URL(v);
+    if (u.username || u.password) return false;
+    for (const key of u.searchParams.keys()) {
+      if (/^(access_token|api_key|apikey|auth|key|password|signature|token)$/i.test(key)) return false;
+    }
     return u.protocol === "https:" || u.protocol === "http:";
   } catch {
     return false;
@@ -650,7 +673,7 @@ async function throttledFetch(url, label, init = {}, timeoutMs = 30000) {
     const gap = Date.now() - lastRequestAt;
     if (gap < FETCH_GAP_MS) await sleep(FETCH_GAP_MS - gap);
     lastRequestAt = Date.now();
-    const res = await fetch(url,{
+    const res = await fetchPublic(url,{
       ...init,
       headers:{ "User-Agent": "mced-intel-monitor/2.0 (competitor daily watch)", ...(init.headers || {}) }, signal: AbortSignal.timeout(timeoutMs),});
     if (res.status !== 429 || attempt === MAX_RETRIES) return res;

@@ -12,6 +12,7 @@ const FIRECRAWL_URL = "https://api.firecrawl.dev/v2/scrape";
 const MAX_CONTENT_CHARS = 8000;
 const FETCH_TIMEOUT_MS = 45_000;
 const MIN_CONTENT_CHARS = 200;
+import { fetchPublic, readCappedBody, validatePublicUrl } from "./lib-network-security.mjs";
 
 /** 清洗:剥掉开头广告/导航杂讯,截断尾部站点样板(相关推荐/订阅等),压缩空行,超长截断 */
 const TAIL_MARKERS = /^(#{1,4}\s*)?(related content|related articles?|newsletter|sign up|subscribe|more from|read more|trending|更多阅读|相关阅读|相关推荐|推荐阅读|猜你喜欢|版权声明|责任编辑|免责声明)\b/i;
@@ -40,14 +41,15 @@ export function cleanScrapedMarkdown(md) {
 }
 
 export async function scrapeMarkdown(url) {
-  const res = await fetch(FIRECRAWL_URL,{
+  await validatePublicUrl(url);
+  const res = await fetchPublic(FIRECRAWL_URL,{
     method: "POST",
     headers:{
       Authorization:`Bearer ${process.env.FIRECRAWL_API_KEY}`,
       "Content-Type": "application/json",}, body: JSON.stringify({ url, formats: ["markdown"], onlyMainContent: true }),
     signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),});
   if (!res.ok) throw new Error(`firecrawl HTTP ${res.status}`);
-  const json = await res.json();
+  const json = JSON.parse(await readCappedBody(res, "firecrawl_response"));
   const cleaned = cleanScrapedMarkdown(json?.data?.markdown || "");
   if (cleaned.length < MIN_CONTENT_CHARS) throw new Error("content too short");
   return cleaned;

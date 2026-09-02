@@ -116,7 +116,13 @@ interface MonitorReport {
   stories: Story[];
   digest: MonitorDigest | null;
   manual_tasks: ManualTask[];
-  errors:{ company: string; channel: string; message: string }[];
+  errors:{
+    candidate_id?: string | null;
+    source_id?: string;
+    stage?: string;
+    error_code: string;
+    retry_count?: number;
+  }[];
   views?: {
     daily_event_ids: string[];
     hot_event_ids: string[];

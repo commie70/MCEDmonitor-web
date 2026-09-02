@@ -113,8 +113,7 @@ export interface MonitorReport {
     candidate_id?: string | null;
     source_id?: string;
     stage?: string;
-    error_category?: string;
-    message: string;
+    error_code: string;
     retry_count?: number;
   }[];
   views?: {

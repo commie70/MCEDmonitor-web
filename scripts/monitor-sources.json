@@ -1388,6 +1388,53 @@
         ]
       },
       "enabled": true
+    },
+    {
+      "source_id": "discovery:weixinzs-mced",
+      "editorial_owner": "WeixinZS 微信公众号监控",
+      "tier": "discovery",
+      "type": "weixinzs_articles",
+      "source_type": "media",
+      "url": "https://api.weixinzs.org/api/v1/articles",
+      "api_key_env": "WEIXINZS_API_KEY",
+      "accounts": [
+        {
+          "name": "早筛网",
+          "username": "gh_757596492666"
+        },
+        {
+          "name": "有趣的胖子万里挑一",
+          "username": "gh_514ef6e078a8"
+        },
+        {
+          "name": "循因缉药",
+          "username": "gh_95e48d6f2116"
+        },
+        {
+          "name": "诊断科学",
+          "username": "gh_f9c6851f9a3d"
+        }
+      ],
+      "poll_interval_hours": 144,
+      "coverage": {
+        "companies": [
+          "待识别"
+        ],
+        "products": [
+          "多癌早筛"
+        ],
+        "event_types": [
+          "regulatory_decision",
+          "clinical_readout",
+          "publication",
+          "conference_disclosure",
+          "product_launch",
+          "partnership",
+          "corporate",
+          "other"
+        ]
+      },
+      "enabled": true
     }
   ],
   "discovery_queries": [

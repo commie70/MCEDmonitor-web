@@ -12,6 +12,7 @@ import {
   createMonitorLlm,
   providerConfiguration,
 } from "./lib-monitor-llm.mjs";
+import { publicErrorCode } from "./lib-network-security.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const FIXTURE_PATH = path.join(ROOT, "tests", "monitor-golden.json");
@@ -154,7 +155,7 @@ try {
 } catch (error) {
   result.error = {
     name: error?.name || "Error",
-    message: String(error?.message || error).slice(0, 500),
+    error_code: publicErrorCode(error, "acceptance_failed"),
   };
 }
 
@@ -165,7 +166,7 @@ console.log(
   )} recall=${result.semantic_matching.recall.toFixed(3)} → ${path.relative(ROOT, OUT_PATH)}`
 );
 if (!result.passed) {
-  if (result.error) console.error(`[monitor-acceptance] ${result.error.message}`);
+  if (result.error) console.error(`[monitor-acceptance] ${result.error.error_code}`);
   process.exitCode = 1;
 }
 

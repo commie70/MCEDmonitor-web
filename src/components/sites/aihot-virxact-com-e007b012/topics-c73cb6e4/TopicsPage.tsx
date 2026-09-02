@@ -338,8 +338,19 @@ function TopicCard({
   onToggle: () => void;
 }) {
   return (
-    <div className={CARD_CLASS} onClick={onToggle}>
-      <div className="flex items-center gap-[8px]">
+    <div
+      className={cn(
+        CARD_CLASS,
+        "self-start cursor-default",
+        open && "col-span-full",
+      )}
+    >
+      <button
+        type="button"
+        className="flex w-full cursor-pointer items-center gap-[8px] text-left"
+        aria-expanded={open}
+        onClick={onToggle}
+      >
         <span
           className={cn(
             "h-[9px] w-[9px] shrink-0 rounded-full",
@@ -356,13 +367,10 @@ function TopicCard({
             "shrink-0 text-mc-ink2 transition-transform",
             open && "rotate-180",
           )}/>
-      </div>
+      </button>
 
       {open && (
-        <div
-          className="mt-[10px] cursor-default border-t border-mc-line-soft pt-[10px]"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="mt-[10px] cursor-default border-t border-mc-line-soft pt-[10px]">
           <div className="mb-[6px] text-[11px] font-semibold text-mc-ink1">
             相关企业({t.companies.length})
           </div>
@@ -384,9 +392,9 @@ function TopicCard({
               本期演示新闻中暂无该方向条目
             </div>
           ) : (
-            <div className="flex flex-col gap-[9px]">
+            <div className="grid grid-cols-2 gap-x-[24px] gap-y-[10px] max-[760px]:grid-cols-1">
               {t.news.map((item) => (
-                <div key={item.id}>
+                <div key={item.id} className="min-w-0 border-b border-mc-line-soft pb-[9px]">
                   {item.url ? (
                     <a
                       href={item.url}
@@ -542,7 +550,7 @@ export function TopicsPage() {
           title="技术方向"
           note="竞品产品技术路线与高频关键词，展开查看相关企业与技术新闻精选。"
         />
-        <div className="grid grid-cols-3 gap-[14px] max-[960px]:grid-cols-1">
+        <div className="grid grid-cols-3 items-start gap-[14px] max-[960px]:grid-cols-1">
           {topics.map((t) => (
             <TopicCard
               key={t.key}

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ALL_COMPETITORS } from "@/components/sites/aihot-virxact-com-e007b012/shared/competitors";
 import { readMonitorReport } from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
+import { readBoundedBody } from "@/lib/read-bounded-body.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,8 @@ export const dynamic = "force-dynamic";
  */
 
 const MAX_BODY_BYTES = 16 * 1024;
+const MAX_ACTIVE_REQUESTS = 16;
+let activeRequests = 0;
 
 interface JsonRpcRequest {
   jsonrpc: "2.0";
@@ -136,12 +139,15 @@ async function parseEnvelope(
   }
   let raw: string;
   try {
-    raw = await request.text();
-  } catch {
+    raw = await readBoundedBody(request, MAX_BODY_BYTES);
+  } catch (error) {
+    if (error instanceof RangeError && error.message === "body too large") {
+      return jsonError(null, -32600, "Invalid Request: body too large", 413);
+    }
+    if (error instanceof RangeError && error.message === "body timeout") {
+      return jsonError(null, -32600, "Invalid Request: body timeout", 408);
+    }
     return jsonError(null, -32700, "Parse error");
-  }
-  if (Buffer.byteLength(raw, "utf8") > MAX_BODY_BYTES) {
-    return jsonError(null, -32600, "Invalid Request: body too large", 413);
   }
   let value: unknown;
   try {
@@ -172,7 +178,7 @@ async function parseEnvelope(
   };
 }
 
-export async function POST(request: Request) {
+async function handlePost(request: Request) {
   const parsed = await parseEnvelope(request);
   if (parsed instanceof NextResponse) return parsed;
   const body = parsed;
@@ -209,5 +215,17 @@ export async function POST(request: Request) {
         return new Response(null,{ status: 202 });
       }
       return jsonError(id, -32601, "Method not found");
+  }
+}
+
+export async function POST(request: Request) {
+  if (activeRequests >= MAX_ACTIVE_REQUESTS) {
+    return jsonError(null, -32600, "Too many active requests", 429);
+  }
+  activeRequests++;
+  try {
+    return await handlePost(request);
+  } finally {
+    activeRequests--;
   }
 }

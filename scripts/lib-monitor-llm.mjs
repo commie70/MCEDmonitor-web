@@ -1,11 +1,16 @@
 const DEFAULT_TIMEOUT_MS = 120_000;
+const MAX_MODEL_RESPONSE_BYTES = 2 * 1024 * 1024;
+const MAX_MODEL_RESULT_BYTES = 128 * 1024;
+const MAX_MODEL_STRING_BYTES = 8 * 1024;
+const MAX_MODEL_ARRAY_ITEMS = 100;
+import { fetchPublic, readCappedBody } from "./lib-network-security.mjs";
 
 export const MODEL_ROLES = Object.freeze({
   qwen: {
     provider: "qwen",
     model: "qwen3.8-flash",
-    key_env: "QWEN_API_KEY",
-    base_url_env: "QWEN_BASE_URL",
+    key_env: "DASHSCOPE_API_KEY",
+    base_url_env: "DASHSCOPE_BASE_URL",
     base_url: "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
     model_env: "QWEN_MONITOR_MODEL",
     structured_output: "json_schema",
@@ -269,7 +274,36 @@ function parseJsonContent(json, schema) {
   } catch {
     throw new Error("model returned invalid JSON");
   }
-  return validateSchema(parsed, schema);
+  const validated = validateSchema(parsed, schema);
+  enforceResultBudget(validated);
+  return validated;
+}
+
+function enforceResultBudget(value) {
+  const stack = [{ value, depth: 0 }];
+  let estimatedBytes = 0;
+  while (stack.length) {
+    const current = stack.pop();
+    if (current.depth > 8) throw new Error("model_result_depth_exceeded");
+    if (typeof current.value === "string") {
+      const bytes = Buffer.byteLength(current.value, "utf8");
+      if (bytes > MAX_MODEL_STRING_BYTES) throw new Error("model_result_string_too_large");
+      estimatedBytes += bytes;
+    } else if (Array.isArray(current.value)) {
+      if (current.value.length > MAX_MODEL_ARRAY_ITEMS) throw new Error("model_result_array_too_large");
+      for (const item of current.value) stack.push({ value: item, depth: current.depth + 1 });
+    } else if (current.value && typeof current.value === "object") {
+      const entries = Object.entries(current.value);
+      if (entries.length > MAX_MODEL_ARRAY_ITEMS) throw new Error("model_result_object_too_large");
+      for (const [key, item] of entries) {
+        estimatedBytes += Buffer.byteLength(key, "utf8");
+        stack.push({ value: item, depth: current.depth + 1 });
+      }
+    } else {
+      estimatedBytes += 16;
+    }
+    if (estimatedBytes > MAX_MODEL_RESULT_BYTES) throw new Error("model_result_too_large");
+  }
 }
 
 function safeEvidence(value) {
@@ -334,6 +368,14 @@ function matchEqual(a, b) {
   return a.relation === b.relation && a.event_id === b.event_id;
 }
 
+function publicProviderOrigin(value) {
+  try {
+    return new URL(value).origin;
+  } catch {
+    return "invalid";
+  }
+}
+
 export function providerConfiguration(env = process.env) {
   return Object.fromEntries(
     Object.entries(MODEL_ROLES).map(([role, fixed]) => [
@@ -341,7 +383,7 @@ export function providerConfiguration(env = process.env) {
       {
         provider: fixed.provider,
         model: env[fixed.model_env] || fixed.model,
-        base_url: env[fixed.base_url_env] || fixed.base_url,
+        base_url: publicProviderOrigin(env[fixed.base_url_env] || fixed.base_url),
         configured: Boolean((env[fixed.base_url_env] || fixed.base_url) && env[fixed.key_env]),
         required_env: [fixed.key_env],
         optional_base_url_env: fixed.base_url_env,
@@ -384,7 +426,8 @@ export function createMonitorLlm({
     };
     if (config.reasoning) body.reasoning_effort = config.reasoning;
 
-    const response = await fetchImpl(chatUrl(config.base_url), {
+    const request = fetchImpl === globalThis.fetch ? fetchPublic : fetchImpl;
+    const response = await request(chatUrl(config.base_url), {
       method: "POST",
       headers: {
         Authorization: `Bearer ${config.api_key}`,
@@ -394,10 +437,12 @@ export function createMonitorLlm({
       signal: AbortSignal.timeout(timeoutMs),
     });
     if (!response.ok) {
-      const detail = await response.text().catch(() => "");
-      throw new Error(`${config.provider}:${name} HTTP ${response.status} ${detail.slice(0, 240)}`);
+      throw new Error(`${config.provider}_${name}_http_${response.status}`);
     }
-    const result = parseJsonContent(await response.json(), schema);
+    const result = parseJsonContent(
+      JSON.parse(await readCappedBody(response, `${config.provider}_${name}_response`, MAX_MODEL_RESPONSE_BYTES)),
+      schema
+    );
     const generatedAt = now();
     return {
       result,

@@ -12,7 +12,7 @@ import {
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const REPORT_PATH = path.join(ROOT, "public", "monitor", "daily-report.json");
-const SHADOW_PATH = path.join(ROOT, "public", "monitor", "shadow-report.json");
+const SHADOW_PATH = path.join(ROOT, ".monitor", "shadow-report.json");
 const LEDGER_PATH = path.join(ROOT, "scripts", "monitor-ledger.json");
 const REGISTRY_PATH = path.join(ROOT, "scripts", "monitor-sources.json");
 

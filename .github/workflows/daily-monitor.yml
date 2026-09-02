@@ -8,13 +8,8 @@ on:
   schedule:
     # 每 3 天 06:17(北京时间,UTC 22:17)运行:每月 1/4/7/10/... 日
     - cron: "17 22 */3 * *"
-  workflow_dispatch:
-    inputs:
-      run_acceptance:
-        description: "运行四家 provider 的 120 案例验收（会产生模型调用）"
-        required: false
-        type: boolean
-        default: false
+  repository_dispatch:
+    types: [daily-monitor, daily-monitor-acceptance]
 
 permissions:
   contents: write # 需要把更新后的日报推回 master
@@ -25,6 +20,8 @@ concurrency:
 
 jobs:
   monitor:
+    if: github.ref == 'refs/heads/master'
+    environment: monitor-production
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -32,7 +29,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          persist-credentials: true # 本任务要 push,凭证必须保留(与只读 CI 相反)
+          ref: refs/heads/master
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify reviewed master revision
+        run: |
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/master)"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
 
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
@@ -44,10 +48,10 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Run live provider acceptance
-        if: inputs.run_acceptance == true
+        if: github.event_name == 'repository_dispatch' && github.event.action == 'daily-monitor-acceptance'
         env:
-          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
-          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -65,8 +69,10 @@ jobs:
           ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
           ANYSEARCH_BASE_URL: ${{ vars.ANYSEARCH_BASE_URL }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-          QWEN_BASE_URL: ${{ vars.QWEN_BASE_URL }}
-          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          WEIXINZS_BASE_URL: ${{ vars.WEIXINZS_BASE_URL }}
+          WEIXINZS_API_KEY: ${{ secrets.WEIXINZS_API_KEY }}
+          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -95,7 +101,7 @@ jobs:
       - name: Detect data changes
         id: changes
         run: |
-          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/monitor/shadow-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
+          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -104,9 +110,14 @@ jobs:
 
       - name: Commit and push updated report
         if: steps.changes.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/monitor/daily-report.json public/monitor/shadow-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json
+          git add public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json
           git commit -m "chore(monitor): daily report $(date -u +%Y-%m-%d)"
+          AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader || true' EXIT
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $AUTH_HEADER"
           git push origin HEAD:master
