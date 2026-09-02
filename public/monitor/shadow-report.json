@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-01T01:17:09.903Z",
-  "window_since": "2026-08-01",
+  "generated_at": "2026-09-02T00:12:35.392Z",
+  "window_since": "2026-08-02",
   "watches": 20,
   "categories": [
     {
@@ -1342,8 +1342,8 @@
         0,
         0,
         0,
-        0,
         1,
+        0,
         0,
         0,
         0,
@@ -1791,8 +1791,8 @@
         0,
         0,
         0,
-        0,
         1,
+        0,
         0,
         0,
         0,
@@ -3185,19 +3185,19 @@
       "retry_count": 0
     },
     {
-      "candidate_id": "https://investors.guardanthealth.com/press-releases/press-releases/2025/FDA-Grants-Breakthrough-Device-Designation-to-Guardant-Healths-Shield-Multi-Cancer-Detection-MCD-Test/default.aspx",
-      "source_id": "official:guardant-health",
+      "candidate_id": "https://www.cityofhope.org/about-city-of-hope/newsroom/city-of-hope-and-delfi-diagnostics-announce-collaboration-to-improve-lung-cancer-screening-rates",
+      "source_id": "discovery:anysearch:cityofhope.org",
       "stage": "content",
       "error_category": "Error",
       "message": "evidence-content HTTP 403",
       "retry_count": 0
     },
     {
-      "candidate_id": "https://www.cityofhope.org/about-city-of-hope/newsroom/city-of-hope-and-delfi-diagnostics-announce-collaboration-to-improve-lung-cancer-screening-rates",
-      "source_id": "discovery:anysearch:cityofhope.org",
+      "candidate_id": "https://fgw.sz.gov.cn/ztzl/qtztzl/szscjmyjjfzzhfwpt/mqfc/myqyfzdt/content/post_12657722.html",
+      "source_id": "discovery:anysearch:fgw.sz.gov.cn",
       "stage": "content",
-      "error_category": "Error",
-      "message": "evidence-content HTTP 403",
+      "error_category": "TypeError",
+      "message": "fetch failed",
       "retry_count": 0
     },
     {
@@ -3223,6 +3223,30 @@
       "error_category": "Error",
       "message": "evidence-content HTTP 403",
       "retry_count": 0
+    },
+    {
+      "candidate_id": "https://zhuanlan.zhihu.com/p/1911842080889770018",
+      "source_id": "discovery:anysearch:zhuanlan.zhihu.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://baike.baidu.com/item/%E6%9D%AD%E5%B7%9E%E8%AF%BA%E8%BE%89%E5%81%A5%E5%BA%B7%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/19640867",
+      "source_id": "discovery:anysearch:baike.baidu.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": "https://zhuanlan.zhihu.com/p/681612545",
+      "source_id": "discovery:anysearch:zhuanlan.zhihu.com",
+      "stage": "content",
+      "error_category": "Error",
+      "message": "evidence-content HTTP 403",
+      "retry_count": 0
     }
   ],
   "views": {
@@ -3243,13 +3267,13 @@
     ]
   },
   "metrics": {
-    "collected_hits": 212,
-    "canonical_duplicates": 3,
+    "collected_hits": 209,
+    "canonical_duplicates": 1,
     "first": 0,
     "update": 0,
-    "duplicate": 0,
+    "duplicate": 1,
     "backfill": 0,
-    "pending": 209,
+    "pending": 207,
     "rejected": 0,
     "failed": 0,
     "moa_escalations": 0,
@@ -3269,7 +3293,7 @@
         "provider": "deepseek",
         "model": "deepseek-v4-flash-vision-exp",
         "base_url": "https://api.deepseek.com",
-        "configured": false,
+        "configured": true,
         "required_env": [
           "DEEPSEEK_API_KEY"
         ],
@@ -3279,7 +3303,7 @@
         "provider": "glm",
         "model": "glm-5.3-flash",
         "base_url": "https://open.bigmodel.cn/api/paas/v4",
-        "configured": false,
+        "configured": true,
         "required_env": [
           "GLM_API_KEY"
         ],
@@ -3289,7 +3313,7 @@
         "provider": "kimi",
         "model": "kimi-k3",
         "base_url": "https://api.moonshot.cn/v1",
-        "configured": false,
+        "configured": true,
         "required_env": [
           "MOONSHOT_API_KEY"
         ],
@@ -3298,15 +3322,15 @@
     },
     "acceptance_passed": false,
     "acceptance_fixture_sha256": "fa7f0b72dd7c539b774cd8df56c52c639da58a71af2e6002b39d27cc06b88f1e",
-    "collection_ms": 72072,
-    "processing_ms": 785999,
-    "total_ms": 858118,
+    "collection_ms": 85218,
+    "processing_ms": 355285,
+    "total_ms": 440550,
     "coverage_gaps": 0,
-    "candidate_total": 209,
+    "candidate_total": 320,
     "event_total": 228,
     "evidence_total": 327,
     "review_backlog": 0,
-    "errors": 8,
+    "errors": 11,
     "estimated_model_cost": null
   }
 }
