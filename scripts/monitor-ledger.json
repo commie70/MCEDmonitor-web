@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "monitoring_baseline": "2026-08-16T17:20:18.787Z",
-  "last_successful_run_at": "2026-09-02T00:12:35.392Z",
+  "last_successful_run_at": "2026-09-05T00:04:22.191Z",
   "last_publication_event_ids": [],
   "candidates": [
     {
@@ -26582,5 +26582,467 @@
         }
       ]
     }
-  ]
+  ],
+  "source_runs": {
+    "pubmed:grail": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:grail": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:grail": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:exact-sciences-abbott": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:exact-sciences-abbott": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:exact-sciences-abbott": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:guardant-health": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:guardant-health": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:guardant-health": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:freenome": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:freenome": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:freenome": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:delfi-diagnostics": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:delfi-diagnostics": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:mirxes": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:mirxes": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:epigenomics": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:epigenomics": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:epigenomics": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:geneoscopy": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "openfda:geneoscopy": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:geneoscopy": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:gene-solutions": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:gene-solutions": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e4b896e5928ce59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e4b896e5928ce59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e78783e79fb3e58c": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e78783e79fb3e58c": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e9b98de8bf9ce59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e9b98de8bf9ce59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e5928ce7919ee59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e5928ce7919ee59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e8afbae8be89e581": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e8afbae8be89e581": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e6b39be7949fe5ad": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e6b39be7949fe5ad": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e58d8ee5a4a7e59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e58d8ee5a4a7e59f": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e59089e59ba0e58a": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e59089e59ba0e58a": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e887bbe5928ce7a7": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e887bbe5928ce7a7": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e59fbae58786e58c": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "official:e59fbae58786e58c": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "pubmed:e8a18ce4b89ae680": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    },
+    "discovery:weixinzs-mced": {
+      "last_checked_at": "2026-09-05T00:04:22.191Z",
+      "last_success_at": null,
+      "cursor_at": "2026-09-02T00:00:00.000Z",
+      "next_due_at": null,
+      "consecutive_failures": 1,
+      "first_failure_at": "2026-09-05T00:04:22.191Z",
+      "last_error": "request_failed",
+      "item_count": 0
+    }
+  }
 }
