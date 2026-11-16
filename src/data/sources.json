@@ -1,0 +1,1893 @@
+[
+  {
+    "id": "ann-oncol-2021-32-9-1167-77",
+    "kind": "journal",
+    "label": "Ann Oncol 2021;32(9):1167-77",
+    "title": "Clinical validation of a targeted methylation-based multi-cancer early detection test using an independent validation set",
+    "authors": "Klein EA et al.",
+    "url": "https://doi.org/10.1016/j.annonc.2021.05.806",
+    "doi": "10.1016/j.annonc.2021.05.806",
+    "pmid": "34176681",
+    "date": "2021-09"
+  },
+  {
+    "id": "j-clin-oncol-2026-44-17-suppl-lba10509",
+    "kind": "conference",
+    "label": "J Clin Oncol 2026;44(17_suppl):LBA10509",
+    "title": "Safety and performance results from PATHFINDER 2, a registrational study of a multi-cancer early detection (MCED) test in an intended-use population",
+    "authors": "Giridhar KV et al.",
+    "url": "https://doi.org/10.1200/jco.2026.44.17_suppl.lba10509",
+    "doi": "10.1200/jco.2026.44.17_suppl.lba10509",
+    "date": "2026-06-10"
+  },
+  {
+    "id": "clinicaltrials-gov-nct05155605",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT05155605",
+    "title": "The PATHFINDER 2 Study: Evaluating the Safety and Performance of the GRAIL Multi-Cancer Early Detection Test in an Eligible Screening Population",
+    "url": "https://clinicaltrials.gov/study/NCT05155605"
+  },
+  {
+    "id": "grail-press-release-2026-05-31-pathfinder-2-asco",
+    "kind": "company",
+    "label": "GRAIL press release 2026-05-31 (PATHFINDER 2, ASCO)",
+    "title": "GRAIL Presents PATHFINDER 2 Results of More Than 35,000 Participants Showing the Galleri Test Substantially Increased Cancer Detection ... at 2026 ASCO Annual Meeting",
+    "url": "https://grail.gcs-web.com/news-releases/news-release-details/grail-presents-pathfinder-2-results-more-35000-participants",
+    "date": "2026-05-31"
+  },
+  {
+    "id": "nat-med-2026-32-10",
+    "kind": "journal",
+    "label": "Nat Med 2026;32(10)",
+    "title": "Performance of a multi-cancer early detection test in the randomized controlled NHS-Galleri trial",
+    "authors": "Neal RD et al.",
+    "url": "https://doi.org/10.1038/s41591-026-04652-8",
+    "doi": "10.1038/s41591-026-04652-8",
+    "pmid": "42773209",
+    "date": "2026-09-22"
+  },
+  {
+    "id": "j-clin-oncol-2026-44-17-suppl-lba100",
+    "kind": "conference",
+    "label": "J Clin Oncol 2026;44(17_suppl):LBA100",
+    "title": "NHS-Galleri: Primary results from a randomised controlled trial to assess the clinical utility of a multi-cancer early detection (MCED) test in population screening",
+    "authors": "Swanton C et al.",
+    "url": "https://doi.org/10.1200/jco.2026.44.17_suppl.lba100",
+    "doi": "10.1200/jco.2026.44.17_suppl.lba100",
+    "date": "2026-06-10"
+  },
+  {
+    "id": "clinicaltrials-gov-nct05611632",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT05611632",
+    "title": "A Randomized, Controlled Trial to Assess the Clinical Utility of a Multi-cancer Early Detection (MCED) Test for Population Screening in the United Kingdom (UK) When Added to Standard of Care",
+    "url": "https://clinicaltrials.gov/study/NCT05611632"
+  },
+  {
+    "id": "grail-press-release-2026-05-30-nhs-galleri-full-results",
+    "kind": "company",
+    "label": "GRAIL press release 2026-05-30 (NHS-Galleri full results)",
+    "title": "GRAIL Reports Full Results from NHS-Galleri Trial Demonstrating Substantial Reduction in Stage IV Cancer Diagnoses at 2026 ASCO Annual Meeting",
+    "url": "https://grail.com/press-releases/grail-reports-full-results-from-nhs-galleri-trial-demonstrating-substantial-reduction-in-stage-iv-cancer-diagnoses-at-2026-asco-annual-meeting/",
+    "date": "2026-05-30"
+  },
+  {
+    "id": "lancet-oncol-2023-24-7-733-43",
+    "kind": "journal",
+    "label": "Lancet Oncol 2023;24(7):733-43",
+    "title": "Multi-cancer early detection test in symptomatic patients referred for cancer investigation in England and Wales (SYMPLIFY): a large-scale, observational cohort study",
+    "authors": "Nicholson BD et al.",
+    "url": "https://doi.org/10.1016/s1470-2045(23)00277-2",
+    "doi": "10.1016/s1470-2045(23)00277-2",
+    "pmid": "37352875",
+    "date": "2023-07"
+  },
+  {
+    "id": "grail-press-release-2025-10-20-symplify-long-term-data-e",
+    "kind": "company",
+    "label": "GRAIL press release 2025-10-20 (SYMPLIFY long-term data, EDCC)",
+    "title": "GRAIL and University of Oxford Present Long-Term Data from the SYMPLIFY Study Evaluating the Galleri Multi-Cancer Early Detection Test in Symptomatic Individuals",
+    "url": "https://grail.com/press-releases/grail-and-university-of-oxford-present-long-term-data-from-the-symplify-study-evaluating-the-galleri-multi-cancer-early-detection-test-in-symptomatic-individuals-at-the-early-detection-of-cancer/",
+    "date": "2025-10-20"
+  },
+  {
+    "id": "lancet-2023-402-10409-1251-60",
+    "kind": "journal",
+    "label": "Lancet 2023;402(10409):1251-60",
+    "title": "Blood-based tests for multicancer early detection (PATHFINDER): a prospective cohort study",
+    "authors": "Schrag D et al.",
+    "url": "https://doi.org/10.1016/s0140-6736(23)01700-2",
+    "doi": "10.1016/s0140-6736(23)01700-2",
+    "pmid": "37805216",
+    "date": "2023-10-07"
+  },
+  {
+    "id": "clinicaltrials-gov-nct04241796",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT04241796",
+    "title": "PATHFINDER",
+    "url": "https://clinicaltrials.gov/study/NCT04241796"
+  },
+  {
+    "id": "science-2018-359-6378-926-30",
+    "kind": "journal",
+    "label": "Science 2018;359(6378):926-30",
+    "title": "Detection and localization of surgically resectable cancers with a multi-analyte blood test",
+    "authors": "Cohen JD et al.",
+    "url": "https://doi.org/10.1126/science.aar3247",
+    "doi": "10.1126/science.aar3247",
+    "pmid": "29348365",
+    "date": "2018-02-23"
+  },
+  {
+    "id": "science-2020-369-6499-eabb9601",
+    "kind": "journal",
+    "label": "Science 2020;369(6499):eabb9601",
+    "title": "Feasibility of blood testing combined with PET-CT to screen for cancer and guide intervention",
+    "authors": "Lennon AM et al.",
+    "url": "https://doi.org/10.1126/science.abb9601",
+    "doi": "10.1126/science.abb9601",
+    "pmid": "32345712",
+    "date": "2020-07-03"
+  },
+  {
+    "id": "exact-sciences-press-release-2025-09-10",
+    "kind": "company",
+    "label": "Exact Sciences press release 2025-09-10",
+    "title": "Exact Sciences Launches Cancerguard™, First-of-Its-Kind Multi-Cancer Early Detection Blood Test",
+    "url": "https://www.exactsciences.com/news-events/press-releases/exact-sciences-launches-cancerguard-first-of-its-kind-multi-cancer-early-detection-blood-test",
+    "date": "2025-09-10"
+  },
+  {
+    "id": "cancerguard-for-healthcare-providers",
+    "kind": "company",
+    "label": "Cancerguard for Healthcare Providers",
+    "title": "Cancerguard® MCED Test for Healthcare Providers",
+    "url": "https://hcp.cancerguard.com/",
+    "date": "2025"
+  },
+  {
+    "id": "cancer-res-2024-84-7-suppl-lb100",
+    "kind": "conference",
+    "label": "Cancer Res 2024;84(7_Suppl):LB100",
+    "title": "Abstract LB100: Performance of a multi-analyte, multi-cancer early detection (MCED) blood test in a prospectively-collected cohort",
+    "authors": "Gainullin V et al.",
+    "url": "https://doi.org/10.1158/1538-7445.am2024-lb100",
+    "doi": "10.1158/1538-7445.am2024-lb100",
+    "date": "2024-04-05"
+  },
+  {
+    "id": "medrxiv-2025-preprint",
+    "kind": "journal",
+    "label": "medRxiv 2025 (preprint)",
+    "title": "Performance of a multi-target, multi-cancer early detection (MCED) blood test in a prospectively collected cohort",
+    "authors": "Gainullin V et al.",
+    "url": "https://doi.org/10.1101/2025.08.24.25334244",
+    "doi": "10.1101/2025.08.24.25334244",
+    "date": "2025-08-26"
+  },
+  {
+    "id": "exact-sciences-press-release-2024-04-08-aacr-2024",
+    "kind": "company",
+    "label": "Exact Sciences press release 2024-04-08 (AACR 2024)",
+    "title": "Exact Sciences to Present Late-Breaking Data from ASCEND-2 Study Validating Its Investigational Multi-Cancer Early Detection Test at AACR Annual Meeting 2024",
+    "url": "https://www.exactsciences.com/newsroom/press-releases/exact-sciences-to-present-late-breaking-data-from-ascend-2-study",
+    "date": "2024-04-08"
+  },
+  {
+    "id": "n-engl-j-med-2014-370-14-1287-97",
+    "kind": "journal",
+    "label": "N Engl J Med 2014;370(14):1287-97",
+    "title": "Multitarget Stool DNA Testing for Colorectal-Cancer Screening",
+    "authors": "Imperiale TF et al.",
+    "url": "https://doi.org/10.1056/nejmoa1311194",
+    "doi": "10.1056/nejmoa1311194",
+    "pmid": "24645800",
+    "date": "2014-04-03"
+  },
+  {
+    "id": "n-engl-j-med-2024-390-11-984-93",
+    "kind": "journal",
+    "label": "N Engl J Med 2024;390(11):984-93",
+    "title": "Next-Generation Multitarget Stool DNA Test for Colorectal Cancer Screening",
+    "authors": "Imperiale TF et al.",
+    "url": "https://doi.org/10.1056/nejmoa2310336",
+    "doi": "10.1056/nejmoa2310336",
+    "pmid": "38477986",
+    "date": "2024-03-14"
+  },
+  {
+    "id": "clinicaltrials-gov-nct04144738",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT04144738",
+    "title": "BLUE-C",
+    "url": "https://clinicaltrials.gov/study/NCT04144738"
+  },
+  {
+    "id": "grail-press-release-2026-01-29",
+    "kind": "company",
+    "label": "GRAIL press release 2026-01-29",
+    "title": "GRAIL Submits FDA Premarket Approval Application for the Galleri® Multi-Cancer Early Detection Test",
+    "url": "https://grail.com/press-releases/grail-submits-fda-premarket-approval-application-for-the-galleri-multi-cancer-early-detection-test/",
+    "date": "2026-01-29"
+  },
+  {
+    "id": "fda-advisory-committee-calendar",
+    "kind": "regulator",
+    "label": "FDA advisory committee calendar",
+    "title": "September 23, 2026: Molecular and Clinical Genetics Panel of the Medical Devices Advisory Committee Meeting",
+    "url": "https://www.fda.gov/advisory-committees/advisory-committee-calendar/september-23-2026-molecular-and-clinical-genetics-panel-medical-devices-advisory-committee-meeting",
+    "date": "2026-09-23"
+  },
+  {
+    "id": "grail-press-release-2026-09-23-panel-vote",
+    "kind": "company",
+    "label": "GRAIL press release 2026-09-23 (panel vote)",
+    "title": "FDA Advisory Committee Votes In Favor of Approval of GRAIL's Galleri® Multi-Cancer Early Detection Test",
+    "url": "https://grail.com/press-releases/fda-advisory-committee-votes-in-favor-of-approval-of-grails-galleri-multi-cancer-early-detection-test/",
+    "date": "2026-09-23"
+  },
+  {
+    "id": "grail-press-release-2026-08-07",
+    "kind": "company",
+    "label": "GRAIL press release 2026-08-07",
+    "title": "GRAIL Announces FDA Advisory Committee Meeting to Review Premarket Approval Application for the Galleri® Multi-Cancer Early Detection Test",
+    "url": "https://grail.com/press-releases/grail-announces-fda-advisory-committee-meeting-to-review-premarket-approval-application-for-the-galleri-multi-cancer-early-detection-test/",
+    "date": "2026-08-07"
+  },
+  {
+    "id": "grail-press-release-2021-01-11",
+    "kind": "company",
+    "label": "GRAIL press release 2021-01-11",
+    "title": "GRAIL Confirms Q2 2021 Introduction of Galleri, First-of-Kind Multi-Cancer Early Detection Blood Test",
+    "url": "https://grail.com/press-releases/grail-confirms-q2-2021-introduction-of-galleri-first-of-kind-multi-cancer-early-detection-blood-test/",
+    "date": "2021-01-11"
+  },
+  {
+    "id": "grail-press-release-2021-03-02",
+    "kind": "company",
+    "label": "GRAIL press release 2021-03-02",
+    "title": "GRAIL Announces First Health System to Offer Galleri, Novel Multi-Cancer Early Detection Blood Test",
+    "url": "https://grail.com/press-releases/grail-announces-first-health-system-to-offer-galleri-novel-multi-cancer-early-detection-blood-test/",
+    "date": "2021-03-02"
+  },
+  {
+    "id": "fda-pma-database-p230043",
+    "kind": "regulator",
+    "label": "FDA PMA database P230043",
+    "title": "Multi-Target Stool DNA (mtsDNA) Test, Cologuard Plus - PMA P230043",
+    "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P230043",
+    "date": "2024-10-03"
+  },
+  {
+    "id": "j-clin-oncol-2022-40-16-suppl-3542",
+    "kind": "conference",
+    "label": "J Clin Oncol 2022;40(16_suppl):3542",
+    "title": "Development of a highly sensitive multicancer, targeted, cell-free DNA epigenomic assay for integrated screening of lung and colorectal cancer",
+    "authors": "Valouev A et al.",
+    "url": "https://doi.org/10.1200/jco.2022.40.16_suppl.3542",
+    "doi": "10.1200/jco.2022.40.16_suppl.3542",
+    "date": "2022-06"
+  },
+  {
+    "id": "n-engl-j-med-2024-390-973-983",
+    "kind": "journal",
+    "label": "N Engl J Med 2024;390:973-983",
+    "title": "A Cell-free DNA Blood-Based Test for Colorectal Cancer Screening",
+    "authors": "Chung DC et al.",
+    "url": "https://doi.org/10.1056/nejmoa2304714",
+    "doi": "10.1056/nejmoa2304714",
+    "pmid": "38477985",
+    "date": "2024-03-14"
+  },
+  {
+    "id": "fda-ssed-shield-pma-p230009-approved-2024-07-26",
+    "kind": "regulator",
+    "label": "FDA SSED, Shield, PMA P230009 (approved 2024-07-26)",
+    "title": "Summary of Safety and Effectiveness Data (SSED): Shield (Blood-based Qualitative Colorectal Cancer Screening Test)",
+    "authors": "FDA / Guardant Health",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/P230009B.pdf",
+    "date": "2024-07-26"
+  },
+  {
+    "id": "j-clin-oncol-2025-43-16-suppl-10550",
+    "kind": "conference",
+    "label": "J Clin Oncol 2025;43(16_suppl):10550",
+    "title": "Evaluation of a plasma cell-free DNA methylation-based multi-cancer detection test",
+    "authors": "He Y et al.",
+    "url": "https://doi.org/10.1200/jco.2025.43.16_suppl.10550",
+    "doi": "10.1200/jco.2025.43.16_suppl.10550",
+    "date": "2025-06"
+  },
+  {
+    "id": "guardant-shield-mcd-asco2025-notes",
+    "kind": "internal",
+    "label": "ASCO 2025 海报 #10550 现场记录",
+    "title": "Shield MCD 盲法验证：ASCO 2025 海报 #10550 现场数据",
+    "document": {
+      "origin": "世和基因医学部 ASCO 2025 会议纪要",
+      "locator": "Guardant Health · Shield MCD 十癌种验证海报",
+      "blocks": [
+        {
+          "heading": "总体结果",
+          "text": "Overall sensitivity 60% (222/372); Stage I/II 34% (N=183); Stage III/IV 84% (N=189). Specificity 98.6% (436/442). Primary or secondary CSO accuracy 93%. Sensitivity in cancers without average-risk standard-of-care screening 73% (bladder, esophageal-gastric, hepatocellular, lung, ovarian, pancreas). Sensitivity in the 6 most aggressive cancers (shortest survival: esophageal-gastric, hepatocellular, lung, ovarian, pancreas) 74%."
+        },
+        {
+          "heading": "分癌种灵敏度",
+          "table": [
+            [
+              "Cancer type (n)",
+              "Sensitivity",
+              "Stage I/II",
+              "Stage III/IV"
+            ],
+            [
+              "Prostate (57)",
+              "21%",
+              "3%",
+              "41%"
+            ],
+            [
+              "Breast (86)",
+              "45%",
+              "17%",
+              "88%"
+            ],
+            [
+              "Bladder (13)",
+              "62%",
+              "44%",
+              "100%"
+            ],
+            [
+              "Lung (57)",
+              "67%",
+              "41%",
+              "93%"
+            ],
+            [
+              "Pancreas (58)",
+              "67%",
+              "49%",
+              "96%"
+            ],
+            [
+              "Ovarian (20)",
+              "70%",
+              "80%",
+              "67%"
+            ],
+            [
+              "Head and Neck (15)",
+              "80%",
+              "53%",
+              "100%"
+            ],
+            [
+              "Colorectal (41)",
+              "83%",
+              "53%",
+              "100%"
+            ],
+            [
+              "Hepatocellular (16)",
+              "94%",
+              "100%",
+              "92%"
+            ],
+            [
+              "Esophageal / Gastric (24)",
+              "96%",
+              "100%",
+              "95%"
+            ]
+          ]
+        },
+        {
+          "text": "分期数值不含头颈癌；分期柱值读自海报图。"
+        },
+        {
+          "heading": "CSO 首位预测准确率(按已知癌种)",
+          "table": [
+            [
+              "Known cancer type (n)",
+              "Correct top-1 fraction"
+            ],
+            [
+              "Bladder (8)",
+              "0.75"
+            ],
+            [
+              "Breast (39)",
+              "0.97"
+            ],
+            [
+              "Colorectal (34)",
+              "0.91"
+            ],
+            [
+              "Esophageal / Gastric (23)",
+              "0.96"
+            ],
+            [
+              "Hepatocellular (15)",
+              "0.67"
+            ],
+            [
+              "Lung (38)",
+              "0.97"
+            ],
+            [
+              "Ovarian (14)",
+              "1.00"
+            ],
+            [
+              "Pancreas (39)",
+              "0.95"
+            ],
+            [
+              "Prostate (12)",
+              "0.92"
+            ]
+          ]
+        },
+        {
+          "heading": "验证队列构成(n=814)",
+          "table": [
+            [
+              "Group",
+              "N",
+              "%"
+            ],
+            [
+              "40-49",
+              "105",
+              "13%"
+            ],
+            [
+              "50-64",
+              "404",
+              "50%"
+            ],
+            [
+              "65+",
+              "305",
+              "37%"
+            ],
+            [
+              "White",
+              "647",
+              "79%"
+            ],
+            [
+              "Black or African-American",
+              "98",
+              "12%"
+            ],
+            [
+              "Asian",
+              "32",
+              "4%"
+            ],
+            [
+              "Hispanic/Latino",
+              "58",
+              "7%"
+            ]
+          ]
+        },
+        {
+          "heading": "检测与 CSO 模型",
+          "text": "CSO model cancer types: Breast, Esophageal/Gastric, Ovarian, Bladder, Hepatocellular, Pancreas, Colorectal, Lung, Prostate (the CSO slide also lists Head and Neck in the sensitivity chart). Slide 5 flow: plasma cfDNA, methylation signal enrichment, sequencing; first determine cancer or not, then trace origin."
+        }
+      ]
+    },
+    "date": "2025-06"
+  },
+  {
+    "id": "cancer-res-2025-85-8-suppl-2-abstract-6425-aacr-2025",
+    "kind": "conference",
+    "label": "Cancer Res 2025;85(8_Suppl_2): Abstract 6425 (AACR 2025)",
+    "title": "Abstract 6425: Evaluation of a plasma cell-free DNA methylation-based multi-cancer detection test",
+    "authors": "Gittelman R et al.",
+    "url": "https://doi.org/10.1158/1538-7445.am2025-6425",
+    "doi": "10.1158/1538-7445.am2025-6425",
+    "date": "2025-04-21"
+  },
+  {
+    "id": "cancer-res-2025-85-8-suppl-2-abstract-6365-aacr-2025",
+    "kind": "conference",
+    "label": "Cancer Res 2025;85(8_Suppl_2): Abstract 6365 (AACR 2025)",
+    "title": "Abstract 6365: A novel methylation-based classifier to identify cancer signal of origin using blood based testing",
+    "authors": "Forouzmand E et al.",
+    "url": "https://doi.org/10.1158/1538-7445.am2025-6365",
+    "doi": "10.1158/1538-7445.am2025-6365",
+    "date": "2025-04-21"
+  },
+  {
+    "id": "jama-2025-334-1-56-63",
+    "kind": "journal",
+    "label": "JAMA 2025;334(1):56-63",
+    "title": "Clinical Validation of a Circulating Tumor DNA-Based Blood Test to Screen for Colorectal Cancer",
+    "authors": "Shaukat A et al.",
+    "url": "https://doi.org/10.1001/jama.2025.7515",
+    "doi": "10.1001/jama.2025.7515",
+    "pmid": "40455622",
+    "date": "2025-07-01"
+  },
+  {
+    "id": "fda-ssed-simplescreen-crc-pma-p250029-approved-2026-07-2",
+    "kind": "regulator",
+    "label": "FDA SSED, SimpleScreen CRC, PMA P250029 (approved 2026-07-24)",
+    "title": "Summary of Safety and Effectiveness Data (SSED): SimpleScreen CRC",
+    "authors": "FDA / Freenome",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/P250029B.pdf",
+    "date": "2026-07-24"
+  },
+  {
+    "id": "freenome-press-release-2026-07-27",
+    "kind": "company",
+    "label": "Freenome press release 2026-07-27",
+    "title": "FDA Approves Freenome's SimpleScreen CRC Blood-Based Screening Test; Abbott to Commercialize in the U.S.",
+    "authors": "Freenome",
+    "url": "https://www.freenome.com/newsroom/fda-approves-freenomes-simplescreen-crc/",
+    "date": "2026-07-27"
+  },
+  {
+    "id": "freenome-press-release-2026-07-09",
+    "kind": "company",
+    "label": "Freenome press release 2026-07-09",
+    "title": "Freenome Reports Top-Line Readout of Updated SimpleScreen CRC Colorectal Cancer Screening Blood Test; Met All Primary and Secondary Endpoints",
+    "authors": "Freenome",
+    "url": "https://www.freenome.com/newsroom/freenome-reports-top-line-readout-of-updated-simplescreen-crc-colorectal-cancer-screening-blood-test-met-all-primary-and-secondary-endpoints/",
+    "date": "2026-07-09"
+  },
+  {
+    "id": "nature-2019-570-385-389",
+    "kind": "journal",
+    "label": "Nature 2019;570:385-389",
+    "title": "Genome-wide cell-free DNA fragmentation in patients with cancer",
+    "authors": "Cristiano S et al.",
+    "url": "https://doi.org/10.1038/s41586-019-1272-6",
+    "doi": "10.1038/s41586-019-1272-6",
+    "pmid": "31142840",
+    "date": "2019-06"
+  },
+  {
+    "id": "cancer-discov-2024-14-11-2224-2242",
+    "kind": "journal",
+    "label": "Cancer Discov 2024;14(11):2224-2242",
+    "title": "Clinical Validation of a Cell-Free DNA Fragmentome Assay for Augmentation of Lung Cancer Early Detection",
+    "authors": "Mazzone PJ et al.",
+    "url": "https://doi.org/10.1158/2159-8290.cd-24-0519",
+    "doi": "10.1158/2159-8290.cd-24-0519",
+    "pmid": "38829053",
+    "date": "2024-11-01"
+  },
+  {
+    "id": "gut-2021-70-5-829-837-online-2020-10-07",
+    "kind": "journal",
+    "label": "Gut 2021;70(5):829-837 (online 2020-10-07)",
+    "title": "Development and validation of a serum microRNA biomarker panel for detecting gastric cancer in a high-risk population",
+    "authors": "So JBY et al.",
+    "url": "https://doi.org/10.1136/gutjnl-2020-322065",
+    "doi": "10.1136/gutjnl-2020-322065",
+    "pmid": "33028667",
+    "date": "2020-10-07"
+  },
+  {
+    "id": "investment-media-pedaily-2024-01-17",
+    "kind": "media",
+    "label": "Investment media (PEdaily) 2024-01-17",
+    "title": "精准胃癌早筛技术亟待普及，觅瑞产品准确率获临床验证",
+    "url": "https://news.pedaily.cn/20240117/78628.shtml",
+    "date": "2024-01-17"
+  },
+  {
+    "id": "gut-2014-63-2-317-325-online-2013-02-13",
+    "kind": "journal",
+    "label": "Gut 2014;63(2):317-325 (online 2013-02-13)",
+    "title": "Prospective evaluation of methylated SEPT9 in plasma for detection of asymptomatic colorectal cancer",
+    "authors": "Church TR et al.",
+    "url": "https://doi.org/10.1136/gutjnl-2012-304149",
+    "doi": "10.1136/gutjnl-2012-304149",
+    "pmid": "23408352",
+    "date": "2014-02"
+  },
+  {
+    "id": "fda-ssed-epi-procolon-pma-p130001-approved-2016-04-12",
+    "kind": "regulator",
+    "label": "FDA SSED, Epi proColon, PMA P130001 (approved 2016-04-12)",
+    "title": "Summary of Safety and Effectiveness Data (SSED): Epi proColon",
+    "authors": "FDA / Epigenomics AG",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf13/P130001B.pdf",
+    "date": "2016-04-12"
+  },
+  {
+    "id": "jama-2023-330-18-1760-1768",
+    "kind": "journal",
+    "label": "JAMA 2023;330(18):1760-1768",
+    "title": "Multitarget Stool RNA Test for Colorectal Cancer Screening",
+    "authors": "Barnell EK et al.",
+    "url": "https://doi.org/10.1001/jama.2023.22231",
+    "doi": "10.1001/jama.2023.22231",
+    "pmid": "37870871",
+    "date": "2023-10-23"
+  },
+  {
+    "id": "elife-2023-12-rp89083",
+    "kind": "journal",
+    "label": "eLife 2023;12:RP89083",
+    "title": "Multimodal analysis of methylomics and fragmentomics in plasma cell-free DNA for multi-cancer early detection and localization",
+    "authors": "Nguyen VTC et al.",
+    "url": "https://doi.org/10.7554/elife.89083",
+    "doi": "10.7554/elife.89083",
+    "pmid": "37819044",
+    "date": "2023-10-11"
+  },
+  {
+    "id": "cancer-invest-2023-41-3-232-248",
+    "kind": "journal",
+    "label": "Cancer Invest 2023;41(3):232-248",
+    "title": "Clinical validation of a ctDNA-Based Assay for Multi-Cancer Detection: An Interim Report from a Vietnamese Longitudinal Prospective Cohort Study of 2795 Participants",
+    "authors": "Nguyen THH et al.",
+    "url": "https://doi.org/10.1080/07357907.2023.2173773",
+    "doi": "10.1080/07357907.2023.2173773",
+    "pmid": "36719061",
+    "date": "2023-02-06"
+  },
+  {
+    "id": "bmc-med-2025-23-90",
+    "kind": "journal",
+    "label": "BMC Med 2025;23:90",
+    "title": "Prospective validation study: a non-invasive circulating tumor DNA-based assay for simultaneous early detection of multiple cancers in asymptomatic adults",
+    "authors": "Nguyen LHD et al.",
+    "url": "https://doi.org/10.1186/s12916-025-03929-y",
+    "doi": "10.1186/s12916-025-03929-y",
+    "pmid": "39948555",
+    "date": "2025-02-14"
+  },
+  {
+    "id": "fda-pma-database-p230009",
+    "kind": "regulator",
+    "label": "FDA PMA database P230009",
+    "title": "PMA P230009 Shield (Guardant Health)",
+    "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P230009",
+    "date": "2024-07-26"
+  },
+  {
+    "id": "guardant-press-release-2025-06-02-03",
+    "kind": "company",
+    "label": "Guardant press release 2025-06-02/03",
+    "title": "FDA Grants Breakthrough Device Designation to Guardant Health's Shield Multi-Cancer Detection (MCD) Test",
+    "url": "https://investors.guardanthealth.com/press-releases/press-releases/2025/FDA-Grants-Breakthrough-Device-Designation-to-Guardant-Healths-Shield-Multi-Cancer-Detection-MCD-Test/",
+    "date": "2025-06-02"
+  },
+  {
+    "id": "patient-care-online-2025-06-04",
+    "kind": "media",
+    "label": "Patient Care Online 2025-06-04",
+    "title": "Guardant Health's Shield Multicancer Detection Blood Test Granted FDA Breakthrough Device Designation",
+    "url": "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation",
+    "date": "2025-06-04"
+  },
+  {
+    "id": "fda-pma-database-p250029",
+    "kind": "regulator",
+    "label": "FDA PMA database P250029",
+    "title": "PMA P250029 SimpleScreen CRC (Freenome)",
+    "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P250029",
+    "date": "2026-07-24"
+  },
+  {
+    "id": "delfi-press-release-prnewswire-2023-10-09",
+    "kind": "company",
+    "label": "DELFI press release (PRNewswire) 2023-10-09",
+    "title": "DELFI Diagnostics Launches FirstLook Lung, an Accessible, Accurate New Way to Enhance Lung Cancer Screening Through a Routine Blood Test",
+    "url": "https://www.biospace.com/delfi-diagnostics-launches-firstlook-lung-an-accessible-accurate-new-way-to-enhance-lung-cancer-screening-through-a-routine-blood-test",
+    "date": "2023-10-09"
+  },
+  {
+    "id": "stockstar-china-industry-observation-2025-10-09",
+    "kind": "media",
+    "label": "Stockstar / China Industry Observation 2025-10-09",
+    "title": "无创胃癌筛查迎来突破(觅瑞 GASTROClear 获 NMPA 批准)",
+    "url": "https://stock.stockstar.com/IG2025100900010963.shtml",
+    "date": "2025-10-09"
+  },
+  {
+    "id": "nbd-2026-04-28",
+    "kind": "media",
+    "label": "NBD 2026-04-28",
+    "title": "每日经济新闻 article on Mirxes GASTROClear",
+    "url": "https://www.nbd.com.cn/articles/2026-04-28/4370412.html",
+    "date": "2026-04-28"
+  },
+  {
+    "id": "fda-pma-database-p130001",
+    "kind": "regulator",
+    "label": "FDA PMA database P130001",
+    "title": "PMA P130001 Epi proColon",
+    "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P130001",
+    "date": "2016-04-12"
+  },
+  {
+    "id": "cancer-network-2016-04-15",
+    "kind": "media",
+    "label": "Cancer Network 2016-04-15",
+    "title": "FDA Approves Blood-Based Colorectal Cancer Test",
+    "url": "https://cancernetwork.com/view/fda-approves-blood-based-colorectal-cancer-test",
+    "date": "2016-04-15"
+  },
+  {
+    "id": "fda-recently-approved-device-page-colosense-p230001",
+    "kind": "regulator",
+    "label": "FDA recently-approved device page: ColoSense P230001",
+    "title": "ColoSense - P230001",
+    "url": "https://www.fda.gov/medical-devices/recently-approved-devices/colosense-p230001",
+    "date": "2024-05-03"
+  },
+  {
+    "id": "fda-ssed-p230001",
+    "kind": "regulator",
+    "label": "FDA SSED P230001",
+    "title": "Summary of Safety and Effectiveness Data: ColoSense",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/P230001B.pdf",
+    "date": "2024-05-03"
+  },
+  {
+    "id": "nat-med-2025-31-8-2737-2745",
+    "kind": "journal",
+    "label": "Nat Med 2025;31(8):2737-2745",
+    "title": "Early detection of multiple cancer types using multidimensional cell-free DNA fragmentomics",
+    "authors": "Bao H et al.",
+    "url": "https://doi.org/10.1038/s41591-025-03735-2",
+    "doi": "10.1038/s41591-025-03735-2",
+    "pmid": "40425843",
+    "date": "2025-05-27"
+  },
+  {
+    "id": "aacr-2024-cancer-res-84-6-suppl-1266",
+    "kind": "conference",
+    "label": "AACR 2024, Cancer Res 84(6 Suppl):1266",
+    "title": "Abstract 1266: Development and performance of a multi-cancer early detection test utilizing plasma cfDNA fragmentomics: A large-scale, prospective, multicenter study",
+    "authors": "Bao H et al.",
+    "url": "https://doi.org/10.1158/1538-7445.am2024-1266",
+    "doi": "10.1158/1538-7445.am2024-1266",
+    "date": "2024-03-22"
+  },
+  {
+    "id": "aacr-2024-cancer-res-84-6-suppl-1263",
+    "kind": "conference",
+    "label": "AACR 2024, Cancer Res 84(6 Suppl):1263",
+    "title": "Abstract 1263: Interim results from a large-scale, prospective cohort study (JINLING) for multi-cancer early detection test in average-risk asymptomatic patients",
+    "authors": "Yang et al.",
+    "url": "https://doi.org/10.1158/1538-7445.am2024-1263",
+    "doi": "10.1158/1538-7445.am2024-1263",
+    "date": "2024-03-22"
+  },
+  {
+    "id": "clinicaltrials-gov-nct06011694",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT06011694",
+    "title": "The Jinling Cohort",
+    "authors": "Nanjing Shihejiyin Technology, Inc. (sponsor)",
+    "url": "https://clinicaltrials.gov/study/NCT06011694",
+    "date": "2023-08-09"
+  },
+  {
+    "id": "ann-oncol-2023-34-5-486-495",
+    "kind": "journal",
+    "label": "Ann Oncol 2023;34(5):486-495",
+    "title": "Unintrusive multi-cancer detection by circulating cell-free DNA methylation sequencing (THUNDER): development and independent validation studies",
+    "authors": "Gao Q et al.",
+    "url": "https://doi.org/10.1016/j.annonc.2023.02.010",
+    "doi": "10.1016/j.annonc.2023.02.010",
+    "pmid": "36849097",
+    "date": "2023-05"
+  },
+  {
+    "id": "innovation-camb-2026-7-1-101076",
+    "kind": "journal",
+    "label": "Innovation (Camb) 2026;7(1):101076",
+    "title": "Exploration of multi-omics liquid biopsy approaches for multi-cancer early detection: The PROMISE study",
+    "authors": "Duan J et al.",
+    "url": "https://doi.org/10.1016/j.xinn.2025.101076",
+    "doi": "10.1016/j.xinn.2025.101076",
+    "pmid": "41737326",
+    "date": "2025-08-06"
+  },
+  {
+    "id": "nat-commun-2020-11-3475",
+    "kind": "journal",
+    "label": "Nat Commun 2020;11:3475",
+    "title": "Non-invasive early detection of cancer four years before conventional diagnosis using a blood test",
+    "authors": "Chen X et al.",
+    "url": "https://doi.org/10.1038/s41467-020-17316-z",
+    "doi": "10.1038/s41467-020-17316-z",
+    "pmid": "32694610",
+    "date": "2020-07-21"
+  },
+  {
+    "id": "mol-cancer-2025-24-163",
+    "kind": "journal",
+    "label": "Mol Cancer 2025;24:163",
+    "title": "GUIDE: a prospective cohort study for blood-based early detection of gastrointestinal cancers using targeted DNA methylation and fragmentomics sequencing",
+    "authors": "Huang A et al.",
+    "url": "https://doi.org/10.1186/s12943-025-02367-x",
+    "doi": "10.1186/s12943-025-02367-x",
+    "pmid": "40468355",
+    "date": "2025-06-05"
+  },
+  {
+    "id": "bmc-med-2022-20-458",
+    "kind": "journal",
+    "label": "BMC Med 2022;20:458",
+    "title": "Noninvasive detection of pancreatic ductal adenocarcinoma using the methylation signature of circulating tumour DNA",
+    "authors": "Wu H et al.",
+    "url": "https://doi.org/10.1186/s12916-022-02647-z",
+    "doi": "10.1186/s12916-022-02647-z",
+    "pmid": "36434648",
+    "date": "2022-11-25"
+  },
+  {
+    "id": "berry-genomics-precar-project-page",
+    "kind": "company",
+    "label": "Berry Genomics PreCar project page",
+    "title": "PreCar项目_肿瘤早诊_贝瑞基因",
+    "authors": "Berry Genomics",
+    "url": "https://www.berrygenomics.com/cmscontent/180.html",
+    "date": "2018 proje"
+  },
+  {
+    "id": "ebiomedicine-2024-100-104962",
+    "kind": "journal",
+    "label": "EBioMedicine 2024;100:104962",
+    "title": "Cell-free DNA testing for early hepatocellular carcinoma surveillance",
+    "authors": "Chen L et al.",
+    "url": "https://doi.org/10.1016/j.ebiom.2023.104962",
+    "doi": "10.1016/j.ebiom.2023.104962",
+    "pmid": "38184937",
+    "date": "2024-02"
+  },
+  {
+    "id": "biopharma-apac-2022-05-19",
+    "kind": "media",
+    "label": "Biopharma APAC 2022-05-19",
+    "title": "Berry Oncology Launches an Innovative Self-Iterative \"HIFI\" System",
+    "authors": "Berry Oncology press release",
+    "url": "https://biopharmaapac.com/news/80/1576/berry-oncology-launches-an-innovative-self-iterative-hifi-system.html",
+    "date": "2022-05-19"
+  },
+  {
+    "id": "cell-res-2021-31-5-589-592",
+    "kind": "journal",
+    "label": "Cell Res 2021;31(5):589-592",
+    "title": "Genome-scale profiling of circulating cell-free DNA signatures for early detection of hepatocellular carcinoma in cirrhotic patients",
+    "authors": "Chen L et al.",
+    "url": "https://doi.org/10.1038/s41422-020-00457-7",
+    "doi": "10.1038/s41422-020-00457-7",
+    "pmid": "33589745",
+    "date": "2021-02-15"
+  },
+  {
+    "id": "medcomm-2023-4-4-e345",
+    "kind": "journal",
+    "label": "MedComm 2023;4(4):e345",
+    "title": "Clinical evaluation of a multitarget fecal immunochemical test-sDNA test for colorectal cancer screening in a high-risk population: a prospective, multicenter clinical study",
+    "authors": "Hu et al.",
+    "url": "https://doi.org/10.1002/mco2.345",
+    "doi": "10.1002/mco2.345",
+    "pmid": "37576863",
+    "date": "2023-08"
+  },
+  {
+    "id": "nmpa-cmde-csz2000050",
+    "kind": "regulator",
+    "label": "NMPA/CMDE 技术审评报告 CSZ2000050",
+    "title": "体外诊断试剂产品注册技术审评报告 KRAS基因突变及BMP3/NDRG4基因甲基化和便隐血联合检测试剂盒(PCR荧光探针法-胶体金法)",
+    "authors": "国家药监局医疗器械技术审评中心",
+    "url": "https://www.cmde.org.cn/directory/web/cmde/images/S1JBU7v50vLNu7HkvLBCTVAzX05EUkc0unS8rzXum7r7rNsePStGqwaq6z7zssuLK1LzButCjqFBDUtOrueLMvdXrt6gtvbrM5b3wt6ijqaOoQ1NaMjAwMDA1MKOpcy5wZGY=.pdf",
+    "date": "2020-11-02"
+  },
+  {
+    "id": "pr-newswire-2024-01-03",
+    "kind": "company",
+    "label": "PR Newswire 2024-01-03",
+    "title": "FDA Grants Breakthrough Device Designation for Geneseeq's Multi-cancer Early Detection Solution",
+    "authors": "Geneseeq",
+    "url": "https://prnewswire.com/news-releases/fda-grants-breakthrough-device-designation-for-geneseeqs-multi-cancer-early-detection-solution-302024692.html",
+    "date": "2024-01-03"
+  },
+  {
+    "id": "pr-newswire-2023-01-24",
+    "kind": "company",
+    "label": "PR Newswire 2023-01-24",
+    "title": "Geneseeq receives CE Marks for MRD and MCED tests",
+    "authors": "Geneseeq",
+    "url": "https://prnewswire.com/news-releases/geneseeq-receives-ce-marks-for-mrd-and-mced-tests-301729496.html",
+    "date": "2023-01-24"
+  },
+  {
+    "id": "globenewswire-biospace-2023-10-15",
+    "kind": "company",
+    "label": "GlobeNewswire/BioSpace 2023-10-15",
+    "title": "Burning Rock Received Breakthrough Device Designation from China's NMPA for its Multi-Cancer Early Detection Test",
+    "authors": "Burning Rock",
+    "url": "https://www.biospace.com/burning-rock-received-breakthrough-device-designation-from-china-s-nmpa-for-its-multi-cancer-early-detection-test",
+    "date": "2023-10-15"
+  },
+  {
+    "id": "iivd-net-2023-09-26",
+    "kind": "media",
+    "label": "iivd.net 2023-09-26",
+    "title": "重磅！泛癌种新进程，燃石医学时来运转了",
+    "authors": "iivd.net",
+    "url": "https://www.iivd.net/article-33854-1.html",
+    "date": "2023-09-26"
+  },
+  {
+    "id": "globenewswire-biospace-2023-01-03",
+    "kind": "company",
+    "label": "GlobeNewswire/BioSpace 2023-01-03",
+    "title": "Burning Rock Received FDA Breakthrough Device Designation for its OverC™ Multi-Cancer Detection Blood Test",
+    "authors": "Burning Rock",
+    "url": "https://www.biospace.com/burning-rock-received-fda-breakthrough-device-designation-for-its-overc-multi-cancer-detection-blood-test",
+    "date": "2023-01-03"
+  },
+  {
+    "id": "biospace-2022-06-01",
+    "kind": "company",
+    "label": "BioSpace 2022-06-01",
+    "title": "Burning Rock Receives CE Mark for its OverC™ Multi-Cancer Detection Blood Test Kit",
+    "authors": "Burning Rock",
+    "url": "https://www.biospace.com/burning-rock-receives-ce-mark-for-its-overc-multi-cancer-detection-blood-test-kit",
+    "date": "2022-06-01"
+  },
+  {
+    "id": "targeted-oncology-2023-05-09",
+    "kind": "media",
+    "label": "Targeted Oncology 2023-05-09",
+    "title": "FDA Grants Breakthrough Device Designation for PDACatch Assay to Detect PDAC",
+    "authors": "Targeted Oncology",
+    "url": "https://www.targetedonc.com/view/fda-grants-breakthrough-device-designation-for-pdacatch-assay-to-detect-pdac",
+    "date": "2023-05-09"
+  },
+  {
+    "id": "pedaily-2020-08-16",
+    "kind": "media",
+    "label": "Pedaily 2020-08-16",
+    "title": "和瑞基因肝癌早筛产品“莱思宁”上市，癌症早筛时代来临",
+    "authors": "Pedaily",
+    "url": "https://news.pedaily.cn/202008/458624.shtml",
+    "date": "2020-08-16"
+  },
+  {
+    "id": "2021-01-11",
+    "kind": "media",
+    "label": "健康界 2021-01-11",
+    "title": "手握“癌症早筛第一证”，加速上市能让诺辉健康止损吗？",
+    "authors": "cn-healthcare.com",
+    "url": "https://www.cn-healthcare.com/articlewm/20201201/content-1168136.html",
+    "date": "2021-01-11"
+  },
+  {
+    "id": "genetron-health-press-release-biospace-business-wire-202",
+    "kind": "company",
+    "label": "Genetron Health press release (BioSpace/Business Wire), 2021-03-24",
+    "title": "Genetron Health Releases New Data Results of HCCscreen for Liver Cancer Early Screening in China",
+    "url": "https://www.biospace.com/genetron-health-releases-new-data-results-of-hccscreen-for-liver-cancer-early-screening-in-china",
+    "date": "2021-03-24"
+  },
+  {
+    "id": "pnas-2019-116-13-6308-12",
+    "kind": "journal",
+    "label": "PNAS 2019;116(13):6308-12",
+    "title": "Detection of early-stage hepatocellular carcinoma in asymptomatic HBsAg-seropositive individuals by liquid biopsy",
+    "authors": "Qu C et al.",
+    "url": "https://doi.org/10.1073/pnas.1819799116",
+    "doi": "10.1073/pnas.1819799116",
+    "pmid": "30858324",
+    "date": "2019-03"
+  },
+  {
+    "id": "bgi-genomics-product-page-csco-meeting-exhibitor",
+    "kind": "company",
+    "label": "BGI Genomics 华常康 product page, CSCO meeting exhibitor",
+    "title": "华常康®粪便DNA甲基化检测",
+    "authors": "深圳华大基因股份有限公司",
+    "url": "https://meeting.csco.org.cn/enterprise/onlineshowproductinfo?pid=451"
+  },
+  {
+    "id": "front-oncol-2024-14-1284975",
+    "kind": "journal",
+    "label": "Front Oncol 2024;14:1284975",
+    "title": "Population-based screening for colorectal cancer in Wuhan, China",
+    "authors": "Liu S et al.",
+    "url": "https://doi.org/10.3389/fonc.2024.1284975",
+    "doi": "10.3389/fonc.2024.1284975",
+    "pmid": "38487726",
+    "date": "2024-02-29"
+  },
+  {
+    "id": "medrxiv-preprint-ref-13-of-the-wuhan-paper",
+    "kind": "media",
+    "label": "medRxiv preprint (ref 13 of the Wuhan paper)",
+    "title": "Identification of multi-omic biomarkers from Fecal DNA for improved Detection of Colorectal Cancer and precancerous lesions",
+    "authors": "Fang Y et al.",
+    "url": "https://doi.org/10.1101/2022.11.08.22282099",
+    "doi": "10.1101/2022.11.08.22282099",
+    "date": "2022-11"
+  },
+  {
+    "id": "southern-plus-2019-03-27",
+    "kind": "media",
+    "label": "南方+ (Southern Plus) 2019-03-27",
+    "title": "抽血也能筛查肠癌？华大基因发布两项癌症早筛新技术",
+    "url": "https://static.nfapp.southcn.com/content/201903/27/c2054306.html",
+    "date": "2019-03-27"
+  },
+  {
+    "id": "2025-03-13",
+    "kind": "media",
+    "label": "江南时报 2025-03-13",
+    "title": "吉因加吉早安®：一次检测8种高发肿瘤，开启无创多癌早筛时代",
+    "url": "https://www.jntimes.cn/xxzx/202503/t20250313_8466333.shtml",
+    "date": "2025-03-13"
+  },
+  {
+    "id": "2025-10-28",
+    "kind": "media",
+    "label": "中华网/看点时报 2025-10-28",
+    "title": "泛癌早筛引领慢病管理实践再升级！吉早安®打造行业新范式",
+    "url": "https://m.tech.china.com/hea/articles/20251028/202510281754711.html",
+    "date": "2025-10-28"
+  },
+  {
+    "id": "clinicaltrials-gov-nct04405557",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT04405557",
+    "title": "The PREDICT Study: Prospective Early Detection In a Population at High-risk for Common Malignant Tumor",
+    "url": "https://clinicaltrials.gov/study/NCT04405557",
+    "date": "2019-11-12"
+  },
+  {
+    "id": "nat-commun-2023-14-6042",
+    "kind": "journal",
+    "label": "Nat Commun 2023;14:6042",
+    "title": "Multimodal analysis of cell-free DNA whole-methylome sequencing for cancer detection and localization",
+    "authors": "Bie F et al.",
+    "url": "https://doi.org/10.1038/s41467-023-41774-w",
+    "doi": "10.1038/s41467-023-41774-w",
+    "pmid": "37758728",
+    "date": "2023-09"
+  },
+  {
+    "id": "bmc-cancer-2024-24-840",
+    "kind": "journal",
+    "label": "BMC Cancer 2024;24:840",
+    "title": "TOTEM: a multi-cancer detection and localization approach using circulating tumor DNA methylation markers",
+    "authors": "Xiong et al.",
+    "url": "https://doi.org/10.1186/s12885-024-12626-7",
+    "doi": "10.1186/s12885-024-12626-7",
+    "pmid": "39009999",
+    "date": "2024-07"
+  },
+  {
+    "id": "clin-epigenetics-2021-13-91",
+    "kind": "journal",
+    "label": "Clin Epigenetics 2021;13:91",
+    "title": "A urine-based DNA methylation assay to facilitate early detection and risk stratification of bladder cancer",
+    "authors": "Ruan W et al.",
+    "url": "https://doi.org/10.1186/s13148-021-01073-x",
+    "doi": "10.1186/s13148-021-01073-x",
+    "pmid": "33902700",
+    "date": "2021-04"
+  },
+  {
+    "id": "j-clin-invest-2021-131-10-e145973",
+    "kind": "journal",
+    "label": "J Clin Invest 2021;131(10):e145973",
+    "title": "Accurate diagnosis of pulmonary nodules using a noninvasive DNA methylation test",
+    "authors": "Liang W et al.",
+    "url": "https://doi.org/10.1172/jci145973",
+    "doi": "10.1172/jci145973",
+    "pmid": "33793424",
+    "date": "2021-05"
+  },
+  {
+    "id": "clinicaltrials-gov-nct03181490",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT03181490",
+    "title": "Circulating Tumor DNA Methylation Test to Differentiate Benign and Malignant Pulmonary Nodules",
+    "url": "https://clinicaltrials.gov/study/NCT03181490",
+    "date": "2017-06"
+  },
+  {
+    "id": "lancet-digit-health-2023-5-10-e647-e656",
+    "kind": "journal",
+    "label": "Lancet Digit Health 2023;5(10):e647-e656",
+    "title": "Accurate classification of pulmonary nodules by a combined model of clinical, imaging, and cell-free DNA methylation biomarkers: a model development and external validation study",
+    "authors": "He J et al.",
+    "url": "https://doi.org/10.1016/s2589-7500(23)00125-5",
+    "doi": "10.1016/s2589-7500(23)00125-5",
+    "pmid": "37567793",
+    "date": "2023-08-09"
+  },
+  {
+    "id": "clinicaltrials-gov-nct03651986",
+    "kind": "registry",
+    "label": "ClinicalTrials.gov NCT03651986",
+    "title": "Diagnostic and Monitoring Significance of ctDNA Methylation Analysis by NGS in Benign and Malignant Pulmonary Nodules",
+    "url": "https://clinicaltrials.gov/study/NCT03651986",
+    "date": "2018"
+  },
+  {
+    "id": "genetron-health-press-release-globenewswire-2020-09-30",
+    "kind": "company",
+    "label": "Genetron Health press release (GlobeNewswire), 2020-09-30",
+    "title": "Genetron Health Receives U.S. FDA Breakthrough Device Designation for its Blood-based NGS Test for Early Detection of Hepatocellular Carcinoma",
+    "url": "https://www.stocktitan.net/news/GTH/genetron-health-receives-u-s-fda-breakthrough-device-designation-for-74ky40wp1tf8.html",
+    "date": "2020-09-30"
+  },
+  {
+    "id": "bgi-perspectives-2022-12-05",
+    "kind": "company",
+    "label": "BGI Perspectives 2022-12-05",
+    "title": "DNA methylation tests enable better colorectal cancer treatment - BGI Perspectives",
+    "url": "https://www.bgi.com/global/news/dna-methylation-tests-facilitate-earlier-colorectal-cancer-treatment-bgi-perspectives",
+    "date": "2022-12-05"
+  },
+  {
+    "id": "anchordx-pr-newswire-2021-07-21",
+    "kind": "company",
+    "label": "AnchorDx PR Newswire 2021-07-21",
+    "title": "AnchorDx's Non-invasive Bladder Cancer Early Detection Test, UriFind, Earns \"Breakthrough Device Designation\" from FDA",
+    "url": "https://prnewswire.com/news-releases/anchordxs-non-invasive-bladder-cancer-early-detection-test-urifind-earns-breakthrough-device-designation-from-fda-301338551.html",
+    "date": "2021-07-13"
+  },
+  {
+    "id": "biospace-2021-07-21",
+    "kind": "media",
+    "label": "BioSpace 2021-07-21",
+    "title": "AnchorDx's Non-invasive Bladder Cancer Early Detection Test, UriFind, Earns \"Breakthrough Device Designation\" from FDA",
+    "url": "https://www.biospace.com/anchordx-s-non-invasive-bladder-cancer-early-detection-test-urifind-earns-and-quot-breakthrough-device-designation-and-quot-from-fda",
+    "date": "2021-07-21"
+  },
+  {
+    "id": "nat-med-2026-pathfinder-2",
+    "kind": "journal",
+    "label": "Nat Med 2026 (PATHFINDER 2)",
+    "title": "Performance and safety of a multi-cancer early detection test: the PATHFINDER 2 study",
+    "authors": "Nabavizadeh N, et al.",
+    "url": "https://doi.org/10.1038/s41591-026-04618-w",
+    "doi": "10.1038/s41591-026-04618-w",
+    "date": "2026-09-22"
+  },
+  {
+    "id": "n-engl-j-med-2026-nhs-galleri",
+    "kind": "journal",
+    "label": "N Engl J Med 2026 (NHS-Galleri)",
+    "title": "Effect of Screening with Multicancer Early-Detection Test on Late-Stage Cancer Diagnosis",
+    "authors": "Sasieni P, et al.",
+    "url": "https://doi.org/10.1056/nejmoa2505723",
+    "doi": "10.1056/nejmoa2505723",
+    "date": "2026-10-08"
+  },
+  {
+    "id": "biospectrum-asia-2025-10",
+    "kind": "media",
+    "label": "BioSpectrum Asia 2025-10",
+    "title": "Mirxes' non-invasive microRNA blood test secures approval in China for gastric cancer screening",
+    "url": "https://www.biospectrumasia.com/news/48/26730/mirxes-non-invasive-microrna-blood-test-secures-approval-in-china-for-gastric-cancer-screening.html",
+    "date": "2025-10"
+  },
+  {
+    "id": "genomeweb-2025-10",
+    "kind": "media",
+    "label": "GenomeWeb 2025-10",
+    "title": "Mirxes Blood-Based Gastric Cancer Screening Test Approved by China NMPA",
+    "url": "https://www.genomeweb.com/molecular-diagnostics/mirxes-blood-based-gastric-cancer-screening-test-approved-china-nmpa",
+    "date": "2025-10"
+  },
+  {
+    "id": "asia-news-network-2026",
+    "kind": "media",
+    "label": "Asia News Network 2026",
+    "title": "A Defining Milestone for Gene Solutions: SPOT-MAS Multi-Cancer Screening Test Receives U.S. FDA Breakthrough Device Designation",
+    "url": "https://asianews.network/a-defining-milestone-for-gene-solutions-spot-mas-multi-cancer-screening-test-receives-u-s-fda-breakthrough-device-designation/",
+    "date": "2026-07"
+  },
+  {
+    "id": "freenome-2026-08-12",
+    "kind": "company",
+    "label": "Freenome 2026-08-12",
+    "title": "FDA Grants Breakthrough Device Designation to Freenome's Blood-Based SimpleScreen Lung Cancer Screening Test",
+    "url": "https://www.biospace.com/press-releases/fda-grants-breakthrough-device-designation-to-freenomes-blood-based-simplescreen-lung-cancer-screening-test",
+    "date": "2026-08-12"
+  },
+  {
+    "id": "freenome-2026-10-20",
+    "kind": "company",
+    "label": "Freenome 2026-10-20",
+    "title": "Freenome Launches SimpleScreen Lung Test",
+    "url": "https://www.freenome.com/newsroom/freenome-launches-simplescreen-lung-test/",
+    "date": "2026-10-20"
+  },
+  {
+    "id": "medtech-dive-2026-09-30",
+    "kind": "media",
+    "label": "MedTech Dive 2026-09-30",
+    "title": "Abbott launches Freenome's colorectal cancer screening test",
+    "url": "https://www.medtechdive.com/news/abbott-launches-freenomes-colorectal-cancer-screening-test/831771/",
+    "date": "2026-09-30"
+  },
+  {
+    "id": "freenome-2026q3",
+    "kind": "company",
+    "label": "Freenome 2026Q3 业绩",
+    "title": "Freenome Reports Third Quarter 2026 Financial Results",
+    "url": "https://www.manilatimes.net/2026/11/11/tmt-newswire/globenewswire/freenome-reports-third-quarter-2026-financial-results/2466970",
+    "date": "2026-11-10"
+  },
+  {
+    "id": "fierce-biotech-2026-09-24",
+    "kind": "media",
+    "label": "Fierce Biotech 2026-09-24",
+    "title": "Grail survives adcomm vote; it now awaits FDA decision on cancer blood test",
+    "url": "https://www.fiercebiotech.com/medtech/grail-survives-adcomm-vote-it-now-awaits-fda-decision-cancer-blood-test",
+    "date": "2026-09-24"
+  },
+  {
+    "id": "grail-pathfinder-2-fact-sheet",
+    "kind": "company",
+    "label": "GRAIL PATHFINDER 2 Fact Sheet",
+    "title": "PATHFINDER 2 Fact Sheet (2026-09-22)",
+    "url": "https://grail.com/wp-content/uploads/2026/10/Grail_Pathfinder2_FactSheet_09.22.26.pdf",
+    "date": "2026-09-22"
+  },
+  {
+    "id": "queen-mary-university-of-london-2026-09-23",
+    "kind": "media",
+    "label": "Queen Mary University of London 2026-09-23",
+    "title": "Major NHS trial provides new evidence on multi-cancer blood test",
+    "url": "https://www.qmul.ac.uk/news/latest-news/2026/medicine-and-dentistry/fmd/major-nhs-trial-provides-new-evidence-on-multi-cancer-blood-test.html",
+    "date": "2026-09-23"
+  },
+  {
+    "id": "the-asco-post-2026-10",
+    "kind": "media",
+    "label": "The ASCO Post 2026-10",
+    "title": "Multicancer Early Detection Screening Does Not Reduce Overall Late-Stage Cancer Diagnosis",
+    "url": "https://ascopost.com/news/october-2026/multicancer-early-detection-screening-does-not-reduce-overall-late-stage-cancer-diagnosis/",
+    "date": "2026-10-01"
+  },
+  {
+    "id": "guardant-health-8-k-2026-11-05",
+    "kind": "company",
+    "label": "Guardant Health 8-K 2026-11-05",
+    "title": "Guardant Health Reports Third Quarter 2026 Financial Results (Form 8-K, Exhibit 99.1)",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001576280/000157628026000043/gh-09302026xexhibit991.htm",
+    "date": "2026-11-05"
+  },
+  {
+    "id": "mrd-natera-signatera-13592e",
+    "kind": "company",
+    "label": "Natera：Signatera 检出限",
+    "title": "Natera：Signatera 检出限",
+    "url": "https://www.natera.com/wp-content/uploads/2020/11/Oncology-Clinical-Seeing-beyond-the-limit-Detect-residual-disease-and-assess-treatment-response-SGN_AV_WP.pdf"
+  },
+  {
+    "id": "mrd-fda-ssed-signatera-cdx-p260004-337623",
+    "kind": "regulator",
+    "label": "FDA SSED：Signatera CDx (P260004)",
+    "title": "Summary of Safety and Effectiveness Data (SSED): Signatera CDx, P260004",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf26/P260004B.pdf"
+  },
+  {
+    "id": "mrd-jama-oncol-2019-809800",
+    "kind": "journal",
+    "label": "JAMA Oncol 2019",
+    "title": "Analysis of Plasma Cell-Free DNA by Ultradeep Sequencing in Patients With Stages I to III Colorectal Cancer",
+    "authors": "Reinert T et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31070691/",
+    "doi": "10.1001/jamaoncol.2019.0528",
+    "pmid": "31070691",
+    "date": "2019"
+  },
+  {
+    "id": "mrd-natera-medicare-6a151b",
+    "kind": "company",
+    "label": "Natera：Medicare 覆盖范围",
+    "title": "Signatera – Circulating Tumor DNA Blood Test | Natera",
+    "url": "https://www.natera.com/oncology/signatera-advanced-cancer-detection/"
+  },
+  {
+    "id": "mrd-natera-2021-03-24-8489e5",
+    "kind": "company",
+    "label": "Natera 公告 2021-03-24",
+    "title": "FDA Grants Two New Breakthrough Device Designations for Natera s Signatera™ MRD Test | Natera",
+    "url": "https://www.natera.com/company/news/fda-grants-two-new-breakthrough-device-designations-for-nateras-signatera-mrd-test/"
+  },
+  {
+    "id": "mrd-discoveries-in-health-policy-2025-01-dee11f",
+    "kind": "media",
+    "label": "Discoveries in Health Policy 2025-01",
+    "title": "Discoveries in Health Policy: Brief Blog: Natera Signatera Price Changes: CMS Fee Schedule ($3500, $2919, $3920)",
+    "url": "https://www.discoveriesinhealthpolicy.com/2025/01/brief-blog-cms-revises-fee-schedule.html"
+  },
+  {
+    "id": "mrd-cms-adlt-114a65",
+    "kind": "regulator",
+    "label": "CMS：ADLT 费率表",
+    "title": "CMS：ADLT 费率表",
+    "url": "https://cms.gov/files/document/advanced-diagnostic-laboratory-tests-under-medicare-clfs.pdf"
+  },
+  {
+    "id": "mrd-natera-2025q4-b02789",
+    "kind": "media",
+    "label": "Natera 2025Q4 财报电话会记录",
+    "title": "Natera (NTRA) Q4 2025 Earnings Call Transcript | The Motley Fool",
+    "url": "https://www.fool.com/earnings/call-transcripts/2026/02/26/natera-ntra-q4-2025-earnings-call-transcript"
+  },
+  {
+    "id": "mrd-natera-signatera-c79c81",
+    "kind": "company",
+    "label": "Natera：Signatera 送检要求",
+    "title": "Signatera FAQ | Natera",
+    "url": "https://www.natera.com/oncology/signatera-advanced-cancer-detection/faq/"
+  },
+  {
+    "id": "mrd-natera-signatera-genome-136593",
+    "kind": "company",
+    "label": "Natera：Signatera Genome",
+    "title": "Natera Announces Broad Clinical Launch of Ultra-Sensitive Signatera™ Genome MRD Test | Natera",
+    "url": "https://www.natera.com/company/news/natera-announces-broad-clinical-launch-of-ultra-sensitive-signatera-genome-mrd-test/"
+  },
+  {
+    "id": "mrd-natera-2025-06-04-421f36",
+    "kind": "company",
+    "label": "Natera 公告 2025-06-04",
+    "title": "Natera Announces Medicare Coverage for Signatera™ Genome | Natera",
+    "url": "https://www.natera.com/company/news/natera-announces-medicare-coverage-for-signatera-genome/"
+  },
+  {
+    "id": "mrd-oncotarget-2024-next-personal-423c17",
+    "kind": "journal",
+    "label": "Oncotarget 2024",
+    "title": "Analytical validation of NeXT Personal®, an ultra-sensitive personalized circulating tumor DNA assay",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10939476/",
+    "authors": "Northcott J et al.",
+    "doi": "10.18632/oncotarget.28565",
+    "pmid": "38484152",
+    "date": "2024"
+  },
+  {
+    "id": "mrd-personalis-next-personal-dx-0bba07",
+    "kind": "company",
+    "label": "Personalis：NeXT Personal Dx 乳腺癌资料",
+    "title": "Personalis：NeXT Personal Dx 乳腺癌资料",
+    "url": "https://www.personalis.com/?p=19437"
+  },
+  {
+    "id": "mrd-personalis-next-personal-dx-c840e5",
+    "kind": "company",
+    "label": "Personalis：NeXT Personal Dx 肺癌资料",
+    "title": "Personalis：NeXT Personal Dx 肺癌资料",
+    "url": "https://www.personalis.com/?p=19596"
+  },
+  {
+    "id": "mrd-tiger-brokers-reuters-2025-11-10-a345d7",
+    "kind": "media",
+    "label": "Tiger Brokers 转载 Reuters 2025-11-10",
+    "title": "Personalis NeXT Personal Test Wins Medicare Coverage for Breast Cancer Surveillance - Tiger Brokers",
+    "url": "https://www.itiger.com/news/2582721868"
+  },
+  {
+    "id": "mrd-rallies-2026-02-10-a43b63",
+    "kind": "media",
+    "label": "Rallies 2026-02-10",
+    "title": "Personalis Secures Medicare Coverage for NeXT Personal Lung Cancer MRD Test for Stage I–III Patients - PSNL News | Rallies",
+    "url": "https://rallies.ai/news/personalis-secures-medicare-coverage-for-next-personal-lung-cancer-mrd-test-for-stage-iiii-patients"
+  },
+  {
+    "id": "mrd-panabee-personalis-medicare-d57932",
+    "kind": "media",
+    "label": "Panabee：Personalis Medicare 费率",
+    "title": "Personalis Locks in Medicare Coverage for MRD Breast Cancer Test",
+    "url": "https://www.panabee.com/news/personalis-locks-in-medicare-coverage-for-mrd-breast-cancer-test-at-3-878-rate"
+  },
+  {
+    "id": "mrd-panabee-next-personal-dx-66b047",
+    "kind": "media",
+    "label": "Panabee：NeXT Personal Dx 费率报道",
+    "title": "Personalis Secures $4,266 and $1,164 Medicare Reimbursement Rates",
+    "url": "https://www.panabee.com/news/personalis-secures-4-266-and-1-164-medicare-reimbursement-rates-for-next-personal-breast"
+  },
+  {
+    "id": "mrd-quest-haystack-mrd-a1afb0",
+    "kind": "company",
+    "label": "Quest 检测目录：Haystack MRD",
+    "title": "Quest Test Directory",
+    "url": "https://testdirectory.questdiagnostics.com/test/test-guides/TS_HaystackMRD/haystack-mrd?p=r"
+  },
+  {
+    "id": "mrd-j-mol-diagn-2026-haystack-mrd-d36b7d",
+    "kind": "journal",
+    "label": "J Mol Diagn 2026",
+    "title": "Highly Accurate Detection of Circulating Tumor DNA for Monitoring Minimal Residual Disease in Solid Tumors: Analytical and Clinical Validation of the Haystack MRD Assay",
+    "url": "https://europepmc.org/article/MED/42624249",
+    "authors": "Clark M et al.",
+    "doi": "10.1016/j.jmoldx.2026.07.006",
+    "pmid": "42624249",
+    "date": "2026"
+  },
+  {
+    "id": "mrd-quest-2026-06-24-3e12d6",
+    "kind": "company",
+    "label": "Quest 公告 2026-06-24",
+    "title": "Quest Diagnostics Receives New York State Approval for Haystack MRD®, Broadening Patient Access to ctDNA Minimal Residual Disease Testing - Jun 24, 2026",
+    "url": "https://newsroom.questdiagnostics.com/2026-06-24-Quest-Diagnostics-Receives-New-York-State-Approval-for-Haystack-MRD-R-,-Broadening-Patient-Access-to-ctDNA-Minimal-Residual-Disease-Testing"
+  },
+  {
+    "id": "mrd-haystack-mrd-b9076e",
+    "kind": "company",
+    "label": "Haystack MRD 官网",
+    "title": "FAQ - Haystack MRD®",
+    "url": "https://haystackmrd.com/faq/"
+  },
+  {
+    "id": "mrd-quest-haystack-mrd-17b98a",
+    "kind": "company",
+    "label": "Quest：Haystack MRD 送检要求",
+    "title": "Haystack MRD Testing | Quest Diagnostics",
+    "url": "https://www.questdiagnostics.com/healthcare-professionals/clinical-education-center/faq/faq300"
+  },
+  {
+    "id": "mrd-neogenomics-2026-02-25-17c70b",
+    "kind": "company",
+    "label": "NeoGenomics 公告 2026-02-25",
+    "title": "NeoGenomics Launches RaDaR ST, Expanding Molecular Residual Disease Testing Across Multiple Solid Tumor Types :: NeoGenomics, Inc. (NEO)",
+    "url": "https://ir.neogenomics.com/news-events/press-releases/detail/322/neogenomics-launches-radar-st-expanding-molecular-residual-disease-testing-across-multiple-solid-tumor-types"
+  },
+  {
+    "id": "mrd-targeted-oncology-radar-336b66",
+    "kind": "media",
+    "label": "Targeted Oncology：RaDaR 研究综述",
+    "title": "RaDaR MRD Test Shows Promise in HR+, HER2- Breast Cancer | Targeted Onc - Immunotherapy, Biomarkers, and Cancer Pathways",
+    "url": "https://www.targetedonc.com/view/radar-mrd-test-shows-promise-in-hr-her2--breast-cancer"
+  },
+  {
+    "id": "mrd-neogenomics-2023-07-27-6049aa",
+    "kind": "company",
+    "label": "NeoGenomics 公告 2023-07-27",
+    "title": "NeoGenomics Announces Medicare Coverage for RaDaR Assay for Minimal Residual Disease and Recurrence in Breast Cancer :: NeoGenomics, Inc. (NEO)",
+    "url": "https://ir.neogenomics.com/news-events/press-releases/detail/249/neogenomics-announces-medicare-coverage-for-radar-assay-for-minimal-residual-disease-and-recurrence-in-breast-cancer"
+  },
+  {
+    "id": "mrd-neogenomics-radar-st-087021",
+    "kind": "company",
+    "label": "NeoGenomics：RaDaR ST 价格",
+    "title": "RaDaR ST Testing | NeoGenomics Laboratories",
+    "url": "https://www.neogenomics.com/providers/oncology-solutions/radarst-mrd/radar-st-testing"
+  },
+  {
+    "id": "mrd-labmedica-radar-st-b5b215",
+    "kind": "media",
+    "label": "LabMedica：RaDaR ST 报道",
+    "title": "Daily clinical lab news - Tumor-Informed MRD Assay Gains Medicare Coverage for Immunotherapy Monitoring - Industry News - mobile.Labmedica.com",
+    "url": "https://mobile.labmedica.com/industry/articles/294812752/tumor-informed-mrd-assay-gains-medicare-coverage-for-immunotherapy-monitoring.amp.html"
+  },
+  {
+    "id": "mrd-medtech-dive-2026-10-898023",
+    "kind": "media",
+    "label": "MedTech Dive 2026-10",
+    "title": "Abbott launches MRD test with improved cancer detection tech | MedTech Dive",
+    "url": "https://www.medtechdive.com/news/abbott-launches-mrd-test-with-improved-cancer-detection-tech/872867/"
+  },
+  {
+    "id": "mrd-exact-sciences-alpha-correct-acb4fb",
+    "kind": "company",
+    "label": "Exact Sciences：Alpha-CORRECT 结果",
+    "title": "Advancing the future of cancer management | Exact Sciences",
+    "url": "https://www.exactsciences.com/news-events/articles/advancing-the-future-of-cancer-management"
+  },
+  {
+    "id": "mrd-exact-sciences-2025-07-09-7fc3f8",
+    "kind": "company",
+    "label": "Exact Sciences 公告 2025-07-09",
+    "title": "Exact Sciences Announces Medicare Coverage for Oncodetect Molecular Residual Disease Test | Exact Sciences",
+    "url": "https://www.exactsciences.com/newsroom/press-releases/exact-sciences-announces-medicare-coverage-for-oncodetect-molecular-residual-disease-test"
+  },
+  {
+    "id": "mrd-exact-sciences-oncodetect-e0f7ba",
+    "kind": "company",
+    "label": "Exact Sciences：Oncodetect",
+    "title": "Oncodetect® Provider Resources | Exact Sciences",
+    "url": "https://www.exactsciences.com/cancer-testing/oncodetect-mrd-providers/resources"
+  },
+  {
+    "id": "mrd-onclive-2026-10-26-2dc307",
+    "kind": "media",
+    "label": "OncLive 2026-10-26",
+    "title": "Whole Genome Oncodetect MRD Test Is Now Available for Solid Tumors | OncLive",
+    "url": "https://www.onclive.com/view/whole-genome-oncodetect-mrd-test-is-now-available-for-solid-tumors"
+  },
+  {
+    "id": "mrd-exact-sciences-oncodetect-fd5c56",
+    "kind": "company",
+    "label": "Exact Sciences：新一代 Oncodetect",
+    "title": "Oncodetect® Molecular Residual Disease Test for Providers | Exact Sciences",
+    "url": "https://www.exactsciences.com/cancer-testing/oncodetect-mrd-providers"
+  },
+  {
+    "id": "mrd-myriad-precise-mrd-a883f9",
+    "kind": "company",
+    "label": "Myriad：Precise MRD 技术规格书",
+    "title": "Myriad：Precise MRD 技术规格书",
+    "url": "https://s3.amazonaws.com/myriad-library/technical-specifications/Precise+MRD+Technical+Specifications.pdf"
+  },
+  {
+    "id": "mrd-myriad-2026-01-27-6e6a36",
+    "kind": "company",
+    "label": "Myriad 公告 2026-01-27",
+    "title": "Myriad Advances MRD Commercialization Timeline, Bolstered by New Study Data",
+    "url": "https://investor.myriad.com/news-releases/news-release-detail/26916/"
+  },
+  {
+    "id": "mrd-targeted-oncology-precise-mrd-9b063b",
+    "kind": "media",
+    "label": "Targeted Oncology：Precise MRD",
+    "title": "ctDNA Assay Precise MRD Expands to Breast, Colorectal, Renal Cancer | Targeted Onc - Immunotherapy, Biomarkers, and Cancer Pathways",
+    "url": "https://www.targetedonc.com/view/ctdna-assay-precise-mrd-expands-to-breast-colorectal-renal-cancer"
+  },
+  {
+    "id": "mrd-labcorp-2026-01-13-87706e",
+    "kind": "company",
+    "label": "Labcorp 公告 2026-01-13",
+    "title": "Labcorp Expands MRD Testing for Breast, Lung and Colon Cancer Recurrence Risk | Labcorp",
+    "url": "https://www.labcorp.com/education-events/press-releases/labcorp-expands-mrd-testing-breast-lung-and-colon-cancer"
+  },
+  {
+    "id": "mrd-labcorp-plasma-detect-genome-e7a02b",
+    "kind": "company",
+    "label": "Labcorp：Plasma Detect Genome",
+    "title": "Labcorp：Plasma Detect Genome",
+    "url": "https://www.labcorp.com/content/dam/labcorp/files/oncology-launch/l1821500_bro1-mrd-colon-cancer-genome-brochure.pdf"
+  },
+  {
+    "id": "mrd-labcorp-plasma-detect-id-3b5316",
+    "kind": "company",
+    "label": "Labcorp：Plasma Detect ID",
+    "title": "Labcorp：Plasma Detect ID",
+    "url": "https://www.labcorp.com/content/dam/labcorp/files/oncology-launch/l1821500_bro3-mrd-lung-cancer-genome-brochure.pdf"
+  },
+  {
+    "id": "mrd-veracyte-truemrd-d83cf5",
+    "kind": "company",
+    "label": "Veracyte：TrueMRD 资料",
+    "title": "Veracyte：TrueMRD 资料",
+    "url": "https://www.veracyte.com/wp-content/uploads/2026/05/truemrd-mibc-acc-012-sample-report-positive.pdf"
+  },
+  {
+    "id": "mrd-veracyte-truemrd-348ed5",
+    "kind": "company",
+    "label": "Veracyte：Eur Urol 2024 论文介绍",
+    "title": "Whole-genome Mutational Analysis for Tumor-informed Detection of Circulating Tumor DNA in Patients with Urothelial Carcinoma | Veracyte",
+    "url": "https://www.veracyte.com/resources/scientific-publications/truemrd-mibc-2024-eur-urol-nordentoft/"
+  },
+  {
+    "id": "mrd-veracyte-2026-05-15-43a670",
+    "kind": "company",
+    "label": "Veracyte：TrueMRD 产品页",
+    "title": "TrueMRD Monitoring Test for MIBC | Veracyte",
+    "url": "https://www.veracyte.com/tests/truemrd-mibc/"
+  },
+  {
+    "id": "mrd-clin-cancer-res-2025-tracer-47cd01",
+    "kind": "journal",
+    "label": "Clin Cancer Res 2025;31(8):1520-32",
+    "title": "Ultrasensitive Detection and Monitoring of Circulating Tumor DNA Using Structural Variants in Early-Stage Breast Cancer",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11994999",
+    "authors": "Elliott MJ et al.",
+    "doi": "10.1158/1078-0432.CCR-24-3472",
+    "pmid": "39785866",
+    "date": "2025"
+  },
+  {
+    "id": "mrd-1stoncology-saga-471ed6",
+    "kind": "media",
+    "label": "1stOncology：SAGA 公告",
+    "title": "Foundation Medicine to Strengthen Monitoring Portfolio with SAGA Diagnostics’ Tumor-Informed Molecular Residual Disease (MRD) Platform – 1stOncology™: Cancer Intelligence Service",
+    "url": "https://www.1stoncology.com/blog/?p=110086"
+  },
+  {
+    "id": "mrd-medical-device-network-pathlight-d0858d",
+    "kind": "media",
+    "label": "Medical Device Network：Pathlight 上市",
+    "title": "SAGA Diagnostics launches multi-cancer MRD platform in US",
+    "url": "https://www.medicaldevice-network.com/news/saga-diagnostics-platform/"
+  },
+  {
+    "id": "mrd-gene-solutions-2026-04-46ba92",
+    "kind": "company",
+    "label": "Gene Solutions 公告 2026-04",
+    "title": "Gene Solutions Introduces Dual Tumor-Blood Liquid Biopsy Comprehensive Profiling Upgrades for K-TRACK and K-4CARE - Advancing Healthcare Through AI-powered Genetic Testing",
+    "url": "https://genesolutions.com/news/gene-solutions-introduces-dual-tumor-blood-liquid-biopsy-comprehensive-profiling-upgrades-for-k-track-and-k-4care"
+  },
+  {
+    "id": "mrd-gene-solutions-asco-breakthrough-2026-1e144a",
+    "kind": "company",
+    "label": "Gene Solutions：ASCO Breakthrough 2026",
+    "title": "K-TRACK at ASCO Breakthrough 2026: Two Landmark ctDNA Studies Earn Top 40 Abstracts Honors for Advancing Precision Oncology in Real-world Setting - Advancing Healthcare Through AI-powered Genetic Test",
+    "url": "https://genesolutions.com/news/k-track-at-asco-breakthrough-2026-two-landmark-ctdna-studies-earn-top-40-abstracts-honors-for-advancing-precision-oncology-in-real-world-setting"
+  },
+  {
+    "id": "mrd-j-hematol-oncol-2021-a17ea6",
+    "kind": "journal",
+    "label": "J Hematol Oncol 2021",
+    "title": "Postoperative circulating tumor DNA as markers of recurrence risk in stages II to III colorectal cancer",
+    "authors": "Chen G et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34001194/",
+    "doi": "10.1186/s13045-021-01089-z",
+    "pmid": "34001194",
+    "date": "2021"
+  },
+  {
+    "id": "mrd-j-hematol-oncol-2022-6859c6",
+    "kind": "journal",
+    "label": "J Hematol Oncol 2022",
+    "title": "Circulating tumor DNA integrating tissue clonality detects minimal residual disease in resectable non-small-cell lung cancer",
+    "authors": "Wang S et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/36183093/",
+    "doi": "10.1186/s13045-022-01355-8",
+    "pmid": "36183093",
+    "date": "2022"
+  },
+  {
+    "id": "mrd-cancer-commun-lond-2023-0e0514",
+    "kind": "journal",
+    "label": "Cancer Commun (Lond) 2023",
+    "title": "Residual circulating tumor DNA after adjuvant chemotherapy effectively predicts recurrence of stage II-III gastric cancer",
+    "authors": "Yuan SQ et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37837629/",
+    "doi": "10.1002/cac2.12494",
+    "pmid": "37837629",
+    "date": "2023"
+  },
+  {
+    "id": "mrd-nat-commun-2021-02a65e",
+    "kind": "journal",
+    "label": "Nat Commun 2021",
+    "title": "Dynamic recurrence risk and adjuvant chemotherapy benefit prediction by ctDNA in resected NSCLC",
+    "authors": "Qiu B et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34799585/",
+    "doi": "10.1038/s41467-021-27022-z",
+    "pmid": "34799585",
+    "date": "2021"
+  },
+  {
+    "id": "mrd-cancer-cell-2023-697f37",
+    "kind": "journal",
+    "label": "Cancer Cell 2023",
+    "title": "Individualized tumor-informed circulating tumor DNA analysis for postoperative monitoring of non-small cell lung cancer",
+    "authors": "Chen K et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37683638/",
+    "doi": "10.1016/j.ccell.2023.08.010",
+    "pmid": "37683638",
+    "date": "2023"
+  },
+  {
+    "id": "mrd-2026-08-25-6fd7c5",
+    "kind": "media",
+    "label": "同花顺转载燃石公告 2026-08-25",
+    "title": "国内唯一！燃石医学「WES-定制化」MRD试剂盒进入国家药监局创新医疗器械特别审查通道",
+    "url": "https://stock.10jqka.com.cn/20260825/c679255669.shtml"
+  },
+  {
+    "id": "mrd-targeted-oncology-brprophet-615db2",
+    "kind": "media",
+    "label": "Targeted Oncology：brPROPHET",
+    "title": "brPROPHET May Better Detect ctDNA and Identify MRD in Colorectal Cancer | Targeted Onc - Immunotherapy, Biomarkers, and Cancer Pathways",
+    "url": "https://www.targetedonc.com/view/brprophet-may-better-detect-ctdna-and-identify-mrd-in-colorectal-cancer"
+  },
+  {
+    "id": "mrd-clin-cancer-res-2022-1ed224",
+    "kind": "journal",
+    "label": "Clin Cancer Res 2022",
+    "title": "Perioperative ctDNA-Based Molecular Residual Disease Detection for Non-Small Cell Lung Cancer: A Prospective Multicenter Cohort Study (LUNGCA-1)",
+    "authors": "Xia L et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34844976/",
+    "doi": "10.1158/1078-0432.CCR-21-3044",
+    "pmid": "34844976",
+    "date": "2022"
+  },
+  {
+    "id": "mrd-mrd-7c26a2",
+    "kind": "media",
+    "label": "国信证券 2026-02：肿瘤基因检测行业报告",
+    "title": "创新医疗器械盘点系列(4)：肿瘤基因检测的「勇敢者游戏」(上篇)",
+    "url": "https://pdf.dfcfw.com/pdf/H3_AP202602021819360469_1.pdf",
+    "date": "2026-02-02"
+  },
+  {
+    "id": "mrd-tumor-informed-ctdna-pmc12674089-3e354a",
+    "kind": "journal",
+    "label": "MedComm 2025",
+    "title": "Personalized and Tumor Informed Circulating Tumor DNA Assay for Molecular Residual Disease Monitoring of Solid Malignancies",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12674089/",
+    "authors": "Liu L et al.",
+    "doi": "10.1002/mco2.70483",
+    "pmid": "41346570",
+    "date": "2025"
+  },
+  {
+    "id": "mrd-mrd-2025-11-69cdaa",
+    "kind": "media",
+    "label": "中华网：吉长安 MRD 报道 2025-11",
+    "title": "吉因加个性化MRD检测：如何作为“分子哨兵”精准预警肿瘤复发？_中华网",
+    "url": "https://m.tech.china.com/hea/articles/20251128/202511281772922.html"
+  },
+  {
+    "id": "mrd-pharma-focus-asia-bgi-natera-3fbf2d",
+    "kind": "media",
+    "label": "Pharma Focus Asia：BGI × Natera",
+    "title": "Natera and BGI Genomics Announce Commercial Launch of the BGI/Natera Signatera Assay in China | Pharma Focus Asia",
+    "url": "https://www.pharmafocusasia.com/index.php/news/natera-and-bgi-genomics-announce-commercial-launch-of-the-bginatera"
+  },
+  {
+    "id": "mrd-cancer-med-2023-b62359",
+    "kind": "journal",
+    "label": "Cancer Med 2023",
+    "title": "Monitoring of gastrointestinal carcinoma via molecular residual disease with circulating tumor DNA using a tumor-informed assay",
+    "authors": "Qi Z et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37602656/",
+    "doi": "10.1002/cam4.6286",
+    "pmid": "37602656",
+    "date": "2023"
+  },
+  {
+    "id": "mrd-clin-cancer-res-2024-0dc512",
+    "kind": "journal",
+    "label": "Clin Cancer Res 2024",
+    "title": "Colorectal Cancer Recurrence Prediction Using a Tissue-Free Epigenomic Minimal Residual Disease Assay",
+    "authors": "Nakamura Y et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39110016/",
+    "doi": "10.1158/1078-0432.CCR-24-1651",
+    "pmid": "39110016",
+    "date": "2024"
+  },
+  {
+    "id": "mrd-guardant-reveal-c841a2",
+    "kind": "company",
+    "label": "Guardant：Reveal 产品页",
+    "title": "Guardant Reveal™: Tissue-Free Test for ctDNA Monitoring",
+    "url": "https://guardantcomplete.com/hcp/solutions/guardant-reveal"
+  },
+  {
+    "id": "mrd-clin-cancer-res-2025-tempus-xm-2d4112",
+    "kind": "journal",
+    "label": "Clin Cancer Res 2025(xM, GALAXY)",
+    "title": "A Tumor-Naïve ctDNA Assay Detects Minimal Residual Disease in Resected Stage II or III Colorectal Cancer and Predicts Recurrence: Subset Analysis from the GALAXY Study in CIRCULATE-Japan",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11739780",
+    "authors": "Nakamura Y et al.",
+    "doi": "10.1158/1078-0432.CCR-24-2396",
+    "pmid": "39513962",
+    "date": "2025"
+  },
+  {
+    "id": "mrd-natera-latitude-da7c8e",
+    "kind": "company",
+    "label": "Natera 公告：Latitude 临床验证",
+    "title": "Natera Publishes Clinical Validation of Latitude™ Tissue-Free MRD Test in Colorectal Cancer | Natera",
+    "url": "https://www.natera.com/company/news/natera-publishes-clinical-validation-of-latitude-tissue-free-mrd-test-in-colorectal-cancer/"
+  },
+  {
+    "id": "mrd-ultra-2023-05-9a4efc",
+    "kind": "media",
+    "label": "新浪：术宁 Ultra 发布 2023-05",
+    "title": "世和基因MRD检测产品术宁Ultra重磅上市|疫情|肿瘤|患者|监测|突变_手机新浪网",
+    "url": "https://news.sina.cn/sx/2023-05-16/detail-imytxyua6453681.d.html?vt=4"
+  },
+  {
+    "id": "mrd-smartest-8c74ad",
+    "kind": "company",
+    "label": "世和基因官网：SMARTEST 研究",
+    "title": "【ESMO 2026】世和cfDNA-MRD检测提前15个月预警胸膜间皮瘤术后复发 - 世和基因",
+    "url": "https://zh.geneseeq.com/id04980225.html"
+  },
+  {
+    "id": "mrd-atg-seq-8ccfdc",
+    "kind": "company",
+    "label": "世和基因官网：ATG-seq 技术",
+    "title": "核心技术 - 世和基因",
+    "url": "https://zh.geneseeq.com/220708104127.html"
+  },
+  {
+    "id": "mrd-fda-de-novo-den170080-b9ad9a",
+    "kind": "regulator",
+    "label": "FDA De Novo 决定摘要 DEN170080",
+    "title": "Evaluation of Automatic Class III Designation for clonoSEQ Assay: Decision Summary (DEN170080)",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/reviews/DEN170080.pdf"
+  },
+  {
+    "id": "mrd-medtech-dive-2018-10-0be893",
+    "kind": "media",
+    "label": "MedTech Dive 2018-10",
+    "title": "FDA clears NGS test to detect residual blood cancer cells | MedTech Dive",
+    "url": "https://www.medtechdive.com/news/fda-oks-ngs-test-to-detect-residual-blood-cancer-cells/538489"
+  },
+  {
+    "id": "mrd-accc-clonoseq-cll-099ea1",
+    "kind": "media",
+    "label": "ACCC：clonoSEQ CLL 许可",
+    "title": "ACCC | clonoSEQ Receives FDA Clearance for MRD Assessment in CLL",
+    "url": "https://www.accc-cancer.org/view/clonoseq-receives-fda-clearance-for-mrd-assessment-in-cll"
+  },
+  {
+    "id": "mrd-oncotarget-2025-3f5de1",
+    "kind": "journal",
+    "label": "Oncotarget 2025",
+    "title": "Analytical validation of a circulating tumor DNA assay using PhasED-Seq technology for detecting residual disease in B-cell malignancies",
+    "authors": "Klimova N et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40353795/",
+    "doi": "10.18632/oncotarget.28719",
+    "pmid": "40353795",
+    "date": "2025"
+  },
+  {
+    "id": "mrd-j-clin-oncol-2026-fc375e",
+    "kind": "journal",
+    "label": "J Clin Oncol 2026",
+    "title": "Prospective Validation of Circulating Tumor DNA Measurable Residual Disease After First-Line Therapy in Large B-Cell Lymphoma",
+    "authors": "Wang S et al.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41385760/",
+    "doi": "10.1200/JCO-25-01712",
+    "pmid": "41385760",
+    "date": "2026"
+  },
+  {
+    "id": "mrd-foresight-clarity-b7dd6e",
+    "kind": "company",
+    "label": "Foresight：CLARITY 产品页",
+    "title": "Foresight CLARITY™ MRD Platform | Ultra-Sensitive Cancer Detection",
+    "url": "https://foresight-dx.com/foresight-products-services/foresight-clarity/"
+  },
+  {
+    "id": "mrd-medtech-dive-2025-12-cb94f3",
+    "kind": "media",
+    "label": "MedTech Dive 2025-12",
+    "title": "Natera acquires Foresight Diagnostics for up to $450M | MedTech Dive",
+    "url": "https://www.medtechdive.com/news/Natera-Foresight-Diagnostics-acquisition-cancer-testing/807478/"
+  },
+  {
+    "id": "mrd-ctdna-mrd-2026-09-ea12b7",
+    "kind": "media",
+    "label": "网易号：ctDNA / MRD 检测科普 2026-09",
+    "title": "面对ctDNA和MRD检测，患者该问清楚的9大问题|肿瘤|活检|医生|治疗|阴性|癌症疫苗|ctdna_网易订阅",
+    "url": "https://www.163.com/dy/article/L5OPMS7205534PN4.html"
+  },
+  {
+    "id": "mrd-mrd-2023-08-1a8f58",
+    "kind": "media",
+    "label": "中华网：MRD 检测报道 2023-08",
+    "title": "千元级MRD何时能来？这项检测能更早发现癌症复发转移的「元凶」，但很多患者止步于万元门槛_中华网",
+    "url": "https://hea.china.com/article/20230811/082023_1390927.html"
+  },
+  {
+    "id": "mrd-2024-4c4910",
+    "label": "沙利文 2024：肿瘤分子诊断产业发展蓝皮书",
+    "url": "https://pdf.dfcfw.com/pdf/H3_AP202604071821047913_1.pdf",
+    "kind": "media",
+    "title": "肿瘤分子诊断产业发展蓝皮书(二零二四年)",
+    "date": "2024"
+  },
+  {
+    "id": "mrd-personalis-2023-10-26-ce0f00",
+    "label": "Personalis 公告 2023-10-26",
+    "url": "https://www.nasdaq.com/press-release/personalis-launches-next-personalr-dx-for-early-access-clinical-use-in-residual",
+    "kind": "company",
+    "title": "Personalis Launches NeXT Personal® Dx for Early Access Clinical Use in Residual Disease and Recurrence Detection in Cancer",
+    "date": "2023-10-26"
+  }
+]

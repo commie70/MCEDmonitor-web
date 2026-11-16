@@ -3,8 +3,26 @@ const MAX_MODEL_RESPONSE_BYTES = 2 * 1024 * 1024;
 const MAX_MODEL_RESULT_BYTES = 128 * 1024;
 const MAX_MODEL_STRING_BYTES = 8 * 1024;
 const MAX_MODEL_ARRAY_ITEMS = 100;
+// 正常输出不到 1K token。上限只为截断失控生成：超过即返回被截断的非法 JSON，本次调用快速失败，
+// 而不是让服务端继续生成几分钟、把限流额度一并耗光。
+const MAX_OUTPUT_TOKENS = 4096;
+// 失控生成是偶发的(同一输入重试通常正常)：输出非法或被截断时重试一次，仍不合格才算失败。
+const OUTPUT_RETRIES = 1;
+const RATE_LIMIT_RETRIES = 3;
+const RATE_LIMIT_BACKOFF_MS = [10_000, 30_000, 60_000];
 import { fetchPublic, readCappedBody } from "./lib-network-security.mjs";
 
+/**
+ * 四个固定模型职责。
+ *
+ * 三家模型默认都开着深度思考，这条流水线用不上：任务是带严格 Schema 的抽取、选档与二选一，
+ * 而思考让单次调用从几秒变成一两分钟(实测 8K 字正文的抽取：Qwen 53s → 7.5s，GLM 153s → 15s，
+ * Kimi 22s → 7.6s，抽取结果一致)，GLM 更是超过调用超时线，直接导致候选处理失败。
+ * 因此按各家文档关掉或调到最低：
+ *   - Qwen：enable_thinking=false(混合思考模型，可关闭)；
+ *   - GLM / Kimi：强制思考、不可关闭，reasoning_effort 取 low。
+ * 换模型时如果新模型不认这些参数，把对应环境变量设为 default 即不发送该字段。
+ */
 export const MODEL_ROLES = Object.freeze({
   qwen: {
     provider: "qwen",
@@ -14,7 +32,11 @@ export const MODEL_ROLES = Object.freeze({
     base_url: "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
     model_env: "QWEN_MONITOR_MODEL",
     structured_output: "json_schema",
+    thinking: false,
+    thinking_env: "QWEN_ENABLE_THINKING",
     reasoning: null,
+    temperature: 0,
+    max_tokens_param: "max_tokens",
   },
   vision: {
     provider: "deepseek",
@@ -25,6 +47,8 @@ export const MODEL_ROLES = Object.freeze({
     model_env: "DEEPSEEK_VISION_MODEL",
     structured_output: "json_object",
     reasoning: null,
+    temperature: 0,
+    max_tokens_param: "max_tokens",
   },
   reviewer: {
     provider: "glm",
@@ -34,7 +58,10 @@ export const MODEL_ROLES = Object.freeze({
     base_url: "https://open.bigmodel.cn/api/paas/v4",
     model_env: "GLM_REVIEW_MODEL",
     structured_output: "json_schema",
-    reasoning: null,
+    reasoning: "low",
+    reasoning_env: "GLM_REASONING_EFFORT",
+    temperature: 0,
+    max_tokens_param: "max_tokens",
   },
   synthesizer: {
     provider: "kimi",
@@ -44,7 +71,12 @@ export const MODEL_ROLES = Object.freeze({
     base_url: "https://api.moonshot.cn/v1",
     model_env: "KIMI_SYNTHESIS_MODEL",
     structured_output: "json_schema",
-    reasoning: null,
+    reasoning: "low",
+    reasoning_env: "KIMI_REASONING_EFFORT",
+    // Kimi 的推理模型只接受默认采样温度，显式传 0 会被 HTTP 400 拒绝：不发送该字段。
+    temperature: null,
+    // Kimi 已弃用 max_tokens。
+    max_tokens_param: "max_completion_tokens",
   },
 });
 
@@ -83,7 +115,7 @@ const EXTRACTION_SCHEMA = {
     "occurred_at",
     "published_at",
     "facts",
-    "risk_flags",
+    "risk",
     "uncertain",
   ],
   properties: {
@@ -105,7 +137,14 @@ const EXTRACTION_SCHEMA = {
         },
       },
     },
-    risk_flags: { type: "array", items: { type: "string", enum: RISK_FLAGS } },
+    // 风险标记用固定布尔字段，而不是「枚举值数组」：数组没有长度约束，
+    // 模型会在其中无限重复同一个枚举值(实测 GLM 输出 4 万字符的 "regulatory_claim" 仍未停)。
+    risk: {
+      type: "object",
+      additionalProperties: false,
+      required: RISK_FLAGS,
+      properties: Object.fromEntries(RISK_FLAGS.map((flag) => [flag, { type: "boolean" }])),
+    },
     uncertain: { type: "boolean" },
   },
 };
@@ -227,6 +266,34 @@ const IMPORTANCE_RUBRIC = `重要性只能按固定档位选择：
 - 对世和行动价值 0/10/20：无需行动 / 需要持续跟踪或更新对照 / 需要立即分析或响应。
 不得自行生成总分；应用程序会相加。`;
 
+const SCREEN_RULES = `判断这份证据是否值得建档，两个条件都满足才 relevant=true：
+1. 与癌症筛查、MCED 或受监测产品有关；
+2. 讲的是一件具体发生的事：公告、监管决定、论文或会议披露、临床读出、产品上市、合作、融资、人事变动等。
+导航页、新闻列表页、产品或公司介绍页、管理团队、投资者关系、招聘、联系方式这类页面即使与癌症筛查有关也不是事件，relevant=false。
+拿不准时 uncertain=true。`;
+
+const EXTRACTION_RULES = `抽取公司、产品、内部事件类型、发生/发布时间和可逐项引用的事实(每项事实一条，不重复)。
+写法统一，便于两份独立抽取直接比对：
+- company：常用简称(如 GRAIL、Guardant Health、世和基因)，不带 Inc. / Corp. / 股票代码 / 括号说明。
+- product：只写品牌名本身(如 Galleri、Shield MCD、Cancerguard)，不带 ®™、类别描述或括号说明；涉及多个产品时取证据的主角产品。
+- occurred_at 是事件发生日，published_at 是这份证据的发布日，均写 YYYY-MM-DD；证据没有给出则为 null，不得推测。
+risk 三项各自判断 true / false：
+- regulatory_claim：证据含监管结论(批准、受理、认定、表决、撤回等)；
+- clinical_number：证据含临床性能数字(灵敏度、特异性、PPV、检出率等)；
+- l1_candidate：可能是足以改变竞争格局的里程碑。`;
+
+const MATCH_RULES = `判断 evidence(新候选)与 candidate_events(既有事件)的关系，三选一：
+- same_event：同一次发生——同一份公告、同一项监管决定、同一篇论文或同一次会议披露的转载、改写或不同语言报道，没有新增关键事实。
+- material_update：仍是同一次发生，但候选补充或更正了它的关键事实(性能数字、日期、适应症范围、监管结论)。
+- different_event：不是同一次发生。同一公司、同一产品的不同监管里程碑、不同研究、不同日期的公告都是不同事件；产品介绍页、公司简介或背景综述与某个具体里程碑之间也是不同事件。
+event_id：same_event 或 material_update 时必须原样取自 candidate_events 中对应事件的 id，不得使用 evidence 自己的 id；different_event 时为 null。
+无法从证据判断时 uncertain=true。`;
+
+/** 模型输出的 risk 布尔字段 → 流水线内部使用的 risk_flags 列表。 */
+function toExtraction({ risk, ...rest }) {
+  return { ...rest, risk_flags: RISK_FLAGS.filter((flag) => risk[flag] === true) };
+}
+
 function schemaFormat(name, schema) {
   return {
     type: "json_schema",
@@ -310,6 +377,18 @@ function safeEvidence(value) {
   return JSON.stringify(value, null, 2).slice(0, 120_000);
 }
 
+/** 思考开关与推理强度：默认取角色定义，环境变量可覆盖；值为 default 时不发送该字段。 */
+function thinkingOptions(fixed, env) {
+  const read = (name) => (name ? String(env[name] ?? "").trim().toLowerCase() : "");
+  const thinking = read(fixed.thinking_env);
+  const reasoning = read(fixed.reasoning_env);
+  return {
+    thinking:
+      thinking === "true" ? true : thinking === "false" ? false : thinking === "default" ? null : fixed.thinking ?? null,
+    reasoning: reasoning === "default" ? null : reasoning || fixed.reasoning || null,
+  };
+}
+
 function roleConfig(role, env) {
   const fixed = MODEL_ROLES[role];
   if (!fixed) throw new Error(`unknown model role ${role}`);
@@ -324,7 +403,18 @@ function roleConfig(role, env) {
     base_url: baseUrl.replace(/\/+$/, ""),
     api_key: apiKey,
     model: env[fixed.model_env] || fixed.model,
+    ...thinkingOptions(fixed, env),
   };
+}
+
+/** 复核模型的 "provider/model" 标识；未配置时返回 null 而不是抛错。 */
+function reviewerLabel(env) {
+  try {
+    const config = roleConfig("reviewer", env);
+    return `${config.provider}/${config.model}`;
+  } catch {
+    return null;
+  }
 }
 
 function chatUrl(baseUrl) {
@@ -354,13 +444,35 @@ function importanceEqual(a, b) {
   );
 }
 
+/**
+ * 两个模型对同一实体的写法常有出入(®™、大小写、空格、公司后缀、日期精度)。
+ * 独立复核比较的是「是否指同一家公司、同一个产品、同一天」，所以先归一再比，
+ * 写法差异不算冲突；真正的分歧(不同产品、不同日期、不同事件类型)照常交仲裁。
+ */
+function normalizeName(value) {
+  return String(value ?? "")
+    .replace(/[®™©]/g, "") // 先去商标符号：NFKC 会把 ™ 展开成字母 TM
+    .normalize("NFKC")
+    .toLowerCase()
+    .trim()
+    .replace(/(?:[,，]\s*|\s+)(incorporated|inc|corporation|corp|company|co|ltd|limited|llc|plc|gmbh|ag)\.?$/u, "")
+    .replace(/(股份有限公司|有限责任公司|有限公司|公司)$/u, "")
+    .replace(/[\s\-_·.,，/()（）]+/gu, "");
+}
+
+function normalizeDay(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const match = /^(\d{4}-\d{2}-\d{2})(?:$|[T\s])/.exec(String(value).trim());
+  return match ? match[1] : String(value).trim();
+}
+
 function extractionEqual(a, b) {
   return (
-    a.company === b.company &&
-    a.product === b.product &&
+    normalizeName(a.company) === normalizeName(b.company) &&
+    normalizeName(a.product) === normalizeName(b.product) &&
     a.event_type === b.event_type &&
-    a.occurred_at === b.occurred_at &&
-    a.published_at === b.published_at
+    normalizeDay(a.occurred_at) === normalizeDay(b.occurred_at) &&
+    normalizeDay(a.published_at) === normalizeDay(b.published_at)
   );
 }
 
@@ -387,6 +499,7 @@ export function providerConfiguration(env = process.env) {
         configured: Boolean((env[fixed.base_url_env] || fixed.base_url) && env[fixed.key_env]),
         required_env: [fixed.key_env],
         optional_base_url_env: fixed.base_url_env,
+        ...thinkingOptions(fixed, env),
       },
     ])
   );
@@ -397,10 +510,11 @@ export function createMonitorLlm({
   fetchImpl = globalThis.fetch,
   now = () => new Date().toISOString(),
   timeoutMs = DEFAULT_TIMEOUT_MS,
+  sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
 } = {}) {
   if (typeof fetchImpl !== "function") throw new Error("fetch implementation is required");
 
-  async function call(role, { name, schema, promptVersion, user, images = [] }) {
+  async function call(role, { name, schema, promptVersion, schemaVersion = `${name}-v1`, user, images = [] }) {
     const config = roleConfig(role, env);
     const structuredUser =
       config.structured_output === "json_object"
@@ -422,32 +536,55 @@ export function createMonitorLlm({
         config.structured_output === "json_object"
           ? { type: "json_object" }
           : schemaFormat(name, schema),
-      temperature: 0,
     };
+    if (typeof config.temperature === "number") body.temperature = config.temperature;
+    if (typeof config.thinking === "boolean") body.enable_thinking = config.thinking;
     if (config.reasoning) body.reasoning_effort = config.reasoning;
+    if (config.max_tokens_param) body[config.max_tokens_param] = MAX_OUTPUT_TOKENS;
 
     const request = fetchImpl === globalThis.fetch ? fetchPublic : fetchImpl;
-    const response = await request(chatUrl(config.base_url), {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.api_key}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(timeoutMs),
-    });
-    if (!response.ok) {
-      throw new Error(`${config.provider}_${name}_http_${response.status}`);
-    }
-    const result = parseJsonContent(
-      JSON.parse(await readCappedBody(response, `${config.provider}_${name}_response`, MAX_MODEL_RESPONSE_BYTES)),
-      schema
-    );
-    const generatedAt = now();
-    return {
-      result,
-      audit: auditOf(config, promptVersion, `${name}-v1`, generatedAt, result),
+    const send = async () => {
+      for (let attempt = 0; ; attempt++) {
+        const response = await request(chatUrl(config.base_url), {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${config.api_key}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+          signal: AbortSignal.timeout(timeoutMs),
+        });
+        // 限流是暂时状态：按 Retry-After 或固定阶梯等待后重试，用尽后才算失败。
+        if (response.status !== 429 || attempt >= RATE_LIMIT_RETRIES) return response;
+        await response.body?.cancel().catch(() => {});
+        const retryAfter = Number.parseFloat(response.headers.get("retry-after") ?? "");
+        await sleep(retryAfter > 0 ? Math.min(retryAfter * 1000, 120_000) : RATE_LIMIT_BACKOFF_MS[attempt]);
+      }
     };
+
+    let rejected;
+    for (let attempt = 0; attempt <= OUTPUT_RETRIES; attempt++) {
+      const response = await send();
+      if (!response.ok) {
+        throw new Error(`${config.provider}_${name}_http_${response.status}`);
+      }
+      let result;
+      try {
+        result = parseJsonContent(
+          JSON.parse(await readCappedBody(response, `${config.provider}_${name}_response`, MAX_MODEL_RESPONSE_BYTES)),
+          schema
+        );
+      } catch (error) {
+        rejected = error;
+        continue;
+      }
+      const generatedAt = now();
+      return {
+        result,
+        audit: auditOf(config, promptVersion, schemaVersion, generatedAt, result),
+      };
+    }
+    throw rejected;
   }
 
   async function arbitrate(task, evidence, qwen, glm) {
@@ -463,11 +600,12 @@ export function createMonitorLlm({
     });
   }
 
-  async function independentReview(name, schema, promptVersion, instruction, evidence) {
+  async function independentReview(name, schema, promptVersion, instruction, evidence, schemaVersion) {
     return call("reviewer", {
       name,
       schema,
       promptVersion,
+      ...(schemaVersion ? { schemaVersion } : {}),
       user: `${instruction}\n这是独立复核；不要假设或猜测另一模型的结论。\n<untrusted_evidence>\n${safeEvidence(
         evidence
       )}\n</untrusted_evidence>`,
@@ -479,8 +617,8 @@ export function createMonitorLlm({
     const screened = await call("qwen", {
       name: "monitor_screen",
       schema: SCREEN_SCHEMA,
-      promptVersion: "screen-v1",
-      user: `判断内容是否与癌症筛查、MCED 或受监测产品有关；不确定时 uncertain=true。\n<untrusted_evidence>\n${safeEvidence(
+      promptVersion: "screen-v2",
+      user: `${SCREEN_RULES}\n<untrusted_evidence>\n${safeEvidence(
         evidence
       )}\n</untrusted_evidence>`,
     });
@@ -490,8 +628,8 @@ export function createMonitorLlm({
       const reviewed = await independentReview(
         "monitor_screen",
         SCREEN_SCHEMA,
-        "screen-review-v1",
-        "独立判断内容是否与癌症筛查、MCED 或受监测产品有关。",
+        "screen-review-v2",
+        SCREEN_RULES,
         evidence
       );
       audits.push(reviewed.audit);
@@ -505,34 +643,47 @@ export function createMonitorLlm({
     const extracted = await call("qwen", {
       name: "monitor_extraction",
       schema: EXTRACTION_SCHEMA,
-      promptVersion: "extract-v1",
-      user: `抽取公司、产品、内部事件类型、发生/发布时间和可逐项引用的事实。日期无证据时为 null。监管结论或临床性能数字必须标 risk_flags。\n<untrusted_evidence>\n${safeEvidence(
+      promptVersion: "extract-v2",
+      schemaVersion: "monitor_extraction-v2",
+      user: `${EXTRACTION_RULES}\n<untrusted_evidence>\n${safeEvidence(
         evidence
       )}\n</untrusted_evidence>`,
     });
     audits.push(extracted.audit);
-    let extraction = extracted.result;
-    const extractionHighRisk = extraction.risk_flags.some((flag) =>
-      ["regulatory_claim", "clinical_number"].includes(flag)
-    );
-    if (extraction.uncertain || extractionHighRisk) {
+    let extraction = toExtraction(extracted.result);
+    // 高风险 = 监管结论 / 临床性能数字：既看模型自标的 risk_flags，也看事件类型本身，
+    // 不依赖抽取模型记得打标。
+    const isHighRiskExtraction = (value) =>
+      value.risk_flags.some((flag) => ["regulatory_claim", "clinical_number"].includes(flag)) ||
+      ["regulatory_decision", "clinical_readout"].includes(value.event_type);
+    let extractionReviewed = false;
+    // 独立复核抽取结果；不一致交仲裁，仲裁仍无法判定则整条候选保持 pending。
+    const reviewExtraction = async () => {
       const reviewed = await independentReview(
         "monitor_extraction",
         EXTRACTION_SCHEMA,
-        "extract-review-v1",
-        "独立抽取公司、产品、事件类型、日期、事实和风险标记。",
-        evidence
+        "extract-review-v2",
+        EXTRACTION_RULES,
+        evidence,
+        "monitor_extraction-v2"
       );
       audits.push(reviewed.audit);
-      if (!extractionEqual(extraction, reviewed.result)) {
-        const arbitration = await arbitrate("事实抽取", evidence, extraction, reviewed.result);
+      const second = toExtraction(reviewed.result);
+      if (!extractionEqual(extraction, second)) {
+        const arbitration = await arbitrate("事实抽取", evidence, extraction, second);
         audits.push(arbitration.audit);
-        if (arbitration.result.selected === "pending") {
-          return { status: "pending", stage: "extraction_conflict", analyses: audits };
-        }
-        extraction = arbitration.result.selected === "qwen" ? extraction : reviewed.result;
+        if (arbitration.result.selected === "pending") return false;
+        extraction = arbitration.result.selected === "qwen" ? extraction : second;
+      }
+      extractionReviewed = true;
+      return true;
+    };
+    if (extraction.uncertain || isHighRiskExtraction(extraction)) {
+      if (!(await reviewExtraction())) {
+        return { status: "pending", stage: "extraction_conflict", analyses: audits };
       }
     }
+    const extractionHighRisk = isHighRiskExtraction(extraction);
 
     const scored = await call("qwen", {
       name: "monitor_importance",
@@ -542,6 +693,7 @@ export function createMonitorLlm({
     });
     audits.push(scored.audit);
     let importance = scored.result;
+    let importanceReviewed = false;
     const scoreHighRisk = importanceTotal(importance) >= 80 || extractionHighRisk;
     if (importance.uncertain || scoreHighRisk) {
       const reviewed = await independentReview(
@@ -559,6 +711,13 @@ export function createMonitorLlm({
           return { status: "pending", stage: "importance_conflict", analyses: audits };
         }
         importance = arbitration.result.selected === "qwen" ? importance : reviewed.result;
+      }
+      importanceReviewed = true;
+    }
+    // L1 事件即使没有监管 / 临床标记，事实抽取也必须经过独立复核后才能自动发布。
+    if (importanceTotal(importance) >= 80 && !extractionReviewed) {
+      if (!(await reviewExtraction())) {
+        return { status: "pending", stage: "extraction_conflict", analyses: audits };
       }
     }
 
@@ -589,6 +748,12 @@ export function createMonitorLlm({
       },
       summary: summarized.result.summary,
       reason: summarized.result.reason,
+      // 独立模型复核的覆盖情况：高风险事件凭此自动发布，取代逐条人工确认。
+      model_review: {
+        extraction: extractionReviewed,
+        importance: importanceReviewed,
+        reviewer: extractionReviewed || importanceReviewed ? reviewerLabel(env) : null,
+      },
       analyses: audits,
     };
   }
@@ -596,22 +761,24 @@ export function createMonitorLlm({
   async function judgeMatch(evidence, candidateEvents, { highRisk = false } = {}) {
     const audits = [];
     const payload = { evidence, candidate_events: candidateEvents };
+    const knownIds = new Set(candidateEvents.map((event) => event.id));
+    // 合并只发生在「关系为同一事件」且 event_id 指向一条既有事件时；两者不一致的回答不可用。
+    const consistent = (value) =>
+      value.relation === "different_event" ? value.event_id === null : knownIds.has(value.event_id);
     const judged = await call("qwen", {
       name: "monitor_event_match",
       schema: MATCH_SCHEMA,
-      promptVersion: "event-match-v1",
-      user: `判断候选与既有事件的关系。不同监管里程碑必须是不同事件；转载或同一公告是同一事件；只有新增关键事实才是 material_update。\n<untrusted_evidence>\n${safeEvidence(
-        payload
-      )}\n</untrusted_evidence>`,
+      promptVersion: "event-match-v2",
+      user: `${MATCH_RULES}\n<untrusted_evidence>\n${safeEvidence(payload)}\n</untrusted_evidence>`,
     });
     audits.push(judged.audit);
     let match = judged.result;
-    if (match.uncertain || highRisk) {
+    if (match.uncertain || highRisk || !consistent(match)) {
       const reviewed = await independentReview(
         "monitor_event_match",
         MATCH_SCHEMA,
-        "event-match-review-v1",
-        "独立判断 same_event、material_update 或 different_event。",
+        "event-match-review-v2",
+        MATCH_RULES,
         payload
       );
       audits.push(reviewed.audit);
@@ -624,6 +791,7 @@ export function createMonitorLlm({
         match = arbitration.result.selected === "qwen" ? match : reviewed.result;
       }
     }
+    if (!consistent(match)) return { relation: "pending", event_id: null, analyses: audits };
     return { ...match, analyses: audits };
   }
 

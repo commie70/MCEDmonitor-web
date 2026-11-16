@@ -1,375 +1,461 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}/* ==========================================================================
-   早筛情报站 — AIHOT 设计令牌(亮色 = :root 默认，暗色 = [data-theme="dark"])
-   取自目标站内联样式表原值，见 docs/research/aihot-virxact-com-e007b012/
+/* ==========================================================================
+   早筛情报站 — 设计令牌
+   墨青为唯一强调色；陶土橙只留给本司锚定(世和基因)。
+   研究设计的证据层级用「实心 → 描边」的视觉重量表达，不靠文字说明。
    ========================================================================== */
 
 :root {
   color-scheme: light;
-  --bg-0: #f4f5f6;
-  --bg-1: #eff1f2;
-  --bg-2: #e2e4e7;
-  --surface-0: rgba(28, 39, 51, 0.025);
-  --surface-1: rgba(28, 39, 51, 0.04);
-  --surface-2: rgba(28, 39, 51, 0.06);
-  --surface-3: rgba(28, 39, 51, 0.09);
-  --surface-card: #ffffff;
-  --surface-card-hover: #ffffff;
-  --surface-elevated: #ffffff;
-  --text-0: #1c2733;
-  --text-1: #5c6672;
-  --text-2: #6b7684;
-  --text-soft-strong: rgba(28, 39, 51, 0.92);
-  --text-soft-medium: rgba(28, 39, 51, 0.55);
-  --border: #e2e4e7;
-  --border-strong: #d8dbdf;
-  --border-soft: #eceef0;
-  --border-emphasis: #8a94a2;
-  --border-card-subtle-solid: #c9cdd2;
-  --shadow: 0 12px 32px rgba(28, 39, 51, 0.12);
-  --shadow-soft: 0 4px 12px rgba(28, 39, 51, 0.06);
-  --shadow-card: 0 1px 2px rgba(28, 39, 51, 0.05);
-  --shadow-card-hover: 0 6px 18px rgba(28, 39, 51, 0.09);
-  --shadow-thumb: 0 1px 3px rgba(28, 39, 51, 0.14);
-  --accent-cyan:#135e6b;
-  --accent-amber: #b8873a;
-  --accent-rose: #b3402a;
-  --accent-emerald: #2f7d5c;
-  --accent-cyan-fg: #135e6b;
-  --accent-amber-fg: #7c5a24;
-  --accent-rose-fg: #b3402a;
-  --accent-emerald-fg: #2a6e51;
-  --rank-1: #b3402a;
-  --rank-2: #a3642f;
-  --rank-3: #96702e;
-  --rank-rest: #6b7684;
-  --note-fg: #42707c;
-  --note-bg: color-mix(in srgb, var(--note-fg) 6%, transparent);
-  --sidebar-bg: #ffffff;
-  --sidebar-border: #e2e4e7;
-  --scrim-overlay: rgba(0, 0, 0, 0.5);
-  --theme-accent: #135e6b;
-  --theme-accent-rgb: 19, 94, 107;
-  --theme-accent-hover: #0e4a54;
-  --theme-accent-contrast: #fcfcfd;
+  --bg: #f4f5f5;
+  --panel: #ffffff;
+  --sunken: #eceeef;
+  --ink: #15232a;
+  --ink-2: #4b5a62;
+  --ink-3: #7c898f;
+  --line: #e0e4e6;
+  --line-strong: #c9d0d3;
+  --accent: #0d6a62;
+  --accent-ink: #0a524c;
+  --accent-soft: #e0efec;
+  --self: #b5540c;
+  --self-soft: #fbeedf;
+  --warn: #a8480f;
+  --warn-soft: #fbeadf;
+  --shadow: 0 1px 2px rgba(21, 35, 42, 0.05), 0 6px 20px -12px rgba(21, 35, 42, 0.18);
+
+  /* 事件类型 */
+  --k-regulatory: #a8530b;
+  --k-readout: #0d6a62;
+  --k-publication: #3454b4;
+  --k-conference: #7340c2;
+  --k-launch: #b83268;
+  --k-deal: #4f6672;
+  --k-corporate: #4f6672;
+  --k-policy: #8a6400;
+  --k-other: #7c898f;
+
+  /* 图表标记色(经色觉缺陷校验)：前瞻 / 本司 */
+  --mark: #00917f;
+  --mark-self: #b5540c;
+
+  /* 热力：0% → 100% */
+  --heat-0: #eef1f2;
+  --heat-1: #0d6a62;
 }
 
-html[data-theme="dark"] {
+[data-theme="dark"] {
   color-scheme: dark;
-  --bg-0: #10151c;
-  --bg-1: #171d26;
-  --bg-2: #1b2230;
-  --surface-0: rgba(255, 255, 255, 0.03);
-  --surface-1: rgba(255, 255, 255, 0.04);
-  --surface-2: rgba(255, 255, 255, 0.07);
-  --surface-3: rgba(255, 255, 255, 0.10);
-  --surface-card: #171d26;
-  --surface-card-hover: #1b2230;
-  --surface-elevated: #1b2230;
-  --text-0: #e8ebf2;
-  --text-1: #98a2b3;
-  --text-2: #7b869a;
-  --text-soft-strong: rgba(232, 235, 242, 0.85);
-  --text-soft-medium: rgba(232, 235, 242, 0.55);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --border-soft: rgba(255, 255, 255, 0.06);
-  --border-emphasis: rgba(255, 255, 255, 0.22);
-  --border-card-subtle-solid: rgba(255, 255, 255, 0.14);
-  --shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
-  --shadow-card:none;
-  --shadow-card-hover:none;
-  --shadow-thumb: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --accent-cyan:#4fa3b3;
-  --accent-amber: #d3b26a;
-  --accent-rose: #d86a52;
-  --accent-emerald: #5fc79a;
-  --accent-cyan-fg: #6cb8c6;
-  --accent-amber-fg: #d3b26a;
-  --accent-rose-fg: #d86a52;
-  --accent-emerald-fg: #5fc79a;
-  --rank-1: #d86a52;
-  --rank-2: #d18a5e;
-  --rank-3: #d3b26a;
-  --rank-rest: #7b869a;
-  --note-fg: #8fb8a8;
-  --note-bg: color-mix(in srgb, var(--note-fg) 10%, transparent);
-  --sidebar-bg: #0c1117;
-  --sidebar-border: rgba(255, 255, 255, 0.07);
-  --scrim-overlay: rgba(0, 0, 0, 0.5);
-  --theme-accent: #4fa3b3;
-  --theme-accent-rgb: 79, 163, 179;
-  --theme-accent-hover: #6cb8c6;
-  --theme-accent-contrast: #10151c;
+  --bg: #0e1416;
+  --panel: #151c1f;
+  --sunken: #1b2428;
+  --ink: #e7edef;
+  --ink-2: #a9b6bc;
+  --ink-3: #74838a;
+  --line: #243036;
+  --line-strong: #33434a;
+  --accent: #4fc3b6;
+  --accent-ink: #7ad8cd;
+  --accent-soft: #12302d;
+  --self: #f0a35c;
+  --self-soft: #3a2614;
+  --warn: #f0a35c;
+  --warn-soft: #3a2614;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+
+  --k-regulatory: #e9a35b;
+  --k-readout: #4fc3b6;
+  --k-publication: #8ea6f5;
+  --k-conference: #b594f0;
+  --k-launch: #ee85b0;
+  --k-deal: #97adb8;
+  --k-corporate: #97adb8;
+  --k-policy: #d9b655;
+  --k-other: #74838a;
+
+  --mark: #2e9f93;
+  --mark-self: #c4762c;
+
+  --heat-0: #1b2428;
+  --heat-1: #4fc3b6;
 }
 
 @theme inline {
-  --color-mc-page: var(--bg-0);
-  --color-mc-bg1: var(--bg-1);
-  --color-mc-bg2: var(--bg-2);
-  --color-mc-surface0: var(--surface-0);
-  --color-mc-surface1: var(--surface-1);
-  --color-mc-surface2: var(--surface-2);
-  --color-mc-surface3: var(--surface-3);
-  --color-mc-card: var(--surface-card);
-  --color-mc-card-hover: var(--surface-card-hover);
-  --color-mc-elev: var(--surface-elevated);
-  --color-mc-ink: var(--text-0);
-  --color-mc-ink1: var(--text-1);
-  --color-mc-ink2: var(--text-2);
-  --color-mc-soft-strong: var(--text-soft-strong);
-  --color-mc-soft-medium: var(--text-soft-medium);
-  --color-mc-line: var(--border);
-  --color-mc-line-strong: var(--border-strong);
-  --color-mc-line-soft: var(--border-soft);
-  --color-mc-emphasis: var(--border-emphasis);
-  --color-mc-card-line: var(--border-card-subtle-solid);
-  --color-mc-cyan: var(--accent-cyan);
-  --color-mc-cyan-fg: var(--accent-cyan-fg);
-  --color-mc-amber: var(--accent-amber);
-  --color-mc-amber-fg: var(--accent-amber-fg);
-  --color-mc-rose: var(--accent-rose);
-  --color-mc-rose-fg: var(--accent-rose-fg);
-  --color-mc-emerald: var(--accent-emerald);
-  --color-mc-emerald-fg: var(--accent-emerald-fg);
-  --color-mc-rank1: var(--rank-1);
-  --color-mc-rank2: var(--rank-2);
-  --color-mc-rank3: var(--rank-3);
-  --color-mc-rankrest: var(--rank-rest);
-  --color-mc-note: var(--note-fg);
-  --color-mc-note-bg: var(--note-bg);
-  --color-mc-sidebar: var(--sidebar-bg);
-  --color-mc-sidebar-line: var(--sidebar-border);
-  --color-mc-accent: var(--theme-accent);
-  --color-mc-accent-hover: var(--theme-accent-hover);
-  --color-mc-accent-contrast: var(--theme-accent-contrast);
-  --shadow-mc-card: var(--shadow-card);
-  --shadow-mc-card-hover: var(--shadow-card-hover);
-  --shadow-mc-soft: var(--shadow-soft);
-  --shadow-mc: var(--shadow);
-  --shadow-mc-thumb: var(--shadow-thumb);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-self: var(--self);
+  --color-self-soft: var(--self-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-mark: var(--mark);
+  --color-mark-self: var(--mark-self);
+  --shadow-panel: var(--shadow);
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    "Noto Sans CJK SC", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   html {
-    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC",
-      "Hiragino Sans GB", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
+
   body {
-    background: var(--bg-0);
-    color: var(--text-0);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  select,
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  dialog {
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-/* 文章详情页 markdown 正文(react-markdown 渲染,HTML 默认剥离,安全) */
-.md-body > *:first-child {
+/* ---- 事件类型：小圆点 + 文字色 ---- */
+[data-kind] {
+  --kind: var(--k-other);
+}
+[data-kind="regulatory"] {
+  --kind: var(--k-regulatory);
+}
+[data-kind="readout"] {
+  --kind: var(--k-readout);
+}
+[data-kind="publication"] {
+  --kind: var(--k-publication);
+}
+[data-kind="conference"] {
+  --kind: var(--k-conference);
+}
+[data-kind="launch"] {
+  --kind: var(--k-launch);
+}
+[data-kind="deal"] {
+  --kind: var(--k-deal);
+}
+[data-kind="corporate"] {
+  --kind: var(--k-corporate);
+}
+[data-kind="policy"] {
+  --kind: var(--k-policy);
+}
+
+/* ---- 技术路线 ---- */
+[data-route] {
+  --route: #64748b;
+}
+[data-route="甲基化"] {
+  --route: #168f80;
+}
+[data-route="片段组学"] {
+  --route: #3b6fb6;
+}
+[data-route="多组学"] {
+  --route: #8b5cf6;
+}
+[data-route="突变"] {
+  --route: #c2710c;
+}
+[data-route="蛋白质"] {
+  --route: #d24d6c;
+}
+[data-route="miRNA"] {
+  --route: #0e9488;
+}
+[data-route="RNA"] {
+  --route: #a21caf;
+}
+[data-route="FIT"] {
+  --route: #75813a;
+}
+[data-route="FIT-DNA"] {
+  --route: #7c8a3b;
+}
+[data-route="AI"] {
+  --route: #64748b;
+}
+
+/* ---- 研究设计：证据层级 = 视觉重量 ---- */
+[data-design] {
+  --d-bg: transparent;
+  --d-fg: var(--ink-3);
+  --d-bd: var(--line-strong);
+  --d-style: dashed;
+}
+[data-design="RCT"] {
+  --d-bg: var(--ink);
+  --d-fg: var(--panel);
+  --d-bd: var(--ink);
+  --d-style: solid;
+}
+[data-design="前瞻干预"],
+[data-design="前瞻注册"],
+[data-design="前瞻 + 回顾注册汇总"] {
+  --d-bg: var(--accent);
+  --d-fg: #ffffff;
+  --d-bd: var(--accent);
+  --d-style: solid;
+}
+[data-theme="dark"] [data-design="前瞻干预"],
+[data-theme="dark"] [data-design="前瞻注册"],
+[data-theme="dark"] [data-design="前瞻 + 回顾注册汇总"] {
+  --d-fg: #06201d;
+}
+[data-design="前瞻队列"] {
+  --d-bg: var(--accent-soft);
+  --d-fg: var(--accent-ink);
+  --d-bd: var(--accent-soft);
+  --d-style: solid;
+}
+
+/* ---- 报证阶段 ---- */
+[data-stage] {
+  --s-bg: var(--sunken);
+  --s-fg: var(--ink-2);
+  --s-bd: transparent;
+}
+[data-stage="nmpa-approved"],
+[data-stage="fda-approved"],
+[data-stage="hsa"] {
+  --s-bg: var(--accent);
+  --s-fg: #ffffff;
+}
+[data-theme="dark"] [data-stage="nmpa-approved"],
+[data-theme="dark"] [data-stage="fda-approved"],
+[data-theme="dark"] [data-stage="hsa"] {
+  --s-fg: #06201d;
+}
+[data-stage="fda-review"] {
+  --s-bg: var(--accent-soft);
+  --s-fg: var(--accent-ink);
+  --s-bd: var(--accent);
+}
+[data-stage="fda-breakthrough"],
+[data-stage="nmpa-innovative"],
+[data-stage="ce"] {
+  --s-bg: var(--accent-soft);
+  --s-fg: var(--accent-ink);
+}
+[data-stage="rnd"] {
+  --s-bg: transparent;
+  --s-fg: var(--ink-3);
+  --s-bd: var(--line-strong);
+}
+
+/* ---- 正文排版(日报、抓回正文) ---- */
+.prose-mc {
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.prose-mc > :first-child {
   margin-top: 0;
 }
-.md-body h1,
-.md-body h2,
-.md-body h3,
-.md-body h4 {
-  margin: 1.1em 0 0.45em;
-  color: var(--text-0);
+.prose-mc h1,
+.prose-mc h2,
+.prose-mc h3,
+.prose-mc h4 {
+  color: var(--ink);
   font-weight: 700;
   line-height: 1.4;
+  margin: 1.5em 0 0.5em;
 }
-.md-body h1 {
-  font-size: 1.25em;
+.prose-mc h1 {
+  font-size: 18px;
 }
-.md-body h2 {
-  font-size: 1.15em;
+.prose-mc h2 {
+  font-size: 16px;
 }
-.md-body h3,
-.md-body h4 {
-  font-size: 1.02em;
+.prose-mc h3,
+.prose-mc h4 {
+  font-size: 14.5px;
 }
-.md-body p {
-  margin: 0.65em 0;
+.prose-mc p,
+.prose-mc ul,
+.prose-mc ol,
+.prose-mc blockquote,
+.prose-mc pre,
+.prose-mc table {
+  margin: 0.7em 0;
 }
-.md-body ul,
-.md-body ol {
-  margin: 0.65em 0;
-  padding-left: 1.4em;
+.prose-mc ul,
+.prose-mc ol {
+  padding-left: 1.3em;
 }
-.md-body ul {
+.prose-mc ul {
   list-style: disc;
 }
-.md-body ol {
+.prose-mc ol {
   list-style: decimal;
 }
-.md-body li {
-  margin: 0.3em 0;
+.prose-mc li {
+  margin: 0.25em 0;
 }
-.md-body a {
-  color: var(--accent-cyan-fg);
+.prose-mc a {
+  color: var(--accent-ink);
   text-decoration: underline;
-  text-underline-offset: 2px;
-  word-break: break-all;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
 }
-.md-body blockquote {
-  margin: 0.8em 0;
-  padding: 6px 12px;
-  border-left: 3px solid var(--border-strong);
-  background: var(--surface-0);
-  color: var(--text-2);
+.prose-mc strong {
+  color: var(--ink);
+  font-weight: 650;
 }
-.md-body code {
-  padding: 1px 5px;
+.prose-mc blockquote {
+  border-left: 3px solid var(--line-strong);
+  padding-left: 12px;
+  color: var(--ink-3);
+}
+.prose-mc code {
+  background: var(--sunken);
   border-radius: 4px;
-  background: var(--surface-2);
-  font-size: 0.92em;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
 }
-.md-body pre {
-  margin: 0.8em 0;
-  padding: 10px 12px;
+.prose-mc pre {
+  background: var(--sunken);
+  border-radius: 8px;
+  padding: 12px 14px;
   overflow-x: auto;
-  border-radius: 8px;
-  background: var(--surface-0);
-  border: 1px solid var(--border);
 }
-.md-body pre code {
-  padding: 0;
+.prose-mc pre code {
   background: none;
+  padding: 0;
 }
-.md-body img {
+.prose-mc img {
   max-width: 100%;
+  height: auto;
   border-radius: 8px;
 }
-.md-body hr {
-  margin: 1.2em 0;
+.prose-mc hr {
   border: 0;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
+  margin: 1.4em 0;
 }
-.md-body table {
-  margin: 0.8em 0;
-  width: 100%;
+.prose-mc table {
   border-collapse: collapse;
-  font-size: 0.95em;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 13px;
 }
-.md-body th,
-.md-body td {
-  padding: 6px 10px;
-  border: 1px solid var(--border);
+.prose-mc th,
+.prose-mc td {
+  border: 1px solid var(--line);
+  padding: 5px 9px;
   text-align: left;
+}
+.prose-mc th {
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+/* ---- 横向滚动表格：首列冻结 ---- */
+.sticky-first > thead > tr > :first-child,
+.sticky-first > tbody > tr > :first-child,
+.sticky-first > tfoot > tr > :first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--panel);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- 热力分档：单一色相由浅到深，6 档 ---- */
+[data-heat] {
+  --heat: var(--heat-0);
+  --heat-fg: var(--ink-2);
+  background: var(--heat);
+  color: var(--heat-fg);
+}
+[data-heat="1"] {
+  --heat: color-mix(in srgb, var(--heat-1) 18%, var(--heat-0));
+}
+[data-heat="2"] {
+  --heat: color-mix(in srgb, var(--heat-1) 38%, var(--heat-0));
+}
+[data-heat="3"] {
+  --heat: color-mix(in srgb, var(--heat-1) 58%, var(--heat-0));
+  --heat-fg: var(--ink);
+}
+[data-heat="4"] {
+  --heat: color-mix(in srgb, var(--heat-1) 80%, var(--heat-0));
+  --heat-fg: var(--panel);
+}
+[data-heat="5"] {
+  --heat: var(--heat-1);
+  --heat-fg: var(--panel);
 }

@@ -1,0 +1,1529 @@
+[
+  {
+    "id": "grail-ccga3",
+    "companyId": "grail",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "CCGA-3 独立验证(Ann Oncol 2021)",
+    "date": "2021-06",
+    "dateNote": "2021-09 见刊(2021-06 在线)",
+    "population": "癌 2,823 / 非癌 1,254，n=4,077",
+    "performance": "特异性 99.5%(99.0–99.8)/ 灵敏度 51.5%(I 期 16.8%、II 期 40.4%、III 期 77.0%、IV 期 90.1%)，CSO 88.7%(top 预测)",
+    "metrics": {
+      "n": 4077,
+      "spec": 99.5,
+      "sens": 51.5,
+      "early": 16.8,
+      "earlyLabel": "I 期",
+      "too": 88.7,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "ann-oncol-2021-32-9-1167-77"
+    ]
+  },
+  {
+    "id": "grail-pathfinder2",
+    "companyId": "grail",
+    "legacyIndex": 1,
+    "design": "前瞻注册",
+    "scope": "mced",
+    "name": "PATHFINDER 2(性能可分析队列，ASCO 2026 主要分析)",
+    "date": "2026-06",
+    "dateNote": "2026-06(ASCO 主要分析)；2026-09 Nat Med 见刊",
+    "population": "≥50 岁、无癌临床疑似、符合指南筛查；440 癌 / 31,567 非癌，n=32,007(入组 35,878；数据截止 2026-02-11)",
+    "performance": "特异性 99.6% / episode 灵敏度 39.3%(全癌种)、69.8%(12 高致死)、66.2%(6 侵袭性癌)；PPV 60.3%、NPV 99.2%；TOO top-2 91.3%；检出癌 53.0% 为 I–II 期；阳性似然比 108.9；诊断解决中位 48 天",
+    "metrics": {
+      "n": 32007,
+      "spec": 99.6,
+      "sens": 39.3,
+      "too": 91.3,
+      "tooLabel": "top-2",
+      "ppv": 60.3,
+      "npv": 99.2
+    },
+    "sources": [
+      "nat-med-2026-pathfinder-2",
+      "j-clin-oncol-2026-44-17-suppl-lba10509",
+      "clinicaltrials-gov-nct05155605",
+      "grail-press-release-2026-05-31-pathfinder-2-asco"
+    ],
+    "compare": {
+      "order": 2,
+      "co": "GRAIL",
+      "prod": "Galleri®",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻注册",
+      "study": "PATHFINDER 2(性能可分析队列，ASCO 2026)",
+      "mced": true,
+      "canc": ">50 癌种",
+      "pop": "≥50 岁、无癌临床疑似、符合指南筛查；440 癌 / 31,567 非癌，n=32,007",
+      "spec": "99.6%",
+      "sens": "39.3%",
+      "sensSub": "全癌种；12 高致死 69.8%；6 侵袭性 66.2%",
+      "early": "—",
+      "earlySub": "检出癌 53.0% 为 I–II 期",
+      "too": "91.3%",
+      "tooSub": "top-2；PPV 60.3% / NPV 99.2%",
+      "updatedAt": "2026-06(ASCO)"
+    }
+  },
+  {
+    "id": "grail-nhs-galleri-performance",
+    "companyId": "grail",
+    "legacyIndex": 2,
+    "design": "RCT",
+    "scope": "mced",
+    "name": "NHS-Galleri 次要终点(干预臂 · 3 轮汇总)",
+    "date": "2026-06",
+    "dateNote": "2026-06(ASCO 2026)；2026-09 Nat Med 见刊",
+    "population": "3,051 癌 / 194,095 非癌，N=197,146",
+    "performance": "特异性 99.55% / episode 灵敏度 30.7%(全癌种)、54.7%(12 预设)，PPV 52.0%、NPV 98.92%，CSO / TOO 92.5%(含 top-2)；首轮 PPV 58.0%、灵敏度 37.2% / 63.4%",
+    "metrics": {
+      "n": 197146,
+      "spec": 99.55,
+      "sens": 30.7,
+      "too": 92.5,
+      "tooLabel": "含 top-2",
+      "ppv": 52,
+      "npv": 98.92
+    },
+    "sources": [
+      "nat-med-2026-32-10",
+      "j-clin-oncol-2026-44-17-suppl-lba100",
+      "clinicaltrials-gov-nct05611632"
+    ],
+    "compare": {
+      "order": 0,
+      "co": "GRAIL",
+      "prod": "Galleri®",
+      "route": [
+        "甲基化"
+      ],
+      "type": "RCT",
+      "study": "NHS-Galleri 次要终点(干预臂·3轮汇总)",
+      "mced": true,
+      "canc": ">50 癌种",
+      "pop": "50–77 岁普通人群(英格兰 NHS)；3,051 癌 / 194,095 非癌，N=197,146",
+      "spec": "99.55%",
+      "sens": "30.7%",
+      "sensSub": "全癌种；12 预设 54.7%；首轮 37.2% / 63.4%",
+      "early": "—",
+      "earlySub": "主要终点 III/IV 联合降低未达；IV 期 2/3 轮 ↓22% / ↓26%，I–II ↑16%",
+      "too": "92.5%",
+      "tooSub": "CSO / TOO 含 top-2；首轮 PPV 58.0%",
+      "updatedAt": "2026-06(ASCO)"
+    }
+  },
+  {
+    "id": "grail-nhs-galleri-primary",
+    "companyId": "grail",
+    "legacyIndex": 3,
+    "design": "RCT",
+    "scope": "mced",
+    "name": "NHS-Galleri 主要终点(stage shift)",
+    "date": "2026-06",
+    "dateNote": "2026-06(ASCO 2026)；2026-10 NEJM 见刊",
+    "population": "50–77 岁普通人群(英格兰 NHS)；n≈142,000",
+    "performance": "主要终点(III/IV 期联合降低)未达(IRR 1.03，p=0.6324)；次要终点：IV 期诊断第 2/3 轮 ↓22% / ↓26%(三轮合计 ↓14%)、12 预设癌种 I–II 期 ↑16%、筛查检出率 4 倍(MCED 检出 n=937)；临床检出 ↓21%、急诊途径 ↓25%",
+    "metrics": {
+      "n": 142000
+    },
+    "sources": [
+      "n-engl-j-med-2026-nhs-galleri",
+      "j-clin-oncol-2026-44-17-suppl-lba100",
+      "grail-press-release-2026-05-30-nhs-galleri-full-results",
+      "clinicaltrials-gov-nct05611632"
+    ]
+  },
+  {
+    "id": "grail-symplify",
+    "companyId": "grail",
+    "legacyIndex": 4,
+    "design": "前瞻队列",
+    "scope": "mced",
+    "name": "SYMPLIFY(有症状疑癌转诊人群，Lancet Oncol 2023)",
+    "date": "2023-06",
+    "dateNote": "2025-10(24 个月更新；原文 2023-06)",
+    "population": "入组 6,238 例，5,461 例进入分析(英国 44 家医院)；初始 9 个月诊断 368 例癌，另有 24 个月注册随访",
+    "performance": "初始分析：特异性 98.4% / 灵敏度 66.3%(症状人群)，PPV 75.5%、NPV 97.6%，CSO top-1 85.2%，I 期 24.2%→IV 期 95.3%；24 个月随访将原 79 例假阳性中的 28 例重分类为癌，PPV 升至 84.2%",
+    "metrics": {
+      "n": 5461,
+      "spec": 98.4,
+      "sens": 66.3,
+      "early": 24.2,
+      "earlyLabel": "I 期",
+      "too": 85.2,
+      "tooLabel": "top-1",
+      "ppv": 75.5,
+      "npv": 97.6
+    },
+    "symptomatic": true,
+    "sources": [
+      "lancet-oncol-2023-24-7-733-43",
+      "grail-press-release-2025-10-20-symplify-long-term-data-e"
+    ],
+    "compare": {
+      "order": 18,
+      "co": "GRAIL",
+      "prod": "Galleri",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻队列",
+      "study": "SYMPLIFY(有症状疑癌转诊)",
+      "mced": true,
+      "canc": ">50 癌种",
+      "pop": "入组 6,238；5,461 例进入分析(44 家医院)，9 个月诊断 368 例癌",
+      "spec": "98.4%",
+      "sens": "66.3%",
+      "sensSub": "症状人群、个体水平",
+      "early": "—",
+      "earlySub": "I 期 24.2% → IV 期 95.3%",
+      "too": "85.2%",
+      "tooSub": "top-1 CSO；PPV 75.5%(2 年随访重分类后 84.2%)",
+      "updatedAt": "2025-10(24 个月更新)"
+    }
+  },
+  {
+    "id": "grail-pathfinder",
+    "companyId": "grail",
+    "legacyIndex": 5,
+    "design": "前瞻队列",
+    "scope": "mced",
+    "name": "PATHFINDER(Schrag，Lancet 2023)",
+    "date": "2023-10",
+    "dateNote": "2023-10(Lancet 402:1251-60)",
+    "population": "≥50 岁(含额外风险与一般风险两队列)；可分析 n=6,621,12 个月随访；阳性信号 92 例(1.4%)、真阳性 35 例 / 36 癌",
+    "performance": "特异性 99.5%(精炼版) / 99.1%(研究版)；灵敏度 28.9%(受试者级 35/121，原文注明非正式终点)；I 期 16.3%；CSO 88%(精炼版 top-1/2)；PPV 43.1%(研究版 38%)",
+    "metrics": {
+      "n": 6621,
+      "spec": 99.5,
+      "sens": 28.9,
+      "early": 16.3,
+      "earlyLabel": "I 期",
+      "too": 88,
+      "tooLabel": "top-1/2",
+      "ppv": 43.1
+    },
+    "sources": [
+      "lancet-2023-402-10409-1251-60",
+      "clinicaltrials-gov-nct04241796"
+    ],
+    "compare": {
+      "order": 11,
+      "co": "GRAIL",
+      "prod": "Galleri®(早期版 / 精炼版)",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻队列",
+      "study": "PATHFINDER(Schrag, Lancet 2023)",
+      "mced": true,
+      "canc": ">50 癌种",
+      "pop": "≥50 岁(含额外风险与一般风险两队列)；分析 n=6,621,12 个月随访；阳性信号 92 例(1.4%)、真阳性 35 例 / 36 癌",
+      "spec": "99.5%",
+      "specSub": "精炼版；早期版 99.1%",
+      "sens": "28.9%",
+      "sensSub": "受试者级 35/121；条目级 29.5%(36/122)",
+      "early": "16.3%",
+      "earlySub": "I 期 7/43；II 26.9% / III 36.4% / IV 75.0%",
+      "too": "88%",
+      "tooSub": "CSO 精炼版；PPV 43.1%(早期版 38%)",
+      "updatedAt": "2023-10(Lancet)",
+      "detail": "pf1"
+    }
+  },
+  {
+    "id": "exact-cancerseek",
+    "companyId": "exact",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "CancerSEEK(Cohen 2018，Cancerguard 前身)",
+    "date": "2018-02",
+    "dateNote": "2018-02(Science 359:926-930)",
+    "population": "1,005 癌(8 癌种)/ 812 健康",
+    "performance": "特异性 >99% / 灵敏度中位 70%(I 期 43%、II 期 73%、III 期 78%；卵巢 98%、肝 95%、胃 90%、乳腺仅 33%)",
+    "metrics": {
+      "n": 1817,
+      "spec": 99,
+      "specLabel": ">99%",
+      "sens": 70,
+      "early": 43,
+      "earlyLabel": "I 期"
+    },
+    "sources": [
+      "science-2018-359-6378-926-30"
+    ]
+  },
+  {
+    "id": "exact-detect-a",
+    "companyId": "exact",
+    "legacyIndex": 1,
+    "design": "前瞻干预",
+    "scope": "mced",
+    "name": "DETECT-A(Lennon 2020)",
+    "date": "2020-04",
+    "dateNote": "2020-04(Science abb9601)",
+    "population": "入组 10,006 名 65–75 岁、无癌史女性；9,911 人完成血液检测",
+    "performance": "确认血检特异性 98.9% / 灵敏度 27%；加 PET-CT 后特异性 99.6%、PPV 40.6%。原文未报告可直接用于横向比较的 I–II 期灵敏度",
+    "metrics": {
+      "n": 10006,
+      "spec": 98.9,
+      "sens": 27
+    },
+    "sources": [
+      "science-2020-369-6499-eabb9601"
+    ],
+    "compare": {
+      "order": 1,
+      "co": "Exact Sciences",
+      "prod": "CancerSEEK(前身)",
+      "route": [
+        "突变",
+        "蛋白质"
+      ],
+      "type": "前瞻干预",
+      "study": "DETECT-A(Lennon 2020)",
+      "mced": true,
+      "canc": "多癌种",
+      "pop": "入组 10,006 名 65–75 岁无癌史女性；9,911 人完成血液检测",
+      "spec": "98.9%",
+      "specSub": "+PET-CT 99.6%",
+      "sens": "27%",
+      "early": "—",
+      "earlySub": "原文未报告可直接横比的早期灵敏度",
+      "too": "—",
+      "tooSub": "加 PET-CT 后 PPV 40.6%",
+      "updatedAt": "2020-04(Science)"
+    }
+  },
+  {
+    "id": "exact-cancerguard-dev",
+    "companyId": "exact",
+    "legacyIndex": 2,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "Cancerguard 测试开发(2025 上市版资料)",
+    "date": "2025-09",
+    "dateNote": "2025-09(LDT 上市)",
+    "population": "开发研究覆盖 19 癌种；上市适用为 50–84 岁，且不适用于乳腺癌、前列腺癌筛查",
+    "performance": "特异性 97.4% / 总体灵敏度约 64%(不含乳腺、前列腺)；六大高致死癌灵敏度 68%；检出超过三分之一的 I–II 期癌",
+    "metrics": {
+      "spec": 97.4,
+      "sens": 64
+    },
+    "sources": [
+      "exact-sciences-press-release-2025-09-10",
+      "cancerguard-for-healthcare-providers"
+    ]
+  },
+  {
+    "id": "exact-ascend2",
+    "companyId": "exact",
+    "legacyIndex": 3,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "ASCEND-2(多中心前瞻采样病例对照；AACR 2024 poster LB100)",
+    "date": "2024-04",
+    "dateNote": "2024-04(AACR 2024)",
+    "population": ">11,000 人前瞻采样，病例对照测试集 729 癌 / 2,434 非癌",
+    "performance": "甲基化 + 蛋白 OR-logic：特异性 98.5% / 灵敏度 50.9%(I 期 15.4%、II 期 38.0%、III 期 67.8%、IV 期 85.5%)；除乳腺 / 前列腺后 56.8%；六大侵袭性癌 63.7%",
+    "metrics": {
+      "n": 3163,
+      "spec": 98.5,
+      "sens": 50.9,
+      "early": 15.4,
+      "earlyLabel": "I 期"
+    },
+    "sources": [
+      "cancer-res-2024-84-7-suppl-lb100",
+      "medrxiv-2025-preprint",
+      "exact-sciences-press-release-2024-04-08-aacr-2024"
+    ],
+    "note": "本行为公司新闻稿与预印本口径；AACR 摘要 LB100 报告的是另一分析(测试集 772 癌 / 2,516 非癌，灵敏度 49.9%@特异性 99.0%)。"
+  },
+  {
+    "id": "exact-deep-c",
+    "companyId": "exact",
+    "legacyIndex": 4,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "Deep-C(Cologuard 1.0，NEJM 2014)",
+    "date": "2014-04",
+    "dateNote": "2014-04(NEJM 370:1287-97)",
+    "population": "50–84 岁平均风险；n=9,989",
+    "performance": "特异性 87% / 灵敏度 92%(CRC)，进展期腺瘤 42%",
+    "metrics": {
+      "n": 9989,
+      "spec": 87,
+      "sens": 92,
+      "precancer": 42
+    },
+    "sources": [
+      "n-engl-j-med-2014-370-14-1287-97"
+    ],
+    "compare": {
+      "order": 7,
+      "co": "Exact Sciences",
+      "prod": "Cologuard 1.0",
+      "route": [
+        "FIT-DNA"
+      ],
+      "type": "前瞻注册",
+      "study": "Deep-C(NEJM 2014)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "50–84 岁平均风险；n=9,989",
+      "spec": "87%",
+      "sens": "92%",
+      "sensSub": "CRC",
+      "early": "—",
+      "too": "—",
+      "tooSub": "进展期腺瘤 42%",
+      "updatedAt": "2014(NEJM)"
+    }
+  },
+  {
+    "id": "exact-blue-c",
+    "companyId": "exact",
+    "legacyIndex": 5,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "BLUE-C(Cologuard Plus，NEJM 2024)",
+    "date": "2024-03",
+    "dateNote": "2024-03(NEJM 390:984-993)",
+    "population": "≥40 岁平均风险拟行肠镜；n=20,176(98 CRC / 2,144 进展期癌前病变)",
+    "performance": "灵敏度 93.9%(CRC,87.1–97.7)/ 特异性 90.6%(进展期肿瘤口径；阴性肠镜 92.7%)；高级别异型增生 74.6%；进展期癌前病变 43.4%；FIT 对照 67.3%",
+    "metrics": {
+      "n": 20176,
+      "spec": 90.6,
+      "sens": 93.9,
+      "precancer": 43.4
+    },
+    "sources": [
+      "n-engl-j-med-2024-390-11-984-93",
+      "clinicaltrials-gov-nct04144738"
+    ],
+    "compare": {
+      "order": 6,
+      "co": "Exact Sciences",
+      "prod": "Cologuard Plus™",
+      "route": [
+        "FIT-DNA"
+      ],
+      "type": "前瞻注册",
+      "study": "BLUE-C(NEJM 2024)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "≥40 岁平均风险拟行肠镜；n=20,176",
+      "spec": "90.6%",
+      "specSub": "进展期肿瘤口径；阴性肠镜 92.7%",
+      "sens": "93.9%",
+      "sensSub": "CRC(87.1–97.7)；高级别异型增生 74.6%",
+      "early": "—",
+      "earlySub": "各期相近",
+      "too": "—",
+      "tooSub": "进展期癌前病变 43.4%；FIT 对照 67.3%",
+      "updatedAt": "2024-03(NEJM)"
+    }
+  },
+  {
+    "id": "guardant-shield-asco2022",
+    "companyId": "guardant",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "Shield 早期验证(ASCO 2022 #3542，LUNAR-2 平台)",
+    "date": "2022-06",
+    "dateNote": "2022-06(ASCO 2022)",
+    "population": "总 4,905 例(CRC 1,366 / 肺 241)",
+    "performance": "CRC 灵敏度 93.1% / 特异性 90%；TOO top-1 99%(肠)/ 98%(肺)",
+    "metrics": {
+      "n": 4905,
+      "spec": 90,
+      "sens": 93.1,
+      "too": 99,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "j-clin-oncol-2022-40-16-suppl-3542"
+    ]
+  },
+  {
+    "id": "guardant-eclipse",
+    "companyId": "guardant",
+    "legacyIndex": 1,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "ECLIPSE(前瞻非随机，CRC；NEJM 2024)",
+    "date": "2024-03",
+    "dateNote": "2024-03(NEJM 390:973-83)/ 2024-07 获批",
+    "population": "45–84 岁平均风险、拟行筛查肠镜；共入组 22,877 人，临床验证队列 10,258 人，其中 7,861 人可评价",
+    "performance": "特异性 89.6%(进展期肿瘤口径)/ 灵敏度 83.1%(CRC；I–III 期 87.5%)，进展期癌前病变 13.2%。FDA SSED 口径：I 期 54.5%(12/22)。2024-07-26 获批(PMA P230009)",
+    "metrics": {
+      "n": 7861,
+      "spec": 89.6,
+      "sens": 83.1,
+      "early": 54.5,
+      "earlyLabel": "I 期",
+      "precancer": 13.2
+    },
+    "sources": [
+      "n-engl-j-med-2024-390-973-983",
+      "fda-ssed-shield-pma-p230009-approved-2024-07-26"
+    ],
+    "compare": {
+      "order": 3,
+      "co": "Guardant Health",
+      "prod": "Shield™",
+      "route": [
+        "甲基化",
+        "片段组学"
+      ],
+      "type": "前瞻注册",
+      "study": "ECLIPSE(NEJM 2024)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "45–84 岁平均风险、拟行筛查肠镜；总入组 22,877，验证队列 10,258，可评价 n=7,861",
+      "spec": "89.6%",
+      "specSub": "进展期肿瘤口径；阴性肠镜 —",
+      "sens": "83.1%",
+      "sensSub": "CRC；I–III 期 87.5%",
+      "early": "—",
+      "earlySub": "FDA SSED:I 期 54.5%(12/22)",
+      "too": "—",
+      "tooSub": "进展期癌前病变 13.2%",
+      "updatedAt": "2024-03(NEJM)"
+    }
+  },
+  {
+    "id": "guardant-shield-mcd-asco2025",
+    "companyId": "guardant",
+    "legacyIndex": 2,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "Shield MCD(盲法病例对照，ASCO 2025 poster #10550)",
+    "date": "2025-06",
+    "dateNote": "2025-06(ASCO 2025)",
+    "population": "盲法验证 n=814：癌 372 / 非癌 442；40–78 岁，中位 62 岁；此前训练集 >10,000 癌 + >7,000 对照不作为本行性能分母",
+    "performance": "特异性 98.6%(436/442)/ 灵敏度 60%(222/372，10 癌种；各癌种 21% 前列腺–96% 食管-胃；I/II 期 34%、III/IV 期 84%)；CSO top-1/2 93%；无现行筛查手段癌种 73%、六大侵袭性癌 74%",
+    "metrics": {
+      "n": 814,
+      "spec": 98.6,
+      "sens": 60,
+      "early": 34,
+      "earlyLabel": "I/II 期",
+      "too": 93,
+      "tooLabel": "top-1/2"
+    },
+    "sources": [
+      "j-clin-oncol-2025-43-16-suppl-10550",
+      "guardant-shield-mcd-asco2025-notes"
+    ],
+    "note": "本行取自会议现场海报；正式摘要(J Clin Oncol 2025；43 suppl:10550)为 962 例可评、灵敏度 59.7%(224/375)、CSO 92%，特异性 436/442 一致。"
+  },
+  {
+    "id": "guardant-shield-mcd-aacr2025",
+    "companyId": "guardant",
+    "legacyIndex": 3,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "Shield MCD(盲法病例对照，AACR 2025 #6425)",
+    "date": "2025-04",
+    "dateNote": "2025-04(AACR 2025)",
+    "population": "778 例可评(40–78 岁，中位 62；55% 女性)；10 癌种",
+    "performance": "特异性 98.5%(397/403)/ 灵敏度 59.7%(224/375；I/II 期 34.6%、III/IV 期 84.2%)；CSO top-1/2 89%；另 #6365:12 癌种 CSO 分类器 top-1 88.2% / top-2 93.6%",
+    "metrics": {
+      "n": 778,
+      "spec": 98.5,
+      "sens": 59.7,
+      "early": 34.6,
+      "earlyLabel": "I/II 期",
+      "too": 89,
+      "tooLabel": "top-1/2"
+    },
+    "sources": [
+      "cancer-res-2025-85-8-suppl-2-abstract-6425-aacr-2025",
+      "cancer-res-2025-85-8-suppl-2-abstract-6365-aacr-2025"
+    ]
+  },
+  {
+    "id": "freenome-preempt-crc",
+    "companyId": "freenome",
+    "legacyIndex": 0,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "PREEMPT CRC(SimpleScreen CRC 获批依据；JAMA 2025 / FDA 2026)",
+    "date": "2025-06",
+    "dateNote": "2026-07-24 FDA 获批；原文 JAMA 2025-06",
+    "population": "45–85 岁无症状平均风险、拟行筛查肠镜；200 余中心；入组 48,995 人，JAMA 分析集 27,010 人",
+    "performance": "FDA 获批口径(按美国人口校正)：CRC 灵敏度 81.1%、进展期癌前病变 13.7%、高级别异型增生 30.5%，无进展期结直肠肿瘤特异性 90.4%。JAMA 未加权口径为 CRC 79.2%、进展期腺瘤 12.5%、特异性 91.5%",
+    "metrics": {
+      "n": 27010,
+      "spec": 90.4,
+      "sens": 81.1,
+      "precancer": 13.7
+    },
+    "sources": [
+      "jama-2025-334-1-56-63",
+      "fda-ssed-simplescreen-crc-pma-p250029-approved-2026-07-2",
+      "freenome-press-release-2026-07-27"
+    ],
+    "compare": {
+      "order": 4,
+      "co": "Freenome",
+      "prod": "SimpleScreen CRC",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻注册",
+      "study": "PREEMPT CRC(SimpleScreen CRC 获批依据)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "45–85 岁无症状平均风险、拟行筛查肠镜；48,995 入组，JAMA 分析集 n=27,010",
+      "spec": "90.4%",
+      "specSub": "FDA 人口校正口径；JAMA 未加权 91.5%",
+      "sens": "81.1%",
+      "sensSub": "FDA 人口校正口径；JAMA 未加权 79.2%",
+      "early": "13.7%",
+      "earlySub": "进展期癌前病变；高级别异型增生 30.5%",
+      "too": "—",
+      "updatedAt": "2026-07(FDA 获批)"
+    }
+  },
+  {
+    "id": "freenome-preempt-crc-v2",
+    "companyId": "freenome",
+    "legacyIndex": 1,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "PREEMPT CRC 更新版验证(2026 topline；拟补充 PMA)",
+    "date": "2026-07",
+    "dateNote": "2026-07-09(公司 topline)",
+    "population": "PREEMPT CRC 盲法、既往未评价及既往评价样本；CRC 89 例、进展期癌前病变 1,570 例，其中高级别异型增生 157 例",
+    "performance": "按美国人口校正：CRC 灵敏度 80.4%(I 期 52.0%、II 期 100%、III 期 97.3%、IV 期 100%)；进展期癌前病变 18.2%，高级别异型增生 41.9%；肠镜无异常者特异性 90.0%。该版本尚拟提交补充 PMA，不等同于 2026-07 已批准版本",
+    "metrics": {
+      "spec": 90,
+      "sens": 80.4,
+      "early": 52,
+      "earlyLabel": "I 期",
+      "precancer": 18.2
+    },
+    "sources": [
+      "freenome-press-release-2026-07-09"
+    ],
+    "compare": {
+      "order": 5,
+      "co": "Freenome",
+      "prod": "SimpleScreen CRC 更新版",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻注册",
+      "study": "PREEMPT CRC 更新版验证(拟补充 PMA)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "盲法 PREEMPT CRC 样本；CRC 89、进展期癌前病变 1,570、高级别异型增生 157",
+      "spec": "90.0%",
+      "specSub": "肠镜无异常者；人口校正",
+      "sens": "80.4%",
+      "sensSub": "CRC；I 期 52.0%、II 期 100%",
+      "early": "18.2%",
+      "earlySub": "进展期癌前病变；高级别异型增生 41.9%",
+      "too": "—",
+      "tooSub": "尚未等同于已批准版本",
+      "updatedAt": "2026-07(topline)"
+    }
+  },
+  {
+    "id": "delfi-cristiano-2019",
+    "companyId": "delfi",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "多癌种(Cristiano，Nature 2019)",
+    "date": "2019-06",
+    "dateNote": "2019-06(Nature 570:385-389)",
+    "population": "236 癌(乳腺 / 结直肠 / 肺 / 卵巢 / 胰腺 / 胃 / 胆管)/ 245 健康",
+    "performance": "特异性 98% / 灵敏度 57–>99%(按癌种；全癌种 I 期 68%；联合突变 91%)，TOO top-1 61% → top-2 75%",
+    "metrics": {
+      "n": 481,
+      "spec": 98,
+      "early": 68,
+      "earlyLabel": "I 期",
+      "too": 61,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "nature-2019-570-385-389"
+    ]
+  },
+  {
+    "id": "delfi-l101",
+    "companyId": "delfi",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "DELFI-L101(前瞻采样病例对照；FirstLook Lung 依据)",
+    "date": "2024-06",
+    "dateNote": "2024-06 在线 / 2024-11 见刊(Cancer Discov 14:2224-42)",
+    "population": "USPSTF 2021 肺癌筛查适格；N=958(训练 576；验证 382，验证集癌 248 / 非癌 134)",
+    "performance": "观察验证：特异性 53% / 灵敏度 84%；筛查人群加权：特异性 58% / 灵敏度 80%；I 期 71%、II 期 89%、III 期 88%、IV 期 98%",
+    "metrics": {
+      "n": 382,
+      "spec": 53,
+      "sens": 84,
+      "early": 71,
+      "earlyLabel": "I 期"
+    },
+    "sources": [
+      "cancer-discov-2024-14-11-2224-2242"
+    ]
+  },
+  {
+    "id": "mirxes-singapore-cohort",
+    "companyId": "mirxes",
+    "legacyIndex": 0,
+    "design": "前瞻队列",
+    "scope": "single",
+    "name": "新加坡注册临床",
+    "date": "2020",
+    "dateNote": "Gut 2021(2020-10 在线)；队列数据见 2024 港交所招股文件",
+    "population": "5,282 名无症状胃癌高危人群，3 年随访",
+    "performance": "I 期胃癌检出 87.5%，整体 NPV 99.4%(单癌种无 TOO)",
+    "metrics": {
+      "n": 5282,
+      "early": 87.5,
+      "earlyLabel": "I 期",
+      "npv": 99.4
+    },
+    "sources": [
+      "gut-2021-70-5-829-837-online-2020-10-07",
+      "investment-media-pedaily-2024-01-17"
+    ],
+    "compare": {
+      "order": 16,
+      "co": "觅瑞 Mirxes",
+      "prod": "GASTROClear™",
+      "route": [
+        "miRNA"
+      ],
+      "type": "前瞻队列",
+      "study": "新加坡注册临床",
+      "mced": false,
+      "canc": "胃",
+      "pop": "5,282 名无症状胃癌高危人群，3 年随访",
+      "spec": "—",
+      "sens": "—",
+      "early": "87.5%",
+      "earlySub": "I 期胃癌检出",
+      "too": "—",
+      "tooSub": "NPV 99.4%",
+      "updatedAt": "Gut 2021"
+    },
+    "note": "5,282 例与 I 期 87.5% 出自招股文件口径；Gut 2021 原文验证集为 4,566 例有症状内镜人群(灵敏度 87.0% / 特异性 68.4%)。"
+  },
+  {
+    "id": "mirxes-nmpa-registration",
+    "companyId": "mirxes",
+    "legacyIndex": 1,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "NMPA 注册临床",
+    "date": "2025-10",
+    "dateNote": "2025-10 获批",
+    "population": "7 家机构，45–74 岁胃癌高风险；前瞻性入组 n=7,253(胃癌 130，高级别上皮内瘤变 19，阴性约 7,104)",
+    "performance": "特异性 78.27% / 胃癌灵敏度 81.54%；高级别上皮内瘤变 57.89%；PPV 6.38%、NPV 99.43%",
+    "metrics": {
+      "n": 7253,
+      "spec": 78.27,
+      "sens": 81.54,
+      "precancer": 57.89,
+      "ppv": 6.38,
+      "npv": 99.43
+    },
+    "sources": [
+      "biospectrum-asia-2025-10",
+      "genomeweb-2025-10"
+    ],
+    "compare": {
+      "order": 8,
+      "co": "觅瑞 Mirxes",
+      "prod": "觅小卫®",
+      "route": [
+        "miRNA"
+      ],
+      "type": "前瞻注册",
+      "study": "NMPA 注册临床",
+      "mced": false,
+      "canc": "胃",
+      "pop": "7 家机构、45–74 岁胃癌高风险；前瞻入组 n=7,253(胃癌 130、高级别上皮内瘤变 19)",
+      "spec": "78.27%",
+      "sens": "81.54%",
+      "sensSub": "胃癌；高级别上皮内瘤变 57.89%",
+      "early": "—",
+      "too": "—",
+      "tooSub": "PPV 6.38% / NPV 99.43%",
+      "updatedAt": "2025-10(获批)"
+    },
+    "note": "分项数值为 NMPA 注册审评资料口径；公开报道为前瞻入组 9,472 例。"
+  },
+  {
+    "id": "mirxes-nmpa-supplement",
+    "companyId": "mirxes",
+    "legacyIndex": 2,
+    "design": "前瞻 + 回顾注册汇总",
+    "scope": "single",
+    "name": "NMPA 注册临床补充验证",
+    "date": "2025",
+    "dateNote": "2025",
+    "population": "总 n=9,144(胃癌 334，高级别上皮内瘤变 25，其他胃病 / 其他癌 8,785)",
+    "performance": "特异性 78.57% / 胃癌灵敏度 84.73%；高级别上皮内瘤变 56.00%",
+    "metrics": {
+      "n": 9144,
+      "spec": 78.57,
+      "sens": 84.73,
+      "precancer": 56
+    },
+    "sources": [
+      "biospectrum-asia-2025-10"
+    ],
+    "compare": {
+      "order": 10,
+      "co": "觅瑞 Mirxes",
+      "prod": "觅小卫®",
+      "route": [
+        "miRNA"
+      ],
+      "type": "前瞻 + 回顾注册汇总",
+      "study": "NMPA 注册补充验证",
+      "mced": false,
+      "canc": "胃",
+      "pop": "总 n=9,144(胃癌 334、高级别上皮内瘤变 25、其他胃病 / 癌 8,785)",
+      "spec": "78.57%",
+      "sens": "84.73%",
+      "sensSub": "胃癌；高级别上皮内瘤变 56.00%",
+      "early": "—",
+      "too": "—",
+      "updatedAt": "2025"
+    },
+    "note": "分项数值为 NMPA 注册审评资料口径。"
+  },
+  {
+    "id": "epigenomics-presept",
+    "companyId": "epigenomics",
+    "legacyIndex": 0,
+    "design": "前瞻队列",
+    "scope": "single",
+    "name": "PRESEPT(Church 2014，Gut)",
+    "date": "2014-02",
+    "dateNote": "2014-02(Gut 63:317-25)；FDA SSED 2016",
+    "population": "50 岁以上平均风险人群；n=7,929",
+    "performance": "特异性 79% / 灵敏度 68%(CRC)，进展期腺瘤 22%",
+    "metrics": {
+      "n": 7929,
+      "spec": 79,
+      "sens": 68,
+      "precancer": 22
+    },
+    "sources": [
+      "gut-2014-63-2-317-325-online-2013-02-13",
+      "fda-ssed-epi-procolon-pma-p130001-approved-2016-04-12"
+    ],
+    "compare": {
+      "order": 15,
+      "co": "Epigenomics",
+      "prod": "Epi proColon®",
+      "route": [
+        "甲基化"
+      ],
+      "type": "前瞻队列",
+      "study": "PRESEPT(Church 2014，Gut)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "50 岁以上平均风险人群；n=7,929",
+      "spec": "79%",
+      "sens": "68%",
+      "sensSub": "CRC",
+      "early": "—",
+      "too": "—",
+      "tooSub": "进展期腺瘤 22%",
+      "updatedAt": "2014-02(Gut)/ FDA 2016"
+    },
+    "note": "数值为 FDA 获批算法口径(SSED P130001：灵敏度 68.2% / 特异性 78.8%)；Gut 2014 原文主要分析为灵敏度 48.2% / 特异性 91.5%、进展期腺瘤 11.2%，入组 7,941 例。"
+  },
+  {
+    "id": "geneoscopy-crc-prevent",
+    "companyId": "geneoscopy",
+    "legacyIndex": 0,
+    "design": "前瞻队列",
+    "scope": "single",
+    "name": "CRC-PREVENT(JAMA 2023)",
+    "date": "2023-10",
+    "dateNote": "2023-10-23 在线(JAMA 330(18):1760-1768)",
+    "population": "45 岁以上人群；49 州 3,800+ 内镜中心；n=8,920(CRC 36 例 0.40%、进展期腺瘤 606 例 6.8%)",
+    "performance": "特异性 88% / 灵敏度 94%(CRC)，进展期腺瘤 46%；vs FIT:94% vs 78%(CRC，P=.01)、46% vs 29%(AA，P<.001)",
+    "metrics": {
+      "n": 8920,
+      "spec": 88,
+      "sens": 94,
+      "precancer": 46
+    },
+    "sources": [
+      "jama-2023-330-18-1760-1768"
+    ],
+    "compare": {
+      "order": 12,
+      "co": "Geneoscopy",
+      "prod": "ColoSense™",
+      "route": [
+        "RNA",
+        "FIT"
+      ],
+      "type": "前瞻队列",
+      "study": "CRC-PREVENT(JAMA 2023)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "45 岁以上人群；n=8,920",
+      "spec": "88%",
+      "sens": "94%",
+      "sensSub": "CRC；vs FIT 78%",
+      "early": "—",
+      "too": "—",
+      "tooSub": "进展期腺瘤 46%(vs FIT 29%)",
+      "updatedAt": "2023-10(JAMA)"
+    }
+  },
+  {
+    "id": "genesolutions-spotmas-validation",
+    "companyId": "genesolutions",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "SPOT-MAS 验证集(eLife 2023)",
+    "date": "2023-10",
+    "dateNote": "2023-10(eLife VoR)",
+    "population": "全队列 738 癌(肝 / 乳腺 / 结直肠 / 肺 / 胃)/ 1,550 健康；验证集 239 癌 / 474 健康",
+    "performance": "特异性 97.0% / 灵敏度 72.4%(5 癌种)，TOO top-1 70.0%(早前 285 癌 / 222 健康先导：95.9% / 73.9%，VMJ 2022-04)",
+    "metrics": {
+      "n": 713,
+      "spec": 97,
+      "sens": 72.4,
+      "too": 70,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "elife-2023-12-rp89083"
+    ]
+  },
+  {
+    "id": "genesolutions-kdetek-interim",
+    "companyId": "genesolutions",
+    "legacyIndex": 1,
+    "design": "前瞻队列",
+    "scope": "mced",
+    "name": "K-DETEK 中期(Cancer Invest 2023)",
+    "date": "2023-02",
+    "dateNote": "2023-02(Cancer Invest 41(3):232-248)",
+    "population": "13 院 + 1 所、≥40 岁无症状人群前瞻入组 n=2,795",
+    "performance": "检出 13 例(0.47%),6 真阳性 → PPV 60%，TOO top-2 83.3%(中期、随访未满，PPV 不稳定)",
+    "metrics": {
+      "n": 2795,
+      "too": 83.3,
+      "tooLabel": "top-2",
+      "ppv": 60
+    },
+    "sources": [
+      "cancer-invest-2023-41-3-232-248"
+    ]
+  },
+  {
+    "id": "genesolutions-kdetek",
+    "companyId": "genesolutions",
+    "legacyIndex": 2,
+    "design": "前瞻干预",
+    "scope": "mced",
+    "name": "K-DETEK(Nguyen 2025；综述统一口径)",
+    "date": "2025-02",
+    "dateNote": "2025-02(BMC Med 23:90)",
+    "population": "≥40 岁无症状人群，前瞻性单臂干预研究；n=10,027",
+    "performance": "特异性 99.71% / 灵敏度 70.83%(I–IIIA 期 70.59%)；TOO top-2 52.94%",
+    "metrics": {
+      "n": 10027,
+      "spec": 99.71,
+      "sens": 70.83,
+      "early": 70.59,
+      "earlyLabel": "I–IIIA 期",
+      "too": 52.94,
+      "tooLabel": "top-2"
+    },
+    "sources": [
+      "bmc-med-2025-23-90"
+    ],
+    "compare": {
+      "order": 14,
+      "co": "Gene Solutions",
+      "prod": "SPOT-MAS™",
+      "route": [
+        "多组学"
+      ],
+      "type": "前瞻干预",
+      "study": "K-DETEK(Nguyen 2025；综述统一口径)",
+      "mced": true,
+      "canc": "5 癌种",
+      "pop": "≥40 岁无症状人群，前瞻性单臂干预研究；n=10,027",
+      "spec": "99.71%",
+      "sens": "70.83%",
+      "sensSub": "覆盖 11 癌种(含 6 种无标准筛查)",
+      "early": "70.59%",
+      "earlySub": "早期 I–IIIA",
+      "too": "52.94%",
+      "tooSub": "top-2；仅保留综述表支持的字段",
+      "updatedAt": "2025-02(综述表)"
+    },
+    "note": "本行沿用综述统一表口径；BMC Med 2025 摘要为 9,024 名合格受试者。"
+  },
+  {
+    "id": "geneseeq-deciphe-omnia",
+    "companyId": "geneseeq",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "DECIPHE-Omnia 独立验证(Nat Med 2025)",
+    "date": "2025-06",
+    "dateNote": "2025-06(Nat Med)",
+    "population": "独立验证：677 癌 / 687 非癌；13 癌种。开发与内部验证另纳入 6,391 人",
+    "performance": "标准特异性阈值：特异性 97.8% / 灵敏度 87.4%；TOO top-1 82.4%、top-2 91.7%",
+    "metrics": {
+      "n": 1364,
+      "spec": 97.8,
+      "sens": 87.4,
+      "too": 82.4,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "nat-med-2025-31-8-2737-2745",
+      "aacr-2024-cancer-res-84-6-suppl-1266"
+    ]
+  },
+  {
+    "id": "geneseeq-jinling",
+    "companyId": "geneseeq",
+    "legacyIndex": 1,
+    "design": "前瞻队列",
+    "scope": "mced",
+    "name": "金陵队列(NCT06011694；Nat Med 2025)",
+    "date": "2025-06",
+    "dateNote": "2025-06(Nat Med)",
+    "population": "45–75 岁无症状人群；首年中期分析可评价 n=3,724，确认癌 43 例",
+    "performance": "标准特异性阈值：特异性 98.1%(3,612/3,681) / 灵敏度 53.5%(23/43)；PPV 25.0%、NPV 99.4%；stage 0/I 期 44.8%(13/29)、II 期 85.7%(6/7)。43 例中 93.0%(40/43)为高危癌前病变或 0/I/II 期；该 93.0% 是病例分期构成，不是早期灵敏度",
+    "metrics": {
+      "n": 3724,
+      "spec": 98.1,
+      "sens": 53.5,
+      "early": 44.8,
+      "earlyLabel": "0/I 期",
+      "ppv": 25,
+      "npv": 99.4
+    },
+    "sources": [
+      "nat-med-2025-31-8-2737-2745",
+      "aacr-2024-cancer-res-84-6-suppl-1263",
+      "clinicaltrials-gov-nct06011694"
+    ],
+    "compare": {
+      "order": 17,
+      "co": "世和基因",
+      "prod": "CanScan® 鹰眼",
+      "route": [
+        "片段组学",
+        "多组学"
+      ],
+      "type": "前瞻队列",
+      "study": "金陵队列(NCT06011694)",
+      "mced": true,
+      "canc": "13 癌种",
+      "pop": "45–75 岁无症状平均风险人群；n=3,724",
+      "spec": "98.1%",
+      "specSub": "3,612/3,681",
+      "sens": "53.5%",
+      "sensSub": "23/43；标准特异性阈值",
+      "early": "44.8%",
+      "earlySub": "stage 0/I 期 13/29；II 期 85.7%(6/7)。93.0% 是病例分期构成，非灵敏度",
+      "too": "—",
+      "tooSub": "前瞻队列未单独报告 TOO；病例对照 top-1 82.4%",
+      "updatedAt": "2025-06(Nat Med)"
+    }
+  },
+  {
+    "id": "burningrock-thunder",
+    "companyId": "burningrock",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "THUNDER(多中心前瞻采样病例对照；Ann Oncol 2023)",
+    "date": "2023-02",
+    "dateNote": "2023-02 在线(Ann Oncol)",
+    "population": "开发 / 内部验证：cfDNA n=1,693(癌 735 / 非癌 958)；前瞻独立队列 n=1,010(505/505)",
+    "performance": "MCDBT-1：特异性 98.9% / 灵敏度 69.1%(I–III 期 59.8%)；TOO top-1 83.2% / top-2 91.7%。另有 MCDBT-2:75.1%@95.1%",
+    "metrics": {
+      "n": 1010,
+      "spec": 98.9,
+      "sens": 69.1,
+      "early": 59.8,
+      "earlyLabel": "I–III 期",
+      "too": 83.2,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "ann-oncol-2023-34-5-486-495"
+    ]
+  },
+  {
+    "id": "burningrock-promise",
+    "companyId": "burningrock",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "PROMISE(前瞻多中心病例对照，多组学；The Innovation 2026)",
+    "date": "2025-08",
+    "dateNote": "2025-08 在线(The Innovation 2026；7(1):101076)",
+    "population": "前瞻采血 n=1,706(癌 866 / 非癌 840)；可分析 n=1,659，训练 1,158 / 验证 501；9 癌种",
+    "performance": "多模态(甲基化 + 蛋白)特异性 98.8% / 灵敏度 75.1%；TOO top-1 73.1% / top-2 85.0%；甲基化单模态 71.2%@98.8%",
+    "metrics": {
+      "n": 1659,
+      "spec": 98.8,
+      "sens": 75.1,
+      "too": 73.1,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "innovation-camb-2026-7-1-101076"
+    ]
+  },
+  {
+    "id": "singlera-panseer-post-diagnosis",
+    "companyId": "singlera",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "PanSeer 泰州 TZL(确诊后；Nat Commun 2020)",
+    "date": "2020-07",
+    "dateNote": "2020-07(Nat Commun 11:3475)",
+    "population": "TZL 队列 123,115 健康者；确诊后癌 223 例 + 健康对照(另 200 组织样本)",
+    "performance": "特异性 96%(93–98%)/ 灵敏度 88%(80–93%)(5 癌种：胃 / 食管 / 结直肠 / 肺 / 肝)",
+    "metrics": {
+      "spec": 96,
+      "sens": 88
+    },
+    "sources": [
+      "nat-commun-2020-11-3475"
+    ]
+  },
+  {
+    "id": "singlera-panseer-pre-diagnosis",
+    "companyId": "singlera",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "PanSeer 泰州 TZL(确诊前 4 年；巢式回顾)",
+    "date": "2020-07",
+    "dateNote": "2020-07(Nat Commun)",
+    "population": "605 无症状者中 191 例采血后 4 年内确诊为 5 癌种之一",
+    "performance": "检出 95%(89–98%，最长早于临床诊断 4 年)——对照取自同队列、巢式回顾设计，方法学受质疑",
+    "metrics": {
+      "n": 605,
+      "sens": 95
+    },
+    "sources": [
+      "nat-commun-2020-11-3475"
+    ]
+  },
+  {
+    "id": "singlera-guide",
+    "companyId": "singlera",
+    "legacyIndex": 2,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "GUIDE / GutSeer(消化道 5 癌；Mol Cancer 2025)",
+    "date": "2025",
+    "dateNote": "2025(Mol Cancer 24:163)",
+    "population": "1,057 癌 + 1,415 非癌训练验证；独立盲测 846 人(含 198 例 I/II 期，占 66.4%)",
+    "performance": "验证集 AUC 0.950，灵敏度 82.8%@特异性 95.8%，独立测试灵敏度 81.5%；分癌种：结直肠 92.2%、肝 92.9%、胰 88.6%、食管 75.5%、胃 65.3%",
+    "metrics": {
+      "n": 846,
+      "spec": 95.8,
+      "sens": 82.8
+    },
+    "sources": [
+      "mol-cancer-2025-24-163"
+    ]
+  },
+  {
+    "id": "singlera-pdacatch",
+    "companyId": "singlera",
+    "legacyIndex": 3,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "PDACatch(胰腺导管癌；BMC Medicine 2022)",
+    "date": "2022-11",
+    "dateNote": "2022-11(BMC Med 20:458)",
+    "population": "232 PDAC / 25 慢性胰腺炎 / 323 健康",
+    "performance": "56 标志物分类器 AUC 0.91(验证灵敏度 84% / 特异性 89%)",
+    "metrics": {
+      "n": 580,
+      "spec": 89,
+      "sens": 84
+    },
+    "sources": [
+      "bmc-med-2022-20-458"
+    ]
+  },
+  {
+    "id": "berry-precar-pilot",
+    "companyId": "berry",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "PreCar(万人队列·性能数据为先导病例对照)",
+    "date": null,
+    "dateNote": "出处未核实",
+    "population": "乙肝 / 肝硬化高危万人队列；先导 500 HCC / 1,000 健康",
+    "performance": "特异性 97.9% / 灵敏度 95.4%(HCC；极早期及 AFP·DCP 阴性者仍 >90%)",
+    "metrics": {
+      "n": 1500,
+      "spec": 97.9,
+      "sens": 95.4
+    },
+    "sources": [
+      "berry-genomics-precar-project-page",
+      "ebiomedicine-2024-100-104962",
+      "biopharma-apac-2022-05-19"
+    ],
+    "note": "未检索到该先导数据的公开出处；数值与 HIFI 测试集(灵敏度 95.42% / 特异性 97.83%，Cell Res 2021)接近。"
+  },
+  {
+    "id": "berry-hifi",
+    "companyId": "berry",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "HIFI 肝硬化队列(确诊后；Cell Res 2021)",
+    "date": "2020-11",
+    "dateNote": "2020-11 接收(Cell Res 2021)",
+    "population": "13 家医院 11 省：2,247 肝硬化(LC)+ 481 HCC + 476 健康；验证集 95 HCC / 100 LC",
+    "performance": "验证集 HCC vs 肝硬化：灵敏度 95.79% / 特异性 95.00%；测试集(148 HCC/1,800 LC)95.42% / 97.83%；AUC 0.995–0.996(显著优于 AFP 0.83–0.85)",
+    "metrics": {
+      "spec": 95,
+      "sens": 95.79
+    },
+    "sources": [
+      "cell-res-2021-31-5-589-592"
+    ]
+  },
+  {
+    "id": "berry-precar-prospective",
+    "companyId": "berry",
+    "legacyIndex": 2,
+    "design": "前瞻队列",
+    "scope": "single",
+    "name": "PreCar 前瞻监读(eBioMedicine 2024)",
+    "date": "2024-02",
+    "dateNote": "2024-02(eBioMedicine 100:104962)",
+    "population": "多中心横断面 4,367 LC + 510 HCC(16 家医院)；Stage I 建模(510 HCC/2,074 LC)，Stage II 前瞻监读(2,293 LC)",
+    "performance": "PreCar Score 对早期 / 极早期(BCLC A/0)灵敏度 51.32%@特异性 95.53%，联合超声后 60.53%@95.08%(超声单用仅 23.68%)；验证集全分期灵敏度 93.75%@95.4%",
+    "metrics": {
+      "spec": 95.53,
+      "early": 51.32,
+      "earlyLabel": "BCLC 0/A"
+    },
+    "sources": [
+      "ebiomedicine-2024-100-104962"
+    ]
+  },
+  {
+    "id": "newhorizon-clear-c",
+    "companyId": "newhorizon",
+    "legacyIndex": 0,
+    "design": "前瞻注册",
+    "scope": "single",
+    "name": "Clear-C(中国首个早筛注册临床；MedComm 2023)",
+    "date": "2023-07",
+    "dateNote": "2023-07(MedComm 4:e345)；会议口径 CSCO 2020",
+    "population": "40–74 岁高危人群、头对头 vs FIT；8 家三甲入组 5,241(2018-09–2019-11)、完成评估 4,245(80.1%；CRC 186 例 4.4%，进展期癌前病变 375 例 8.8%)",
+    "performance": "特异性 87.1%(无进展期肿瘤；肠镜阴性 90.3%)/ CRC 灵敏度 91.9%(vs FIT 62.4%，P<0.001)，进展期癌前病变 63.5%(vs FIT 30.9%)，NPV 99.6%(95%CI 99.2–99.7)；CMDE 审评报告另有 4,758 例口径",
+    "metrics": {
+      "n": 4245,
+      "spec": 87.1,
+      "sens": 91.9,
+      "precancer": 63.5,
+      "npv": 99.6
+    },
+    "sources": [
+      "medcomm-2023-4-4-e345",
+      "nmpa-cmde-csz2000050"
+    ],
+    "compare": {
+      "order": 9,
+      "co": "诺辉健康",
+      "prod": "常卫清®",
+      "route": [
+        "FIT-DNA"
+      ],
+      "type": "前瞻注册",
+      "study": "Clear-C(中国首个早筛注册临床；MedComm 2023)",
+      "mced": false,
+      "canc": "结直肠",
+      "pop": "40–74 岁高危、头对头 vs FIT；入组 5,241、完成评估 4,245(进展期癌前病变 375 例，8.8%)",
+      "spec": "87.1%",
+      "sens": "91.9%",
+      "sensSub": "CRC；显著优于 FIT(62.4%)",
+      "early": "—",
+      "earlySub": "进展期癌前病变 63.5%(vs FIT 30.9%)",
+      "too": "—",
+      "tooSub": "NPV 99.6%",
+      "updatedAt": "2023-07(MedComm)"
+    }
+  },
+  {
+    "id": "genetron-hit",
+    "companyId": "genetron",
+    "legacyIndex": 0,
+    "design": "前瞻队列",
+    "scope": "single",
+    "name": "HIT 多中心前瞻终分析",
+    "date": "2021-03",
+    "dateNote": "2021-03-24(终分析公开)",
+    "population": "1,615 名完成随访的 HBsAg+ 人群；HCC 86 / 非 HCC 1,529",
+    "performance": "特异性 93%(1,419/1,529) / 灵敏度 88%(76/86)，PPV 40.9%、NPV 99.3%；按肿瘤大小：<3 cm 85%(28/33)、3–5 cm 96%(22/23)、>5 cm 88%(7/8)。单癌种无 TOO",
+    "metrics": {
+      "n": 1615,
+      "spec": 93,
+      "sens": 88,
+      "early": 85,
+      "earlyLabel": "<3 cm",
+      "ppv": 40.9,
+      "npv": 99.3
+    },
+    "sources": [
+      "genetron-health-press-release-biospace-business-wire-202"
+    ],
+    "compare": {
+      "order": 13,
+      "co": "泛生子",
+      "prod": "HCCscreen™",
+      "route": [
+        "多组学"
+      ],
+      "type": "前瞻队列",
+      "study": "HIT 多中心前瞻终分析",
+      "mced": false,
+      "canc": "肝",
+      "pop": "1,615 名完成随访的 HBsAg+ 人群；HCC 86 / 非 HCC 1,529",
+      "spec": "93%",
+      "sens": "88%",
+      "sensSub": "HCC",
+      "early": "85–96%",
+      "earlySub": "<3cm 85%、3–5cm 96%",
+      "too": "—",
+      "tooSub": "PPV 40.9% / NPV 99.3%",
+      "updatedAt": "2021-03(终分析)"
+    }
+  },
+  {
+    "id": "genetron-pnas-2019",
+    "companyId": "genetron",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "PNAS 先导(Qu 2019)",
+    "date": "2019-03",
+    "dateNote": "2019-03(PNAS 116(13):6308)",
+    "population": "331 例 HBsAg+ 且超声 / AFP 正常者(验证队列)；24 阳性、随访 6–8 月确认 4 例 HCC(均 <3cm)",
+    "performance": "特异性 94% / 灵敏度 100%；PPV 17%；训练队列 85% / 93%",
+    "metrics": {
+      "n": 331,
+      "spec": 94,
+      "sens": 100,
+      "ppv": 17
+    },
+    "sources": [
+      "pnas-2019-116-13-6308-12"
+    ]
+  },
+  {
+    "id": "bgi-colotect",
+    "companyId": "bgi",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "华常康临床验证",
+    "date": null,
+    "dateNote": "企业产品资料",
+    "population": "结直肠癌临床队列",
+    "performance": "特异性 92.37% / 灵敏度 87.74%(CRC)，进展期腺瘤 66.67%",
+    "metrics": {
+      "spec": 92.37,
+      "sens": 87.74,
+      "precancer": 66.67
+    },
+    "sources": [
+      "bgi-genomics-product-page-csco-meeting-exhibitor",
+      "front-oncol-2024-14-1284975",
+      "medrxiv-preprint-ref-13-of-the-wuhan-paper"
+    ],
+    "note": "数值仅见企业产品资料，未见对应的同行评议全文。"
+  },
+  {
+    "id": "bgi-genearc",
+    "companyId": "bgi",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "GeneArc(血液甲基化)",
+    "date": "2019-03",
+    "dateNote": "2019-03(产品发布)",
+    "population": "临床试验",
+    "performance": "灵敏度 86%(CRC)",
+    "metrics": {
+      "sens": 86
+    },
+    "sources": [
+      "southern-plus-2019-03-27"
+    ],
+    "note": "数值出自 2019 年产品发布报道，小样本，未报告特异性。"
+  },
+  {
+    "id": "geneplus-jizaoan",
+    "companyId": "geneplus",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "吉早安 肿瘤早期预警",
+    "date": null,
+    "dateNote": "未发表",
+    "population": "—",
+    "performance": "性能未公开披露(研发 / LDT 阶段)",
+    "metrics": {},
+    "sources": [
+      "2025-03-13",
+      "2025-10-28",
+      "clinicaltrials-gov-nct04405557"
+    ]
+  },
+  {
+    "id": "genecast-themis",
+    "companyId": "genecast",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "THEMIS(MONITOR 多中心观察性病例对照，Nat Commun 2023)",
+    "date": "2023-09",
+    "dateNote": "2023-09(Nat Commun 14:6042)",
+    "population": "497 健康 / 780 癌(7 癌种)；测试集 健康 145 / 癌 238(34.5% 早期)",
+    "performance": "多组学(甲基化 + 片段 + CNA + 末端motif)特异性 99% / 灵敏度 83%(197/238；早期 I–II 期 73%)，整体 AUC 0.966；TOO/CSO top-1 65%(90/139)",
+    "metrics": {
+      "n": 383,
+      "spec": 99,
+      "sens": 83,
+      "early": 73,
+      "earlyLabel": "I–II 期",
+      "too": 65,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "nat-commun-2023-14-6042"
+    ]
+  },
+  {
+    "id": "genecast-totem",
+    "companyId": "genecast",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "mced",
+    "name": "TOTEM(靶向甲基化，BMC Cancer 2024)",
+    "date": "2024-07",
+    "dateNote": "2024-07 接收(BMC Cancer 24:840)",
+    "population": "500 健康 / 733 癌(7 癌种)，训练：测试 7:3；独立验证 143 健康 + 79 肝 + 100 胃",
+    "performance": "特异性 98% 目标(测试集 100%)/ 灵敏度 67.3%(早期 I–II 期 45.7%；独立验证 55.9%)，AUC 0.908；TOO top-1 77.7% / top-2 86.5%(独立验证 76.0% / 84.0%)",
+    "metrics": {
+      "spec": 98,
+      "sens": 67.3,
+      "early": 45.7,
+      "earlyLabel": "I–II 期",
+      "too": 77.7,
+      "tooLabel": "top-1"
+    },
+    "sources": [
+      "bmc-cancer-2024-24-840"
+    ]
+  },
+  {
+    "id": "anchordx-urifind",
+    "companyId": "anchordx",
+    "legacyIndex": 0,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "UriFind 膀胱癌(尿液甲基化诊断；Clin Epigenetics 2021)",
+    "date": "2021-04",
+    "dateNote": "2021-04(Clin Epigenetics 13:91)",
+    "population": "可疑膀胱癌 Cohort1 192 / Cohort2 98(回顾)；血尿人群 Cohort3 174(前瞻)",
+    "performance": "双标志物模型 灵敏度 88.1%(C2)–91.2%(C3)/ 特异性 89.7%(C2)–85.7%(C3)(低级别肿瘤检出优于细胞学 / FISH)；五标志物分层识别高危 NMIBC/MIBC 灵敏度 90.5%、特异性 86.8%",
+    "metrics": {
+      "spec": 85.7,
+      "sens": 91.2
+    },
+    "diagnostic": true,
+    "sources": [
+      "clin-epigenetics-2021-13-91"
+    ]
+  },
+  {
+    "id": "anchordx-pulmoseek",
+    "companyId": "anchordx",
+    "legacyIndex": 1,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "PulmoSeek 肺结节良恶性(血浆甲基化；JCI 2021)",
+    "date": "2021-05",
+    "dateNote": "2021-05(JCI 131(10):e145973)",
+    "population": "585 例 LDCT 阳性入组、529 例可分析；140 例独立验证",
+    "performance": "AUC 0.843、准确率 0.800；6–20mm 结节 灵敏度 1.000、I 期肺癌 0.971；优于 PET-CT 及 Mayo/VA 临床模型(结节良恶性分类，非无症状筛查)",
+    "metrics": {
+      "n": 529
+    },
+    "diagnostic": true,
+    "sources": [
+      "j-clin-invest-2021-131-10-e145973",
+      "clinicaltrials-gov-nct03181490"
+    ]
+  },
+  {
+    "id": "anchordx-pulmoseek-plus",
+    "companyId": "anchordx",
+    "legacyIndex": 2,
+    "design": "病例对照",
+    "scope": "single",
+    "name": "PulmoSeek Plus(临床 + 影像 + 甲基化联合；Lancet Digit Health 2023)",
+    "date": "2023-08",
+    "dateNote": "2023-08(Lancet Digit Health)",
+    "population": "1,380 人、24 家医院(NCT03181490/NCT03651986)",
+    "performance": "灵敏度 0.98@特异性 0.50(排除肺癌)，早期(0/I 期)0.98、5–10mm 结节 0.99；模型可减少 89% 不必要手术、73% 延误治疗",
+    "metrics": {
+      "n": 1380,
+      "spec": 50,
+      "sens": 98
+    },
+    "diagnostic": true,
+    "sources": [
+      "lancet-digit-health-2023-5-10-e647-e656",
+      "clinicaltrials-gov-nct03181490",
+      "clinicaltrials-gov-nct03651986"
+    ]
+  }
+]

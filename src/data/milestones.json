@@ -1,0 +1,98 @@
+[
+  {
+    "id": "2026-09-23-galleri-fda-panel",
+    "date": "2026-09-23",
+    "companyId": "grail",
+    "product": "Galleri®",
+    "kind": "regulatory",
+    "level": "L1",
+    "title": "FDA 咨询委员会表决支持 Galleri：有效性 6:4，获益大于风险 7:2:1",
+    "summary": "FDA 分子与临床遗传学器械专家组就 Galleri 用于 50 岁及以上成人的 PMA 表决：安全性一致通过；有效性 6 票赞成、4 票反对；获益大于风险 7 票赞成、2 票反对、1 票弃权。咨询意见不等于批准，FDA 尚未作出最终决定。多位委员对有效性保留意见，并建议标签注明仍需常规筛查。",
+    "why": "首个进入 FDA 咨询程序的 MCED。分歧明显的表决与 NHS-Galleri 主要终点未达，共同划定了后来者需要面对的有效性证据门槛。",
+    "confidence": "high",
+    "sources": [
+      "grail-press-release-2026-09-23-panel-vote",
+      "fierce-biotech-2026-09-24"
+    ]
+  },
+  {
+    "id": "2026-09-22-nhs-galleri-published",
+    "date": "2026-09-22",
+    "companyId": "grail",
+    "product": "Galleri®",
+    "kind": "publication",
+    "level": "L1",
+    "title": "NHS-Galleri 随机试验见刊：III/IV 期合并发病未降低(IRR 1.03)",
+    "summary": "NEJM 报告 142,250 人 1:1 随机(干预 71,122 / 对照 71,128)，三轮筛查后 12 个预设癌种 III/IV 期合并发病 706 对 688 例，IRR 1.03(95% CI 0.92–1.14，P=0.63)，主要终点未达；IV 期 IRR 0.86(0.74–1.00)，第 3 轮 0.74(0.57–0.95)。Nature Medicine 同期报告检测性能：阳性者 46%–58% 确诊癌症，特异性约 99.5%–99.6%。未报告死亡率终点。",
+    "why": "首个 MCED 随机对照结果的同行评议版本：能检出癌症，但未降低晚期合并发病。分期迁移成为监管与支付方的核心证据问题。",
+    "confidence": "high",
+    "sources": [
+      "n-engl-j-med-2026-nhs-galleri",
+      "nat-med-2026-32-10",
+      "queen-mary-university-of-london-2026-09-23",
+      "the-asco-post-2026-10"
+    ]
+  },
+  {
+    "id": "2026-09-22-pathfinder2-published",
+    "date": "2026-09-22",
+    "companyId": "grail",
+    "product": "Galleri®",
+    "kind": "publication",
+    "level": "L1",
+    "title": "PATHFINDER 2 全量结果见刊 Nature Medicine：PPV 60.3%，episode 灵敏度 39.3%",
+    "summary": "入组 35,878 人(≥50 岁，北美 32 个中心)，32,007 人可评估性能：PPV 60.3%，特异性 99.64%，NPV 99.2%，CSO 准确率 91.3%，总体 episode 灵敏度 39.3%(12 种高致死癌 69.8%)；新诊断原发癌 53% 为 I–II 期。单臂、无对照的描述性研究。",
+    "why": "迄今最大的 MCED 前瞻干预研究的同行评议数据，成为真实筛查场景下 PPV、特异性与 episode 灵敏度的对照基准。",
+    "confidence": "high",
+    "sources": [
+      "nat-med-2026-pathfinder-2",
+      "grail-pathfinder-2-fact-sheet"
+    ]
+  },
+  {
+    "id": "2026-11-05-guardant-q3-shield",
+    "date": "2026-11-05",
+    "companyId": "guardant",
+    "product": "Shield™",
+    "kind": "corporate",
+    "level": "L2",
+    "title": "Guardant 三季度：Shield 检测 8.3 万例(+246%)，筛查收入 6,760 万美元",
+    "summary": "2026Q3 Shield 检测量 83,000 例(上年同期 24,000 例)，筛查收入 6,760 万美元(+180%)。全年指引：筛查收入 2.33–2.38 亿美元、检测量 28.5–29 万例；商业保险覆盖约 1 亿人。财报未提及 Shield MCD。",
+    "why": "血液 CRC 筛查已在商业支付方放量，是 MCED 厂商上市后规模与付费路径的现实参照。",
+    "confidence": "high",
+    "sources": [
+      "guardant-health-8-k-2026-11-05"
+    ]
+  },
+  {
+    "id": "2026-10-20-freenome-simplescreen-lung-ldt",
+    "date": "2026-10-20",
+    "companyId": "freenome",
+    "product": "SimpleScreen Lung",
+    "kind": "launch",
+    "level": "L2",
+    "title": "Freenome 以 LDT 推出 SimpleScreen Lung：灵敏度 85% @ 特异性 50%",
+    "summary": "面向 50–80 岁、吸烟≥20 包年且未参加指南推荐肺癌筛查的人群，可与 SimpleScreen CRC 同次采血。独立队列 172 例肺癌 / 436 例对照：灵敏度 85%(I 期 82%、II 期 75%、III 期 91%、IV 期 94%)，特异性 50%，NPV 99.8%。未经 FDA 审评或批准。",
+    "why": "血液肺癌筛查进入 LDT 商业化，与 Delfi FirstLook Lung 同一工作点(高灵敏度、约 50% 特异性)直接竞争，不可与 MCED 的高特异性数据横比。",
+    "confidence": "high",
+    "sources": [
+      "freenome-2026-10-20"
+    ]
+  },
+  {
+    "id": "2026-09-30-abbott-simplescreen-crc-launch",
+    "date": "2026-09-30",
+    "companyId": "freenome",
+    "product": "SimpleScreen CRC",
+    "kind": "launch",
+    "level": "L2",
+    "title": "Abbott 在美国上市 Freenome SimpleScreen CRC，Medicare Part B 覆盖",
+    "summary": "用于 45 岁及以上平均风险人群。Abbott 引用性能：CRC 灵敏度 81.1%(I 期 63.5%)，进展期癌前病变 13.7%，无进展期肿瘤者约 90% 阴性。Freenome 三季报称 FDA 批准日为 2026-07-24。",
+    "why": "第二款获批的血液 CRC 筛查产品入市，Guardant Shield 不再独占该品类，价格与支付覆盖的竞争先于 MCED 展开。",
+    "confidence": "high",
+    "sources": [
+      "medtech-dive-2026-09-30",
+      "freenome-2026q3"
+    ]
+  }
+]

@@ -1,0 +1,923 @@
+[
+  {
+    "id": "grail",
+    "name": "GRAIL",
+    "nameEn": "GRAIL",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": true,
+    "product": "Galleri®",
+    "layout": "单一 MCED 血检，>50 癌种共享信号 + 组织溯源(CSO / TOO)",
+    "routes": [
+      "甲基化",
+      "AI"
+    ],
+    "cancers": [
+      "肛门",
+      "膀胱",
+      "结直肠",
+      "食管",
+      "头颈",
+      "肝",
+      "胆管",
+      "肺",
+      "淋巴瘤",
+      "卵巢",
+      "胰腺",
+      "浆细胞肿瘤",
+      "胃"
+    ],
+    "cancerLabel": ">50 癌种(12 预设高致死类别；肝 / 胆管合并计 1 类)",
+    "panel": "靶向甲基化：约 1,116,720 个 CpG、17.2 Mb 靶区，120-bp 探针，亚硫酸氢盐转化 + 杂交捕获测序",
+    "statuses": [
+      {
+        "stage": "fda-review",
+        "label": "FDA PMA 审评中(2026-01-29 提交)",
+        "scope": "MCED · 咨询委员会 2026-09-23 表决：安全性一致通过、有效性 6:4、获益大于风险 7:2:1；FDA 终审待定",
+        "date": "2026-01-29",
+        "sources": [
+          "grail-press-release-2026-01-29",
+          "fda-advisory-committee-calendar",
+          "grail-press-release-2026-09-23-panel-vote",
+          "grail-press-release-2026-08-07"
+        ]
+      },
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2018)",
+        "scope": "MCED",
+        "date": "2018",
+        "sources": [
+          "grail-press-release-2026-01-29"
+        ]
+      },
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化(2021)",
+        "scope": "MCED",
+        "date": "2021",
+        "sources": [
+          "grail-press-release-2021-01-11",
+          "grail-press-release-2021-03-02"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "LDT商业化",
+      "研发或申报中"
+    ],
+    "citation": "Ann Oncol 2021(CCGA-3)；Lancet 2023(PATHFINDER)；Lancet Oncol 2023(SYMPLIFY)；Nat Med 2026(PATHFINDER 2 / NHS-Galleri 性能)；NEJM 2026(NHS-Galleri 主要终点)；FDA 咨询委员会 2026-09-23",
+    "updatedAt": "2026-09(FDA 咨询委员会表决；PATHFINDER 2 / NHS-Galleri 见刊)"
+  },
+  {
+    "id": "exact",
+    "name": "Exact Sciences / Abbott",
+    "nameEn": "Exact Sciences / Abbott",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": true,
+    "product": "Cancerguard™ / Cologuard Plus™",
+    "layout": "MCED(Cancerguard，源自 CancerSEEK 谱系)+ 粪便 DNA(Cologuard 1.0 / Plus，CRC)",
+    "routes": [
+      "多组学",
+      "甲基化",
+      "蛋白质",
+      "突变"
+    ],
+    "cancers": [
+      "乳腺",
+      "结直肠",
+      "食管",
+      "肝",
+      "肺",
+      "卵巢",
+      "胰腺",
+      "胃"
+    ],
+    "cancerLabel": "多癌种(CancerSEEK 8 癌种 / Cancerguard 多癌种)",
+    "panel": "CancerSEEK：16 基因突变 + 8 蛋白；Cancerguard：DNA 甲基化 + 肿瘤相关蛋白；Cologuard Plus：多靶点粪便 DNA",
+    "statuses": [
+      {
+        "stage": "fda-approved",
+        "label": "FDA 获批(2024-10)",
+        "scope": "Cologuard Plus · CRC",
+        "date": "2024-10-03",
+        "sources": [
+          "fda-pma-database-p230043"
+        ]
+      },
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化",
+        "scope": "Cancerguard · MCED(2025H2)",
+        "date": "2025-09",
+        "sources": [
+          "exact-sciences-press-release-2025-09-10"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA获批",
+      "LDT商业化"
+    ],
+    "citation": "Science 2018(CancerSEEK)/ 2020(DETECT-A)；NEJM 2024(BLUE-C)；AACR 2024(ASCEND-2)；Exact Sciences 2025(Cancerguard 上市)",
+    "updatedAt": "2025-09(Cancerguard LDT 上市)"
+  },
+  {
+    "id": "guardant",
+    "name": "Guardant Health",
+    "nameEn": "Guardant Health",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": true,
+    "product": "Shield™ / Shield™ MCD",
+    "layout": "单癌种 Shield(CRC，FDA 首个一线血检)已上市 + Shield MCD 多癌种(10 癌种，FDA 突破性器械、入选 NCI Vanguard 研究)",
+    "routes": [
+      "甲基化",
+      "片段组学",
+      "突变"
+    ],
+    "cancers": [
+      "结直肠",
+      "膀胱",
+      "乳腺",
+      "食管",
+      "胃",
+      "肝",
+      "肺",
+      "卵巢",
+      "胰腺",
+      "前列腺"
+    ],
+    "cancerLabel": "结直肠(获批)+ 10 癌种 MCD(膀胱 / 乳腺 / 结直肠 / 食管 / 胃 / 肝 / 肺 / 卵巢 / 胰腺 / 前列腺)",
+    "panel": "Shield：甲基化分区 mp-cfDNA + 片段组学 + 突变；Shield MCD：甲基化为主血检(CSO / TOO 模型覆盖 10 癌种)",
+    "statuses": [
+      {
+        "stage": "fda-approved",
+        "label": "FDA 获批(2024-07)",
+        "scope": "Shield · CRC 首个一线血检",
+        "date": "2024-07-26",
+        "sources": [
+          "fda-pma-database-p230009",
+          "fda-ssed-shield-pma-p230009-approved-2024-07-26"
+        ]
+      },
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2025-06)",
+        "scope": "Shield MCD · 多癌种",
+        "date": "2025-06-02",
+        "sources": [
+          "guardant-press-release-2025-06-02-03",
+          "patient-care-online-2025-06-04"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA获批",
+      "FDA突破性器械"
+    ],
+    "citation": "NEJM 2024(ECLIPSE)；FDA SSED P230009(2024-07-26 获批)；ASCO 2025 / AACR 2025(Shield MCD 验证)；JPM 2025(NCI Vanguard 入选)",
+    "updatedAt": "2025-06(ASCO 2025)"
+  },
+  {
+    "id": "freenome",
+    "name": "Freenome",
+    "nameEn": "Freenome",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": false,
+    "product": "SimpleScreen CRC / SimpleScreen Lung",
+    "layout": "单癌种血检：SimpleScreen CRC(FDA 获批，Abbott 2026-09 美国上市)+ SimpleScreen Lung(LDT，2026-10)",
+    "routes": [
+      "甲基化"
+    ],
+    "cancers": [
+      "结直肠",
+      "肺"
+    ],
+    "cancerLabel": "结直肠(获批)+ 肺(LDT)",
+    "panel": "血浆 cfDNA 甲基化检测；Freenome 多组学平台另可整合蛋白与基因组特征",
+    "statuses": [
+      {
+        "stage": "fda-approved",
+        "label": "FDA 获批(2026-07-24)",
+        "scope": "SimpleScreen CRC · ≥45 岁平均风险",
+        "date": "2026-07-24",
+        "sources": [
+          "fda-pma-database-p250029",
+          "freenome-press-release-2026-07-27"
+        ]
+      },
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2026-08-12)",
+        "scope": "SimpleScreen Lung · 肺",
+        "date": "2026-08-12",
+        "sources": [
+          "freenome-2026-08-12"
+        ]
+      },
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化(2026-10-20)",
+        "scope": "SimpleScreen Lung · 肺",
+        "date": "2026-10-20",
+        "sources": [
+          "freenome-2026-10-20"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA获批",
+      "FDA突破性器械",
+      "LDT商业化"
+    ],
+    "citation": "JAMA 2025(PREEMPT CRC)；FDA PMA P250029(2026-07-24 获批)；Freenome 2026(更新版验证、SimpleScreen Lung)",
+    "updatedAt": "2026-10(SimpleScreen Lung LDT 上市)"
+  },
+  {
+    "id": "delfi",
+    "name": "Delfi Diagnostics",
+    "nameEn": "Delfi Diagnostics",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": false,
+    "product": "FirstLook™ Lung",
+    "layout": "已上市单癌种(肺)；2019 年完成多癌种片段组学病例对照研究",
+    "routes": [
+      "片段组学",
+      "AI"
+    ],
+    "cancers": [
+      "乳腺",
+      "结直肠",
+      "肺",
+      "卵巢",
+      "胰腺",
+      "胃",
+      "胆管"
+    ],
+    "cancerLabel": "肺(已上市产品)；2019 研究覆盖 7 癌种",
+    "panel": "低深度 WGS 片段组学(5 Mb 非重叠窗口，短 / 长片段比 + CNV)",
+    "statuses": [
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化(2023-10)",
+        "scope": "肺",
+        "date": "2023-10-09",
+        "sources": [
+          "delfi-press-release-prnewswire-2023-10-09"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "LDT商业化"
+    ],
+    "citation": "Nature 2019(Cristiano 多癌种)；Cancer Discov 2024(DELFI-L101，PMID 38829053)",
+    "updatedAt": "2024-11(Cancer Discov 见刊)"
+  },
+  {
+    "id": "mirxes",
+    "name": "觅瑞 Mirxes",
+    "nameEn": "Mirxes",
+    "country": "新加坡·中国",
+    "region": "国外",
+    "self": false,
+    "mced": false,
+    "product": "觅小卫® / GASTROClear™",
+    "layout": "单癌种血检：GASTROClear(胃)+ LungClear(肺，LDT)；MCED 管线 CADENCE(NCT05633342,9 癌种，计划 n=15,000，进行中)",
+    "routes": [
+      "miRNA"
+    ],
+    "cancers": [
+      "胃",
+      "肺"
+    ],
+    "cancerLabel": "胃( + 肺 LDT；MCED 在研)",
+    "panel": "血液 qPCR:12 个 miRNA 标志物组",
+    "statuses": [
+      {
+        "stage": "nmpa-approved",
+        "label": "NMPA III类证(2025-10)",
+        "scope": "胃癌 · 中国首张胃癌早筛证",
+        "date": "2025-10",
+        "sources": [
+          "stockstar-china-industry-observation-2025-10-09",
+          "nbd-2026-04-28",
+          "biospectrum-asia-2025-10",
+          "genomeweb-2025-10"
+        ]
+      },
+      {
+        "stage": "hsa",
+        "label": "新加坡 HSA(2019)",
+        "scope": "胃",
+        "date": "2019",
+        "sources": []
+      },
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械",
+        "scope": "胃",
+        "date": null,
+        "sources": []
+      }
+    ],
+    "statusKeys": [
+      "NMPA III类证",
+      "FDA突破性器械"
+    ],
+    "citation": "Gut 2021(GASTROClear 开发与验证)；NMPA 注册审评资料(杭州觅因)；2025-10 获批公告",
+    "updatedAt": "2025-10(NMPA 获批公告)"
+  },
+  {
+    "id": "epigenomics",
+    "name": "Epigenomics",
+    "nameEn": "Epigenomics",
+    "country": "德国 / 美国",
+    "region": "国外",
+    "self": false,
+    "mced": false,
+    "product": "Epi proColon®",
+    "layout": "血液单基因甲基化(SEPT9)，首个 FDA 批准的血液 CRC 筛查",
+    "routes": [
+      "甲基化"
+    ],
+    "cancers": [
+      "结直肠"
+    ],
+    "cancerLabel": "结直肠",
+    "panel": "血液 mSEPT9(甲基化特异性 PCR，单基因)",
+    "statuses": [
+      {
+        "stage": "fda-approved",
+        "label": "FDA 获批(2016)",
+        "scope": "CRC",
+        "date": "2016-04-12",
+        "sources": [
+          "fda-pma-database-p130001",
+          "fda-ssed-epi-procolon-pma-p130001-approved-2016-04-12",
+          "cancer-network-2016-04-15"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA获批"
+    ],
+    "citation": "FDA SSED P130001(2016-04 获批)；PRESEPT(Church 2014, Gut)",
+    "updatedAt": "2016-04(FDA 获批)"
+  },
+  {
+    "id": "geneoscopy",
+    "name": "Geneoscopy",
+    "nameEn": "Geneoscopy",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "mced": false,
+    "product": "ColoSense™",
+    "layout": "粪便 RNA(mt-sRNA)+ FIT,2024 FDA 获批",
+    "routes": [
+      "RNA",
+      "FIT"
+    ],
+    "cancers": [
+      "结直肠"
+    ],
+    "cancerLabel": "结直肠",
+    "panel": "粪便脱落细胞 mRNA 标志物 + 血红蛋白(FIT)",
+    "statuses": [
+      {
+        "stage": "fda-approved",
+        "label": "FDA 获批(2024-05)",
+        "scope": "CRC",
+        "date": "2024-05-03",
+        "sources": [
+          "fda-recently-approved-device-page-colosense-p230001",
+          "fda-ssed-p230001"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA获批"
+    ],
+    "citation": "FDA 2024；CRC-PREVENT(JAMA 2023-10 在线，PMID 见 PMC10594178)",
+    "updatedAt": "2023-10(JAMA 在线)"
+  },
+  {
+    "id": "genesolutions",
+    "name": "Gene Solutions",
+    "nameEn": "Gene Solutions",
+    "country": "越南",
+    "region": "国外",
+    "self": false,
+    "mced": true,
+    "product": "SPOT-MAS™",
+    "layout": "SPOT-MAS 多模态 MCED 血检(5 癌种)；越南 LDT 商业化，定位中低收入国家人群筛查(含两项 K-DETEK 前瞻队列读出)",
+    "routes": [
+      "甲基化",
+      "片段组学",
+      "多组学",
+      "AI"
+    ],
+    "cancers": [
+      "肝",
+      "乳腺",
+      "结直肠",
+      "肺",
+      "胃"
+    ],
+    "cancerLabel": "5 癌种(肝 / 乳腺 / 结直肠 / 肺 / 胃)",
+    "panel": "SPOT-MAS：亚硫酸盐法多模态 cfDNA — 450 靶向区 / 18,000 CpG 甲基化 + 全基因组甲基化(2734×1Mb)+ CNA(588×5Mb)+ 片段长度 + 末端 motif，浅层 WGS ~0.55X，DNBSEQ-G400，机器学习集成",
+    "statuses": [
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2026)",
+        "scope": "SPOT-MAS · MCED",
+        "date": "2026",
+        "sources": [
+          "asia-news-network-2026"
+        ]
+      },
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化",
+        "scope": "MCED · 越南",
+        "date": null,
+        "sources": []
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "LDT商业化"
+    ],
+    "citation": "eLife 2023(病例对照验证集)；Cancer Investigation 2023(K-DETEK 中期，NCT05227261)；BMC Medicine 2025(K-DETEK 全队列，PMID 39948555)",
+    "updatedAt": "2026(FDA 突破性器械认定)"
+  },
+  {
+    "id": "geneseeq",
+    "name": "世和基因",
+    "nameEn": "Geneseeq",
+    "country": "中国",
+    "region": "国内",
+    "self": true,
+    "mced": true,
+    "product": "CanScan® 鹰眼",
+    "layout": "MERCURY™ 多组学平台：MCED(13 癌种)+ 单癌种(肺 / 胃 / 食管 / 结直肠 / 胰腺)+ MRD",
+    "routes": [
+      "片段组学",
+      "多组学",
+      "AI"
+    ],
+    "cancers": [
+      "乳腺",
+      "宫颈",
+      "结直肠",
+      "子宫内膜",
+      "食管",
+      "胃",
+      "肝",
+      "肺",
+      "卵巢",
+      "胰腺",
+      "前列腺",
+      "胆管",
+      "淋巴瘤"
+    ],
+    "cancerLabel": "13 癌种",
+    "panel": "低深度 WGS(MERCURY，整合基因组与片段组特征：片段长度、CNV、末端 motif、推断甲基化及基因表达指标)",
+    "statuses": [
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2023)",
+        "scope": "MCED",
+        "date": "2023",
+        "sources": [
+          "pr-newswire-2024-01-03"
+        ]
+      },
+      {
+        "stage": "ce",
+        "label": "CE 认证(2023-01)",
+        "scope": "MCED",
+        "date": "2023-01",
+        "sources": [
+          "pr-newswire-2023-01-24"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "CE认证"
+    ],
+    "citation": "Nature Medicine 2025(DECIPHE-Omnia)；AACR 2024(#1266/#1263)；金陵队列 NCT06011694",
+    "updatedAt": "2025-06(Nat Med)"
+  },
+  {
+    "id": "burningrock",
+    "name": "燃石医学",
+    "nameEn": "Burning Rock",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": true,
+    "product": "OverC™",
+    "layout": "MCED 血检(6 癌种)",
+    "routes": [
+      "甲基化",
+      "AI"
+    ],
+    "cancers": [
+      "肝",
+      "肺",
+      "食管",
+      "结直肠",
+      "胰腺",
+      "卵巢"
+    ],
+    "cancerLabel": "6 癌种",
+    "panel": "靶向甲基化：定制 161,984 个 CpG 位点",
+    "statuses": [
+      {
+        "stage": "nmpa-innovative",
+        "label": "NMPA 创新通道(2023-10)",
+        "scope": "MCED · 中国首款多癌早检入创新通道",
+        "date": "2023-10",
+        "sources": [
+          "globenewswire-biospace-2023-10-15",
+          "iivd-net-2023-09-26"
+        ]
+      },
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2023)",
+        "scope": "MCED",
+        "date": "2023-01",
+        "sources": [
+          "globenewswire-biospace-2023-01-03"
+        ]
+      },
+      {
+        "stage": "ce",
+        "label": "CE 认证(2022)",
+        "scope": "MCED",
+        "date": "2022-06",
+        "sources": [
+          "biospace-2022-06-01"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "NMPA创新通道",
+      "FDA突破性器械",
+      "CE认证"
+    ],
+    "citation": "Ann Oncol 2023(THUNDER，PMID 36849097)；The Innovation 2026(PROMISE，PMID 41737326)；NMPA 创新通道公示",
+    "updatedAt": "2025-08(PROMISE 在线)"
+  },
+  {
+    "id": "singlera",
+    "name": "鹍远基因",
+    "nameEn": "Singlera",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": true,
+    "product": "PanSeer / PDACatch / GutSeer",
+    "layout": "MCED(PanSeer,5 癌种)+ 胰腺癌(PDACatch)+ 消化道 5 癌(GUIDE/GutSeer)",
+    "routes": [
+      "甲基化",
+      "片段组学"
+    ],
+    "cancers": [
+      "胃",
+      "食管",
+      "结直肠",
+      "肺",
+      "肝",
+      "胰腺"
+    ],
+    "cancerLabel": "5 癌种( + 胰腺 PDACatch；消化道 GUIDE)",
+    "panel": "PanSeer：半靶向 PCR 检测 595 个基因组区域、11,787 个 CpG 位点，分析 LoD 0.1%；PDACatch：胰腺癌甲基化 panel；GUIDE：甲基化 + 片段组学",
+    "statuses": [
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2023-05)",
+        "scope": "PDACatch · 胰腺",
+        "date": "2023-05",
+        "sources": [
+          "targeted-oncology-2023-05-09"
+        ]
+      },
+      {
+        "stage": "rnd",
+        "label": "LDT / 研发",
+        "scope": "MCED",
+        "date": null,
+        "sources": []
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "研发或申报中"
+    ],
+    "citation": "Nature Communications 2020(泰州队列 TZL)；BMC Medicine 2022(PDACatch)；Mol Cancer 2025(GUIDE/GutSeer)",
+    "updatedAt": "2025(Mol Cancer GUIDE)"
+  },
+  {
+    "id": "berry",
+    "name": "和瑞基因",
+    "nameEn": "Berry Oncology(贝瑞旗下)",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": false,
+    "product": "莱思宁 (LiverScreening)",
+    "layout": "单癌种(肝)已上市 → 肺癌等研发；PreCar 前瞻万人队列",
+    "routes": [
+      "多组学",
+      "片段组学",
+      "甲基化"
+    ],
+    "cancers": [
+      "肝"
+    ],
+    "cancerLabel": "肝(HIFI 平台可外扩)",
+    "panel": "HIFI 平台：低深度 WGS + 5hmC 测序，整合 5hmC + 5′末端 motif + 核小体印记(NF)+ 片段分布 四类特征，logistic 回归加权模型(单癌种无 TOO)",
+    "statuses": [
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化(2020-08)",
+        "scope": "肝",
+        "date": "2020-08",
+        "sources": [
+          "pedaily-2020-08-16",
+          "biopharma-apac-2022-05-19"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "LDT商业化"
+    ],
+    "citation": "PreCar 项目；CSCO 2021；Cell Res 2021(HIFI)；eBioMedicine 2024(PreCar 前瞻)；肝癌早筛专家共识",
+    "updatedAt": "2024-02(eBioMedicine)"
+  },
+  {
+    "id": "newhorizon",
+    "name": "诺辉健康",
+    "nameEn": "New Horizon",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": false,
+    "product": "常卫清®",
+    "layout": "居家早筛：常卫清(CRC)+ 噗噗管(FIT)+ 幽幽管(胃)+ 宫证清(宫颈)",
+    "routes": [
+      "FIT-DNA",
+      "甲基化",
+      "突变"
+    ],
+    "cancers": [
+      "结直肠",
+      "胃",
+      "宫颈"
+    ],
+    "cancerLabel": "结直肠( + 胃 / 宫颈研发)",
+    "panel": "FIT-sDNA(qPCR)：KRAS 突变 + BMP3/NDRG4 甲基化 + 粪便血红蛋白",
+    "statuses": [
+      {
+        "stage": "nmpa-approved",
+        "label": "NMPA III类证(2020-11)",
+        "scope": "CRC · 中国首张癌症早筛证",
+        "date": "2020-11",
+        "sources": [
+          "nmpa-cmde-csz2000050",
+          "2021-01-11"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "NMPA III类证"
+    ],
+    "citation": "MedComm 2023(Clear-C 论文，Hu et al.)；CSCO 2020(会议口径)；人民日报；JPM2024 公司 deck",
+    "updatedAt": "2023-07(MedComm 论文)"
+  },
+  {
+    "id": "genetron",
+    "name": "泛生子",
+    "nameEn": "Genetron",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": false,
+    "product": "HCCscreen™",
+    "layout": "单癌种(肝)→ Mutation Capsule 平台外扩多癌种",
+    "routes": [
+      "多组学",
+      "甲基化",
+      "突变",
+      "蛋白质"
+    ],
+    "cancers": [
+      "肝"
+    ],
+    "cancerLabel": "肝(M2P 平台可外扩)",
+    "panel": "Mutation Capsule：外周血 cfDNA 多重甲基化 + 突变信号；HCCscreen 同时结合血清蛋白标志物",
+    "statuses": [
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2020-09)",
+        "scope": "肝 · 国内首家",
+        "date": "2020-09-30",
+        "sources": [
+          "genetron-health-press-release-globenewswire-2020-09-30"
+        ]
+      },
+      {
+        "stage": "ldt",
+        "label": "LDT 商业化",
+        "scope": "肝",
+        "date": null,
+        "sources": [
+          "genetron-health-press-release-globenewswire-2020-09-30",
+          "genetron-health-press-release-biospace-business-wire-202"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "LDT商业化"
+    ],
+    "citation": "PNAS 2019(先导)；HIT 研究 2021(多中心前瞻终分析)；Sci Transl Med 2022",
+    "updatedAt": "2021-03(HIT 终分析)"
+  },
+  {
+    "id": "bgi",
+    "name": "华大基因",
+    "nameEn": "BGI / 华大数极",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": false,
+    "product": "华常康",
+    "layout": "华常康(粪便DNA, CRC)+ GeneArc(血液，CRC)+ 肝癌 / 多癌种(扩大验证中)",
+    "routes": [
+      "甲基化",
+      "多组学"
+    ],
+    "cancers": [
+      "结直肠",
+      "肝"
+    ],
+    "cancerLabel": "结直肠( + 肝；多癌种原型)",
+    "panel": "华常康：粪便 DNA 甲基化(SDC2/ADHFE1/PPP2R5C)；GeneArc：血液多重甲基化 PCR",
+    "statuses": [
+      {
+        "stage": "ldt",
+        "label": "LDT / 商业化",
+        "scope": "CRC",
+        "date": null,
+        "sources": [
+          "bgi-genomics-product-page-csco-meeting-exhibitor",
+          "front-oncol-2024-14-1284975",
+          "bgi-perspectives-2022-12-05"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "LDT商业化"
+    ],
+    "citation": "未见同行评议的早筛性能全文；企业产品资料(不采官网性能口径)",
+    "updatedAt": "企业资料"
+  },
+  {
+    "id": "geneplus",
+    "name": "吉因加",
+    "nameEn": "GenePlus",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": true,
+    "product": "吉早安®",
+    "layout": "早筛早诊系列(吉早安)+ MRD 全病程监测；国产测序平台(DNBSEQ-T7/Gene+)",
+    "routes": [
+      "甲基化",
+      "多组学"
+    ],
+    "cancers": [
+      "多癌种"
+    ],
+    "cancerLabel": "多癌种早期预警(在研)",
+    "panel": "温和甲基化转化(TAPS 类，可同步检测基因组变异)+ 国产 NGS",
+    "statuses": [
+      {
+        "stage": "rnd",
+        "label": "研发 / LDT",
+        "scope": "早筛早诊",
+        "date": null,
+        "sources": [
+          "2025-03-13",
+          "2025-10-28"
+        ]
+      }
+    ],
+    "statusKeys": [
+      "研发或申报中"
+    ],
+    "citation": "未见同行评议早筛性能全文；不采企业口径",
+    "updatedAt": "无(性能未公开披露)"
+  },
+  {
+    "id": "genecast",
+    "name": "臻和科技",
+    "nameEn": "Genecast",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": true,
+    "product": "THEMIS / TOTEM(研究阶段)",
+    "layout": "MRD(ctDNA)为核心 + 多癌种早检(THEMIS 多组学 / TOTEM 靶向甲基化，7 癌种，已发表)",
+    "routes": [
+      "甲基化",
+      "片段组学",
+      "多组学"
+    ],
+    "cancers": [
+      "乳腺",
+      "结直肠",
+      "食管",
+      "胃",
+      "肝",
+      "肺",
+      "胰腺"
+    ],
+    "cancerLabel": "7 癌种(乳腺 / 结直肠 / 食管 / 胃 / 肝 / 肺 / 胰腺)",
+    "panel": "THEMIS：酶法(TET2+APOBEC3A，无亚硫酸盐)低深度全甲基化组测序 WMS,4ml 血浆 / ~2X / 60M reads，整合 甲基化 + 片段FSI+CNA(CAFF) + 末端motif(FEM)；TOTEM:EM-seq 靶向甲基化(~1Mb / 82,400 CpG,57 诊断 + 873 溯源 marker，可降至 21+214)",
+    "statuses": [
+      {
+        "stage": "rnd",
+        "label": "研发 / LDT",
+        "scope": "多癌早检(已发表)",
+        "date": null,
+        "sources": []
+      }
+    ],
+    "statusKeys": [
+      "研发或申报中"
+    ],
+    "citation": "Nature Communications 2023(THEMIS,14:6042，PMID 37758728)；BMC Cancer 2024(TOTEM,24:840)；MONITOR 队列(与中国医学科学院肿瘤医院合作)",
+    "updatedAt": "2024-07(TOTEM)/ 2023-09(THEMIS)"
+  },
+  {
+    "id": "anchordx",
+    "name": "基准医疗",
+    "nameEn": "AnchorDx",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "mced": false,
+    "product": "UriFind® / PulmoSeek®",
+    "layout": "单癌种诊断 / 早检：UriFind®(膀胱，尿液 DNA 甲基化)+ PulmoSeek®(肺结节良恶性，血浆甲基化)",
+    "routes": [
+      "甲基化"
+    ],
+    "cancers": [
+      "膀胱",
+      "肺"
+    ],
+    "cancerLabel": "膀胱 / 肺",
+    "panel": "UriFind：尿液 DNA PCR 甲基化检测，双标志物 ONECUT2/VIM 用于检出，五标志物 VIM/OSTM1/SLC4A10/AC092805.1/ONECUT2 用于风险分层；PulmoSeek：血浆 cfDNA 甲基化肺结节分类",
+    "statuses": [
+      {
+        "stage": "fda-breakthrough",
+        "label": "FDA 突破性器械(2021-07)",
+        "scope": "UriFind · 膀胱",
+        "date": "2021-07-13",
+        "sources": [
+          "anchordx-pr-newswire-2021-07-21",
+          "biospace-2021-07-21"
+        ]
+      },
+      {
+        "stage": "rnd",
+        "label": "LDT / 受理",
+        "scope": "肺",
+        "date": null,
+        "sources": []
+      }
+    ],
+    "statusKeys": [
+      "FDA突破性器械",
+      "研发或申报中"
+    ],
+    "citation": "UriFind(Clin Epigenetics 2021；13:91)；PulmoSeek(JCI 2021)；PulmoSeek Plus(Lancet Digit Health 2023)；FDA 突破性器械",
+    "updatedAt": "2023-08(PulmoSeek Plus)"
+  }
+]

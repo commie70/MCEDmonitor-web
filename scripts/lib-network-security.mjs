@@ -176,6 +176,26 @@ export function assertSafeCrossOriginRedirect(init = {}) {
   }
 }
 
+/**
+ * Resolver that only ever answers with the addresses already checked by validatePublicUrl,
+ * so the socket cannot be re-pointed at a private address between validation and connect.
+ *
+ * It must honour the two shapes of dns.lookup: with `all: true` (what net.connect asks for
+ * whenever autoSelectFamily is on, the default since Node 20) the callback takes an array of
+ * `{ address, family }`; otherwise it takes `(address, family)`. Answering the first shape with
+ * a bare string makes every request fail with ERR_INVALID_IP_ADDRESS.
+ */
+export function pinnedLookup(addresses) {
+  const records = addresses.map((address) => ({ address, family: net.isIPv6(address) ? 6 : 4 }));
+  return (_hostname, options, callback) => {
+    const wanted = typeof options === "object" && options ? Number(options.family) || 0 : Number(options) || 0;
+    const matching = wanted ? records.filter((record) => record.family === wanted) : records;
+    const answer = matching.length ? matching : records;
+    if (typeof options === "object" && options?.all) callback(null, answer);
+    else callback(null, answer[0].address, answer[0].family);
+  };
+}
+
 function requestValidated({ url, addresses }, init) {
   return new Promise((resolve, reject) => {
     const transport = url.protocol === "https:" ? https : http;
@@ -192,7 +212,7 @@ function requestValidated({ url, addresses }, init) {
       method: init.method || "GET",
       headers: Object.fromEntries(headers.entries()),
       servername: url.hostname,
-      lookup: (_hostname, _options, callback) => callback(null, addresses[0], net.isIPv6(addresses[0]) ? 6 : 4),
+      lookup: pinnedLookup(addresses),
       signal: init.signal,
     }, (response) => {
       settled = true;

@@ -1,28 +1,9 @@
 {
-  "name": "ai-website-clone-template",
-  "version": "0.4.0",
+  "name": "mced-intel",
+  "version": "1.0.0",
   "private": true,
-  "description": "Clone any website into a clean, modern Next.js codebase using AI coding agents",
-  "author": "JCodesMore",
+  "description": "早筛情报站:癌症早筛产品的性能、技术路线、癌种覆盖与报证进度持续监测",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template.git"
-  },
-  "homepage": "https://github.com/JCodesMore/ai-website-cloner-template",
-  "bugs": {
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template/issues"
-  },
-  "keywords": [
-    "claude-code",
-    "website-clone",
-    "reverse-engineering",
-    "nextjs",
-    "ai",
-    "template",
-    "tailwindcss",
-    "shadcn-ui"
-  ],
   "engines": {
     "node": ">=24"
   },
@@ -34,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "monitor": "node scripts/mced-daily-monitor.mjs",
-    "monitor:legacy": "node scripts/mced-daily-monitor-legacy.mjs",
+    "monitor:project": "node scripts/project-public-report.mjs",
     "monitor:migrate": "node scripts/migrate-monitor-ledger.mjs",
     "monitor:review": "node scripts/review-monitor-event.mjs",
     "monitor:acceptance": "node scripts/evaluate-monitor-acceptance.mjs",

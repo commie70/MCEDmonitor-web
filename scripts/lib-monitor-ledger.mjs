@@ -59,6 +59,7 @@ const CATEGORY_BY_EVENT_TYPE = {
 };
 
 const RETRYABLE_CANDIDATE_STAGES = new Set([
+  "run_budget",
   "model_configuration",
   "content_extraction",
   "model_processing",
@@ -244,6 +245,9 @@ export function validateSourceRegistry(registry) {
   assert(registry.schema_version === 1, "source registry schema_version must be 1");
   assert(Array.isArray(registry.sources), "source registry sources must be an array");
   assert(Array.isArray(registry.discovery_queries), "source registry discovery_queries must be an array");
+  if (registry.release_mode !== undefined) {
+    assert(["auto", "shadow"].includes(registry.release_mode), "source registry release_mode must be auto or shadow");
+  }
 
   const ids = new Set();
   for (const [index, source] of registry.sources.entries()) {
@@ -387,6 +391,7 @@ export function validateLedger(ledger) {
     optionalIso(event.occurred_at, `${label}.occurred_at`);
     optionalIso(event.published_at, `${label}.published_at`);
     optionalIso(event.discovered_at, `${label}.discovered_at`);
+    optionalIso(event.released_at, `${label}.released_at`);
   }
   for (const id of ledger.last_publication_event_ids) {
     assert(eventIds.has(id), `last_publication_event_ids references missing event ${id}`);
@@ -492,8 +497,20 @@ function isHighRisk(candidate, importance) {
   );
 }
 
-function requiresHumanReview(candidate, importance) {
-  return isHighRisk(candidate, importance);
+/**
+ * 高风险事件(L1、监管结论、临床性能数字)的发布条件。
+ *
+ * 逐条人工确认不可持续，改由独立模型复核把关：抽取与重要性两步都经复核模型独立判断、
+ * 且与主模型一致或已由仲裁解决，事件才自动放行(approved，reviewed_by 记为模型)。
+ * 缺少任一步复核的高风险事件保持 pending——不公开，可由人工复核 CLI 处理。
+ */
+function reviewOutcome(candidate, importance, now) {
+  if (!isHighRisk(candidate, importance)) return { review_status: "not_required" };
+  const review = candidate.model_review;
+  if (review?.extraction === true && review?.importance === true && nonEmptyString(review.reviewer)) {
+    return { review_status: "approved", reviewed_by: `model:${review.reviewer}`, reviewed_at: now };
+  }
+  return { review_status: "pending" };
 }
 
 function factsHash(facts) {
@@ -592,11 +609,56 @@ function candidateRetryPayload(candidate) {
   };
 }
 
+/**
+ * 账本对这条候选已有结论(无关、已并入事件、缺可验证日期、证据不足)，或者会自己重放它。
+ * 待处理却没有重放载荷的候选(旧版流水线遗留)两者都不是：只有重新采集才能救回，不能算已知。
+ */
+function candidateIsInHand(candidate) {
+  if (candidate.status !== "pending") return true;
+  if (!RETRYABLE_CANDIDATE_STAGES.has(candidate.stage)) return true;
+  return isObject(candidate.retry_payload);
+}
+
+/**
+ * 账本已经接手的链接：成为证据的，以及账本有结论或会自己重放(含重试用尽被搁置)的候选。
+ * 它们不需要再从列表页或搜索结果里采一遍——否则同一批页面每次运行都会被重新抓取、重新送进模型，
+ * 重试上限也形同虚设。
+ */
+export function knownUrls(ledger) {
+  const urls = new Set(ledger.evidence.map((evidence) => evidence.canonical_url));
+  for (const candidate of ledger.candidates) {
+    if (!nonEmptyString(candidate.url) || !candidateIsInHand(candidate)) continue;
+    try {
+      urls.add(normalizeUrl(candidate.url));
+    } catch {
+      // 账本里的旧记录可能带有今天不再接受的地址，忽略即可。
+    }
+  }
+  return urls;
+}
+
+/** 同一候选最多重放的次数；顺延(run_budget)不计入。 */
+export const MAX_CANDIDATE_RETRIES = 5;
+
+function candidateIsRetryable(candidate) {
+  return (
+    candidate.status === "pending" &&
+    RETRYABLE_CANDIDATE_STAGES.has(candidate.stage) &&
+    isObject(candidate.retry_payload)
+  );
+}
+
+/** 重试次数用尽的候选：模型始终无法达成一致或正文始终取不到，不再占用运行预算。 */
+export function stalledCandidates(ledger) {
+  return ledger.candidates.filter(
+    (candidate) => candidateIsRetryable(candidate) && candidate.retry_count >= MAX_CANDIDATE_RETRIES
+  );
+}
+
 export function pendingRetryHits(ledger) {
   return ledger.candidates
-    .filter((candidate) => candidate.status === "pending")
-    .filter((candidate) => RETRYABLE_CANDIDATE_STAGES.has(candidate.stage))
-    .filter((candidate) => isObject(candidate.retry_payload))
+    .filter(candidateIsRetryable)
+    .filter((candidate) => candidate.retry_count < MAX_CANDIDATE_RETRIES)
     .map((candidate) => ({
       ...candidate.retry_payload,
       retry_of_candidate_id: candidate.id,
@@ -792,7 +854,9 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
       event.occurred_at = normalizeDateTime(candidate.occurred_at) || event.occurred_at;
       event.published_at = normalizeDateTime(candidate.published_at) || event.published_at;
       event.importance = normalizeImportance(candidate);
-      event.review_status = requiresHumanReview(candidate, event.importance) ? "pending" : "not_required";
+      delete event.reviewed_by;
+      delete event.reviewed_at;
+      Object.assign(event, reviewOutcome(candidate, event.importance, now));
       event.last_material_update_at = now;
       for (const supportingRecord of supportingRecords) {
         supportingRecord.status = "promoted";
@@ -865,7 +929,7 @@ export function mergeCandidate(ledger, candidate, { matcherResult = null, now = 
     evidence_ids: relatedEvidenceIds,
     importance,
     evidence_confidence: confidence,
-    review_status: requiresHumanReview(candidate, importance) ? "pending" : "not_required",
+    ...reviewOutcome(candidate, importance, now),
     analyses: [...(candidate.analyses || [])],
   };
   ledger.events.push(event);
@@ -911,6 +975,39 @@ export function eventIsPublic(event) {
   if (!event.importance.level) return false;
   if (!["approved", "not_required"].includes(event.review_status)) return false;
   return true;
+}
+
+/**
+ * 迁移自旧版最后一份有效公开报告的事件：在发布门禁设立之前就已对外可见。
+ */
+export function eventPredatesGate(event) {
+  return event.publication_state === "backfill" && event.analyses[0]?.provider === "legacy";
+}
+
+/** 已对外放行：门禁之后即使关闭，这些事件也不撤下。 */
+export function eventIsReleased(event) {
+  return Boolean(event.released_at) || eventPredatesGate(event);
+}
+
+/**
+ * 门禁开放时调用：把满足事件级条件、尚未放行的事件标记为已放行。
+ * 放行是账本里的状态，公开报告只是它的投影。
+ * 门禁关闭期间积压的新发布 / 实质更新在放行的这一次进入「本期」。
+ */
+export function releaseEligibleEvents(ledger, now = new Date().toISOString()) {
+  let released = 0;
+  for (const event of ledger.events) {
+    if (eventIsReleased(event) || !eventIsPublic(event)) continue;
+    event.released_at = now;
+    released++;
+    if (
+      ["first", "update"].includes(event.publication_state) &&
+      !ledger.last_publication_event_ids.includes(event.id)
+    ) {
+      ledger.last_publication_event_ids.push(event.id);
+    }
+  }
+  return released;
 }
 
 export function eventIsDailyEligible(event) {
@@ -1036,11 +1133,14 @@ export function projectPublicReport(
     errors = [],
     metrics = {},
     sourceCount = 0,
+    gateOpen = true,
+    release = null,
   } = {}
 ) {
   validateLedger(ledger);
   const windowSince = new Date(Date.parse(generatedAt) - windowDays * 86_400_000).toISOString().slice(0, 10);
-  const events = ledger.events.filter(eventIsPublic).sort(compareEvents);
+  const eligible = ledger.events.filter(eventIsPublic);
+  const events = eligible.filter((event) => gateOpen || eventIsReleased(event)).sort(compareEvents);
   const stories = events.map((event) => eventToStory(event, ledger.evidence, generatedAt, windowDays));
   const storyById = new Map(stories.map((story) => [story.id, story]));
   const publicationIds = new Set(ledger.last_publication_event_ids);
@@ -1080,6 +1180,7 @@ export function projectPublicReport(
       all_event_ids: events.map((event) => event.id),
     },
     metrics,
+    ...(release ? { release: { ...release, held: eligible.length - events.length } } : {}),
   };
 }
 

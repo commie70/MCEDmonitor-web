@@ -1,0 +1,20 @@
+[
+  {
+    "region": "国内",
+    "covers": "单次检测",
+    "range": "几千元到上万元",
+    "asOf": "2026-09",
+    "sources": [
+      "mrd-ctdna-mrd-2026-09-ea12b7"
+    ]
+  },
+  {
+    "region": "国内",
+    "covers": "一次性购买的固定次数套餐",
+    "range": "2–3 万元",
+    "asOf": "2023-08",
+    "sources": [
+      "mrd-mrd-2023-08-1a8f58"
+    ]
+  }
+]

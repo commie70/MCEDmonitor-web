@@ -1,24 +1,24 @@
 import { NextResponse } from "next/server";
-import {
-  readMonitorReport,
-  reportMissingResponse,
-} from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
-import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
+import { apiEvent } from "@/lib/api";
+import { featured, hotEvents } from "@/lib/events";
+import { loadEvents } from "@/lib/load-events";
+import { monitorHealth, storiesForView } from "@/lib/monitor-report";
+import { API_CACHE_HEADERS } from "@/lib/url";
 
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/v1/daily — 每日监测摘要：首次发布/实质更新且达到 L1/L2、通过证据与复核门禁的事件。
+ * GET /api/v1/daily — 最近一期监测日报：
+ *  - digest / top_stories：本期首次发布与实质更新中达到 L1/L2 并通过门禁的事件(v1 字段)；
+ *  - recent：近 31 天 L1/L2 事件(含证据库里程碑)；
+ *  - health：监测运行健康度。
  */
 export async function GET() {
-  const report = await readMonitorReport();
-  if (!report) return reportMissingResponse();
-
-  const dailyIds = new Set(
-    report.views?.daily_event_ids ?? report.stories.map((story) => story.id)
-  );
-  const topStories = report.stories
-    .filter((story) => dailyIds.has(story.id))
+  const { events, report, today } = await loadEvents();
+  if (!report) {
+    return NextResponse.json({ error: "monitor_report_missing", hint: "npm run monitor:project" }, { status: 503 });
+  }
+  const topStories = storiesForView(report, "daily")
     .slice(0, 5)
     .map((story) => ({
       id: story.id,
@@ -42,6 +42,8 @@ export async function GET() {
       window_since: report.window_since,
       digest: report.digest,
       top_stories: topStories,
+      recent: featured(hotEvents(events, today, 31)).map(apiEvent),
+      health: monitorHealth(report),
     },
     { headers: API_CACHE_HEADERS }
   );

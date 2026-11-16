@@ -12975,7 +12975,7 @@
         }
       },
       "evidence_confidence": "medium",
-      "review_status": "approved",
+      "review_status": "rejected",
       "analyses": [
         {
           "provider": "legacy",
@@ -12987,7 +12987,10 @@
             "migrated_score": 65
           }
         }
-      ]
+      ],
+      "reviewed_at": "2026-11-11T16:24:38.391Z",
+      "reviewed_by": "rebuild-audit",
+      "review_note": "迁移遗留的错误合并：标题与正文为 Guardant Shield 的 FDA 批准，却记在 Epigenomics / Epi proColon 名下，并混入 2016 年旧闻。"
     },
     {
       "id": "evt_4033a772-19b7-4970-ae5d-8c412ac64594",

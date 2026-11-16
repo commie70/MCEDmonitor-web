@@ -55,6 +55,23 @@ export async function scrapeMarkdown(url) {
   return cleaned;
 }
 
+/** 脚本渲染的页面静态 HTML 里没有内容：取浏览器执行脚本之后的整页 HTML。 */
+export async function scrapeRenderedHtml(url) {
+  await validatePublicUrl(url);
+  const res = await fetchPublic(FIRECRAWL_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url, formats: ["html"], onlyMainContent: false }),
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
+  if (!res.ok) throw new Error(`firecrawl HTTP ${res.status}`);
+  const json = JSON.parse(await readCappedBody(res, "firecrawl_response"));
+  return String(json?.data?.html || "");
+}
+
 /**
  * 为报告前 maxItems 条故事线的首条目抓取正文并就地写回(item.content)。
  * 故事线条目是扁平条目的拷贝,抓取后同步传播到 report.items 的同 id 条目。

@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+/**
+ * 模型链路固定验收：确定性测试 + 语义匹配准确率 + 四个 provider 的契约冒烟。
+ * 结果写入 scripts/monitor-acceptance.json，是发布门禁(lib-release-gate.mjs)的唯一依据。
+ *
+ *   npm run monitor:acceptance                  强制重跑
+ *   npm run monitor:acceptance -- --if-needed   定时任务用：现有结果仍然有效时跳过
+ *
+ * 现有结果失效的情形：未通过、验收集已变、模型链路代码已变、模型配置已变、或已超过 MAX_AGE_DAYS 天。
+ */
+
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -13,23 +23,34 @@ import {
   providerConfiguration,
 } from "./lib-monitor-llm.mjs";
 import { publicErrorCode } from "./lib-network-security.mjs";
+import { readAcceptanceStatus } from "./lib-release-gate.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const FIXTURE_PATH = path.join(ROOT, "tests", "monitor-golden.json");
 const TEST_PATH = path.join(ROOT, "tests", "monitor-pipeline.test.mjs");
 const OUT_PATH = path.join(ROOT, "scripts", "monitor-acceptance.json");
+const MAX_AGE_DAYS = 30;
 const ONE_PIXEL_PNG =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
 
 const fixtureRaw = await fs.readFile(FIXTURE_PATH, "utf8");
 const fixture = JSON.parse(fixtureRaw);
 const fixtureSha256 = sha256(fixtureRaw);
+// 门禁按「当前验收集 + 当前模型链路代码」认这份结果，两个哈希都由门禁库计算。
+const current = await readAcceptanceStatus(ROOT);
 const providerConfig = providerConfiguration();
 const generatedAt = new Date().toISOString();
+
+if (process.argv.includes("--if-needed") && stillValid(current)) {
+  console.log(`[monitor-acceptance] 沿用 ${current.artifact.generated_at} 的通过结果`);
+  process.exit(0);
+}
+
 const result = {
   schema_version: 1,
   generated_at: generatedAt,
   golden_fixture_sha256: fixtureSha256,
+  pipeline_sha256: current.pipelineSha256,
   passed: false,
   provider_configuration: providerConfig,
   deterministic_suite: { passed: false },
@@ -97,7 +118,9 @@ try {
       ],
       { highRisk: index === 0 }
     );
-    const predictedSame = ["same_event", "material_update"].includes(match.relation);
+    // 账本只在关系为同一事件且 event_id 指向既有事件时合并，验收按同一口径计。
+    const predictedSame =
+      ["same_event", "material_update"].includes(match.relation) && match.event_id === existingId;
     const expectedSame = entry.expected === "same_event";
     if (predictedSame && expectedSame) result.semantic_matching.true_positive++;
     else if (predictedSame) result.semantic_matching.false_positive++;
@@ -168,6 +191,22 @@ console.log(
 if (!result.passed) {
   if (result.error) console.error(`[monitor-acceptance] ${result.error.error_code}`);
   process.exitCode = 1;
+}
+
+function stillValid({ artifact: previous, passed }) {
+  if (!passed) return false;
+  const ageDays = (Date.parse(generatedAt) - Date.parse(previous.generated_at)) / 86_400_000;
+  if (!(ageDays >= 0 && ageDays <= MAX_AGE_DAYS)) return false;
+  return Object.entries(providerConfig).every(([role, config]) => {
+    const before = previous.provider_configuration?.[role];
+    return (
+      before?.provider === config.provider &&
+      before.model === config.model &&
+      before.base_url === config.base_url &&
+      (before.thinking ?? null) === config.thinking &&
+      (before.reasoning ?? null) === config.reasoning
+    );
+  });
 }
 
 function ratio(numerator, denominator) {

@@ -1,32 +1,24 @@
 import { NextResponse } from "next/server";
-import {
-  pageParams,
-  readMonitorReport,
-  reportMissingResponse,
-} from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
-import { API_CACHE_HEADERS } from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
+import { pageParams, readMonitorReport } from "@/lib/monitor-report";
+import { API_CACHE_HEADERS } from "@/lib/url";
 
 export const dynamic = "force-dynamic";
 
-const CATEGORY_KEYS = ["regulatory", "academic", "research", "market"] as const;
-type CategoryKey = (typeof CATEGORY_KEYS)[number];
+const CATEGORY_KEYS = ["regulatory", "academic", "research", "market"];
 
 /**
- * GET /api/v1/items — 监测条目流;支持 ?category= 过滤与 ?offset=/limit= 分页(limit ≤200,默认 100)。
+ * GET /api/v1/items — 发布事件背后的可追溯证据条目；
+ * ?category= 过滤，?offset= / ?limit= 分页(limit ≤200，默认 100)。
  */
 export async function GET(request: Request) {
   const report = await readMonitorReport();
-  if (!report) return reportMissingResponse();
-
+  if (!report) {
+    return NextResponse.json({ error: "monitor_report_missing", hint: "npm run monitor:project" }, { status: 503 });
+  }
   const category = new URL(request.url).searchParams.get("category");
-  const filter = CATEGORY_KEYS.includes(category as CategoryKey)
-    ? (category as CategoryKey)
-    :null;
-  const filtered = filter
-    ? report.items.filter((item) => item.category === filter)
-    : report.items;
+  const filter = category && CATEGORY_KEYS.includes(category) ? category : null;
+  const filtered = filter ? report.items.filter((item) => item.category === filter) : report.items;
   const { offset, limit } = pageParams(request.url, 100, 200);
-
   return NextResponse.json(
     {
       generated_at: report.generated_at,

@@ -1,6 +1,8 @@
 name: Daily Monitor
 
-# 每日自动监测:新账本流水线影子运行 + 旧生成器维持公开报告，直到 ADR 切换门槛满足。
+# 定时监测:模型验收 → 采集 → 事件账本 → 由账本投影公开报告(public/monitor/daily-report.json)。
+# 全程自动:验收通过即放行新事件;验收未通过时照常采集建账,新事件留在账本里,下次验收通过后自动放行。
+# 事件级门禁:证据置信度 / 重要性等级;高风险事件须经独立模型复核一致。
 # push 到 master 后由 EdgeOne Pages 的 Git 集成自动重新部署。
 # 密钥全部来自仓库 Secrets,不落盘、不入库。
 
@@ -23,7 +25,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     environment: monitor-production
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 日常运行十几分钟;上限留给长时间中断后的补采。超出运行预算的候选会顺延到下一次,不会因超时丢失整次运行。
+    timeout-minutes: 180
 
     steps:
       - name: Checkout
@@ -47,25 +50,37 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
+      # 现有验收结果仍有效时跳过;daily-monitor-acceptance 事件强制重跑。
+      # 验收失败不终止任务:监测照常运行,只是本次不放行新事件。
       - name: Run live provider acceptance
-        if: github.event_name == 'repository_dispatch' && github.event.action == 'daily-monitor-acceptance'
+        continue-on-error: true
         env:
+          FORCE_ACCEPTANCE: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'daily-monitor-acceptance' }}
           DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
+          QWEN_ENABLE_THINKING: ${{ vars.QWEN_ENABLE_THINKING }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_VISION_MODEL: ${{ vars.DEEPSEEK_VISION_MODEL }}
           GLM_BASE_URL: ${{ vars.GLM_BASE_URL }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           GLM_REVIEW_MODEL: ${{ vars.GLM_REVIEW_MODEL }}
+          GLM_REASONING_EFFORT: ${{ vars.GLM_REASONING_EFFORT }}
           KIMI_BASE_URL: ${{ vars.KIMI_BASE_URL }}
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           KIMI_SYNTHESIS_MODEL: ${{ vars.KIMI_SYNTHESIS_MODEL }}
-        run: npm run monitor:acceptance
+          KIMI_REASONING_EFFORT: ${{ vars.KIMI_REASONING_EFFORT }}
+        run: |
+          if [[ "$FORCE_ACCEPTANCE" == "true" ]]; then
+            npm run monitor:acceptance
+          else
+            npm run monitor:acceptance -- --if-needed
+          fi
 
-      - name: Run evidence-first monitor in shadow mode
+      - name: Run evidence-first monitor
         env:
+          MCED_RUN_BUDGET_MINUTES: "150"
           ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
           ANYSEARCH_BASE_URL: ${{ vars.ANYSEARCH_BASE_URL }}
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
@@ -74,28 +89,19 @@ jobs:
           DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
+          QWEN_ENABLE_THINKING: ${{ vars.QWEN_ENABLE_THINKING }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_VISION_MODEL: ${{ vars.DEEPSEEK_VISION_MODEL }}
           GLM_BASE_URL: ${{ vars.GLM_BASE_URL }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           GLM_REVIEW_MODEL: ${{ vars.GLM_REVIEW_MODEL }}
+          GLM_REASONING_EFFORT: ${{ vars.GLM_REASONING_EFFORT }}
           KIMI_BASE_URL: ${{ vars.KIMI_BASE_URL }}
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           KIMI_SYNTHESIS_MODEL: ${{ vars.KIMI_SYNTHESIS_MODEL }}
-        run: node scripts/mced-daily-monitor.mjs --mode shadow
-
-      - name: Keep legacy public report during shadow acceptance
-        env:
-          DASHSCOPE_BASE_URL: ${{ vars.DASHSCOPE_BASE_URL }}
-          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
-          QWEN_MONITOR_MODEL: ${{ vars.QWEN_MONITOR_MODEL }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-          ANYSEARCH_API_KEY: ${{ secrets.ANYSEARCH_API_KEY }}
-          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
-          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
-        run: node scripts/mced-daily-monitor-legacy.mjs --limit-llm 12
+          KIMI_REASONING_EFFORT: ${{ vars.KIMI_REASONING_EFFORT }}
+        run: node scripts/mced-daily-monitor.mjs
 
       - name: Rebuild changelog
         run: node scripts/build-changelog.mjs
@@ -103,7 +109,7 @@ jobs:
       - name: Detect data changes
         id: changes
         run: |
-          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json)" ]]; then
+          if [[ -n "$(git status --porcelain -- public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl)" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -117,7 +123,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl scripts/monitor-state.json
+          git add public/monitor/daily-report.json public/changelog.json scripts/monitor-acceptance.json scripts/monitor-ledger.json scripts/monitor-history.jsonl
           git commit -m "chore(monitor): daily report $(date -u +%Y-%m-%d)"
           AUTH_HEADER="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           trap 'git config --local --unset-all http.https://github.com/.extraheader || true' EXIT
