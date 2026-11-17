@@ -1,0 +1,660 @@
+[
+  {
+    "id": "signatera-ldt",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "natera-ldt-whitepaper",
+      "natera-patients",
+      "signatera-reinert2019"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "WES发现、16 SNV血浆多重PCR核实。JAMA全文核实94人landmark列联数与75人纵向88%/98%；landmark计算值应持续标计算而非原文报告。短句: identified relapse with 88% sensitivity and 98% specificity."
+  },
+  {
+    "id": "signatera-cdx",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "signatera-cdx-fda"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "FDA原始P260004D已读。16 SNV、2阳性规则及10/33/66ng输入分别0.033/0.010/0.005% mean VAF确认；预设浓度与观察浓度分开。仅MIBC CDx。短句: sample-level mean VAF of the 16-plex targets"
+  },
+  {
+    "id": "guardant-reveal-epigenomic",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "reveal-expansion",
+      "reveal-cosmos",
+      "reveal-japan-price"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      },
+      {
+        "field": "clinical[0].n",
+        "reason": "342是总CRC队列，不是81%敏感度结肠癌子组样本量；保留population中的总队列说明。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "none",
+        "source_ids": [
+          "reveal-expansion",
+          "reveal-cosmos",
+          "reveal-japan-price"
+        ],
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      },
+      {
+        "field": "clinical[0].n",
+        "value": null,
+        "source_ids": [
+          "reveal-cosmos"
+        ],
+        "reason": "342是总CRC队列，不是81%敏感度结肠癌子组样本量；保留population中的总队列说明。"
+      }
+    ],
+    "notes": "原论文摘要81%仅II期及以上结肠癌连续检测；342为全CRC队列，非敏感度分母。日本医院直接官网核实含税首测316500、后续271000日元；不得视美国市场价或确定新版报价。报价生效年份未公开，2026-11-12仅读取日。短句: 初回：316,500円（税込）; 2回目以降：271,000円（税込）"
+  },
+  {
+    "id": "oncodetect-v1",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "oncodetect-v1",
+      "oncodetect-alpha-paper"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "原论文表2核实90.9%与94.3%；后者是调整标准结果，原预设73.3%。研究111人surveillance，特异度分母87。保留历史版本且不能升级成v2临床验证。短句: In the surveillance period sensitivity was unchanged, while specificity improved to 94.3%."
+  },
+  {
+    "id": "oncodetect-v2",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "oncodetect-v2"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "当前官网核实5000 targets、<1ppm high-end inputs、>99%分析特异度；仅厂商内部验证披露，不视独立验证，输入ng/概率未公开。FDA未批准。短句: The next-generation Oncodetect test tracks up to 5,000 tumor-specific variants"
+  },
+  {
+    "id": "next-personal",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "next-av",
+      "next-breast2025"
+    ],
+    "rejected_claims": [
+      {
+        "field": "analytical.specificity[0].context",
+        "reason": "原文明确CI经in silico方法；不能将该窄区间暗示为临床样本统计区间。"
+      },
+      {
+        "field": "analytical.precision[1].concentration",
+        "reason": "拒绝CV3.55%@10000ppm：仅概览Table1如此，详细Table6和实验正文均约1000ppm。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "analytical.specificity[0].context",
+        "value": "分析验证观察100%；99.92–100% CI使用in silico方法推定；非复发specificity",
+        "source_ids": [
+          "next-av"
+        ],
+        "reason": "原文明确CI经in silico方法；不能将该窄区间暗示为临床样本统计区间。"
+      },
+      {
+        "field": "analytical.lod[0].input",
+        "value": "15 ng cfDNA；细胞系模拟样本；代表性panel，个体panel性能可变",
+        "source_ids": [
+          "next-av"
+        ],
+        "reason": "Methods说明除注明例外预富集文库统一15ng；LoD研究没有另述输入。短句: all pre-enrichment libraries were created with 15 ng of cfDNA."
+      },
+      {
+        "field": "analytical.loq",
+        "value": "10 ppm；两试剂批次总误差均<25%",
+        "source_ids": [
+          "next-av"
+        ],
+        "reason": "原文Table7与Limit of quantification节确认。"
+      },
+      {
+        "field": "analytical.precision",
+        "value": "CV12.77% at ~25ppm；3.55% at ~1,000ppm；4.15% at ~25,000ppm；各24 repeats",
+        "source_ids": [
+          "next-av"
+        ],
+        "reason": "详细Table6及正文浓度一致；概览Table1中间浓度写10,000ppm与Table6的991.0ppm实测冲突，应使用详细实验表并披露排印不一致。"
+      }
+    ],
+    "notes": "Oncotarget原文3.45ppm LoD95与1.67ppm判阳阈值区分正确；100%分析specificity CI用in silico方法，不是单纯临床阴性样本CI。乳腺78例/617样本/11复发、64未检出者无复发由原论文摘要经Europe PMC原始索引核实。Tempus当前临床官网https://www.tempus.com/solutions/xm/已独立确认供应与1800 targets。短句: The final LOD95 determination is 3.45 PPM"
+  },
+  {
+    "id": "myriad-precise-mrd",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "precise-launch"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "实际读取2026-03-02有限乳腺上市稿，组织WGS与后续定制panel明确；1ppm仅厂家未给LoD95，未将计划全年推广当完成。短句: For ongoing monitoring, the panel measures ctDNA levels"
+  },
+  {
+    "id": "tempus-xm-naive",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "tempus-xm"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "none",
+        "source_ids": [
+          "tempus-xm"
+        ],
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      }
+    ],
+    "notes": "原始ls-xm官网脚注核实landmark双工作流后续仅甲基化。临床可订购另由https://www.tempus.com/solutions/xm/证实；生命科学页本身以研究用途为主。短句: all subsequent timepoints utilize the methylation workflow only."
+  },
+  {
+    "id": "haystack-mrd",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "haystack-product",
+      "haystack-95",
+      "haystack-clark2026",
+      "haystack-dynamic2026"
+    ],
+    "rejected_claims": [
+      {
+        "field": "clinical",
+        "reason": "只核实摘要报告数字；当前临床比较矩阵缺n与确切采血窗口，应留独立摘要证据记录，完成全文复核再入矩阵。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "clinical",
+        "value": [],
+        "source_ids": [
+          "haystack-clark2026"
+        ],
+        "reason": "只核实摘要报告数字；当前临床比较矩阵缺n与确切采血窗口，应留独立摘要证据记录，完成全文复核再入矩阵。"
+      }
+    ],
+    "notes": "厂商2024 PDF核实0.0006% tumor fraction LoD95；2026论文摘要经Europe PMC核实0.063 mean ctDNA molecules/mL。厂商Oct1稿明确商业WES vs WGS研究版。论文临床仅摘要核实，3年100%/100%和5年83.3%/100%，n与采血窗口未核实。短句: detect 95% of cases at 0.0006% tumor fraction"
+  },
+  {
+    "id": "plasma-detect-genome",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "plasma-clinical",
+      "plasma-workflow"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "Labcorp临床目录实际读到随访plasma WGS、0.005% tumor content及99.4%分析specificity；III期colon限定。RUO中位5000靶点不直接套临床目录。短句: Whole genome sequencing data of plasma"
+  },
+  {
+    "id": "radar-st",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "radar-st-launch",
+      "radar-st-catalog"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "2026-02-25原始发布稿核实新ST、48变异与LoD95 11ppm；不能与停售旧RaDaR混。短句: limit of detection at 95% probability (LOD95) of 11 ppm"
+  },
+  {
+    "id": "foresight-clarity",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "foresight-acquisition"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.tissue",
+        "reason": "收购稿不支持肿瘤组织必需；淋巴瘤基线血浆/组织路径未逐一核实。"
+      },
+      {
+        "field": "analytical.lod",
+        "reason": "0.3ppm为enhanced phased-variant研究技术，未证明等同此行CLARITY淋巴瘤配置；移至独立研究版本。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.tissue",
+        "value": null,
+        "source_ids": [
+          "foresight-acquisition"
+        ],
+        "reason": "收购稿不支持肿瘤组织必需；淋巴瘤基线血浆/组织路径未逐一核实。"
+      },
+      {
+        "field": "analytical.lod",
+        "value": [],
+        "source_ids": [
+          "foresight-acquisition"
+        ],
+        "reason": "0.3ppm为enhanced phased-variant研究技术，未证明等同此行CLARITY淋巴瘤配置；移至独立研究版本。"
+      }
+    ],
+    "notes": "已读收购官方稿和当前https://foresight-dx.com/。收购成立；enhanced 0.3ppm版本即刻研究服务，临床2026仅当时预测。"
+  },
+  {
+    "id": "saga-pathlight",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "foundation-mrd-launch",
+      "pathlight-tracer-paper"
+    ],
+    "rejected_claims": [
+      {
+        "field": "analytical.lod",
+        "reason": "2025 TRACER研究配置与2026 FoundationOne商业配置未桥接；原研究数字确认但需移至独立研究版本，当前产品不得直接继承。"
+      },
+      {
+        "field": "clinical",
+        "reason": "2025 TRACER研究配置与2026 FoundationOne商业配置未桥接；原研究数字确认但需移至独立研究版本，当前产品不得直接继承。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "analytical.lod",
+        "value": [],
+        "source_ids": [
+          "pathlight-tracer-paper",
+          "foundation-mrd-launch"
+        ],
+        "reason": "2025 TRACER研究配置与2026 FoundationOne商业配置未桥接；原研究数字确认但需移至独立研究版本，当前产品不得直接继承。"
+      },
+      {
+        "field": "clinical",
+        "value": [],
+        "source_ids": [
+          "pathlight-tracer-paper",
+          "foundation-mrd-launch"
+        ],
+        "reason": "2025 TRACER研究配置与2026 FoundationOne商业配置未桥接；原研究数字确认但需移至独立研究版本，当前产品不得直接继承。"
+      }
+    ],
+    "notes": "已读FoundationOne上市原稿，Roche完成收购、SAGA执行、组织WGS后最多16SV dPCR、2–3周/1–3天确认。2025 TRACER原文分析70ng约5ppm、300ng1.1ppm、100例队列及仅可评估远处复发100%确认，但非现产品桥接。短句: This launch follows the completion of Roche’s acquisition of SAGA Diagnostics."
+  },
+  {
+    "id": "veracyte-truemrd",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "truemrd-launch",
+      "truemrd-platform"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已读当前平台与发布稿；每次plasma WGS及matched tissue/normal明确，当前平台明确现可订购MIBC；不套C2i旧研究指标。短句: Uses WGS analysis of each timepoint blood sample"
+  },
+  {
+    "id": "adaptive-clonoseq",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "clonoseq-fda",
+      "clonoseq-price"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "FDA DEN170080原文核实细胞当量LoD与20μg频率及MM323人预后分析。公司2026 Q1原始10-Q第20页核实2007美元单次/8029 episode Medicare支付，非患者市价。该涨价叙述位于2024Q4事件段落，2026-05-05是披露日非价格起效日。短句: Medicare Clinical Laboratory Fee Schedule rate of $2,007 per test"
+  },
+  {
+    "id": "geneseeq-shuning-ultra",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "geneseeq-shuning-ultra-official",
+      "geneseeq-aacr2026-3852",
+      "geneseeq-aacr2026-map"
+    ],
+    "rejected_claims": [
+      {
+        "field": "analytical.lod",
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      },
+      {
+        "field": "analytical.specificity",
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      },
+      {
+        "field": "clinical",
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "analytical.lod",
+        "value": [],
+        "source_ids": [
+          "geneseeq-aacr2026-3852",
+          "geneseeq-aacr2026-map"
+        ],
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      },
+      {
+        "field": "analytical.specificity",
+        "value": [],
+        "source_ids": [
+          "geneseeq-aacr2026-3852",
+          "geneseeq-aacr2026-map"
+        ],
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      },
+      {
+        "field": "clinical",
+        "value": [],
+        "source_ids": [
+          "geneseeq-aacr2026-3852",
+          "geneseeq-aacr2026-map"
+        ],
+        "reason": "2026多模态研究版数据可核实，但当前产品未完成算法版本桥接；将此批数值移至明确的AACR2026研究配置，不能与2025商品panel记录混为一版。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：术宁Ultra®精选2365泛实体瘤基因 AACR官方会议摘要3852的完整检索文本与厂商映射页面均独立读取；数值仅会议研究版，样本数/概率/输入未披露，不等于现售所有算法。"
+  },
+  {
+    "id": "burningrock-langwei",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "burningrock-langwei-official",
+      "burningrock-20f2025",
+      "burningrock-prophet-cancercell2023"
+    ],
+    "rejected_claims": [
+      {
+        "field": "analytical.lod",
+        "reason": "40ppm CanCatch/brPROPHET平台与当前中国朗微商品版本无桥接；只能独立研究配置展示。"
+      },
+      {
+        "field": "clinical",
+        "reason": "181例/299天原摘要可核实，但PROPHET研究配置不能赋给当前朗微；移至独立研究配置。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "analytical.lod",
+        "value": [],
+        "source_ids": [
+          "burningrock-20f2025"
+        ],
+        "reason": "40ppm CanCatch/brPROPHET平台与当前中国朗微商品版本无桥接；只能独立研究配置展示。"
+      },
+      {
+        "field": "clinical",
+        "value": [],
+        "source_ids": [
+          "burningrock-prophet-cancercell2023"
+        ],
+        "reason": "181例/299天原摘要可核实，但PROPHET研究配置不能赋给当前朗微；移至独立研究配置。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：基因数量：组织全外显子/血液个体化定制 SEC原始20-F核实40ppm仅CanCatch。原论文摘要经EuropePMC核实181例/760血浆/299天。"
+  },
+  {
+    "id": "burningrock-pharos",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "burningrock-pharos-official"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "undisclosed",
+        "source_ids": [
+          "burningrock-pharos-official"
+        ],
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：基因数量：168/520"
+  },
+  {
+    "id": "geneplus-jichangan",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "geneplus-jichangan-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：稳定检出丰度0.01%的ctDNA 最低可下探至0.005%"
+  },
+  {
+    "id": "genecast-langweibo",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "genecast-langweibo-official"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "undisclosed",
+        "source_ids": [
+          "genecast-langweibo-official"
+        ],
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：最低检出限(LOD)低至0.008%"
+  },
+  {
+    "id": "genecast-changweibo",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "genecast-changweibo-official"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "undisclosed",
+        "source_ids": [
+          "genecast-changweibo-official"
+        ],
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：最低检出限0.008%，特异性保持超过99.5%"
+  },
+  {
+    "id": "genecast-weishibo",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "genecast-weishibo-official"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "undisclosed",
+        "source_ids": [
+          "genecast-weishibo-official"
+        ],
+        "reason": "官网血液固定panel/产品基因数不证明组织发现流程；不得借用monitoring panel填写组织发现。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：样本特异性稳定保持超过99.5%"
+  },
+  {
+    "id": "genecast-zhenbeian",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "genecast-zhenbeian-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：根据组织检测所确定的变异图谱优选50个位点"
+  },
+  {
+    "id": "bgi-huajianwei",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "bgi-huajianwei-official",
+      "bgi-huajianwei-shop"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：¥ 3600~20000 商品已经下架!"
+  },
+  {
+    "id": "tongshu-zhenxinan",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "tongshu-zhenxinan-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "仅官方主页搜索索引确认名称，短句：诊心安-MRD 检测。web打开无正文、requests429；未确认技术/性能。提案已保留null可继续，官网列示不等于实际订购验收。"
+  },
+  {
+    "id": "origimed-orimiracle-s",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "origimed-orimiracle-s-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：依据WES Plus 图谱个体化定制MRD监测panel"
+  },
+  {
+    "id": "origimed-orimiracle-l",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "origimed-orimiracle-l-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：BCR/TCR克隆重排"
+  },
+  {
+    "id": "haplox-haiweiqing",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "haplox-haiweiqing-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：最低检测限达到0.005%"
+  },
+  {
+    "id": "haplox-haiweijing",
+    "verdict": "PARTIAL",
+    "accepted_source_ids": [
+      "haplox-haiweijing-official"
+    ],
+    "rejected_claims": [
+      {
+        "field": "technique.discovery",
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.discovery",
+        "value": "none",
+        "source_ids": [
+          "haplox-haiweijing-official"
+        ],
+        "reason": "discovery定义为组织发现；tumor-naive无需组织，不能填panel。枚举未支持none时应扩展枚举并显示无需组织。"
+      }
+    ],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：无法获取组织，需进行MRD监测及复发风险评估"
+  },
+  {
+    "id": "3dmed-feichangankang",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "3dmed-feichangankang-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：肺常安康-MRD监测版"
+  },
+  {
+    "id": "genetron-seq-mrd",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "genetron-seq-mrd-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：IgH/K/L基因的CDR3区域序列"
+  },
+  {
+    "id": "genetron-dongwei",
+    "verdict": "CONFIRMED",
+    "accepted_source_ids": [
+      "genetron-dongwei-official"
+    ],
+    "rejected_claims": [],
+    "corrections": [],
+    "notes": "已独立读取原始官网（部分web抽取失败时requests读取同URL）。仅确认提案所限产品名称、技术、厂商标示性能、状态；不确认临床验证、监管批准或未给出的价格。支持短句：洞微GENETRON MRD™实体瘤全程管理"
+  },
+  {
+    "id": "predicine-beacon-china",
+    "verdict": "REJECTED",
+    "accepted_source_ids": [],
+    "rejected_claims": [
+      {
+        "field": "technique.targets",
+        "reason": "唯一中文旧PDF本复核无法打开；默认不确认50/500位点和0.005%数字，待取得可读原件。"
+      },
+      {
+        "field": "analytical.lod",
+        "reason": "唯一中文旧PDF本复核无法打开；默认不确认50/500位点和0.005%数字，待取得可读原件。"
+      }
+    ],
+    "corrections": [
+      {
+        "field": "technique.targets",
+        "value": null,
+        "source_ids": [],
+        "reason": "唯一中文旧PDF本复核无法打开；默认不确认50/500位点和0.005%数字，待取得可读原件。"
+      },
+      {
+        "field": "analytical.lod",
+        "value": [],
+        "source_ids": [],
+        "reason": "唯一中文旧PDF本复核无法打开；默认不确认50/500位点和0.005%数字，待取得可读原件。"
+      }
+    ],
+    "notes": "官方旧PDF重复访问超时，未成功读取正文；不能用proposer摘录当独立核实。可保留名称为待核候选，不发布尚未确认技术或LoD。"
+  }
+]

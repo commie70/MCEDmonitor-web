@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { apiMrdPriceRanges, apiMrdProducts } from "@/lib/api";
+import { apiMrdInstitutionPrices, apiMrdPriceRanges, apiMrdProducts } from "@/lib/api";
 import { API_CACHE_HEADERS } from "@/lib/url";
 
 export const dynamic = "force-dynamic";
@@ -14,10 +14,12 @@ export function GET(request: Request) {
     category: params.get("category") ?? undefined,
     approach: params.get("approach") ?? undefined,
     tissue: params.get("tissue") ?? undefined,
+    tracking: params.get("tracking") ?? undefined,
+    q: params.get("q") ?? undefined,
     region: params.get("region") ?? undefined,
   });
   return NextResponse.json(
-    { count: products.length, products, price_ranges: apiMrdPriceRanges() },
+    { count: products.length, products, price_ranges: apiMrdPriceRanges(), institution_prices: apiMrdInstitutionPrices() },
     { headers: API_CACHE_HEADERS }
   );
 }

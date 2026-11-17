@@ -82,7 +82,7 @@ export default function PerformancePage() {
 
   return (
     <div>
-      <PageHeader title="性能对照" />
+      <PageHeader title="性能对照"><a download className="text-[12px] font-semibold text-accent-ink hover:underline" href="/api/v1/export/performance">导出 CSV</a></PageHeader>
       <Suspense>
         <PerformanceView rows={rows} gaps={gaps} />
       </Suspense>

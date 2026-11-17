@@ -1889,5 +1889,417 @@
     "kind": "company",
     "title": "Personalis Launches NeXT Personal® Dx for Early Access Clinical Use in Residual Disease and Recurrence Detection in Cancer",
     "date": "2023-10-26"
+  },
+  {
+    "id": "sol61-geneseeq-shuning-ultra-official",
+    "kind": "company",
+    "label": "术宁Ultra 官方产品资料",
+    "title": "术宁Ultra 官方产品资料",
+    "url": "https://zh.geneseeq.com/id48810685.html"
+  },
+  {
+    "id": "sol61-geneseeq-aacr2026-3852",
+    "kind": "conference",
+    "label": "AACR 2026 Abstract 3852: Ultrasensitive AI-driven framework for MRD detection based on multidimensional cfDNA features",
+    "title": "AACR 2026 Abstract 3852: Ultrasensitive AI-driven framework for MRD detection based on multidimensional cfDNA features",
+    "url": "https://www.aacr.org/wp-content/uploads/2026/04/AACR2026_Proceedings_Part-1.pdf",
+    "date": "2026-04"
+  },
+  {
+    "id": "sol61-geneseeq-aacr2026-map",
+    "kind": "company",
+    "label": "世和AACR2026研究与术宁Ultra名称对应",
+    "title": "世和AACR2026研究与术宁Ultra名称对应",
+    "url": "https://zh.geneseeq.com/id00324545.html"
+  },
+  {
+    "id": "sol61-burningrock-langwei-official",
+    "kind": "company",
+    "label": "朗微 官方产品资料",
+    "title": "朗微 官方产品资料",
+    "url": "https://www.brbiotech.com/cn/service/b1"
+  },
+  {
+    "id": "sol61-burningrock-prophet-cancercell2023",
+    "kind": "journal",
+    "label": "Individualized tumor-informed circulating tumor DNA analysis for postoperative monitoring of non-small cell lung cancer",
+    "title": "Individualized tumor-informed circulating tumor DNA analysis for postoperative monitoring of non-small cell lung cancer",
+    "url": "https://doi.org/10.1016/j.ccell.2023.08.010",
+    "date": "2023-09-07"
+  },
+  {
+    "id": "sol61-burningrock-20f2025",
+    "kind": "company",
+    "label": "Burning Rock 2025 Form 20-F MRD技术说明",
+    "title": "Burning Rock 2025 Form 20-F MRD技术说明",
+    "url": "https://www.sec.gov/Archives/edgar/data/1792267/000119312526183377/d31568d20f.htm",
+    "date": "2026"
+  },
+  {
+    "id": "sol61-burningrock-pharos-official",
+    "kind": "company",
+    "label": "Pharos 官方产品资料",
+    "title": "Pharos 官方产品资料",
+    "url": "https://www.brbiotech.com/cn/service/b2"
+  },
+  {
+    "id": "sol61-geneplus-jichangan-official",
+    "kind": "company",
+    "label": "吉长安（MRD） 官方产品资料",
+    "title": "吉长安（MRD） 官方产品资料",
+    "url": "https://www.geneplus.cn/products/jichangan"
+  },
+  {
+    "id": "sol61-genecast-langweibo-official",
+    "kind": "company",
+    "label": "朗微博 官方产品资料",
+    "title": "朗微博 官方产品资料",
+    "url": "https://www.genecast.com.cn/solutions/detail?id=21"
+  },
+  {
+    "id": "sol61-genecast-changweibo-official",
+    "kind": "company",
+    "label": "畅微博 官方产品资料",
+    "title": "畅微博 官方产品资料",
+    "url": "https://www.genecast.com.cn/solutions/detail?id=22"
+  },
+  {
+    "id": "sol61-genecast-weishibo-official",
+    "kind": "company",
+    "label": "微适博 官方产品资料",
+    "title": "微适博 官方产品资料",
+    "url": "https://www.genecast.com.cn/solutions/detail?id=27"
+  },
+  {
+    "id": "sol61-genecast-zhenbeian-official",
+    "kind": "company",
+    "label": "臻倍安 官方产品资料",
+    "title": "臻倍安 官方产品资料",
+    "url": "https://www.genecast.com.cn/solutions/detail?id=33"
+  },
+  {
+    "id": "sol61-bgi-huajianwei-official",
+    "kind": "company",
+    "label": "华大基因2023半年报",
+    "title": "华大基因2023半年报",
+    "url": "https://static.cninfo.com.cn/finalpage/2023-08-12/1217523238.PDF",
+    "date": "2023-08-12"
+  },
+  {
+    "id": "sol61-bgi-huajianwei-shop",
+    "kind": "company",
+    "label": "华大基因官方商城 华见微",
+    "title": "华大基因官方商城 华见微",
+    "url": "https://www.ihuada.com/app/index.php?c=entry&do=mobile&i=3&id=1752&m=ewei_shopv2&r=goods.detail"
+  },
+  {
+    "id": "sol61-tongshu-zhenxinan-official",
+    "kind": "company",
+    "label": "诊心安-MRD 官方产品资料",
+    "title": "诊心安-MRD 官方产品资料",
+    "url": "https://www.tongshugene.net/"
+  },
+  {
+    "id": "sol61-origimed-orimiracle-s-official",
+    "kind": "company",
+    "label": "至美 OriMIRACLE S 官方产品资料",
+    "title": "至美 OriMIRACLE S 官方产品资料",
+    "url": "https://www.origimed.com/index.php/Product/mrd"
+  },
+  {
+    "id": "sol61-haplox-haiweiqing-official",
+    "kind": "company",
+    "label": "海微清 官方产品资料",
+    "title": "海微清 官方产品资料",
+    "url": "https://www.haplox.cn/clinical/mrd/hwq"
+  },
+  {
+    "id": "sol61-haplox-haiweijing-official",
+    "kind": "company",
+    "label": "海微净（固定化MRD系列） 官方产品资料",
+    "title": "海微净（固定化MRD系列） 官方产品资料",
+    "url": "https://www.haplox.cn/clinical/mrd/hwj"
+  },
+  {
+    "id": "sol61-3dmed-feichangankang-official",
+    "kind": "company",
+    "label": "肺常安康-MRD监测版 官方产品资料",
+    "title": "肺常安康-MRD监测版 官方产品资料",
+    "url": "https://www.3dmedcare.com/about_us/founder_words_2.html"
+  },
+  {
+    "id": "sol61-genetron-seq-mrd-official",
+    "kind": "company",
+    "label": "Seq-MRD 官方产品资料",
+    "title": "Seq-MRD 官方产品资料",
+    "url": "https://www.genetronhealth.com/products-cancerOrMonitor.html"
+  },
+  {
+    "id": "sol61-predicine-beacon-china-official",
+    "kind": "company",
+    "label": "慧诠MRD / PredicineBEACON 官方产品资料",
+    "title": "慧诠MRD / PredicineBEACON 官方产品资料",
+    "url": "https://cnwebtest1.predicine.com/wp-content/uploads/2021/09/%E6%85%A7%E8%AF%A0MRD-CN-20210907.pdf"
+  },
+  {
+    "id": "sol61-natera-ldt-whitepaper",
+    "kind": "company",
+    "label": "Signatera personalized tumor-informed approach",
+    "title": "Signatera personalized tumor-informed approach",
+    "url": "https://www.natera.com/wp-content/uploads/2020/11/Oncology-Clinical-A-personalized-tumor-informed-approach-to-detect-molecular-residual-disease-SGN_SR_WP.pdf"
+  },
+  {
+    "id": "sol61-natera-patients",
+    "kind": "company",
+    "label": "Signatera for Patients",
+    "title": "Signatera for Patients",
+    "url": "https://www.natera.com/oncology/signatera-advanced-cancer-detection/patients/"
+  },
+  {
+    "id": "sol61-signatera-reinert2019",
+    "kind": "journal",
+    "label": "Reinert et al. Analysis of Plasma Cell-Free DNA by Ultradeep Sequencing",
+    "title": "Reinert et al. Analysis of Plasma Cell-Free DNA by Ultradeep Sequencing",
+    "url": "https://jamanetwork.com/journals/jamaoncology/fullarticle/2733132",
+    "date": "2019-05-09"
+  },
+  {
+    "id": "sol61-signatera-cdx-fda",
+    "kind": "regulator",
+    "label": "Signatera CDx Technical Document P260004",
+    "title": "Signatera CDx Technical Document P260004",
+    "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf26/P260004D.pdf",
+    "date": "2026-05-15"
+  },
+  {
+    "id": "sol61-reveal-expansion",
+    "kind": "company",
+    "label": "Guardant Reveal expansion",
+    "title": "Guardant Reveal expansion",
+    "url": "https://investors.guardanthealth.com/press-releases/press-releases/2025/Guardant-Health-Expands-Tissue-Free-Reveal-Test-to-Include-Late-Stage-Therapy-Response-Monitoring/default.aspx",
+    "date": "2025-11-10"
+  },
+  {
+    "id": "sol61-reveal-cosmos",
+    "kind": "journal",
+    "label": "Colorectal Cancer Recurrence Prediction Using a Tissue-Free Epigenomic Minimal Residual Disease Assay",
+    "title": "Colorectal Cancer Recurrence Prediction Using a Tissue-Free Epigenomic Minimal Residual Disease Assay",
+    "url": "https://aacrjournals.org/clincancerres/article/30/19/4377/748568/Colorectal-Cancer-Recurrence-Prediction-Using-a",
+    "date": "2024"
+  },
+  {
+    "id": "sol61-reveal-japan-price",
+    "kind": "company",
+    "label": "千葉西総合病院 Guardant Reveal",
+    "title": "千葉西総合病院 Guardant Reveal",
+    "url": "https://www.chibanishi-hp.or.jp/department/surgery/speciality/guardant_reveal"
+  },
+  {
+    "id": "sol61-oncodetect-v1",
+    "kind": "company",
+    "label": "Clinical validation of the Oncodetect test",
+    "title": "Clinical validation of the Oncodetect test",
+    "url": "https://www.exactsciences.com/-/media/project/headless/one-exact-web/documents/products-services/oncodetect/providers/oncodetect-white-paper.pdf?rev=042ba1b9d77a4fea9db7e1981aea4823",
+    "date": "2025"
+  },
+  {
+    "id": "sol61-oncodetect-alpha-paper",
+    "kind": "journal",
+    "label": "Circulating Tumor DNA as a Marker of Recurrence Risk in Stage III Colorectal Cancer: α-CORRECT",
+    "title": "Circulating Tumor DNA as a Marker of Recurrence Risk in Stage III Colorectal Cancer: α-CORRECT",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1002/jso.27989",
+    "date": "2025"
+  },
+  {
+    "id": "sol61-oncodetect-v2",
+    "kind": "company",
+    "label": "Oncodetect Molecular Residual Disease Test",
+    "title": "Oncodetect Molecular Residual Disease Test",
+    "url": "https://www.exactsciences.com/cancer-testing/oncodetect-ctdna-test"
+  },
+  {
+    "id": "sol61-next-av",
+    "kind": "journal",
+    "label": "Analytical validation of NeXT Personal",
+    "title": "Analytical validation of NeXT Personal",
+    "url": "https://www.oncotarget.com/article/28565/text/",
+    "date": "2024"
+  },
+  {
+    "id": "sol61-next-commercial",
+    "kind": "company",
+    "label": "NeXT Personal Dx",
+    "title": "NeXT Personal Dx",
+    "url": "https://www.personalis.com/for-clinicians/next-personal-dx/"
+  },
+  {
+    "id": "sol61-next-breast2025",
+    "kind": "journal",
+    "label": "Whole genome sequencing-powered ctDNA sequencing for breast cancer detection",
+    "title": "Whole genome sequencing-powered ctDNA sequencing for breast cancer detection",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39914664/",
+    "date": "2025-02-04"
+  },
+  {
+    "id": "sol61-tempus-q3-2026",
+    "kind": "company",
+    "label": "Tempus Q3 2026 shareholder letter",
+    "title": "Tempus Q3 2026 shareholder letter",
+    "url": "https://investors.tempus.com/files/doc_financials/2026/q3/TEM-Q3-2026_CEO-CFO-Letter_11-1.pdf",
+    "date": "2026-11"
+  },
+  {
+    "id": "sol61-tempus-current-xm",
+    "kind": "company",
+    "label": "Tempus xM clinical MRD tests",
+    "title": "Tempus xM clinical MRD tests",
+    "url": "https://www.tempus.com/solutions/xm/"
+  },
+  {
+    "id": "sol61-precise-launch",
+    "kind": "company",
+    "label": "Myriad Commercially Launches Precise MRD with Select Community Oncologists",
+    "title": "Myriad Commercially Launches Precise MRD with Select Community Oncologists",
+    "url": "https://myriad.gcs-web.com/news-releases/news-release-details/myriad-commercially-launches-precise-mrd-select-community",
+    "date": "2026-03-02"
+  },
+  {
+    "id": "sol61-tempus-xm",
+    "kind": "company",
+    "label": "Tempus MRD Testing Portfolio",
+    "title": "Tempus MRD Testing Portfolio",
+    "url": "https://www.tempus.com/solutions/ls-xm/"
+  },
+  {
+    "id": "sol61-haystack-product",
+    "kind": "company",
+    "label": "Haystack MRD",
+    "title": "Haystack MRD",
+    "url": "https://haystackmrd.com/"
+  },
+  {
+    "id": "sol61-haystack-95",
+    "kind": "company",
+    "label": "Haystack clinical summary",
+    "title": "Haystack clinical summary",
+    "url": "https://www.questdiagnostics.com/content/dam/corporate/restricted/documents/business-solutions/q1-haystack-commercial-sprint-/2025-01-06-Clinical-summary-article.pdf",
+    "date": "2024"
+  },
+  {
+    "id": "sol61-haystack-clark2026",
+    "kind": "journal",
+    "label": "Highly Accurate Detection of ctDNA: Analytical and Clinical Validation of Haystack MRD",
+    "title": "Highly Accurate Detection of ctDNA: Analytical and Clinical Validation of Haystack MRD",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42624249/",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "sol61-haystack-dynamic2026",
+    "kind": "company",
+    "label": "Haystack MRD performance in DYNAMIC specimen cohort",
+    "title": "Haystack MRD performance in DYNAMIC specimen cohort",
+    "url": "https://newsroom.questdiagnostics.com/2026-10-01-Haystack-MRD-R-Demonstrates-Robust-Clinical-Performance-in-Specimen-Cohort-from-the-Landmark-DYNAMIC-Colorectal-Cancer-Trials",
+    "date": "2026-10-01"
+  },
+  {
+    "id": "sol61-plasma-clinical",
+    "kind": "company",
+    "label": "Plasma Detect Genome MRD Monitoring test 484551",
+    "title": "Plasma Detect Genome MRD Monitoring test 484551",
+    "url": "https://www.labcorp.com/tests/484551/plasma-detect-genome-mrd-monitoring"
+  },
+  {
+    "id": "sol61-plasma-workflow",
+    "kind": "company",
+    "label": "Plasma Detect Genome",
+    "title": "Plasma Detect Genome",
+    "url": "https://www.labcorp.com/oncology/biopharma/portfolio/molecular-residual-disease-mrd/plasma-detect-genome"
+  },
+  {
+    "id": "sol61-radar-st-catalog",
+    "kind": "company",
+    "label": "RaDaR ST test directory",
+    "title": "RaDaR ST test directory",
+    "url": "https://www.neogenomics.com/providers/test/MOG-RDFX-01BZ/radar-st",
+    "date": "2026-03-11"
+  },
+  {
+    "id": "sol61-radar-withdrawn-sec",
+    "kind": "regulator",
+    "label": "Natera Form 10-Q September 2026",
+    "title": "Natera Form 10-Q September 2026",
+    "url": "https://www.sec.gov/Archives/edgar/data/1604821/000162828026071145/ntra-20260930.htm",
+    "date": "2026-11"
+  },
+  {
+    "id": "sol61-foresight-acquisition",
+    "kind": "company",
+    "label": "Natera Acquires Foresight Diagnostics",
+    "title": "Natera Acquires Foresight Diagnostics",
+    "url": "https://www.natera.com/company/news/natera-acquires-foresight-diagnostics/",
+    "date": "2025-12-05"
+  },
+  {
+    "id": "sol61-pathlight-launch",
+    "kind": "company",
+    "label": "Pathlight U.S. commercial launch",
+    "title": "Pathlight U.S. commercial launch",
+    "url": "https://sagadiagnostics.com/saga-diagnostics-announces-u-s-commercial-launch/",
+    "date": "2025-05-27"
+  },
+  {
+    "id": "sol61-pathlight-crc",
+    "kind": "company",
+    "label": "Pathlight launch in colorectal cancer",
+    "title": "Pathlight launch in colorectal cancer",
+    "url": "https://sagadiagnostics.com/saga-diagnostics-launches-ultrasensitive-pathlight-mrd-test-in-colorectal-cancer/",
+    "date": "2026-01-12"
+  },
+  {
+    "id": "sol61-foundation-mrd-launch",
+    "kind": "company",
+    "label": "Foundation Medicine launches FoundationOne MRD",
+    "title": "Foundation Medicine launches FoundationOne MRD",
+    "url": "https://www.foundationmedicine.com/press-release/foundationone-mrd",
+    "date": "2026-05-29"
+  },
+  {
+    "id": "sol61-pathlight-tracer-paper",
+    "kind": "journal",
+    "label": "Ultrasensitive Detection and Monitoring of ctDNA Using Structural Variants in Early-Stage Breast Cancer",
+    "title": "Ultrasensitive Detection and Monitoring of ctDNA Using Structural Variants in Early-Stage Breast Cancer",
+    "url": "https://pathlightmrd.com/wp-content/uploads/2025/05/ccr-24-3472.pdf",
+    "date": "2025-01-07"
+  },
+  {
+    "id": "sol61-truemrd-launch",
+    "kind": "company",
+    "label": "Veracyte Secures Medicare Coverage for TrueMRD Monitoring Test in MIBC",
+    "title": "Veracyte Secures Medicare Coverage for TrueMRD Monitoring Test in MIBC",
+    "url": "https://investor.veracyte.com/news-releases/news-release-details/veracyte-secures-medicare-coverage-truemrd-monitoring-test",
+    "date": "2026-05-15"
+  },
+  {
+    "id": "sol61-truemrd-platform",
+    "kind": "company",
+    "label": "TrueMRD Platform",
+    "title": "TrueMRD Platform",
+    "url": "https://www.veracyte.com/innovation/truemrd-platform/"
+  },
+  {
+    "id": "sol61-clonoseq-price",
+    "kind": "company",
+    "label": "Adaptive Biotechnologies Q1 2026 Form 10-Q",
+    "title": "Adaptive Biotechnologies Q1 2026 Form 10-Q",
+    "url": "https://investors.adaptivebiotech.com/static-files/513c1046-b998-48d7-a530-72de1ba038fd",
+    "date": "2026-05-05"
+  },
+  {
+    "id": "sol61-nantong-price",
+    "kind": "company",
+    "label": "通大附院外送检验价格公示",
+    "title": "通大附院外送检验价格公示",
+    "url": "https://www.ahnmc.com/shownews.asp?id=21774",
+    "date": "2026-08-26"
   }
 ]

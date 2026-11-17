@@ -6,7 +6,7 @@
 
 - 事件时间线：报证节点、研究读出、文献与会议、上市与合作，按 L1 / L2 / L3 分级
 - 证据库：19 家企业 × 50 项研究，按研究设计分层(RCT → 前瞻干预 → 前瞻注册 → 前瞻队列 → 病例对照)
-- MRD 性能矩阵：25 个国内外 MRD 产品的技术选型(tumor-informed / tumor-naive，WES / WGS / panel)、检出限、临床性能、报证支付与公开价格
+- MRD 性能矩阵：44 条国内外 MRD 产品/版本记录的技术选型(tumor-informed / tumor-naive，WES / WGS / panel)、检出限、临床性能、报证支付与公开价格
 - 信源库：198 条公开资料(期刊、会议、试验注册、监管文件、企业公告)，每个数字可回溯到原文
 - 监测日报：每 3 天自动采集 PubMed、openFDA、企业官网与公众号，模型抽取 + 独立模型复核后发布
 
@@ -26,7 +26,7 @@
   - `GET /api/v1/companies` · `GET /api/v1/companies/{id}` — 企业摘要 / 完整档案
   - `GET /api/v1/studies` · `GET /api/v1/studies/{id}` — 研究证据；?company= ?design=
   - `GET /api/v1/prospective` — 前瞻研究性能对照(不含病例对照)
-  - `GET /api/v1/mrd` — MRD 产品矩阵；?approach= ?tissue= ?region= ?category=
+  - `GET /api/v1/mrd` — MRD 产品矩阵；?approach= ?tissue= ?tracking= ?region= ?category= ?q=
   - `GET /api/v1/sources` — 信源库；?kind=
   - `GET /api/v1/stories` · `GET /api/v1/items` · `GET /api/v1/daily` — 监测流水线事件、证据条目与日报
 
@@ -36,3 +36,7 @@
 - 病例对照研究的性能不可外推到真实筛查人群，不要与前瞻数据并列比较。
 - MRD 检出限按原文口径记录：量纲相同才可比较，VAF 与肿瘤分数之间不换算；标为企业材料的数值未经同行评议。
 - 个人与组织内部使用免费；对外商业用途需先取得授权。
+
+- `GET /api/v1/mrd/{id}` — 单产品及逐项来源
+- `GET /api/v1/status` — 采集健康度与信源运行摘要
+- `GET /api/v1/export/{dataset}` — CSV；dataset=mrd|products|studies|performance|regulatory；MRD支持与JSON相同筛选

@@ -81,6 +81,7 @@ test("no local file path or working note leaks into published data", async () =>
       "pathfinder.json",
       "mrd.json",
       "mrd-price-ranges.json",
+      "mrd-institution-prices.json",
     ].map((name) =>
       path.join(DATA, name)
     ),
@@ -117,12 +118,12 @@ test("every MRD product is identified, classified and sourced cell by cell", () 
     const label = `MRD ${product.id}`;
     if (product.companyId) assert.equal(companyIds.has(product.companyId), true, `${label} 指向未知企业`);
     assert.ok(["solid", "heme"].includes(product.category), `${label} 类别无效`);
-    assert.ok(["tumor-informed", "tumor-naive"].includes(product.approach), `${label} 技术路径无效`);
+    assert.ok(["tumor-informed", "tumor-naive", "hybrid", "undisclosed"].includes(product.approach), `${label} 技术路径无效`);
     assert.ok(["国内", "国外"].includes(product.region), `${label} 地区无效`);
-    assert.ok(["个体化 panel", "固定 panel", "WGS", "免疫受体测序"].includes(product.tracking), `${label} 追踪方式无效`);
+    assert.ok(["个体化 panel", "固定 panel", "WGS", "免疫受体测序", "数字 PCR", "未公开"].includes(product.tracking), `${label} 追踪方式无效`);
     // tumor-naive 不测组织；实体瘤 tumor-informed 必须说明组织测的是什么(血液肿瘤的克隆鉴定不是组织测序)。
     if (product.approach === "tumor-naive") assert.equal(product.tissue, null, `${label} tumor-naive 不应有组织测序`);
-    else if (product.category === "solid") assert.ok(["WES", "WGS", "panel"].includes(product.tissue), `${label} 缺少组织测序类型`);
+    else if (product.category === "solid") assert.ok(["WES", "WGS", "panel", "undisclosed"].includes(product.tissue), `${label} 缺少组织测序类型`);
     cited(product, `${label} 技术选型`);
 
     for (const entry of product.lod) {
@@ -137,15 +138,15 @@ test("every MRD product is identified, classified and sourced cell by cell", () 
       cited(entry, `${label} 临床研究 ${entry.study}`);
       assert.ok(entry.cancer && entry.setting && entry.study, `${label} 临床研究缺少癌种、场景或研究名`);
       assert.ok(
-        entry.sensitivity || entry.specificity || entry.baselineDetection || entry.hazardRatio || entry.leadTime,
+        entry.sensitivity || entry.specificity || entry.baselineDetection || entry.hazardRatio || entry.leadTime || entry.outcome,
         `${label} 临床研究 ${entry.study} 没有任何指标`
       );
     }
     for (const entry of product.statuses) cited(entry, `${label} 报证 ${entry.label}`);
     for (const entry of product.prices) {
       cited(entry, `${label} 价格`);
-      assert.ok(entry.amount > 0, `${label} 价格必须为正数`);
-      assert.ok(["USD", "CNY", "EUR", "GBP"].includes(entry.currency), `${label} 币种无效`);
+      assert.ok(entry.amount === null ? entry.label && entry.status === "historical" : entry.amount > 0, `${label} 价格必须为正数，历史区间须有原文标签`);
+      assert.ok(["USD", "CNY", "EUR", "GBP", "JPY"].includes(entry.currency), `${label} 币种无效`);
       assert.ok(entry.basis && entry.covers && /^\d{4}(-\d{2})?$/.test(entry.asOf), `${label} 价格缺少性质、覆盖内容或时间`);
     }
   }

@@ -1,0 +1,2 @@
+import type { MrdProduct } from "../data/types";
+export function filterMrdProducts<T extends Pick<MrdProduct, "approach" | "tissue" | "tracking" | "region" | "category" | "company" | "product" | "country" | "targets" | "tissueDetail" | "trackingDetail"> & { clinical: { cancer: string }[] }>(products: T[], filter?: { approach?: string; tissue?: string; tracking?: string; region?: string; category?: string; q?: string }): T[];

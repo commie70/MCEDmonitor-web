@@ -26,7 +26,7 @@ export default function LeaderboardPage() {
 
   return (
     <div>
-      <PageHeader title="产品看板" />
+      <PageHeader title="产品看板"><a download className="text-[12px] font-semibold text-accent-ink hover:underline" href="/api/v1/export/products">导出 CSV</a></PageHeader>
       <dl className="mb-4 grid grid-cols-3 divide-x divide-line overflow-hidden rounded-xl border border-line bg-panel sm:grid-cols-6">
         {tiles.map((tile) => (
           <div key={tile.label} className="px-3 py-3 text-center max-sm:[&:nth-child(n+4)]:border-t max-sm:[&:nth-child(n+4)]:border-line">

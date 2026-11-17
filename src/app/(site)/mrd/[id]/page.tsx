@@ -12,7 +12,7 @@ import {
   lodBasis,
 } from "@/components/board/mrd-parts";
 import { Panel, SourceLinks } from "@/components/ui";
-import { MRD_CATEGORY_LABEL, MRD_PRODUCTS, formatPrice } from "@/data";
+import { MRD_CATEGORY_LABEL, MRD_PRODUCTS, mrdPriceLabel } from "@/data";
 import { toMatrixProduct } from "@/lib/mrd-view";
 import { cn } from "@/lib/utils";
 
@@ -135,13 +135,14 @@ export default async function MrdProductPage({ params }: Props) {
             )}
           </Block>
 
+          {product.analytical.length > 0 && <Block title="分析特异性与定量性能"><ul className="grid gap-4">{product.analytical.map((entry, i) => <li key={i}><p className="text-[14px] font-semibold">{entry.label} · {entry.value}</p><p className="text-[13px] text-ink-2">{entry.context}</p><SourceLinks links={entry.links} /></li>)}</ul></Block>}
           <Block title="临床性能">
             {product.clinical.length === 0 ? (
               <p className="text-[13.5px] text-ink-3">未公开</p>
             ) : (
               <ul className="grid gap-5">
                 {product.clinical.map((entry) => (
-                  <li key={entry.study + entry.cancer} className="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-[10px]">
+                  <li key={entry.study + entry.cancer + entry.setting} className="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-[10px]">
                     <EvidenceDot evidence={entry.evidence} className="translate-y-[-1px]" />
                     <div className="min-w-0">
                       <p className="text-[14.5px] font-semibold leading-[1.5] text-ink">{entry.study}</p>
@@ -193,9 +194,9 @@ export default async function MrdProductPage({ params }: Props) {
               <ul className="grid gap-[10px]">
                 {product.prices.map((entry) => (
                   <li key={entry.basis + entry.covers + entry.amount} className="flex flex-wrap items-center gap-x-3 gap-y-[6px]">
-                    <span className="text-[18px] font-bold tabular-nums text-ink">{formatPrice(entry.amount, entry.currency)}</span>
+                    <span className="text-[18px] font-bold tabular-nums text-ink">{mrdPriceLabel(entry)}</span>
                     <span className="text-[13px] leading-[1.6] text-ink-2">
-                      {[entry.covers, entry.basis, entry.asOf].filter(Boolean).join(" · ")}
+                      {[entry.covers, entry.basis, entry.currency, entry.market, entry.dateNote || entry.asOf, entry.status === "historical" && "历史价格"].filter(Boolean).join(" · ")}
                     </span>
                     <SourceLinks links={entry.links} />
                   </li>

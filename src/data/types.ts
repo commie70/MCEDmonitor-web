@@ -207,13 +207,13 @@ export interface Milestone {
 /** 实体瘤 ctDNA MRD 与血液肿瘤克隆追踪是两类检测，不放在同一条检出限轴上比较。 */
 export type MrdCategory = "solid" | "heme";
 
-export type MrdApproach = "tumor-informed" | "tumor-naive";
+export type MrdApproach = "tumor-informed" | "tumor-naive" | "hybrid" | "undisclosed";
 
 /** 定制检测前对肿瘤组织做的测序；tumor-naive 没有这一步。 */
-export type MrdTissueAssay = "WES" | "WGS" | "panel";
+export type MrdTissueAssay = "WES" | "WGS" | "panel" | "IG/TCR" | "undisclosed";
 
 /** 血浆(或骨髓)里追踪的范围 */
-export type MrdTracking = "个体化 panel" | "固定 panel" | "WGS" | "免疫受体测序";
+export type MrdTracking = "个体化 panel" | "固定 panel" | "WGS" | "免疫受体测序" | "数字 PCR" | "未公开";
 
 /** 数据出处的分量：同行评议的研究、监管机构审评过的数据 → 实心；企业材料 → 描边。 */
 export type MrdEvidence = "peer-reviewed" | "regulator" | "vendor";
@@ -248,6 +248,10 @@ export interface MrdClinical {
   specificity?: string;
   /** 治疗前(基线)血浆的 ctDNA 检出率：不是对复发的灵敏度，不与之比较 */
   baselineDetection?: string;
+  ppv?: string;
+  npv?: string;
+  population?: string;
+  outcome?: string;
   /** 较影像学复发的中位提前期 */
   leadTime?: string;
   hazardRatio?: string;
@@ -256,9 +260,28 @@ export interface MrdClinical {
   sources: string[];
 }
 
+export interface MrdAnalytical {
+  label: string;
+  value: string;
+  context: string;
+  evidence: MrdEvidence;
+  sources: string[];
+}
+
+export interface MrdInstitutionPrice extends MrdPrice {
+  id: string;
+  provider: string;
+  service: string;
+  note: string;
+}
+
 export interface MrdPrice {
-  amount: number;
-  currency: "USD" | "CNY" | "EUR" | "GBP";
+  amount: number | null;
+  label?: string;
+  currency: "USD" | "CNY" | "EUR" | "GBP" | "JPY";
+  market?: string;
+  dateNote?: string;
+  status?: "historical" | "undisclosed" | "current";
   /** 价格性质：目录价 / Medicare 支付价 / 企业披露均价 / 官方渠道标价 */
   basis: string;
   /** 这个价格买到什么：首次定制 / 每次监测 / 套餐 */
@@ -296,6 +319,9 @@ export interface MrdProduct {
   targets: string;
   lod: MrdLod[];
   clinical: MrdClinical[];
+  analytical?: MrdAnalytical[];
+  availability?: string;
+  recordKind?: "product" | "research";
   sample: string;
   turnaround: string;
   statuses: MrdStatus[];

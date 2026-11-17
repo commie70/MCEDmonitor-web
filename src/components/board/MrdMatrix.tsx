@@ -4,9 +4,10 @@ import Link from "next/link";
 import { ChevronRight, Search, X } from "lucide-react";
 import type { ReactNode } from "react";
 import { CARD_GRID, Empty, pillClass } from "@/components/ui";
-import { MRD_APPROACHES, MRD_APPROACH_LABEL, MRD_CATEGORY_LABEL, MRD_TISSUE_ASSAYS, formatPrice } from "@/data/meta";
+import { MRD_APPROACHES, MRD_APPROACH_LABEL, MRD_CATEGORY_LABEL, MRD_TISSUE_ASSAYS, mrdPriceLabel, filterMrdProducts } from "@/data/meta";
 import type { MrdApproach, MrdCategory, MrdEvidence } from "@/data/types";
 import { useQueryState } from "@/hooks/use-query-state";
+import { MrdViews } from "./MrdViews";
 import { cn } from "@/lib/utils";
 import {
   ApproachChip,
@@ -21,36 +22,10 @@ import {
 const GROUPS: { key: string; category: MrdCategory; approach: MrdApproach | null; label: string }[] = [
   { key: "informed", category: "solid", approach: "tumor-informed", label: `${MRD_CATEGORY_LABEL.solid} · Tumor-informed` },
   { key: "naive", category: "solid", approach: "tumor-naive", label: `${MRD_CATEGORY_LABEL.solid} · Tumor-naive` },
+  { key: "hybrid", category: "solid", approach: "hybrid", label: "实体瘤 · 混合策略" },
+  { key: "undisclosed", category: "solid", approach: "undisclosed", label: "实体瘤 · 未公开" },
   { key: "heme", category: "heme", approach: null, label: MRD_CATEGORY_LABEL.heme },
 ];
-
-interface Filter {
-  approach: string;
-  tissue: string;
-  region: string;
-  keyword: string;
-}
-
-function matches(product: MatrixProduct, filter: Filter): boolean {
-  if (filter.approach && product.approach !== filter.approach) return false;
-  if (filter.tissue && product.tissue !== filter.tissue) return false;
-  if (filter.region && product.region !== filter.region) return false;
-  if (filter.keyword) {
-    const haystack = [
-      product.company,
-      product.companyEn,
-      product.product,
-      product.tissueDetail,
-      product.trackingDetail,
-      ...product.analytes,
-      ...product.clinical.map((entry) => `${entry.cancer} ${entry.study}`),
-    ]
-      .join(" ")
-      .toLowerCase();
-    if (!haystack.includes(filter.keyword)) return false;
-  }
-  return true;
-}
 
 /** 读数的分量跟着出处走：同行评议与监管审评实心深色，企业材料减重变浅。 */
 function weight(evidence: MrdEvidence): string {
@@ -168,9 +143,9 @@ function ProductCard({ product }: { product: MatrixProduct }) {
         {price ? (
           <span className="min-w-0 text-[12.5px] leading-[1.5] text-ink-2">
             <span className="mr-2 text-[15px] font-bold tabular-nums text-ink group-hover:text-accent-ink">
-              {formatPrice(price.amount, price.currency)}
+              {mrdPriceLabel(price)}
             </span>
-            {price.covers}
+            {price.basis} · {price.currency} · {price.covers}
           </span>
         ) : (
           <span className="text-[12.5px] text-ink-3">市价未公开</span>
@@ -187,13 +162,9 @@ function ProductCard({ product }: { product: MatrixProduct }) {
  */
 export function MrdMatrix({ products }: { products: MatrixProduct[] }) {
   const query = useQueryState();
-  const filter: Filter = {
-    approach: query.get("approach"),
-    tissue: query.get("tissue"),
-    region: query.get("region"),
-    keyword: query.get("q").trim().toLowerCase(),
-  };
-  const visible = products.filter((product) => matches(product, filter));
+  const filter = { approach: query.get("approach"), tissue: query.get("tissue"), tracking: query.get("tracking"), category: query.get("category"), region: query.get("region"), q: query.get("q") };
+  const view = ["technology", "analytical", "clinical", "prices"].includes(query.get("view")) ? query.get("view") : "products";
+  const visible = filterMrdProducts(products, filter);
   const groups = GROUPS.map((group) => ({
     ...group,
     list: visible
@@ -210,6 +181,9 @@ export function MrdMatrix({ products }: { products: MatrixProduct[] }) {
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-2">
+        <a download href={`/api/v1/export/mrd?${new URLSearchParams(filter)}`} className={pillClass(false)}>导出 CSV</a>
+        <select aria-label="肿瘤类别" value={filter.category} onChange={(e) => query.set({ category: e.target.value })} className={pillClass(false)}><option value="">全部类别</option><option value="solid">实体瘤</option><option value="heme">血液肿瘤</option></select>
+        <select aria-label="随访检测" value={filter.tracking} onChange={(e) => query.set({ tracking: e.target.value })} className={pillClass(false)}><option value="">全部随访检测</option>{[...new Set(products.map((p) => p.tracking))].map((method) => <option key={method}>{method}</option>)}</select>
         <div role="radiogroup" aria-label="技术路径" className="inline-flex rounded-full border border-line bg-panel p-[2px]">
           {["", ...MRD_APPROACHES].map((approach) => (
             <button
@@ -290,9 +264,10 @@ export function MrdMatrix({ products }: { products: MatrixProduct[] }) {
         </span>
       </div>
 
+      <div className="mb-4 flex flex-wrap gap-2" aria-label="MRD视图">{[["products", "产品"], ["technology", "技术"], ["analytical", "分析"], ["clinical", "临床"], ["prices", "价格"]].map(([key, label]) => <button key={key} type="button" aria-pressed={view === key} className={pillClass(view === key)} onClick={() => query.set({ view: key === "products" ? null : key })}>{label}</button>)}</div>
       {visible.length === 0 ? (
         <Empty>没有符合条件的产品</Empty>
-      ) : (
+      ) : view !== "products" ? <MrdViews products={visible} view={view} /> : (
         <div className="grid gap-6">
           {groups.map((group) => (
             <section key={group.key} aria-label={group.label}>

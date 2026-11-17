@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { STUDIES, getCompany, getStudy } from "@/data";
-import { apiCompanies, apiCompany, apiEvent, apiMrdPriceRanges, apiMrdProducts, apiProspective, apiStudy } from "@/lib/api";
+import { apiCompanies, apiCompany, apiEvent, apiMrdInstitutionPrices, apiMrdPriceRanges, apiMrdProducts, apiProspective, apiStudy } from "@/lib/api";
 import { dateKey } from "@/lib/dates";
 import { hotEvents } from "@/lib/events";
 import { loadEvents } from "@/lib/load-events";
@@ -104,9 +104,11 @@ async function callTool(name: string, args: Record<string, unknown>): Promise<un
         category: text(args.category) || undefined,
         approach: text(args.approach) || undefined,
         tissue: text(args.tissue) || undefined,
+        tracking: text(args.tracking) || undefined,
+        q: text(args.q) || undefined,
         region: text(args.region) || undefined,
       });
-      return { count: products.length, products, price_ranges: apiMrdPriceRanges() };
+      return { count: products.length, products, price_ranges: apiMrdPriceRanges(), institution_prices: apiMrdInstitutionPrices() };
     }
     case "search_items": {
       const { events, report } = await loadEvents();

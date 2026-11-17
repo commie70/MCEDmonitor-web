@@ -1,6 +1,7 @@
 import { MRD_APPROACH_LABEL, MRD_LOD_SCALE_LABEL } from "@/data/meta";
 import type {
   MrdApproach,
+  MrdAnalytical,
   MrdClinical,
   MrdEvidence,
   MrdLod,
@@ -15,7 +16,8 @@ import { cn } from "@/lib/utils";
 
 export type Linked<T> = Omit<T, "sources"> & { links: EventLink[] };
 
-export type MatrixProduct = Omit<MrdProduct, "lod" | "clinical" | "statuses" | "prices" | "sources"> & {
+export type MatrixProduct = Omit<MrdProduct, "analytical" | "lod" | "clinical" | "statuses" | "prices" | "sources"> & {
+  analytical: Linked<MrdAnalytical>[];
   lod: Linked<MrdLod>[];
   clinical: Linked<MrdClinical>[];
   statuses: Linked<MrdStatus>[];
@@ -79,9 +81,12 @@ export function clinicalReadings(entry: Linked<MrdClinical>): { label: string; v
     { label: "治疗前检出", value: entry.baselineDetection },
     { label: "提前期", value: entry.leadTime },
     { label: "HR", value: entry.hazardRatio },
+    { label: "PPV", value: entry.ppv },
+    { label: "NPV", value: entry.npv },
+    { label: "终点", value: entry.outcome },
   ].filter((reading): reading is { label: string; value: string } => Boolean(reading.value));
 }
 
-export function clinicalContext(entry: Pick<MrdClinical, "cancer" | "setting" | "n">): string {
-  return [entry.cancer, entry.setting, entry.n && `n=${entry.n.toLocaleString("en-US")}`].filter(Boolean).join(" · ");
+export function clinicalContext(entry: Pick<MrdClinical, "cancer" | "setting" | "n" | "population">): string {
+  return [entry.cancer, entry.population, entry.setting, entry.n && `n=${entry.n.toLocaleString("en-US")}`].filter(Boolean).join(" · ");
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "nantong-20260826",
+    "provider": "南通大学附属医院",
+    "service": "实体瘤MRD监测（个性化Panel）",
+    "amount": 1680,
+    "currency": "CNY",
+    "basis": "机构公示价",
+    "covers": "元/例",
+    "asOf": "2026-08",
+    "note": "外送苏州赛默医学检验；未指明产品品牌、建模或随访阶段",
+    "sources": [
+      "sol61-nantong-price"
+    ]
+  }
+]

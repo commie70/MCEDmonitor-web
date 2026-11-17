@@ -67,8 +67,10 @@ export const MCP_TOOLS = [
       type: "object",
       properties: {
         category: { type: "string", enum: ["solid", "heme"], description: "实体瘤 / 血液肿瘤" },
-        approach: { type: "string", enum: ["tumor-informed", "tumor-naive"], description: "技术路径" },
-        tissue: { type: "string", enum: ["WES", "WGS", "panel"], description: "定制前的组织测序" },
+        approach: { type: "string", enum: ["tumor-informed", "tumor-naive", "hybrid", "undisclosed"], description: "技术路径" },
+        tracking: { type: "string", description: "随访检测：个体化 panel / 固定 panel / WGS / 免疫受体测序 / 数字 PCR / 未公开" },
+        q: { type: "string", description: "产品、企业或癌种关键词" },
+        tissue: { type: "string", enum: ["WES", "WGS", "panel", "IG/TCR", "none", "undisclosed"], description: "定制前的组织测序" },
         region: { type: "string", enum: ["国内", "国外"], description: "地区" },
       },
       additionalProperties: false,

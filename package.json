@@ -22,7 +22,9 @@
     "monitor:test": "node --test tests/monitor-pipeline.test.mjs",
     "changelog": "node scripts/build-changelog.mjs",
     "check": "npm run lint && npm run typecheck && npm test && npm run build",
-    "skill:hash": "cd public/mced-skill && shasum -a 256 SKILL.md | awk '{print $1\"  SKILL.md\"}' > SKILL.md.sha256"
+    "skill:hash": "cd public/mced-skill && shasum -a 256 SKILL.md | awk '{print $1\"  SKILL.md\"}' > SKILL.md.sha256",
+    "monitor:status": "node scripts/build-system-status.mjs",
+    "prebuild": "npm run monitor:status"
   },
   "dependencies": {
     "clsx": "^2.1.1",

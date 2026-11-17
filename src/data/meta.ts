@@ -1,4 +1,4 @@
-import type { MrdApproach, MrdCategory, MrdLod, MrdTissueAssay, RegStage, RouteKey, StudyDesign } from "./types";
+import type { MrdApproach, MrdCategory, MrdLod, MrdPrice, MrdTissueAssay, RegStage, RouteKey, StudyDesign } from "./types";
 
 /**
  * 不依赖数据本体的常量与小工具。
@@ -109,14 +109,16 @@ export const SOURCE_KIND_LABEL = {
 
 // ---- MRD ----
 
-export const MRD_APPROACHES: MrdApproach[] = ["tumor-informed", "tumor-naive"];
+export const MRD_APPROACHES: MrdApproach[] = ["tumor-informed", "tumor-naive", "hybrid", "undisclosed"];
 
 export const MRD_APPROACH_LABEL: Record<MrdApproach, string> = {
   "tumor-informed": "Tumor-informed",
   "tumor-naive": "Tumor-naive",
+  hybrid: "混合策略",
+  undisclosed: "未公开",
 };
 
-export const MRD_TISSUE_ASSAYS: MrdTissueAssay[] = ["WES", "WGS", "panel"];
+export const MRD_TISSUE_ASSAYS: MrdTissueAssay[] = ["WES", "WGS", "panel", "IG/TCR", "undisclosed"];
 
 export const MRD_CATEGORY_LABEL: Record<MrdCategory, string> = {
   solid: "实体瘤",
@@ -129,8 +131,14 @@ export const MRD_LOD_SCALE_LABEL: Record<NonNullable<MrdLod["scale"]>, string> =
   cells: "克隆比例",
 };
 
-const CURRENCY_SYMBOL = { USD: "$", CNY: "¥", EUR: "€", GBP: "£" } as const;
+const CURRENCY_SYMBOL = { USD: "$", CNY: "¥", EUR: "€", GBP: "£", JPY: "JPY " } as const;
 
 export function formatPrice(amount: number, currency: keyof typeof CURRENCY_SYMBOL): string {
   return `${CURRENCY_SYMBOL[currency]}${amount.toLocaleString("en-US")}`;
 }
+
+export function mrdPriceLabel(price: Pick<MrdPrice, "amount" | "currency" | "label">): string {
+  return price.label || (price.amount === null ? "未公开" : formatPrice(price.amount, price.currency));
+}
+
+export { filterMrdProducts } from "../lib/mrd-filter.mjs";

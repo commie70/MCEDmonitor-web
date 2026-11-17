@@ -44,7 +44,7 @@ curl https://gs-mced.geneseeq.com/api/v1/studies/grail-pathfinder2
 curl https://gs-mced.geneseeq.com/api/v1/prospective
 
 # MRD 产品矩阵：技术选型、检出限、临床性能、报证与支付、公开价格
-# 过滤：approach=tumor-informed|tumor-naive  tissue=WES|WGS|panel  region=国内|国外  category=solid|heme
+# 过滤：approach=tumor-informed|tumor-naive|hybrid|undisclosed  tissue=WES|WGS|panel|IG/TCR|none|undisclosed  tracking=随访检测方式  region=国内|国外  category=solid|heme
 curl "https://gs-mced.geneseeq.com/api/v1/mrd?approach=tumor-informed"
 
 # 信源库；kind=journal|conference|registry|regulator|company|media|internal
@@ -86,3 +86,6 @@ curl https://gs-mced.geneseeq.com/feed.xml
   个别只有现场记录的资料在站内重建为页面(`/sources/{id}`)。
 - 监测事件由模型流水线抽取并经独立模型复核，摘要与重要性评分是情报线索而非结论。
 - 不承诺 SLA；请自行缓存。个人与组织内部使用免费，对外商业镜像 / 转售需授权。
+
+单产品：`GET /api/v1/mrd/{id}`。采集运行：`GET /api/v1/status`。
+CSV：`GET /api/v1/export/{dataset}`，支持 mrd、products、studies、performance、regulatory；mrd 使用与 JSON 列表相同的筛选参数。

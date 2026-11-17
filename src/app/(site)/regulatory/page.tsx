@@ -104,7 +104,7 @@ export default async function RegulatoryPage() {
 
   return (
     <div>
-      <PageHeader title="报证进度" />
+      <PageHeader title="报证进度"><a download className="text-[12px] font-semibold text-accent-ink hover:underline" href="/api/v1/export/regulatory">导出 CSV</a></PageHeader>
       <Matrix companies={COMPANIES} />
 
       <section className="mt-8 max-w-[900px]">

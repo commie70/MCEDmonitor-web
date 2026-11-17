@@ -12,9 +12,10 @@ function withLinks<T extends { sources: string[] }>({ sources, ...rest }: T): Om
 }
 
 /** 证据库里的 MRD 产品 → 页面用的形态：逐格信源解析成链接。 */
-export function toMatrixProduct({ sources, lod, clinical, statuses, prices, ...product }: MrdProduct): MatrixProduct {
+export function toMatrixProduct({ sources, analytical = [], lod, clinical, statuses, prices, ...product }: MrdProduct): MatrixProduct {
   return {
     ...product,
+    analytical: analytical.map(withLinks),
     lod: lod.map(withLinks),
     clinical: clinical.map(withLinks),
     statuses: statuses.map(withLinks),

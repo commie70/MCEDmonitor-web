@@ -1,6 +1,7 @@
 import {
   COMPANIES,
   MRD_PRICE_RANGES,
+  MRD_INSTITUTION_PRICES,
   MRD_PRODUCTS,
   STUDIES,
   getCompany,
@@ -14,6 +15,7 @@ import {
   type Source,
   type Study,
 } from "@/data";
+import { filterMrdProducts } from "./mrd-filter.mjs";
 import { isExternal } from "@/data/meta";
 import type { IntelEvent } from "./event-model";
 import { SITE_URL } from "./url";
@@ -92,6 +94,7 @@ export function apiCompanySummary(company: Company) {
     co: company.name,
     en: company.region === "国外" ? company.country : company.nameEn,
     region: company.region,
+    country: company.country,
     self: company.self,
     routes: company.routes,
     layout: company.layout,
@@ -148,6 +151,8 @@ export interface MrdFilter {
   approach?: string;
   tissue?: string;
   region?: string;
+  tracking?: string;
+  q?: string;
 }
 
 /** MRD 产品矩阵的一行。检出限与价格按原文口径输出，不做单位或币种换算。 */
@@ -169,6 +174,9 @@ export function apiMrdProduct(product: MrdProduct) {
     tracking_detail: product.trackingDetail,
     analytes: product.analytes,
     targets: product.targets,
+    analytical: (product.analytical || []).map(withApiSources),
+    availability: product.availability,
+    record_kind: product.recordKind,
     lod: product.lod.map(withApiSources),
     clinical: product.clinical.map(withApiSources),
     statuses: product.statuses.map(withApiSources),
@@ -184,13 +192,7 @@ export function apiMrdProduct(product: MrdProduct) {
 }
 
 export function apiMrdProducts(filter: MrdFilter = {}) {
-  return MRD_PRODUCTS.filter(
-    (product) =>
-      (!filter.category || product.category === filter.category) &&
-      (!filter.approach || product.approach === filter.approach) &&
-      (!filter.tissue || product.tissue === filter.tissue) &&
-      (!filter.region || product.region === filter.region)
-  ).map(apiMrdProduct);
+  return filterMrdProducts(MRD_PRODUCTS, filter).map(apiMrdProduct);
 }
 
 /** 没有产品级公开标价的市场，媒体报道的行业报价区间。 */
@@ -220,3 +222,5 @@ export function apiEvent(event: IntelEvent) {
     sources: event.links.map((link) => ({ label: link.label, kind: link.kind, url: absolute(link.href) })),
   };
 }
+
+export function apiMrdInstitutionPrices() { return MRD_INSTITUTION_PRICES.map(withApiSources); }

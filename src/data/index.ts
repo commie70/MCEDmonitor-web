@@ -1,12 +1,13 @@
 import companiesJson from "./companies.json";
 import milestonesJson from "./milestones.json";
+import mrdInstitutionPricesJson from "./mrd-institution-prices.json";
 import mrdJson from "./mrd.json";
 import mrdPriceRangesJson from "./mrd-price-ranges.json";
 import pathfinderJson from "./pathfinder.json";
 import sourcesJson from "./sources.json";
 import studiesJson from "./studies.json";
 import { CANCER_ORDER, isProspective } from "./meta";
-import type { Company, Milestone, MrdPriceRange, MrdProduct, PathfinderTable, RegStage, Source, Study } from "./types";
+import type { MrdInstitutionPrice, Company, Milestone, MrdPriceRange, MrdProduct, PathfinderTable, RegStage, Source, Study } from "./types";
 
 export type * from "./types";
 export * from "./meta";
@@ -20,6 +21,7 @@ export const STUDIES = studiesJson as Study[];
 export const SOURCES = sourcesJson as Source[];
 export const MILESTONES = milestonesJson as Milestone[];
 export const PATHFINDER = pathfinderJson as PathfinderTable;
+export const MRD_INSTITUTION_PRICES = mrdInstitutionPricesJson as MrdInstitutionPrice[];
 export const MRD_PRODUCTS = mrdJson as MrdProduct[];
 export const MRD_PRICE_RANGES = mrdPriceRangesJson as MrdPriceRange[];
 
@@ -70,6 +72,7 @@ export function mrdSourceIds(product: MrdProduct): string[] {
   return [
     ...new Set([
       ...product.sources,
+      ...(product.analytical || []).flatMap((entry) => entry.sources),
       ...product.lod.flatMap((entry) => entry.sources),
       ...product.clinical.flatMap((entry) => entry.sources),
       ...product.statuses.flatMap((entry) => entry.sources),

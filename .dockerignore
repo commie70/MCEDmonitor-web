@@ -46,7 +46,16 @@ GEMINI.md
 
 # Docs / research (large, not needed at runtime)
 docs
-scripts
+scripts/*
+!scripts/build-system-status.mjs
+!scripts/lib-release-gate.mjs
+!scripts/lib-network-security.mjs
+!scripts/lib-monitor-ledger.mjs
+!scripts/lib-monitor-llm.mjs
+!scripts/monitor-sources.json
+!scripts/monitor-ledger.json
+!scripts/monitor-acceptance.json
+!scripts/monitor-history.jsonl
 
 # Docker files themselves (no need to copy into image)
 Dockerfile

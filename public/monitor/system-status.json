@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "lastRun": "2026-11-14T02:25:37.532Z",
+  "health": "failed",
+  "failedSources": 45,
+  "coverageGaps": 45,
+  "errors": 111,
+  "pendingCount": 0,
+  "pendingCandidates": 319,
+  "release": {
+    "gate_open": true,
+    "reason": null,
+    "accepted_at": "2026-11-12T17:22:30.658Z"
+  },
+  "sources": [
+    {
+      "id": "fda:openfda-device",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "nmpa:medical-device",
+      "owner": "国家药品监督管理局",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "cmde:medical-device",
+      "owner": "国家药品监督管理局医疗器械技术审评中心",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "nih:clinicaltrials",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "crossref:doi",
+      "owner": "Crossref",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "conference:asco",
+      "owner": "ASCO",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "conference:esmo",
+      "owner": "ESMO",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "conference:aacr",
+      "owner": "AACR",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:grail",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:grail",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:grail",
+      "owner": "GRAIL",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:exact-sciences-abbott",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:exact-sciences-abbott",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:exact-sciences-abbott",
+      "owner": "Exact Sciences / Abbott",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:guardant-health",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:guardant-health",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:guardant-health",
+      "owner": "Guardant Health",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:freenome",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:freenome",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:freenome",
+      "owner": "Freenome",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:delfi-diagnostics",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:delfi-diagnostics",
+      "owner": "DELFI Diagnostics",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:mirxes",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:mirxes",
+      "owner": "MiRXES",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:epigenomics",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:epigenomics",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:epigenomics",
+      "owner": "Epigenomics AG",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:geneoscopy",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "openfda:geneoscopy",
+      "owner": "U.S. Food and Drug Administration",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:geneoscopy",
+      "owner": "Geneoscopy",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:gene-solutions",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:gene-solutions",
+      "owner": "Gene Solutions",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e4b896e5928ce59f",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e4b896e5928ce59f",
+      "owner": "Geneseeq",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e78783e79fb3e58c",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e78783e79fb3e58c",
+      "owner": "Burning Rock Biotech",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e9b98de8bf9ce59f",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e9b98de8bf9ce59f",
+      "owner": "Singlera Genomics",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e5928ce7919ee59f",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e5928ce7919ee59f",
+      "owner": "Berry Genomics / Berry Oncology",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e8afbae8be89e581",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e8afbae8be89e581",
+      "owner": "New Horizon Health",
+      "enabled": false,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e6b39be7949fe5ad",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e6b39be7949fe5ad",
+      "owner": "Genetron Health",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e58d8ee5a4a7e59f",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e58d8ee5a4a7e59f",
+      "owner": "BGI Genomics",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e59089e59ba0e58a",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e59089e59ba0e58a",
+      "owner": "GenePlus",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e887bbe5928ce7a7",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e887bbe5928ce7a7",
+      "owner": "Genecast",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e59fbae58786e58c",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "official:e59fbae58786e58c",
+      "owner": "AnchorDx",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "pubmed:e8a18ce4b89ae680",
+      "owner": "U.S. National Library of Medicine",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:genomeweb",
+      "owner": "GenomeWeb",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:medtech-dive",
+      "owner": "MedTech Dive",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:fierce-biotech",
+      "owner": "Fierce Biotech",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:stat",
+      "owner": "STAT",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:cancer-letter",
+      "owner": "The Cancer Letter",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:scmp",
+      "owner": "South China Morning Post",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "trusted:patient-care-online",
+      "owner": "Patient Care Online",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "discovery:pr-newswire",
+      "owner": "PR Newswire",
+      "enabled": true,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 0,
+      "item_count": 0
+    },
+    {
+      "id": "discovery:weixinzs-mced",
+      "owner": "WeixinZS 微信公众号监控",
+      "enabled": true,
+      "last_checked_at": "2026-11-11T01:55:15.975Z",
+      "last_success_at": null,
+      "next_due_at": null,
+      "consecutive_failures": 24,
+      "item_count": 0
+    }
+  ]
+}

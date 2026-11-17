@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MrdMatrix } from "@/components/board/MrdMatrix";
 import { PageHeader, Panel, SectionTitle, SourceLinks } from "@/components/ui";
-import { MRD_PRICE_RANGES, MRD_PRODUCTS } from "@/data";
+import { MRD_INSTITUTION_PRICES, MRD_PRICE_RANGES, MRD_PRODUCTS } from "@/data";
 import { sourceLinks as links, toMatrixProduct } from "@/lib/mrd-view";
 
 export const metadata: Metadata = { title: "MRD 性能矩阵" };
@@ -34,6 +34,7 @@ export default function MrdPage() {
       <Suspense>
         <MrdMatrix products={products} />
       </Suspense>
+      <section className="mt-6"><SectionTitle>机构收费</SectionTitle><Panel><ul className="divide-y divide-line">{MRD_INSTITUTION_PRICES.map((price) => <li key={price.id} className="px-4 py-3 text-[13px]"><strong>{price.provider} · {price.currency} {price.amount} / {price.covers}</strong><p>{price.service} · {price.asOf}</p><p className="text-ink-3">{price.note}</p><SourceLinks links={links(price.sources)} /></li>)}</ul></Panel></section>
       {MRD_PRICE_RANGES.length > 0 && (
         <section className="mt-6">
           <SectionTitle>国内行业报价 · 媒体报道</SectionTitle>
