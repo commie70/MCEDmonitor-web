@@ -1,8 +1,7 @@
-import { readMonitorReport } from "@/components/sites/aihot-virxact-com-e007b012/shared/monitor-report";
-import {
-  API_CACHE_HEADERS,
-  safeHttpUrl,
-} from "@/components/sites/aihot-virxact-com-e007b012/shared/url";
+import { isExternal } from "@/data/meta";
+import { featured, type IntelEvent } from "@/lib/events";
+import { loadEvents } from "@/lib/load-events";
+import { API_CACHE_HEADERS, SITE_URL, safeHttpUrl } from "@/lib/url";
 
 export const dynamic = "force-dynamic";
 
@@ -14,57 +13,52 @@ function escapeXml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function toRfc822(value: string, fallback: string): string {
-  const date = new Date(value || fallback);
-  if (Number.isNaN(date.getTime())) {
-    return new Date(fallback).toUTCString();
-  }
-  return date.toUTCString();
-}/** GET /feed.xml — RSS 2.0：监测故事线前 20 条(仅 http(s) 链接入 feed)。 */
-export async function GET() {
-  const report = await readMonitorReport();
+/** 事件日期可能只有年 / 年月，缺失部分按 1 号计。 */
+function pubDate(date: string, fallback: string): string {
+  const [y, m = "01", d = "01"] = date.slice(0, 10).split("-");
+  const parsed = new Date(`${y}-${m}-${d}T00:00:00+08:00`);
+  return (Number.isNaN(parsed.getTime()) ? new Date(fallback) : parsed).toUTCString();
+}
 
-  if (!report) {
-    return new Response("monitor_report_missing: run npm run monitor",{
-      status: 503,
-      headers:{ "Content-Type": "text/plain; charset=utf-8" },});
-  }
-
-  const dailyIds = new Set(report.views?.daily_event_ids ?? report.stories.map((story) => story.id));
-  const items = report.stories
-    .filter((story) => dailyIds.has(story.id))
-    .slice(0, 20)
-    .map((story) => {
-      const link = safeHttpUrl(story.items[0]?.url);
-      if (!link) return null;
-      const description =
-        story.summary || `${story.company} · ${story.sources_count} 个信源`;
-      return `    <item>
-      <title>${escapeXml(story.title)}</title>
+function itemXml(event: IntelEvent, fallback: string): string {
+  const page = `${SITE_URL}/items/${encodeURIComponent(event.id)}`;
+  const external = event.links.find((link) => isExternal(link.href));
+  const link = safeHttpUrl(external?.href) ?? page;
+  const description = [event.summary, event.why].filter(Boolean).join(" ") || `${event.company} · ${event.product}`;
+  return `    <item>
+      <title>${escapeXml(event.title)}</title>
       <link>${escapeXml(link)}</link>
+      <comments>${escapeXml(page)}</comments>
       <description>${escapeXml(description)}</description>
-      <pubDate>${toRfc822(story.last_seen, report.generated_at)}</pubDate>
-      <guid isPermaLink="false">${escapeXml(story.id)}</guid>
+      <category>${escapeXml(event.company)}</category>
+      <pubDate>${pubDate(event.date, fallback)}</pubDate>
+      <guid isPermaLink="false">${escapeXml(event.id)}</guid>
     </item>`;
-    })
-    .filter(Boolean)
+}
+
+/** GET /feed.xml — RSS 2.0：最近 30 条 L1/L2 事件。 */
+export async function GET() {
+  const { events, report } = await loadEvents();
+  const built = report?.generated_at ?? new Date().toISOString();
+  const items = featured(events)
+    .slice(0, 30)
+    .map((event) => itemXml(event, built))
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>早筛情报站 · 竞品监测</title>
-    <link>/</link>
-    <description>癌症早筛竞品新闻监测：每日故事线、监管动态与新研究。</description>
-    <lastBuildDate>${toRfc822(report.generated_at, report.generated_at)}</lastBuildDate>
+    <title>早筛情报站</title>
+    <link>${SITE_URL}/</link>
+    <description>癌症早筛产品的性能、技术路线、癌种覆盖与报证进度：报证节点、研究读出与文献。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>${new Date(built).toUTCString()}</lastBuildDate>
 ${items}
   </channel>
 </rss>
 `;
 
-  return new Response(xml,{
-    headers:{
-      "Content-Type": "application/rss+xml; charset=utf-8",
-      ...API_CACHE_HEADERS,
-    },});
+  return new Response(xml, {
+    headers: { "Content-Type": "application/rss+xml; charset=utf-8", ...API_CACHE_HEADERS },
+  });
 }

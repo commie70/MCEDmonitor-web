@@ -1,28 +1,38 @@
 # 早筛情报站(mced-intel)
 
-> 癌症早筛竞品新闻监测与信息看板。面向 IVD 公司医学部、研发部、战略发展部员工。
+> 持续监测国内外癌症早筛产品(多癌种 MCED 与单癌种)的性能、技术路线、癌种覆盖与报证进度。面向医学部、研发部、战略发展部与药企合作。
 
-## 这是什么
+## 内容
 
-- 19 家早筛企业 × 五层证据研究库(性能数字均来自文献 / 会议原文，含出处与更新时间)
-- 每日自动监测： PubMed、Google News、openFDA、Tavily、AnySearch、Brave、Firecrawl
-- 故事线聚类 + 跨引擎命中热度 + AI 摘要 / 评分 / 日报
+- 事件时间线：报证节点、研究读出、文献与会议、上市与合作，按 L1 / L2 / L3 分级
+- 证据库：19 家企业 × 50 项研究，按研究设计分层(RCT → 前瞻干预 → 前瞻注册 → 前瞻队列 → 病例对照)
+- MRD 性能矩阵：25 个国内外 MRD 产品的技术选型(tumor-informed / tumor-naive，WES / WGS / panel)、检出限、临床性能、报证支付与公开价格
+- 信源库：198 条公开资料(期刊、会议、试验注册、监管文件、企业公告)，每个数字可回溯到原文
+- 监测日报：每 3 天自动采集 PubMed、openFDA、企业官网与公众号，模型抽取 + 独立模型复核后发布
 
-## 接入路径(全部匿名只读，无需 API Key)
+## 页面
 
-- Agent Skill:`/mced-skill/SKILL.md`
-- MCP(JSON-RPC 2.0):`POST /api/mcp` — tools: get_top_stories / get_companies / get_company / search_items
-- RSS:`/feed.xml`(每日故事线前 20 条)
-- REST API v1:
-  - `GET /api/v1/companies` — 公司摘要列表
-  - `GET /api/v1/companies/{id}` — 单家完整性能库(含研究与出处)
-  - `GET /api/v1/prospective` — 前瞻队列性能对照(18 条)
-  - `GET /api/v1/stories` — 当前窗口故事线
-  - `GET /api/v1/items?category=regulatory|academic|research|market` — 原始命中
-  - `GET /api/v1/daily` — 当日 AI 日报 + 前 5 故事线
+- `/` 精选 · `/all` 全部动态 · `/hot` 热点榜 · `/daily` 监测日报 · `/topics` 主题
+- `/leaderboard` 产品看板 · `/performance` 性能对照 · `/regulatory` 报证进度 · `/coverage` 癌种覆盖 · `/mrd` MRD 性能矩阵 · `/sources` 信源库
+- `/companies/{id}` 企业档案 · `/studies/{id}` 研究证据 · `/mrd/{id}` MRD 产品(逐格出处) · `/items/{id}` 事件详情
+
+## 接入(匿名只读，无需 API Key)
+
+- Agent Skill：`/mced-skill/SKILL.md`
+- MCP(Streamable HTTP)：`POST /api/mcp` — get_top_stories / get_events / get_companies / get_company / get_prospective / get_study / get_mrd_products / search_items
+- RSS：`/feed.xml`(最近 30 条 L1 / L2 事件)
+- REST API v1：
+  - `GET /api/v1/events` — 统一事件时间线；?kind= ?company= ?level= ?since= ?q= ?origin=
+  - `GET /api/v1/companies` · `GET /api/v1/companies/{id}` — 企业摘要 / 完整档案
+  - `GET /api/v1/studies` · `GET /api/v1/studies/{id}` — 研究证据；?company= ?design=
+  - `GET /api/v1/prospective` — 前瞻研究性能对照(不含病例对照)
+  - `GET /api/v1/mrd` — MRD 产品矩阵；?approach= ?tissue= ?region= ?category=
+  - `GET /api/v1/sources` — 信源库；?kind=
+  - `GET /api/v1/stories` · `GET /api/v1/items` · `GET /api/v1/daily` — 监测流水线事件、证据条目与日报
 
 ## 注意
 
-- 摘要、评分、日报由 AI 生成；引用数字、性能或原话前，请回原文 URL 复核。
-- 性能数据引用自文献 / 会议原文并附出处；「旧文」标签表示最新可推断时间早于当前监测窗口。
+- 摘要与重要性评分由模型生成；引用性能数字或原话前，请回原文 URL 复核。
+- 病例对照研究的性能不可外推到真实筛查人群，不要与前瞻数据并列比较。
+- MRD 检出限按原文口径记录：量纲相同才可比较，VAF 与肿瘤分数之间不换算；标为企业材料的数值未经同行评议。
 - 个人与组织内部使用免费；对外商业用途需先取得授权。

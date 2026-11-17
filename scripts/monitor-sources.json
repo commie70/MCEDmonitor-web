@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_mode": "shadow",
+  "release_mode": "auto",
   "retmax_per_query": 8,
   "discovery_provider": {
     "provider": "anysearch",
@@ -285,7 +285,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.exactsciences.com/news-events/press-releases",
+      "url": "https://www.exactsciences.com/newsroom/press-releases",
       "coverage": {
         "companies": [
           "Exact Sciences / Abbott"
@@ -351,7 +351,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://investors.guardanthealth.com/press-releases/default.aspx",
+      "url": "https://investors.guardanthealth.com/rss/pressrelease.aspx",
       "coverage": {
         "companies": [
           "Guardant Health"
@@ -774,7 +774,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://ir.brbiotech.com/news-events/news-releases",
+      "url": "https://www.brbiotech.com/cn/news/index/1030",
       "coverage": {
         "companies": [
           "燃石医学"
@@ -864,7 +864,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.berrygenomics.com/",
+      "url": "https://www.berrygenomics.com/column/93/",
       "coverage": {
         "companies": [
           "和瑞基因"
@@ -924,7 +924,7 @@
           "conference_disclosure"
         ]
       },
-      "enabled": true
+      "enabled": false
     },
     {
       "source_id": "pubmed:e6b39be7949fe5ad",
@@ -954,7 +954,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.genetronhealth.com/en/about.html",
+      "url": "https://www.genetronhealth.com/news-company.html",
       "coverage": {
         "companies": [
           "泛生子"
@@ -1044,7 +1044,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.geneplus.cn/",
+      "url": "https://www.geneplus.cn/news",
       "coverage": {
         "companies": [
           "吉因加"
@@ -1089,7 +1089,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.genecast.com.cn/",
+      "url": "https://www.genecast.com.cn/news.html",
       "coverage": {
         "companies": [
           "臻和科技"
@@ -1134,7 +1134,7 @@
       "tier": "authoritative",
       "type": "official_web",
       "source_type": "official",
-      "url": "https://www.anchordx.com/news/",
+      "url": "https://www.anchordx.com/news/activity",
       "coverage": {
         "companies": [
           "基准医疗"

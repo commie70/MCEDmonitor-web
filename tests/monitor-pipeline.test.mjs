@@ -13,11 +13,14 @@ import {
   estimatedJsonBytes,
   importanceFrom,
   loadLedger,
+  MAX_CANDIDATE_RETRIES,
   mergeCandidate,
   normalizeUrl,
   projectPublicReport,
   pendingRetryHits,
   recordPendingCandidate,
+  releaseEligibleEvents,
+  stalledCandidates,
   validateLedger,
 } from "../scripts/lib-monitor-ledger.mjs";
 import {
@@ -237,6 +240,67 @@ test("pending-review events are absent from every public projection", () => {
   assert.deepEqual(report.views.all_event_ids, []);
 });
 
+test("independent model concurrence releases a high-risk event without human approval", () => {
+  const entry = golden.history_states.find((item) => item.expected === "first");
+  const highRisk = {
+    event_type: "regulatory_decision",
+    importance: { relevance: 30, impact: 50, actionability: 20 },
+  };
+
+  const concurred = mergeCandidate(
+    createEmptyLedger(),
+    candidateFromCase(entry, {
+      ...highRisk,
+      model_review: { extraction: true, importance: true, reviewer: "glm/glm-review" },
+    }),
+    { now: "2026-08-30T00:00:00.000Z" }
+  );
+  assert.equal(concurred.event.review_status, "approved");
+  assert.equal(concurred.event.reviewed_by, "model:glm/glm-review");
+  assert.equal(eventIsPublic(concurred.event), true);
+
+  for (const model_review of [
+    { extraction: true, importance: false, reviewer: "glm/glm-review" },
+    { extraction: true, importance: true, reviewer: null },
+  ]) {
+    const partial = mergeCandidate(createEmptyLedger(), candidateFromCase(entry, { ...highRisk, model_review }));
+    assert.equal(partial.event.review_status, "pending");
+    assert.equal(eventIsPublic(partial.event), false);
+  }
+});
+
+test("a closed gate holds new events, an open gate releases them, and a later closure unpublishes nothing", () => {
+  const entry = golden.history_states.find((item) => item.expected === "first");
+  const ledger = createEmptyLedger();
+  const merged = mergeCandidate(ledger, candidateFromCase(entry));
+  const closed = {
+    generatedAt: "2026-08-30T00:00:00.000Z",
+    gateOpen: false,
+    release: { gate_open: false, reason: "acceptance_not_passed" },
+  };
+
+  const held = projectPublicReport(ledger, closed);
+  assert.deepEqual(held.views.all_event_ids, []);
+  assert.deepEqual(held.items, []);
+  assert.equal(held.release.held, 1);
+
+  // 下一次运行：门禁已开放，积压事件放行并进入本期。
+  ledger.last_publication_event_ids = [];
+  assert.equal(releaseEligibleEvents(ledger, "2026-09-02T00:00:00.000Z"), 1);
+  validateLedger(ledger);
+  const open = projectPublicReport(ledger, {
+    generatedAt: "2026-09-02T00:00:00.000Z",
+    gateOpen: true,
+    release: { gate_open: true, reason: null },
+  });
+  assert.deepEqual(open.views.all_event_ids, [merged.event.id]);
+  assert.deepEqual(open.views.daily_event_ids, [merged.event.id]);
+  assert.equal(open.release.held, 0);
+
+  assert.equal(releaseEligibleEvents(ledger, "2026-09-05T00:00:00.000Z"), 0);
+  assert.deepEqual(projectPublicReport(ledger, closed).views.all_event_ids, [merged.event.id]);
+});
+
 test("public projection preserves compatibility aliases while adding audit fields", () => {
   const entry = golden.history_states.find((item) => item.expected === "first");
   const ledger = createEmptyLedger();
@@ -446,6 +510,28 @@ test("pre-merge pending candidates retain a bounded retry payload and are replay
   assert.equal(ledger.candidates.length, 1);
 });
 
+test("candidates deferred by the run budget are replayed next run without counting as a failed attempt", async () => {
+  const entry = golden.history_states[0];
+  const ledger = createEmptyLedger();
+  const candidate = candidateFromCase(entry, { id: "deferred-candidate" });
+  recordPendingCandidate(ledger, candidate, {
+    stage: "run_budget",
+    errorCategory: "run_budget_exceeded",
+    incrementRetry: false,
+  });
+  validateLedger(ledger);
+
+  const [replayed] = pendingRetryHits(ledger);
+  assert.equal(replayed.url, candidate.url);
+  assert.equal(replayed.content, candidate.content);
+  assert.equal(ledger.candidates[0].retry_count, 0);
+
+  // The orchestrator defers instead of letting the CI timeout kill a run that would then never persist.
+  const monitor = await fs.readFile(path.join(ROOT, "scripts", "mced-daily-monitor.mjs"), "utf8");
+  assert.match(monitor, /Date\.now\(\) - startedAt > RUN_BUDGET_MS/);
+  assert.match(monitor, /stage: "run_budget"/);
+});
+
 test("ledger validation and load reject corruption without rewriting it", async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), "mced-ledger-test-"));
   const ledgerPath = path.join(dir, "ledger.json");
@@ -522,7 +608,7 @@ test("the fixed Qwen path emits strict structured output and audit records", asy
       occurred_at: "2026-08-20T00:00:00.000Z",
       published_at: "2026-08-20T00:00:00.000Z",
       facts: [{ name: "launch", value: "market launch", evidence_ref: "evd-1" }],
-      risk_flags: [],
+      risk: { regulatory_claim: false, clinical_number: false, l1_candidate: false },
       uncertain: false,
     },
     {
@@ -612,7 +698,7 @@ test("a high-risk Qwen/GLM conflict is arbitrated only by Kimi", async () => {
       occurred_at: "2026-08-20T00:00:00.000Z",
       published_at: "2026-08-20T00:00:00.000Z",
       facts: [{ name: "status", value: "approved", evidence_ref: "evd-1" }],
-      risk_flags: ["regulatory_claim"],
+      risk: { regulatory_claim: true, clinical_number: false, l1_candidate: false },
       uncertain: false,
     },
     {
@@ -622,7 +708,7 @@ test("a high-risk Qwen/GLM conflict is arbitrated only by Kimi", async () => {
       occurred_at: "2026-08-21T00:00:00.000Z",
       published_at: "2026-08-20T00:00:00.000Z",
       facts: [{ name: "status", value: "approved", evidence_ref: "evd-1" }],
-      risk_flags: ["regulatory_claim"],
+      risk: { regulatory_claim: true, clinical_number: false, l1_candidate: false },
       uncertain: false,
     },
     { selected: "glm", rationale: "primary evidence date", evidence_refs: ["evd-1"] },
@@ -660,6 +746,300 @@ test("a high-risk Qwen/GLM conflict is arbitrated only by Kimi", async () => {
     "https://glm.invalid/v1/chat/completions",
     "https://qwen.invalid/v1/chat/completions",
   ]);
+});
+
+test("independent review compares identity, not spelling: only real disagreements reach arbitration", async () => {
+  const qwenExtraction = {
+    company: "Guardant Health, Inc.",
+    product: "Shield™ MCD",
+    event_type: "regulatory_decision",
+    occurred_at: "2026-08-20T00:00:00.000Z",
+    published_at: "2026-08-20",
+    facts: [{ name: "status", value: "breakthrough designation", evidence_ref: "evd-1" }],
+    risk: { regulatory_claim: true, clinical_number: false, l1_candidate: false },
+    uncertain: false,
+  };
+  const importance = {
+    relevance: { score: 30, rationale: "MCED", evidence_refs: ["evd-1"] },
+    impact: { score: 30, rationale: "regulatory", evidence_refs: ["evd-1"] },
+    actionability: { score: 10, rationale: "track", evidence_refs: ["evd-1"] },
+    uncertain: false,
+  };
+  const run = async (glmExtraction, arbitration) => {
+    const queue = [
+      { relevant: true, uncertain: false, reason: "relevant", evidence_refs: ["evd-1"] },
+      qwenExtraction,
+      glmExtraction,
+      ...(arbitration ? [arbitration] : []),
+      importance,
+      importance,
+      { summary: "摘要", reason: "理由", evidence_refs: ["evd-1"] },
+    ];
+    const urls = [];
+    const llm = createMonitorLlm({
+      env: configuredEnv,
+      fetchImpl: async (url) => {
+        urls.push(new URL(url).hostname);
+        return jsonResponse(queue.shift());
+      },
+    });
+    return { result: await llm.analyzeCandidate({ id: "evd-1", title: "FDA designation" }), urls };
+  };
+
+  // 同一家公司、同一个产品、同一天，只是写法不同：不触发仲裁。
+  const same = await run({
+    ...qwenExtraction,
+    company: "Guardant Health",
+    product: "Shield MCD",
+    occurred_at: "2026-08-20",
+    published_at: "2026-08-20T08:00:00Z",
+  });
+  assert.equal(same.result.status, "ready");
+  assert.equal(same.urls.includes("kimi.invalid"), false);
+  assert.deepEqual(same.result.model_review, { extraction: true, importance: true, reviewer: "glm/glm-5.3-flash" });
+
+  // 产品不同、日期不同是真分歧：交 Kimi 仲裁。
+  for (const difference of [{ product: "Shield" }, { occurred_at: "2026-08-21" }, { company: "Guardant" }]) {
+    const disputed = await run(
+      { ...qwenExtraction, ...difference },
+      { selected: "qwen", rationale: "原始公告", evidence_refs: ["evd-1"] }
+    );
+    assert.equal(disputed.result.status, "ready");
+    assert.equal(disputed.urls.filter((host) => host === "kimi.invalid").length, 1, JSON.stringify(difference));
+  }
+});
+
+test("a candidate that keeps failing stops being replayed after the retry cap", () => {
+  const entry = golden.history_states[0];
+  const ledger = createEmptyLedger();
+  const candidate = candidateFromCase(entry, { id: "stubborn-candidate" });
+  for (let attempt = 1; attempt <= MAX_CANDIDATE_RETRIES; attempt++) {
+    assert.equal(pendingRetryHits(ledger).length, attempt === 1 ? 0 : 1);
+    recordPendingCandidate(ledger, candidate, { stage: "extraction_conflict", errorCategory: "model_uncertain" });
+  }
+  assert.equal(ledger.candidates[0].retry_count, MAX_CANDIDATE_RETRIES);
+  assert.deepEqual(pendingRetryHits(ledger), []);
+  assert.equal(stalledCandidates(ledger).length, 1);
+});
+
+test("sampling temperature is sent per role: Kimi rejects an explicit temperature", async () => {
+  const requests = [];
+  const llm = createMonitorLlm({
+    env: configuredEnv,
+    fetchImpl: async (url, init) => {
+      const body = JSON.parse(init.body);
+      requests.push({ url, body });
+      return jsonResponse(
+        url.startsWith("https://kimi.invalid")
+          ? { markdown: "日报", evidence_refs: [] }
+          : { relation: "different_event", event_id: null, uncertain: false, rationale: "不同里程碑", evidence_refs: [] }
+      );
+    },
+  });
+  await llm.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }]);
+  await llm.digest([{ id: "evt-1" }]);
+  const [qwen, kimi] = requests;
+  assert.equal(qwen.url, "https://qwen.invalid/v1/chat/completions");
+  assert.equal(qwen.body.temperature, 0);
+  assert.equal(kimi.url, "https://kimi.invalid/v1/chat/completions");
+  assert.equal(Object.hasOwn(kimi.body, "temperature"), false);
+});
+
+test("risk flags are fixed booleans in the model schema, so a model cannot repeat one forever", async () => {
+  const requests = [];
+  const queue = [
+    { relevant: true, uncertain: false, reason: "relevant", evidence_refs: ["evd-1"] },
+    {
+      company: "GRAIL",
+      product: "Galleri",
+      event_type: "product_launch",
+      occurred_at: "2026-08-20",
+      published_at: "2026-08-20",
+      facts: [{ name: "launch", value: "market launch", evidence_ref: "evd-1" }],
+      risk: { regulatory_claim: false, clinical_number: true, l1_candidate: false },
+      uncertain: false,
+    },
+  ];
+  const llm = createMonitorLlm({
+    env: configuredEnv,
+    fetchImpl: async (url, init) => {
+      requests.push(JSON.parse(init.body));
+      // 第三次调用(独立复核)直接失败，足以检查前两次请求与转换结果。
+      return queue.length ? jsonResponse(queue.shift()) : new Response("{}", { status: 500 });
+    },
+  });
+  await assert.rejects(llm.analyzeCandidate({ id: "evd-1", title: "GRAIL launches Galleri" }), /glm_monitor_extraction_http_500/);
+
+  const schema = requests[1].response_format.json_schema.schema;
+  assert.equal(Object.hasOwn(schema.properties, "risk_flags"), false);
+  assert.deepEqual(schema.properties.risk.required, ["regulatory_claim", "clinical_number", "l1_candidate"]);
+  assert.equal(Object.values(schema.properties.risk.properties).every((entry) => entry.type === "boolean"), true);
+  // clinical_number=true 使抽取进入独立复核：布尔字段已转成内部的 risk_flags。
+  assert.equal(requests.length, 3);
+  assert.equal(requests[2].model, "glm-5.3-flash");
+});
+
+test("every model call carries an output cap and backs off on rate limits before failing", async () => {
+  const match = { relation: "different_event", event_id: null, uncertain: false, rationale: "不同", evidence_refs: [] };
+  const waits = [];
+  const bodies = [];
+  let limited = 2;
+  const llm = createMonitorLlm({
+    env: configuredEnv,
+    sleep: async (ms) => {
+      waits.push(ms);
+    },
+    fetchImpl: async (url, init) => {
+      bodies.push(JSON.parse(init.body));
+      if (limited-- > 0) return new Response('{"error":"rate limited"}', { status: 429 });
+      return jsonResponse(url.startsWith("https://kimi.invalid") ? { markdown: "日报", evidence_refs: [] } : match);
+    },
+  });
+  const result = await llm.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }]);
+  assert.equal(result.relation, "different_event");
+  assert.deepEqual(waits, [10_000, 30_000]);
+  assert.equal(bodies.length, 3);
+  assert.equal(bodies[0].max_tokens, 4096);
+
+  await llm.digest([{ id: "evt-1" }]);
+  assert.equal(bodies.at(-1).max_completion_tokens, 4096);
+  assert.equal(Object.hasOwn(bodies.at(-1), "max_tokens"), false);
+
+  // 限流始终不解除：重试用尽后按失败处理，候选留待下次运行。
+  const stuck = createMonitorLlm({
+    env: configuredEnv,
+    sleep: async () => {},
+    fetchImpl: async () => new Response("{}", { status: 429, headers: { "retry-after": "2" } }),
+  });
+  await assert.rejects(
+    stuck.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }]),
+    /qwen_monitor_event_match_http_429/
+  );
+});
+
+test("a truncated or malformed model output is retried once, then fails closed", async () => {
+  const match = { relation: "different_event", event_id: null, uncertain: false, rationale: "不同", evidence_refs: [] };
+  const truncated = () =>
+    new Response(JSON.stringify({ choices: [{ message: { content: '{"relation":"different_event","evidence_refs":["evd-1","evd-1",' } }] }), {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    });
+
+  let calls = 0;
+  const recovered = createMonitorLlm({
+    env: configuredEnv,
+    fetchImpl: async () => (++calls === 1 ? truncated() : jsonResponse(match)),
+  });
+  const result = await recovered.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }]);
+  assert.equal(result.relation, "different_event");
+  assert.equal(calls, 2);
+  assert.equal(result.analyses.length, 1);
+
+  let attempts = 0;
+  const broken = createMonitorLlm({
+    env: configuredEnv,
+    fetchImpl: async () => {
+      attempts++;
+      return truncated();
+    },
+  });
+  await assert.rejects(
+    broken.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }]),
+    /model returned invalid JSON/
+  );
+  assert.equal(attempts, 2);
+});
+
+test("deep thinking is switched off or set to its lowest effort, and stays overridable per deployment", async () => {
+  const bodies = async (env) => {
+    const seen = {};
+    const llm = createMonitorLlm({
+      env,
+      fetchImpl: async (url, init) => {
+        seen[new URL(url).hostname.split(".")[0]] = JSON.parse(init.body);
+        return jsonResponse(
+          url.startsWith("https://kimi.invalid")
+            ? { markdown: "日报", evidence_refs: [] }
+            : { relation: "different_event", event_id: null, uncertain: false, rationale: "不同", evidence_refs: [] }
+        );
+      },
+    });
+    // highRisk 让匹配同时经过 Qwen 与 GLM；digest 走 Kimi。
+    await llm.judgeMatch({ id: "evd-1", title: "FDA approval" }, [{ id: "evt-1", title: "CE mark" }], { highRisk: true });
+    await llm.digest([{ id: "evt-1" }]);
+    return seen;
+  };
+
+  const fixed = await bodies(configuredEnv);
+  assert.equal(fixed.qwen.enable_thinking, false);
+  assert.equal(Object.hasOwn(fixed.qwen, "reasoning_effort"), false);
+  assert.equal(fixed.glm.reasoning_effort, "low");
+  assert.equal(Object.hasOwn(fixed.glm, "enable_thinking"), false);
+  assert.equal(fixed.kimi.reasoning_effort, "low");
+
+  // 换成不认这些参数的模型时，default 表示不发送该字段；也可以显式改值。
+  const overridden = await bodies({
+    ...configuredEnv,
+    QWEN_ENABLE_THINKING: "default",
+    GLM_REASONING_EFFORT: "high",
+    KIMI_REASONING_EFFORT: "default",
+  });
+  assert.equal(Object.hasOwn(overridden.qwen, "enable_thinking"), false);
+  assert.equal(overridden.glm.reasoning_effort, "high");
+  assert.equal(Object.hasOwn(overridden.kimi, "reasoning_effort"), false);
+
+  const config = providerConfiguration(configuredEnv);
+  assert.deepEqual(
+    [config.qwen.thinking, config.reviewer.reasoning, config.synthesizer.reasoning],
+    [false, "low", "low"]
+  );
+});
+
+test("a match that does not point at a known event is reviewed and never merges on its own", async () => {
+  const existing = [{ id: "evt-1", title: "SPOT-MAS product page" }];
+  const evidence = { id: "evd-1", title: "SPOT-MAS receives FDA Breakthrough Device Designation" };
+  const inconsistent = {
+    relation: "material_update",
+    event_id: "evd-1",
+    uncertain: false,
+    rationale: "adds designation",
+    evidence_refs: ["evd-1"],
+  };
+  const different = { relation: "different_event", event_id: null, uncertain: false, rationale: "新里程碑", evidence_refs: [] };
+
+  const run = async (queue) => {
+    const urls = [];
+    const llm = createMonitorLlm({
+      env: configuredEnv,
+      fetchImpl: async (url) => {
+        urls.push(url);
+        return jsonResponse(queue.shift());
+      },
+    });
+    return { match: await llm.judgeMatch(evidence, existing), urls };
+  };
+
+  // Qwen 的回答自相矛盾 → 独立复核 → 仲裁选中复核结论。
+  const corrected = await run([
+    inconsistent,
+    different,
+    { selected: "glm", rationale: "不同里程碑", evidence_refs: [] },
+  ]);
+  assert.equal(corrected.match.relation, "different_event");
+  assert.deepEqual(corrected.urls, [
+    "https://qwen.invalid/v1/chat/completions",
+    "https://glm.invalid/v1/chat/completions",
+    "https://kimi.invalid/v1/chat/completions",
+  ]);
+
+  // 仲裁仍选中矛盾回答 → 候选保持 pending，不合并也不新建。
+  const held = await run([
+    inconsistent,
+    different,
+    { selected: "qwen", rationale: "选主模型", evidence_refs: [] },
+  ]);
+  assert.equal(held.match.relation, "pending");
+  assert.equal(held.match.event_id, null);
 });
 
 test("the semantic fixture remains balanced for independent MoA evaluation", () => {

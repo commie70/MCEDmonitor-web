@@ -1,27 +1,842 @@
 {
   "schema_version": 1,
-  "generated_at": null,
+  "generated_at": "2026-11-12T17:22:30.658Z",
   "golden_fixture_sha256": "fa7f0b72dd7c539b774cd8df56c52c639da58a71af2e6002b39d27cc06b88f1e",
-  "passed": false,
-  "provider_configuration": {},
+  "pipeline_sha256": "247ddb4c550f5768cec3eca0a9ad5ebdf4a491897eeab3e99ff1b94afb47110a",
+  "passed": true,
+  "provider_configuration": {
+    "qwen": {
+      "provider": "qwen",
+      "model": "qwen3.8-flash",
+      "base_url": "https://llm-rf57rn8hu2wtck8r.cn-beijing.maas.aliyuncs.com",
+      "configured": true,
+      "required_env": [
+        "DASHSCOPE_API_KEY"
+      ],
+      "optional_base_url_env": "DASHSCOPE_BASE_URL",
+      "thinking": false,
+      "reasoning": null
+    },
+    "vision": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash-vision-exp",
+      "base_url": "https://api.deepseek.com",
+      "configured": true,
+      "required_env": [
+        "DEEPSEEK_API_KEY"
+      ],
+      "optional_base_url_env": "DEEPSEEK_BASE_URL",
+      "thinking": null,
+      "reasoning": null
+    },
+    "reviewer": {
+      "provider": "glm",
+      "model": "glm-5.3-flash",
+      "base_url": "https://open.bigmodel.cn",
+      "configured": true,
+      "required_env": [
+        "GLM_API_KEY"
+      ],
+      "optional_base_url_env": "GLM_BASE_URL",
+      "thinking": null,
+      "reasoning": "low"
+    },
+    "synthesizer": {
+      "provider": "kimi",
+      "model": "kimi-k3",
+      "base_url": "https://api.moonshot.cn",
+      "configured": true,
+      "required_env": [
+        "MOONSHOT_API_KEY"
+      ],
+      "optional_base_url_env": "KIMI_BASE_URL",
+      "thinking": null,
+      "reasoning": "low"
+    }
+  },
   "deterministic_suite": {
-    "passed": false
+    "passed": true
   },
   "provider_smoke": {
-    "qwen": false,
-    "deepseek": false,
-    "glm": false,
-    "kimi": false
+    "qwen": true,
+    "deepseek": true,
+    "glm": true,
+    "kimi": true
   },
   "semantic_matching": {
     "total": 30,
-    "true_positive": 0,
+    "true_positive": 15,
     "false_positive": 0,
     "false_negative": 0,
-    "true_negative": 0,
-    "precision": 0,
-    "recall": 0,
-    "predictions": []
+    "true_negative": 15,
+    "precision": 1,
+    "recall": 1,
+    "predictions": [
+      {
+        "id": "event-same-01",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-01",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:33.573Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-01",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件标题完全一致（仅后缀不同），描述的是同一项关于Guardant Health在亚洲市场推出Shield MCD测试并与Manulife合作的事件。两者均无新增关键事实，属于同一公告的不同来源转载。",
+              "evidence_refs": [
+                "event-same-01-candidate",
+                "golden_event-same-01"
+              ]
+            }
+          },
+          {
+            "provider": "glm",
+            "model": "glm-5.3-flash",
+            "prompt_version": "event-match-review-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:37.991Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-01",
+              "uncertain": false,
+              "rationale": "标题与公司完全一致，为同一公告在不同渠道（投资者关系页 vs Yahoo Finance 转载）的报道，无新增关键事实。evidence_ref: event-same-01-candidate, golden_event-same-01",
+              "evidence_refs": [
+                "event-same-01-candidate",
+                "golden_event-same-01"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-02",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-02",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:40.641Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-02",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件均指向世和基因（Geneseeq）关于其癌症检测血液测试在《Nature Medicine》上发表的同一新闻稿。标题高度一致，仅URL来源不同（PR Newswire vs 公司官网），属于同一事件的转载/不同渠道发布，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-02-candidate",
+                "golden_event-same-02"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-03",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-03",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:43.787Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-03",
+              "uncertain": false,
+              "rationale": "候选证据（STAT新闻）与既有事件（Exact Sciences官方新闻稿）均报道了同一核心事实：Exact Sciences推出Cancerguard液体活检癌症检测产品。两者标题高度一致，指向同一次发布活动，且候选证据未提供新的关键事实（如具体性能数据、监管批准细节或不同日期的后续进展），属于同一事件的媒体报道转载/改写。",
+              "evidence_refs": [
+                "event-same-03-candidate",
+                "golden_event-same-03"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-04",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-04",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:46.323Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-04",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件均指向同一篇关于GRAIL在2026 ASCO年会上报告NHS-Galleri试验完整结果的新闻稿。标题内容完全一致，仅URL来源不同（PRNewswire vs GRAIL官网），属于同一公告的不同渠道转载，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-04-candidate",
+                "golden_event-same-04"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-05",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-05",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:48.691Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-05",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件指向同一公司（Epigenomics）、同一标题（'Epigenomics decides to restructure to minimize costs'）以及几乎完全相同的URL（仅末尾斜杠差异）。两者均无新增关键事实，属于同一公告的重复或转载。",
+              "evidence_refs": [
+                "event-same-05-candidate",
+                "golden_event-same-05"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-06",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-06",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:50.265Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-06",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件指向同一URL、同一标题（仅后缀来源标识差异）及相同的核心事实（Guardant Health Shield获FDA突破性设备认定），无新增关键信息。",
+              "evidence_refs": [
+                "https://www.patientcareonline.com/view/guardant-health-s-shield-mutlicancer-detection-blood-test-granted-fda-breakthrough-device-designation"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-07",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-07",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:53.372Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-07",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件均报道了同一核心事实：Gene Solutions公司的SPOT-MAS多癌种筛查测试获得美国FDA突破性设备认定。两者标题主体完全一致，仅发布平台不同（Asia News Network vs rutlandherald.com），属于同一新闻稿的转载，且未包含新增的关键事实（如具体性能数据、确切日期或适应症细节）。",
+              "evidence_refs": [
+                "event-same-07-candidate",
+                "golden_event-same-07"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-08",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-08",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:55.187Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-08",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件指向同一篇SCMP文章（URL完全一致），标题内容相同，且未包含新增的关键事实。",
+              "evidence_refs": [
+                "https://www.scmp.com/business/article/3328316/mirxes-wins-chinas-approval-launch-groundbreaking-blood-test-gastric-cancer"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-09",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-09",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:57.338Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-09",
+              "uncertain": false,
+              "rationale": "Both evidence and candidate event describe the same specific regulatory milestone: Freenome's lung cancer blood test receiving FDA Breakthrough Device status. The titles are semantically equivalent ('Receives FDA Breakthrough Device Status' vs 'Grants Breakthrough Device Designation'), referring to the same single occurrence without new key facts.",
+              "evidence_refs": [
+                "event-same-09-candidate",
+                "golden_event-same-09"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-10",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-10",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:22:59.287Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-10",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件在标题、URL、公司及事实内容上完全一致，属于同一份公告的重复记录，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-10-candidate",
+                "golden_event-same-10"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-11",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-11",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:01.016Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-11",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件具有相同的标题（'AACR | 臻和科技发布多癌种早筛研究数据'）和公司（'臻和科技'），且URL指向同一来源的不同视图参数，表明这是同一次会议披露的转载。没有新增关键事实。",
+              "evidence_refs": [
+                "evidence.title == candidate_events[0].title",
+                "evidence.company == candidate_events[0].company"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-12",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-12",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:02.994Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-12",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件在标题、URL、公司及事实内容上完全一致，属于同一份公告的重复记录，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-12-candidate",
+                "golden_event-same-12"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-13",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-13",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:05.925Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-13",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件均指向同一份文件《基于液体活检技术的多癌种联合筛查专家共识（2025版）》，且日期均为2025年8月7日。候选标题中提到的“吉早安”是该共识涉及的产品或技术品牌，属于对同一事件的转载报道，未提供新的关键事实（如性能数据、监管结论变更等），因此判定为同一事件。",
+              "evidence_refs": [
+                "event-same-13-candidate",
+                "golden_event-same-13"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-14",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-14",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:07.578Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-14",
+              "uncertain": false,
+              "rationale": "证据与候选事件指向同一URL（仅末尾斜杠差异）和几乎相同的标题，描述的是FDA授予世和基因多癌种早筛解决方案突破性设备认定的同一公告，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-14-candidate",
+                "golden_event-same-14"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-same-15",
+        "expected": "same_event",
+        "predicted": "same_event",
+        "selected_event_id": "golden_event-same-15",
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:09.530Z",
+            "result": {
+              "relation": "same_event",
+              "event_id": "golden_event-same-15",
+              "uncertain": false,
+              "rationale": "候选证据与既有事件在标题、URL、公司及事实字段上完全一致，属于同一公告的重复记录，无新增关键事实。",
+              "evidence_refs": [
+                "event-same-15-candidate",
+                "golden_event-same-15"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-01",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:12.491Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据标题为'Delfi Diagnostics Gains NY State Approval...'（获得纽约州批准），而既有事件标题为'Delfi launches lung cancer blood test...'（发布肺癌血液检测）。'获得监管批准'与'产品发布/上市'属于不同的商业或监管里程碑事件，且涉及的具体动作不同。",
+              "evidence_refs": [
+                "event-different-01-candidate",
+                "golden_event-different-01"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-02",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:13.791Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "The evidence describes an FDA approval event for Epi proColon, while the candidate event describes a corporate restructuring decision. These are distinct business events with different subject matter.",
+              "evidence_refs": [
+                "event-different-02-candidate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-03",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:15.499Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件标题为 'Exact Sciences’ legacy cancer diagnostics data hit in cyberattack'（网络安全攻击），而既有事件标题为 'Exact Sciences Launches Cancerguard...'（产品发布）。两者描述的是完全不同的商业/技术事件，尽管涉及同一公司。",
+              "evidence_refs": [
+                "event-different-03-candidate",
+                "golden_event-different-03"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-04",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:17.872Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件涉及结直肠癌（CRC）血液筛查测试的FDA批准，而既有事件涉及肺癌血液筛查的突破性设备认定。两者针对不同的癌症类型和不同的监管里程碑，属于不同事件。",
+              "evidence_refs": [
+                "event-different-04-candidate",
+                "golden_event-different-04"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-05",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:20.760Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件是关于GRAIL公司2026年第二季度的财务业绩报告，而既有事件是关于NHS-Galleri试验在2026年ASCO年会上的临床结果披露。两者属于同一公司的不同主题（财务 vs 临床/监管里程碑），因此是不同的事件。",
+              "evidence_refs": [
+                "event-different-05-candidate",
+                "golden_event-different-05"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-06",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:23.498Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据报道的是Gene Solutions的SPOT-MAS产品获得美国FDA突破性设备认定这一具体监管里程碑事件，而既有事件仅是一个关于SPOT-MAS ctDNA筛查的产品介绍页面。两者性质不同：一个是具体的新闻/监管公告，另一个是静态的产品背景综述，因此属于不同的事件。",
+              "evidence_refs": [
+                "event-different-06-candidate",
+                "golden_event-different-06"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-07",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:25.710Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据描述的是 CMS 授予 Medicare 覆盖（监管/支付里程碑），而既有事件描述的是被纳入美国癌症协会筛查指南（临床指南推荐）。这是同一公司同一产品的两个不同性质、不同来源的关键事实，属于不同的事件。",
+              "evidence_refs": [
+                "event-different-07-candidate",
+                "golden_event-different-07"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-08",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:28.034Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件描述的是Guardant Health的Shield多癌种检测血液测试获得FDA突破性设备认定，而既有事件描述的是该测试在亚洲市场与Manulife合作推出。两者涉及不同的监管里程碑和商业动作，属于不同事件。",
+              "evidence_refs": [
+                "event-different-08-candidate",
+                "golden_event-different-08"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-09",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:31.017Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据标题为“FDA Grants Breakthrough Device Designation”（FDA授予突破性设备认定），而既有事件标题为“Geneseeq's Breakthrough Cancer Detection Blood Test Published in ...”（血液检测论文发表）。两者分别对应监管里程碑和学术发表，属于不同性质的独立事件。",
+              "evidence_refs": [
+                "event-different-09-candidate",
+                "golden_event-different-09"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-10",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:32.952Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件描述的是华大基因粪便多靶点基因甲基化检测项目获得ISO 15189认可，而既有事件描述的是华常康®粪便DNA甲基化检测助力肠道健康的宣传或发布。两者涉及不同的具体事实（监管/质量认证 vs 产品推广/健康倡导），且标题和内容指向不同的事件节点，因此判定为不同事件。",
+              "evidence_refs": [
+                "event-different-10-candidate",
+                "golden_event-different-10"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-11",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:35.831Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据描述的是吉因加产品“吉早安™”的上市公告，而既有事件是关于“基于液体活检技术的多癌种联合筛查专家共识（2025版）”的发布。两者属于同一公司不同性质的独立事件（产品商业化 vs. 行业/学术共识），关键事实完全不同，因此判定为 different_event。",
+              "evidence_refs": [
+                "event-different-11-candidate",
+                "golden_event-different-11"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-12",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:38.356Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选事件标题为'国研首个尿路上皮癌辅助诊断试剂盒（UriFind）获批上市'，描述的是具体的监管批准里程碑；既有事件标题为'基准医疗：引领精准医疗，造福千家万户'，属于公司简介或背景综述。根据规则，产品介绍页、公司简介与具体监管里程碑之间视为不同事件。",
+              "evidence_refs": [
+                "event-different-12-candidate",
+                "golden_event-different-12"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-13",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:40.257Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据涉及'创新医疗器械特别审查申请审查结果公示（2026年第13号）'，而既有事件涉及'OverC™多癌种早检试剂盒荣获欧盟CE资质'。两者属于不同的监管里程碑或公告事项，因此判定为不同事件。",
+              "evidence_refs": [
+                "event-different-13-candidate",
+                "golden_event-different-13"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-14",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:43.711Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据描述的是在《Nat Commun》（Nature Communications）期刊上发布的研究，而既有事件描述的是在AACR（美国癌症研究协会）会议上发布的数据。这是两个不同的披露渠道和场合，属于不同的事件。",
+              "evidence_refs": [
+                "event-different-14-candidate",
+                "golden_event-different-14"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "event-different-15",
+        "expected": "different_event",
+        "predicted": "different_event",
+        "selected_event_id": null,
+        "analyses": [
+          {
+            "provider": "qwen",
+            "model": "qwen3.8-flash",
+            "prompt_version": "event-match-v2",
+            "schema_version": "monitor_event_match-v1",
+            "generated_at": "2026-11-12T17:23:46.420Z",
+            "result": {
+              "relation": "different_event",
+              "event_id": null,
+              "uncertain": false,
+              "rationale": "候选证据标题为 'The genesis of GASTROClear - Mirxes'，通常指代产品介绍、背景综述或起源故事；既有事件标题为 'Mirxes wins China's approval to launch groundbreaking blood test ...'，明确指代获得中国监管批准这一具体里程碑。根据规则，产品介绍页/背景综述与具体监管里程碑属于不同事件。",
+              "evidence_refs": [
+                "event-different-15-candidate",
+                "golden_event-different-15"
+              ]
+            }
+          }
+        ]
+      }
+    ]
   },
   "thresholds": {
     "deterministic_suite": true,
@@ -29,8 +844,5 @@
     "semantic_recall_min": 0.95,
     "all_provider_smokes": true
   },
-  "error": {
-    "name": "AcceptancePending",
-    "message": "Live provider acceptance has not run. Configure all four providers, then run npm run monitor:acceptance."
-  }
+  "error": null
 }

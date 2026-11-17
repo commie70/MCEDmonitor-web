@@ -72,7 +72,11 @@ async function loadHistory() {
     }
   }
   return records;
-}/** 数据更新条目：同一天多次运行合并为一条(取 ts 最后一次，标题带「截至 HH: mm」) */
+}/**
+ * 数据更新条目：同一天多次运行合并为一条(取当天最后一次流水线运行)。
+ * 账本流水线的运行记录带 mode 字段；更早的关键词检索生成器只有 items / stories。
+ * 同一天两种记录并存时以流水线记录为准，它如实反映采集是否成功。
+ */
 function buildDataEntries(records) {
   const byDay = new Map(); // date -> { count, last }
   for (const r of records) {
@@ -80,30 +84,55 @@ function buildDataEntries(records) {
     const cur = byDay.get(date);
     if (!cur) {
       byDay.set(date,{ count: 1, last: r });
-    } else {
-      cur.count += 1;
-      if (new Date(r.ts).getTime() >= new Date(cur.last.ts).getTime()) cur.last = r;
+      continue;
     }
+    cur.count += 1;
+    const newer = new Date(r.ts).getTime() >= new Date(cur.last.ts).getTime();
+    if (r.mode ? !cur.last.mode || newer : !cur.last.mode && newer) cur.last = r;
   }
-  return [...byDay.entries()].map(([date,{ count, last }]) => {
-    const cats = last.categories ?? {};
-    const catText = CATEGORY_LABELS.map(
-      ([key, label]) => `${label} ${Number(cats[key] ?? 0)}`
-    ).join(" / ");
-    const base = `监测数据更新：${Number(last.items ?? 0)} 条原始命中、${Number(
-      last.stories ?? 0
-    )} 条故事线`;
-    return {
-      date,
-      entry:{
-        kind: "data",
-        title: count > 1 ? `${base} · 截至 ${timeHM(last.ts)}` : base,
-        detail: `窗口 ${last.window_since ?? "未知"} 至今 · ${catText} · 信道错误 ${Number(
-          last.errors ?? 0
-        )}`,
-        tags: ["数据更新"],},};
-  });
-}/** 功能条目：从 changelog-features.json 原样读入(仅做形状校验) */
+  return [...byDay.entries()].map(([date,{ count, last }]) => ({
+    date,
+    entry: last.mode ? pipelineEntry(last, count) : keywordSearchEntry(last, count),
+  }));
+}
+
+function pipelineEntry(run, count) {
+  const n = (key) => Number(run[key] ?? 0);
+  const outage = n("collected_hits") === 0 && n("coverage_gaps") > 0;
+  // 门禁字段出现之前的记录没有 gate_open，按正常运行处理。
+  const paused = !outage && run.gate_open === false;
+  const base = outage
+    ? `监测采集中断：${n("coverage_gaps")} 个信源连续失败，本次无新增`
+    : paused
+      ? `监测运行：采集 ${n("collected_hits")} 条，模型验收未通过，新事件暂不上站`
+      : `监测运行：采集 ${n("collected_hits")} 条 · 新发布 ${n("first")} · 实质更新 ${n("update")}`;
+  return {
+    kind: "data",
+    title: count > 1 ? `${base} · 截至 ${timeHM(run.ts)}` : base,
+    detail: `${n("deferred") ? `超出运行预算、顺延下次处理 ${n("deferred")} · ` : ""}模型复核未一致 ${n(
+      "review_backlog"
+    )} · 重试用尽 ${n("stalled_candidates")} · 证据不足待定 ${n("pending")} · 重复证据 ${n(
+      "duplicate"
+    )} · 历史回填 ${n("backfill")} · 信源缺口 ${n("coverage_gaps")} · 账本事件 ${n("event_total")}`,
+    tags: [outage ? "采集异常" : paused ? "发布暂停" : "数据更新"],
+  };
+}
+
+function keywordSearchEntry(run, count) {
+  const cats = run.categories ?? {};
+  const catText = CATEGORY_LABELS.map(
+    ([key, label]) => `${label} ${Number(cats[key] ?? 0)}`
+  ).join(" / ");
+  const base = `监测数据更新：${Number(run.items ?? 0)} 条原始命中、${Number(run.stories ?? 0)} 条故事线`;
+  return {
+    kind: "data",
+    title: count > 1 ? `${base} · 截至 ${timeHM(run.ts)}` : base,
+    detail: `窗口 ${run.window_since ?? "未知"} 至今 · ${catText} · 信道错误 ${Number(run.errors ?? 0)}`,
+    tags: ["数据更新"],
+  };
+}
+
+/** 功能条目：从 changelog-features.json 原样读入(仅做形状校验) */
 async function loadFeatureEntries() {
   const features = await readJson(FEATURES_PATH,[]);
   if (!Array.isArray(features)) return [];

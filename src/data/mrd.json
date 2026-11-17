@@ -1,0 +1,1654 @@
+[
+  {
+    "id": "natera-signatera",
+    "companyId": null,
+    "company": "Natera",
+    "companyEn": "Natera",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Signatera",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "FFPE 肿瘤组织与配对全血做全外显子测序，选出 16 个克隆性体细胞变异",
+    "tracking": "个体化 panel",
+    "trackingDetail": "患者专属 16 重 PCR + 超深度测序(mPCR-NGS)，至少 2 个位点检出判为阳性",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "16 个位点",
+    "lod": [
+      {
+        "label": "0.043% 样本平均 VAF",
+        "basis": "Signatera CDx 血浆流程确立的检出限(probit 估计 0.0214%)",
+        "scale": "vaf",
+        "value": 0.043,
+        "evidence": "regulator",
+        "sources": [
+          "mrd-fda-ssed-signatera-cdx-p260004-337623"
+        ]
+      },
+      {
+        "label": "0.01% VAF",
+        "basis": "企业所称检出限，未注明 LoD95",
+        "scale": "vaf",
+        "value": 0.01,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-natera-signatera-13592e"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 I–III 期",
+        "setting": "术后纵向监测",
+        "study": "Reinert et al., JAMA Oncol 2019",
+        "n": 125,
+        "sensitivity": "87.5%(14/16 例复发)",
+        "leadTime": "平均 8.7 个月",
+        "hazardRatio": "7.2(术后第 30 天)",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-jama-oncol-2019-809800"
+        ]
+      }
+    ],
+    "sample": "首次：FFPE 肿瘤组织 + 1×6 mL EDTA 管 + 2×10 mL Streck 管；后续：2×10 mL Streck 管",
+    "turnaround": "首次定制 3–4 周，后续 7–10 天",
+    "statuses": [
+      {
+        "label": "FDA PMA 批准：Signatera CDx(肌层浸润性膀胱癌，伴随阿替利珠单抗)",
+        "date": "2026-05",
+        "sources": [
+          "mrd-fda-ssed-signatera-cdx-p260004-337623"
+        ]
+      },
+      {
+        "label": "Medicare 覆盖多个实体瘤适应症",
+        "date": null,
+        "sources": [
+          "mrd-natera-medicare-6a151b"
+        ]
+      },
+      {
+        "label": "FDA 突破性器械认定(第 2、3 项)",
+        "date": "2021-03",
+        "sources": [
+          "mrd-natera-2021-03-24-8489e5"
+        ]
+      }
+    ],
+    "prices": [
+      {
+        "amount": 3920,
+        "currency": "USD",
+        "basis": "Medicare CLFS 费率(PLA 0340U，政策博客转述 CMS 修订)",
+        "covers": "每次检测",
+        "asOf": "2025-01",
+        "sources": [
+          "mrd-discoveries-in-health-policy-2025-01-dee11f"
+        ]
+      },
+      {
+        "amount": 3500,
+        "currency": "USD",
+        "basis": "Medicare CLFS 新 ADLT 初始期费率(PLA 0340U)",
+        "covers": "每次检测",
+        "asOf": "2021-07",
+        "sources": [
+          "mrd-cms-adlt-114a65"
+        ]
+      },
+      {
+        "amount": 1225,
+        "currency": "USD",
+        "basis": "企业披露的平均实收单价(财报电话会)",
+        "covers": "每次检测(各支付方平均)",
+        "asOf": "2025",
+        "sources": [
+          "mrd-natera-2025q4-b02789"
+        ]
+      }
+    ],
+    "launch": null,
+    "sources": [
+      "mrd-natera-signatera-13592e",
+      "mrd-fda-ssed-signatera-cdx-p260004-337623",
+      "mrd-natera-signatera-c79c81"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "natera-signatera-genome",
+    "companyId": null,
+    "company": "Natera",
+    "companyEn": "Natera",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Signatera Genome",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "按患者肿瘤的全基因组序列定制检测",
+    "tracking": "个体化 panel",
+    "trackingDetail": "",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "",
+    "lod": [
+      {
+        "label": "1 ppm",
+        "basis": "企业宣称「低至」",
+        "scale": "tf",
+        "value": 1,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-natera-signatera-genome-136593"
+        ]
+      }
+    ],
+    "clinical": [],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare LCD L38779 覆盖扩展至 Signatera Genome",
+        "date": "2025-06",
+        "sources": [
+          "mrd-natera-2025-06-04-421f36"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-natera-signatera-genome-136593"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "personalis-next-personal",
+    "companyId": null,
+    "company": "Personalis",
+    "companyEn": "Personalis",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "NeXT Personal",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "肿瘤与配对正常样本全基因组测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "杂交捕获个体化 panel，NeXT SENSE 降噪",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "最多约 1,800 个变异",
+    "lod": [
+      {
+        "label": "3.45 ppm",
+        "basis": "LoD95(代表性 panel)",
+        "scale": "tf",
+        "value": 3.45,
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-oncotarget-2024-next-personal-423c17"
+        ]
+      },
+      {
+        "label": "1.67 ppm",
+        "basis": "检出阈值",
+        "scale": "tf",
+        "value": 1.67,
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-oncotarget-2024-next-personal-423c17"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "早期乳腺癌",
+        "setting": "术后纵向监测",
+        "study": "Garcia-Murillas et al., ASCO 2024",
+        "n": 78,
+        "sensitivity": "100%(11/11 例复发)",
+        "specificity": "100%(60/60 例未复发)",
+        "leadTime": "中位约 15 个月",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-personalis-next-personal-dx-0bba07"
+        ]
+      },
+      {
+        "cancer": "NSCLC IA–IIIA 期(TRACERx)",
+        "setting": "术后纵向监测",
+        "study": "Black et al., ESMO 2023",
+        "leadTime": "中位 6 个月",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-personalis-next-personal-dx-c840e5"
+        ]
+      }
+    ],
+    "sample": "首次：FFPE 肿瘤组织 + 外周血；后续仅需采血",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare 覆盖：II–III 期乳腺癌复发监测",
+        "date": "2025-10",
+        "sources": [
+          "mrd-tiger-brokers-reuters-2025-11-10-a345d7"
+        ]
+      },
+      {
+        "label": "Medicare 覆盖：I–III 期 NSCLC 监测",
+        "date": "2026-02",
+        "sources": [
+          "mrd-rallies-2026-02-10-a43b63"
+        ]
+      },
+      {
+        "label": "LDT(未经 FDA 批准)",
+        "date": null,
+        "sources": [
+          "mrd-personalis-next-personal-dx-c840e5"
+        ]
+      }
+    ],
+    "prices": [
+      {
+        "amount": 3878,
+        "currency": "USD",
+        "basis": "Medicare 支付价(媒体转述企业公告)",
+        "covers": "首次检测(含定制)",
+        "asOf": "2025-11",
+        "sources": [
+          "mrd-panabee-personalis-medicare-d57932",
+          "mrd-tiger-brokers-reuters-2025-11-10-a345d7"
+        ]
+      },
+      {
+        "amount": 1158,
+        "currency": "USD",
+        "basis": "Medicare 支付价(媒体转述企业公告)",
+        "covers": "每次血浆监测",
+        "asOf": "2025-11",
+        "sources": [
+          "mrd-panabee-personalis-medicare-d57932",
+          "mrd-tiger-brokers-reuters-2025-11-10-a345d7"
+        ]
+      }
+    ],
+    "launch": "2023",
+    "note": "另有报道称首次检测 $4,266、每次监测 $1,164，两组数字尚未在 CMS 原始文件中核对。",
+    "sources": [
+      "mrd-oncotarget-2024-next-personal-423c17",
+      "mrd-personalis-next-personal-dx-0bba07",
+      "mrd-panabee-next-personal-dx-66b047",
+      "mrd-personalis-2023-10-26-ce0f00"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "haystack-mrd",
+    "companyId": null,
+    "company": "Quest Diagnostics(Haystack Oncology)",
+    "companyEn": "Quest Diagnostics",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Haystack MRD",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤组织与配对血样全外显子测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "优先追踪主干突变，Safe-SeqS 改良的分子条码纠错测序",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "最多 50 个突变",
+    "lod": [
+      {
+        "label": "0.0006% 肿瘤分数",
+        "basis": "LoD95(Quest 检测目录)",
+        "scale": "tf",
+        "value": 6,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-quest-haystack-mrd-a1afb0"
+        ]
+      },
+      {
+        "label": "0.063 个 ctDNA 分子 / mL 血浆",
+        "basis": "LoD95(含采血与提取的全流程)",
+        "scale": null,
+        "value": null,
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-j-mol-diagn-2026-haystack-mrd-d36b7d"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 II–III 期",
+        "setting": "治疗后单点(3 年随访)",
+        "study": "Haystack MRD 分析与临床验证, J Mol Diagn 2026",
+        "sensitivity": "100%(95% CI 72.3–100)",
+        "specificity": "100%(95% CI 92.9–100)",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-j-mol-diagn-2026-haystack-mrd-d36b7d"
+        ]
+      }
+    ],
+    "sample": "首次：FFPE 肿瘤组织 + 1×6 mL EDTA 管 + 3×10 mL Streck 管；监测：3×10 mL Streck 管",
+    "turnaround": "首次约 30 天，监测 7–10 天",
+    "statuses": [
+      {
+        "label": "LDT；获纽约州批准后可在全美 50 州开展",
+        "date": "2026-06",
+        "sources": [
+          "mrd-quest-2026-06-24-3e12d6"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2024",
+    "sources": [
+      "mrd-quest-haystack-mrd-a1afb0",
+      "mrd-haystack-mrd-b9076e",
+      "mrd-quest-haystack-mrd-17b98a"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "neogenomics-radar-st",
+    "companyId": null,
+    "company": "NeoGenomics",
+    "companyEn": "NeoGenomics",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "RaDaR ST",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤全外显子测序，选出患者特异变异",
+    "tracking": "个体化 panel",
+    "trackingDetail": "患者专属多重 PCR 扩增子测序(InVision 平台)",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "最多 48 个变异",
+    "lod": [
+      {
+        "label": "11 ppm",
+        "basis": "LoD95(企业公告)",
+        "scale": "tf",
+        "value": 11,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-neogenomics-2026-02-25-17c70b"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "HR+/HER2− 乳腺癌(确诊 5 年以上)",
+        "setting": "纵向监测",
+        "study": "CHiRP 研究(Targeted Oncology 报道)",
+        "n": 83,
+        "leadTime": "中位 12.4 个月",
+        "note": "数据来自上一代 RaDaR 1.0。",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-targeted-oncology-radar-336b66"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare 已覆盖首批上市适应症",
+        "date": "2026-02",
+        "sources": [
+          "mrd-neogenomics-2026-02-25-17c70b"
+        ]
+      },
+      {
+        "label": "FDA 突破性器械认定(早期癌症 MRD)",
+        "date": null,
+        "sources": [
+          "mrd-neogenomics-2023-07-27-6049aa"
+        ]
+      }
+    ],
+    "prices": [
+      {
+        "amount": 3750,
+        "currency": "USD",
+        "basis": "目录价",
+        "covers": "每次血浆监测",
+        "asOf": "2026-11",
+        "sources": [
+          "mrd-neogenomics-radar-st-087021"
+        ]
+      },
+      {
+        "amount": 8400,
+        "currency": "USD",
+        "basis": "目录价",
+        "covers": "肿瘤测序 + 首次 MRD 检测",
+        "asOf": "2026-11",
+        "sources": [
+          "mrd-neogenomics-radar-st-087021"
+        ]
+      }
+    ],
+    "launch": "2026",
+    "note": "价格页未标注日期，按 2026-11 查阅时记录。",
+    "sources": [
+      "mrd-neogenomics-2026-02-25-17c70b",
+      "mrd-labmedica-radar-st-b5b215"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "exact-oncodetect",
+    "companyId": "exact",
+    "company": "Exact Sciences / Abbott",
+    "companyEn": "Exact Sciences / Abbott",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Oncodetect(第一代)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤全外显子测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "最多 200 个变异",
+    "lod": [
+      {
+        "label": "15–50 ppm",
+        "basis": "Abbott 发言人对第一代检测的说法(区间)",
+        "scale": "tf",
+        "value": 50,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-medtech-dive-2026-10-898023"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 III 期",
+        "setting": "监测期",
+        "study": "Alpha-CORRECT(J Surg Oncol，企业转述)",
+        "hazardRatio": "≈50(监测期 ctDNA 阳性 vs 阴性)",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-exact-sciences-alpha-correct-acb4fb"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare(MolDX) 覆盖：II、III 期及可切除 IV 期结直肠癌",
+        "date": "2025-07",
+        "sources": [
+          "mrd-exact-sciences-2025-07-09-7fc3f8"
+        ]
+      },
+      {
+        "label": "LDT(未经 FDA 批准)",
+        "date": null,
+        "sources": [
+          "mrd-exact-sciences-oncodetect-e0f7ba"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-medtech-dive-2026-10-898023"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "exact-oncodetect-wgs",
+    "companyId": "exact",
+    "company": "Exact Sciences / Abbott",
+    "companyEn": "Exact Sciences / Abbott",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Oncodetect(新一代)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "肿瘤全基因组测序，MAESTRO 技术",
+    "tracking": "个体化 panel",
+    "trackingDetail": "",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "最多 5,000 个变异",
+    "lod": [
+      {
+        "label": "<1 ppm",
+        "basis": "企业宣称，高投入量条件下",
+        "scale": "tf",
+        "value": 1,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-onclive-2026-10-26-2dc307"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "食管癌",
+        "setting": "术后监测",
+        "study": "36 例研究(OncLive 2026-10 报道)",
+        "n": 36,
+        "sensitivity": "100%(14/14 例复发前检出)",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-onclive-2026-10-26-2dc307"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [],
+    "prices": [],
+    "launch": "2026",
+    "sources": [
+      "mrd-exact-sciences-oncodetect-fd5c56",
+      "mrd-onclive-2026-10-26-2dc307"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "myriad-precise-mrd",
+    "companyId": null,
+    "company": "Myriad Genetics",
+    "companyEn": "Myriad Genetics",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Precise MRD",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "肿瘤与正常(白细胞层)全基因组测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "杂交捕获个体化 panel，高深度纠错测序",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "500–1,000 个位点",
+    "lod": [
+      {
+        "label": "2.89 ppm ctDNA 分数",
+        "basis": "LoD95(理想条件，技术规格书)",
+        "scale": "tf",
+        "value": 2.89,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-myriad-precise-mrd-a883f9"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "乳腺癌 I–III 期",
+        "setting": "治疗前",
+        "study": "MONITOR-Breast 中期结果(企业公告)",
+        "baselineDetection": "93%",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-myriad-2026-01-27-6e6a36"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "临床供应扩展至乳腺癌、结直肠癌、肾癌",
+        "date": "2026-06",
+        "sources": [
+          "mrd-targeted-oncology-precise-mrd-9b063b"
+        ]
+      },
+      {
+        "label": "LDT(未经 FDA 批准)",
+        "date": null,
+        "sources": [
+          "mrd-myriad-precise-mrd-a883f9"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2026",
+    "sources": [
+      "mrd-myriad-precise-mrd-a883f9"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "labcorp-plasma-detect-genome",
+    "companyId": null,
+    "company": "Labcorp",
+    "companyEn": "Labcorp",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Plasma Detect Genome",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "肿瘤组织与白细胞全基因组测序",
+    "tracking": "WGS",
+    "trackingDetail": "血浆 cfDNA 全基因组测序，追踪患者特异变异",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "中位约 5,000 个变异",
+    "lod": [
+      {
+        "label": "0.005% ctDNA 含量",
+        "basis": "LoD95(企业公告)",
+        "scale": "tf",
+        "value": 50,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-labcorp-2026-01-13-87706e"
+        ]
+      }
+    ],
+    "clinical": [],
+    "sample": "首次：9 张未染色切片(5 µm)+ 2×10 mL Streck 管；监测：2×10 mL Streck 管",
+    "turnaround": "首次 14 天，监测 7 天",
+    "statuses": [
+      {
+        "label": "面向 III 期结肠癌在全美供应",
+        "date": "2026-01",
+        "sources": [
+          "mrd-labcorp-2026-01-13-87706e"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2026",
+    "sources": [
+      "mrd-labcorp-plasma-detect-genome-e7a02b"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "labcorp-plasma-detect-id",
+    "companyId": null,
+    "company": "Labcorp",
+    "companyEn": "Labcorp",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Plasma Detect ID",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤与配对胚系全外显子测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "18–50 个变异",
+    "lod": [
+      {
+        "label": "0.005% 等位基因频率",
+        "basis": "企业宣称「低至」",
+        "scale": "vaf",
+        "value": 0.005,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-labcorp-plasma-detect-id-3b5316"
+        ]
+      }
+    ],
+    "clinical": [],
+    "sample": "首次：肿瘤组织 + 2×10 mL Streck 管 + 1 支 K2 EDTA 管；监测：2×10 mL Streck 管",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "适用 I–III 期乳腺癌与 I–IIIA 期 NSCLC",
+        "date": "2026-01",
+        "sources": [
+          "mrd-labcorp-2026-01-13-87706e"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2026",
+    "sources": [
+      "mrd-labcorp-plasma-detect-id-3b5316"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "veracyte-truemrd",
+    "companyId": null,
+    "company": "Veracyte(C2i Genomics)",
+    "companyEn": "Veracyte",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "TrueMRD",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "存档 FFPE 肿瘤组织与胚系(白细胞层)全基因组测序",
+    "tracking": "WGS",
+    "trackingDetail": "血浆 cfDNA 全基因组测序",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "数千个肿瘤标志",
+    "lod": [
+      {
+        "label": "0.0001 肿瘤分数",
+        "basis": "≥95% 检出(分析性能)",
+        "scale": "tf",
+        "value": 100,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-veracyte-truemrd-d83cf5"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "肌层浸润性膀胱癌",
+        "setting": "膀胱切除术后单点与监测",
+        "study": "Nordentoft et al., Eur Urol 2024",
+        "n": 112,
+        "sensitivity": "91%",
+        "specificity": "92%",
+        "leadTime": "中位 131 天",
+        "note": "数字引自企业对论文的介绍。",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-veracyte-truemrd-348ed5"
+        ]
+      }
+    ],
+    "sample": "FFPE 肿瘤组织 + 全血",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare 覆盖：肌层浸润性膀胱癌",
+        "date": null,
+        "sources": [
+          "mrd-veracyte-2026-05-15-43a670"
+        ]
+      },
+      {
+        "label": "LDT(未经 FDA 批准)",
+        "date": null,
+        "sources": [
+          "mrd-veracyte-truemrd-d83cf5"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-veracyte-truemrd-d83cf5"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "saga-pathlight",
+    "companyId": null,
+    "company": "SAGA Diagnostics",
+    "companyEn": "SAGA Diagnostics",
+    "country": "瑞典",
+    "region": "国外",
+    "self": false,
+    "product": "Pathlight",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WGS",
+    "tissueDetail": "肿瘤组织全基因组测序，识别结构变异断点",
+    "tracking": "个体化 panel",
+    "trackingDetail": "多重数字 PCR 追踪患者特异结构变异",
+    "analytes": [
+      "结构变异"
+    ],
+    "targets": "每例最多 16 个结构变异",
+    "lod": [
+      {
+        "label": "0.00052%(5 ppm)",
+        "basis": "LoD95",
+        "scale": "tf",
+        "value": 5,
+        "input": "70 ng DNA",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-clin-cancer-res-2025-tracer-47cd01"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "早期乳腺癌",
+        "setting": "术后随访监测",
+        "study": "TRACER, Clin Cancer Res 2025",
+        "n": 100,
+        "sensitivity": "100%(远处复发前均检出)",
+        "leadTime": "中位 417 天",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-clin-cancer-res-2025-tracer-47cd01"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "Medicare(MolDX) 覆盖：早期乳腺癌复发监测",
+        "date": "2025-07",
+        "sources": [
+          "mrd-1stoncology-saga-471ed6"
+        ]
+      },
+      {
+        "label": "Roche / Foundation Medicine 宣布收购(至多 5.95 亿美元)",
+        "date": "2026-04",
+        "sources": [
+          "mrd-1stoncology-saga-471ed6"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2025",
+    "sources": [
+      "mrd-clin-cancer-res-2025-tracer-47cd01",
+      "mrd-medical-device-network-pathlight-d0858d"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "genesolutions-k-track",
+    "companyId": "genesolutions",
+    "company": "Gene Solutions",
+    "companyEn": "Gene Solutions",
+    "country": "越南",
+    "region": "国外",
+    "self": false,
+    "product": "K-TRACK",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "panel",
+    "tissueDetail": "肿瘤组织基因检测(覆盖 164 个 DNA 基因)后选出个体化突变",
+    "tracking": "个体化 panel",
+    "trackingDetail": "杂交捕获流程",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "最多 20 个个体化突变",
+    "lod": [
+      {
+        "label": "0.01%",
+        "basis": "企业宣称(升级后的流程)，未注明口径",
+        "scale": null,
+        "value": null,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-gene-solutions-2026-04-46ba92"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "乳腺癌",
+        "setting": "术后监测",
+        "study": "ASCO Breakthrough 2026 摘要 42(企业发布)",
+        "n": 180,
+        "sensitivity": "80.0%",
+        "specificity": "98.3%",
+        "leadTime": "最长 11 个月",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-gene-solutions-asco-breakthrough-2026-1e144a"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "约 8 个工作日",
+    "statuses": [],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-gene-solutions-2026-04-46ba92"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "geneseeq-shielding",
+    "companyId": "geneseeq",
+    "company": "世和基因",
+    "companyEn": "Geneseeq",
+    "country": "中国",
+    "region": "国内",
+    "self": true,
+    "product": "术宁 SHIELDING",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "panel",
+    "tissueDetail": "肿瘤组织、白细胞与血浆用同一 panel 测序：425 基因(结直肠癌、胃癌、NSCLC 队列)或 139 基因肺癌追踪 panel",
+    "tracking": "固定 panel",
+    "trackingDetail": "ATG-Seq 超深度测序，只追踪组织中检出的体细胞变异",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "139 基因(群体定制)",
+    "lod": [],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 II–III 期",
+        "setting": "术后 3–7 天单点 + 纵向监测",
+        "study": "J Hematol Oncol 2021",
+        "n": 240,
+        "sensitivity": "82.6%(纵向)",
+        "specificity": "94.1%(纵向)",
+        "leadTime": "平均 5.01 个月",
+        "hazardRatio": "10.98(术后 3–7 天阳性)",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-j-hematol-oncol-2021-a17ea6"
+        ]
+      },
+      {
+        "cancer": "可切除 NSCLC",
+        "setting": "纵向监测",
+        "study": "J Hematol Oncol 2022",
+        "n": 128,
+        "leadTime": "中位 145 天",
+        "hazardRatio": "7.59",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-j-hematol-oncol-2022-6859c6"
+        ]
+      },
+      {
+        "cancer": "胃癌 II–III 期",
+        "setting": "辅助化疗后",
+        "study": "Cancer Commun 2023",
+        "n": 100,
+        "sensitivity": "77.8%",
+        "specificity": "90.6%",
+        "hazardRatio": "14.99",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-cancer-commun-lond-2023-0e0514"
+        ]
+      },
+      {
+        "cancer": "NSCLC(术后)",
+        "setting": "纵向监测",
+        "study": "Nat Commun 2021",
+        "n": 103,
+        "leadTime": "中位 88 天",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-nat-commun-2021-02a65e"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "CE 认证(Shielding MRD 试剂盒)",
+        "date": "2023-01",
+        "sources": [
+          "pr-newswire-2023-01-24"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2021",
+    "note": "论文未写明商品名；CE 公告称 Shielding 试剂盒采用 ATG-SEQ 超深度测序，行业报告将术宁列为 tumor-informed、群体定制 139 基因。",
+    "sources": [
+      "pr-newswire-2023-01-24",
+      "mrd-j-hematol-oncol-2021-a17ea6",
+      "mrd-nat-commun-2021-02a65e",
+      "mrd-2024-4c4910",
+      "mrd-mrd-7c26a2"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "burningrock-langwei",
+    "companyId": "burningrock",
+    "company": "燃石医学",
+    "companyEn": "Burning Rock",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "product": "朗微(brPROPHET)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤组织与配对白细胞全外显子测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "深度测序患者特异变异",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "50 个变异(PROPHET)，brPROPHET 最多 55 个",
+    "lod": [
+      {
+        "label": "0.0036% ctDNA 分数",
+        "basis": "Probit 分析；60 ng 投入时为 0.0018%，摘要记作 0.004%",
+        "scale": "tf",
+        "value": 36,
+        "input": "20 ng cfDNA",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-cancer-cell-2023-697f37"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "早期 NSCLC",
+        "setting": "纵向监测",
+        "study": "PROPHET, Cancer Cell 2023",
+        "n": 181,
+        "sensitivity": "84.2%(16/19)",
+        "baselineDetection": "45%",
+        "leadTime": "中位 299 天",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-cancer-cell-2023-697f37"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "进入 NMPA 创新医疗器械特别审查",
+        "date": "2026-08",
+        "sources": [
+          "mrd-2026-08-25-6fd7c5"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2021",
+    "sources": [
+      "mrd-targeted-oncology-brprophet-615db2",
+      "mrd-2026-08-25-6fd7c5",
+      "mrd-2024-4c4910"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "genecast-minerva",
+    "companyId": "genecast",
+    "company": "臻和科技",
+    "companyEn": "Genecast",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "product": "MinerVa(朗微博 / 畅微博)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "panel",
+    "tissueDetail": "定制 769 基因 panel 检测肿瘤组织与血浆的体细胞突变",
+    "tracking": "固定 panel",
+    "trackingDetail": "769 基因捕获测序",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "769 基因",
+    "lod": [],
+    "clinical": [
+      {
+        "cancer": "NSCLC I–III 期",
+        "setting": "围手术期(术后 3 天 / 1 个月)",
+        "study": "LUNGCA-1, Clin Cancer Res 2022",
+        "n": 330,
+        "hazardRatio": "11.1",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-clin-cancer-res-2022-1ed224"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [],
+    "prices": [],
+    "launch": "2020",
+    "note": "论文未写明商品名；769 基因与朗微博的对应见行业报告。",
+    "sources": [
+      "mrd-mrd-7c26a2",
+      "mrd-clin-cancer-res-2022-1ed224",
+      "mrd-2024-4c4910"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "geneplus-jichangan",
+    "companyId": "geneplus",
+    "company": "吉因加",
+    "companyEn": "GenePlus",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "product": "吉长安(1021+ MRD)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "panel",
+    "tissueDetail": "1021 基因 panel 做组织测序",
+    "tracking": "个体化 panel",
+    "trackingDetail": "超深度靶向测序",
+    "analytes": [
+      "SNV",
+      "indel"
+    ],
+    "targets": "最多 20 个变异",
+    "lod": [
+      {
+        "label": "0.005%",
+        "basis": "样本水平检出限(追踪 12–20 个突变)",
+        "scale": null,
+        "value": null,
+        "input": "60 ng cfDNA",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-tumor-informed-ctdna-pmc12674089-3e354a"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "结直肠癌",
+        "setting": "术后纵向监测",
+        "study": "MedComm 2025",
+        "n": 89,
+        "sensitivity": "93.8%(30/32)",
+        "specificity": "100%",
+        "evidence": "peer-reviewed",
+        "note": "n 为结直肠癌、乳腺癌、肺癌三个队列合计。",
+        "sources": [
+          "mrd-tumor-informed-ctdna-pmc12674089-3e354a"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "进入 NMPA 创新医疗器械特别审查程序",
+        "date": null,
+        "sources": [
+          "mrd-mrd-2025-11-69cdaa"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2021",
+    "note": "论文未写明商品名，与吉长安的对应依据 1021 基因 panel。",
+    "sources": [
+      "mrd-tumor-informed-ctdna-pmc12674089-3e354a",
+      "mrd-2024-4c4910"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "bgi-huajianwei",
+    "companyId": "bgi",
+    "company": "华大基因",
+    "companyEn": "BGI Genomics",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "product": "华见微(Signatera 中国版)",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "",
+    "tracking": "个体化 panel",
+    "trackingDetail": "多重 PCR + NGS，使用 MGI 测序平台",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "16 个突变",
+    "lod": [],
+    "clinical": [],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [],
+    "prices": [],
+    "launch": "2021",
+    "note": "由 Natera 授权；未查到中国版单独的性能数据。",
+    "sources": [
+      "mrd-pharma-focus-asia-bgi-natera-3fbf2d",
+      "mrd-mrd-7c26a2",
+      "mrd-2024-4c4910"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "origimed-orimiracles",
+    "companyId": null,
+    "company": "至本医疗",
+    "companyEn": "OrigiMed",
+    "country": "中国",
+    "region": "国内",
+    "self": false,
+    "product": "至美 OriMIRACLES",
+    "category": "solid",
+    "approach": "tumor-informed",
+    "tissue": "WES",
+    "tissueDetail": "肿瘤组织与配对胚系全外显子测序，选出克隆性 SNV",
+    "tracking": "个体化 panel",
+    "trackingDetail": "患者专属多重 PCR + NGS",
+    "analytes": [
+      "SNV"
+    ],
+    "targets": "21–30 个变异",
+    "lod": [],
+    "clinical": [],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [],
+    "prices": [],
+    "launch": "2021",
+    "sources": [
+      "mrd-cancer-med-2023-b62359",
+      "mrd-2024-4c4910"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "guardant-reveal",
+    "companyId": "guardant",
+    "company": "Guardant Health",
+    "companyEn": "Guardant Health",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Guardant Reveal",
+    "category": "solid",
+    "approach": "tumor-naive",
+    "tissue": null,
+    "tissueDetail": "",
+    "tracking": "固定 panel",
+    "trackingDetail": "血浆表观基因组(甲基化)区域检测 ctDNA，不需要肿瘤组织",
+    "analytes": [
+      "甲基化"
+    ],
+    "targets": "逾 20,000 个表观基因组区域",
+    "lod": [],
+    "clinical": [
+      {
+        "cancer": "结直肠癌(术后)",
+        "setting": "纵向监测",
+        "study": "Clin Cancer Res 2024",
+        "n": 342,
+        "sensitivity": "81%(II 期及以上结肠癌)",
+        "specificity": "98.2%",
+        "leadTime": "中位 5.3 个月",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-clin-cancer-res-2024-0dc512"
+        ]
+      }
+    ],
+    "sample": "外周血",
+    "turnaround": "7 天(企业宣称)",
+    "statuses": [
+      {
+        "label": "Medicare 覆盖结直肠癌各分期",
+        "date": null,
+        "sources": [
+          "mrd-guardant-reveal-c841a2"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-guardant-reveal-c841a2",
+      "mrd-clin-cancer-res-2024-0dc512"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "tempus-xm",
+    "companyId": null,
+    "company": "Tempus AI",
+    "companyEn": "Tempus AI",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "xM(结直肠癌)",
+    "category": "solid",
+    "approach": "tumor-naive",
+    "tissue": null,
+    "tissueDetail": "",
+    "tracking": "固定 panel",
+    "trackingDetail": "变异 panel(0.3 Mbp，100 多个基因)与甲基化 panel(6 Mbp)联合判读",
+    "analytes": [
+      "甲基化",
+      "SNV",
+      "indel"
+    ],
+    "targets": "0.3 Mbp 变异 panel + 6 Mbp 甲基化 panel",
+    "lod": [],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 II–III 期",
+        "setting": "术后单点 / 纵向",
+        "study": "Clin Cancer Res 2025",
+        "n": 80,
+        "sensitivity": "单点 61.1%，纵向 83.3%",
+        "specificity": "单点 87.9%，纵向 89.5%",
+        "leadTime": "中位 4.77 个月",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-clin-cancer-res-2025-tempus-xm-2d4112"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [],
+    "prices": [],
+    "launch": "2024",
+    "note": "2024 年以仅供研究(RUO)形式推出。",
+    "sources": [
+      "mrd-clin-cancer-res-2025-tempus-xm-2d4112"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "natera-latitude",
+    "companyId": null,
+    "company": "Natera",
+    "companyEn": "Natera",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Latitude",
+    "category": "solid",
+    "approach": "tumor-naive",
+    "tissue": null,
+    "tissueDetail": "",
+    "tracking": "固定 panel",
+    "trackingDetail": "血浆甲基化标志物检测，不需要肿瘤组织",
+    "analytes": [
+      "甲基化"
+    ],
+    "targets": "",
+    "lod": [],
+    "clinical": [
+      {
+        "cancer": "结直肠癌 II–III 期",
+        "setting": "纵向监测(GALAXY 队列)",
+        "study": "npj Precis Oncol 2026",
+        "n": 195,
+        "sensitivity": "84.4%",
+        "specificity": "97.2%(样本水平)",
+        "leadTime": "中位 4.6 个月",
+        "note": "数字引自企业对论文的公告。",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-natera-latitude-da7c8e"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "临床验证发表，企业称据此向 MolDX 申请结直肠癌覆盖",
+        "date": "2026-01",
+        "sources": [
+          "mrd-natera-latitude-da7c8e"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2025",
+    "sources": [
+      "mrd-natera-latitude-da7c8e"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "geneseeq-shielding-ultra",
+    "companyId": "geneseeq",
+    "company": "世和基因",
+    "companyEn": "Geneseeq",
+    "country": "中国",
+    "region": "国内",
+    "self": true,
+    "product": "术宁 Ultra",
+    "category": "solid",
+    "approach": "tumor-naive",
+    "tissue": null,
+    "tissueDetail": "",
+    "tracking": "固定 panel",
+    "trackingDetail": "2365 个泛实体瘤相关基因，ATG-seq 三重降噪，30,000× 超高深度测序；整合突变与片段组学两类信号",
+    "analytes": [
+      "SNV",
+      "indel",
+      "片段组学"
+    ],
+    "targets": "2365 基因",
+    "lod": [
+      {
+        "label": "0.01%",
+        "basis": "2023 年发布稿「LOD 稳定达 0.01%」，未注明口径",
+        "scale": null,
+        "value": null,
+        "evidence": "vendor",
+        "sources": [
+          "mrd-ultra-2023-05-9a4efc"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "胸膜间皮瘤 I–III 期",
+        "setting": "术后多时间点",
+        "study": "SMARTEST(官网发布)",
+        "n": 30,
+        "sensitivity": "55%(多时间点联合)",
+        "leadTime": "中位 452 天",
+        "evidence": "vendor",
+        "sources": [
+          "mrd-smartest-8c74ad"
+        ]
+      }
+    ],
+    "sample": "",
+    "turnaround": "实验流程 5–7 个工作日",
+    "statuses": [],
+    "prices": [],
+    "launch": "2023",
+    "note": "官网 ATG-seq 技术页另称「95% 稳定检出千分之一丰度」，与发布稿的 0.01% 不是同一口径。",
+    "sources": [
+      "mrd-smartest-8c74ad",
+      "mrd-ultra-2023-05-9a4efc",
+      "mrd-atg-seq-8ccfdc"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "adaptive-clonoseq",
+    "companyId": null,
+    "company": "Adaptive Biotechnologies",
+    "companyEn": "Adaptive Biotechnologies",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "clonoSEQ",
+    "category": "heme",
+    "approach": "tumor-informed",
+    "tissue": null,
+    "tissueDetail": "用诊断期的高肿瘤负荷样本确定患者特异的克隆性免疫球蛋白重排序列",
+    "tracking": "免疫受体测序",
+    "trackingDetail": "多重 PCR + NGS 检测 IgH、IgK、IgL 重排与 BCL1/BCL2-IgH 易位",
+    "analytes": [
+      "Ig 基因重排"
+    ],
+    "targets": "",
+    "lod": [
+      {
+        "label": "1.903 个恶性细胞",
+        "basis": "LoD(probit)；20 µg DNA 投入时相当于 6.77×10⁻⁷",
+        "scale": "cells",
+        "value": 6.77e-07,
+        "input": "500 ng–20 µg DNA",
+        "evidence": "regulator",
+        "sources": [
+          "mrd-fda-de-novo-den170080-b9ad9a"
+        ]
+      }
+    ],
+    "clinical": [],
+    "sample": "",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "FDA De Novo 授权：多发性骨髓瘤、B-ALL(骨髓)",
+        "date": "2018",
+        "sources": [
+          "mrd-medtech-dive-2018-10-0be893"
+        ]
+      },
+      {
+        "label": "FDA 许可：慢性淋巴细胞白血病(血液或骨髓)",
+        "date": "2020-08",
+        "sources": [
+          "mrd-accc-clonoseq-cll-099ea1"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": "2018",
+    "sources": [
+      "mrd-fda-de-novo-den170080-b9ad9a"
+    ],
+    "updatedAt": "2026-11-13"
+  },
+  {
+    "id": "foresight-clarity",
+    "companyId": null,
+    "company": "Foresight Diagnostics(Natera)",
+    "companyEn": "Foresight Diagnostics",
+    "country": "美国",
+    "region": "国外",
+    "self": false,
+    "product": "Foresight CLARITY",
+    "category": "heme",
+    "approach": "tumor-informed",
+    "tissue": null,
+    "tissueDetail": "由治疗前血浆或肿瘤组织确定相位变异(phased variants)",
+    "tracking": "固定 panel",
+    "trackingDetail": "PhasED-Seq：靶向测序追踪同一 DNA 分子上的多个突变",
+    "analytes": [
+      "相位变异"
+    ],
+    "targets": "",
+    "lod": [
+      {
+        "label": "0.7 ppm",
+        "basis": "LoD95",
+        "scale": "tf",
+        "value": 0.7,
+        "input": "120 ng DNA",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-oncotarget-2025-3f5de1"
+        ]
+      }
+    ],
+    "clinical": [
+      {
+        "cancer": "大 B 细胞淋巴瘤",
+        "setting": "一线治疗结束时",
+        "study": "J Clin Oncol 2026",
+        "n": 136,
+        "hazardRatio": "9.8(PFS)",
+        "evidence": "peer-reviewed",
+        "sources": [
+          "mrd-j-clin-oncol-2026-fc375e"
+        ]
+      }
+    ],
+    "sample": "外周血",
+    "turnaround": "",
+    "statuses": [
+      {
+        "label": "未经 FDA 批准(CLIA 实验室)",
+        "date": null,
+        "sources": [
+          "mrd-foresight-clarity-b7dd6e"
+        ]
+      },
+      {
+        "label": "被 Natera 收购(2.75 亿美元预付)",
+        "date": "2025-12",
+        "sources": [
+          "mrd-medtech-dive-2025-12-cb94f3"
+        ]
+      }
+    ],
+    "prices": [],
+    "launch": null,
+    "sources": [
+      "mrd-foresight-clarity-b7dd6e",
+      "mrd-medtech-dive-2025-12-cb94f3"
+    ],
+    "updatedAt": "2026-11-13"
+  }
+]
