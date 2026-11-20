@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-17T04:28:51.239Z",
-  "window_since": "2026-10-17",
+  "generated_at": "2026-11-20T03:11:23.390Z",
+  "window_since": "2026-10-20",
   "watches": 20,
   "categories": [
     {
@@ -12,17 +12,17 @@
     {
       "key": "academic",
       "label": "学术动态",
-      "count": 2
+      "count": 0
     },
     {
       "key": "research",
       "label": "新研究",
-      "count": 2
+      "count": 0
     },
     {
       "key": "market",
       "label": "市场动态",
-      "count": 5
+      "count": 0
     }
   ],
   "items": [
@@ -1882,10 +1882,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -2028,10 +2028,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -2335,7 +2335,7 @@
       "spark": [
         0,
         0,
-        1,
+        0,
         0,
         0,
         0,
@@ -4889,10 +4889,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -4993,7 +4993,7 @@
       "spark": [
         0,
         0,
-        1,
+        0,
         0,
         0,
         0,
@@ -5818,10 +5818,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -5917,10 +5917,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -6018,10 +6018,10 @@
       "spark": [
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -6128,7 +6128,7 @@
       "spark": [
         0,
         0,
-        1,
+        0,
         0,
         0,
         0,
@@ -7180,10 +7180,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -7303,10 +7303,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -7411,10 +7411,10 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
         1,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -8164,35 +8164,7 @@
       "stale_month": null
     }
   ],
-  "digest": {
-    "markdown": "总览：已核验事件显示，癌症早筛竞争焦点正从“能否检出”转向临床终点、支付覆盖与可落地工作流。[evt_59b0e187-cb4b-4f3d-8b39-190912b5d964]\n\n要点：\n1. GRAIL称Galleri最大前瞻性试验未达主要终点；旧预警指其难检出<10mm肿瘤且缺乏改善结局证据，可信度与监管前景承压。[evt_59b0e187-cb4b-4f3d-8b39-190912b5d964]\n2. Guardant Q3营收3.61亿美元、增36%；Shield收入6760万、测试量8.3万、增246%，上调全年指引并扩大伴随诊断与商业覆盖。[evt_55c8e87c-f562-41f2-9569-cba488622c97]\n3. Freenome推出SimpleScreen Lung LDT，可与已获批CRC测试单次采血联用；独立队列灵敏度85%、特异度50%、NPV 99.8%。[evt_d5bf9dcd-2478-4046-b84a-f8dc8c54c694]\n4. GRAIL拟在EDCC/ESMO披露NHS-Galleri与PATHFINDER 2八项数据，主题含检出窗口、种族差异、急诊诊断减少与CSO引导检查效率。[evt_e982b13d-4460-4898-a3f5-ec3fd18ccbaf]\n5. Gene Solutions在马来西亚发布SPOT-MAS CRC与Eva，并展示获FDA突破性认定的SPOT-MAS 10，东南亚商业化推进。[evt_c4cdf58c-c66c-454a-9550-6671cc336023]\n\n趋势判断：单点性能宣传边际减弱，终点证据、保险覆盖、单次采血组合与筛查后闭环将决定下一阶段份额。",
-    "model": "kimi-k3",
-    "generated_at": "2026-11-17T06:59:21.114Z",
-    "evidence_refs": [
-      "evt_59b0e187-cb4b-4f3d-8b39-190912b5d964",
-      "evt_55c8e87c-f562-41f2-9569-cba488622c97",
-      "evt_d5bf9dcd-2478-4046-b84a-f8dc8c54c694",
-      "evt_e982b13d-4460-4898-a3f5-ec3fd18ccbaf",
-      "evt_c4cdf58c-c66c-454a-9550-6671cc336023"
-    ],
-    "analysis": {
-      "provider": "kimi",
-      "model": "kimi-k3",
-      "prompt_version": "digest-zh-v1",
-      "schema_version": "monitor_digest-v1",
-      "generated_at": "2026-11-17T06:59:21.114Z",
-      "result": {
-        "evidence_refs": [
-          "evt_59b0e187-cb4b-4f3d-8b39-190912b5d964",
-          "evt_55c8e87c-f562-41f2-9569-cba488622c97",
-          "evt_d5bf9dcd-2478-4046-b84a-f8dc8c54c694",
-          "evt_e982b13d-4460-4898-a3f5-ec3fd18ccbaf",
-          "evt_c4cdf58c-c66c-454a-9550-6671cc336023"
-        ],
-        "markdown": "总览：已核验事件显示，癌症早筛竞争焦点正从“能否检出”转向临床终点、支付覆盖与可落地工作流。[evt_59b0e187-cb4b-4f3d-8b39-190912b5d964]\n\n要点：\n1. GRAIL称Galleri最大前瞻性试验未达主要终点；旧预警指其难检出<10mm肿瘤且缺乏改善结局证据，可信度与监管前景承压。[evt_59b0e187-cb4b-4f3d-8b39-190912b5d964]\n2. Guardant Q3营收3.61亿美元、增36%；Shield收入6760万、测试量8.3万、增246%，上调全年指引并扩大伴随诊断与商业覆盖。[evt_55c8e87c-f562-41f2-9569-cba488622c97]\n3. Freenome推出SimpleScreen Lung LDT，可与已获批CRC测试单次采血联用；独立队列灵敏度85%、特异度50%、NPV 99.8%。[evt_d5bf9dcd-2478-4046-b84a-f8dc8c54c694]\n4. GRAIL拟在EDCC/ESMO披露NHS-Galleri与PATHFINDER 2八项数据，主题含检出窗口、种族差异、急诊诊断减少与CSO引导检查效率。[evt_e982b13d-4460-4898-a3f5-ec3fd18ccbaf]\n5. Gene Solutions在马来西亚发布SPOT-MAS CRC与Eva，并展示获FDA突破性认定的SPOT-MAS 10，东南亚商业化推进。[evt_c4cdf58c-c66c-454a-9550-6671cc336023]\n\n趋势判断：单点性能宣传边际减弱，终点证据、保险覆盖、单次采血组合与筛查后闭环将决定下一阶段份额。"
-      }
-    }
-  },
+  "digest": null,
   "manual_tasks": [
     {
       "company": "GRAIL",
@@ -9143,78 +9115,8 @@
     },
     {
       "candidate_id": null,
-      "source_id": "pubmed:guardant-health",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:epigenomics",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:epigenomics",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:geneoscopy",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:geneoscopy",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:gene-solutions",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "pubmed:gene-solutions",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "official:e9b98de8bf9ce59f",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "official:e9b98de8bf9ce59f",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "official:e9b98de8bf9ce59f",
-      "stage": "content",
-      "error_code": "request_failed",
-      "retry_count": 0
-    },
-    {
-      "candidate_id": null,
-      "source_id": "official:e9b98de8bf9ce59f",
-      "stage": "content",
+      "source_id": "official:gene-solutions",
+      "stage": "collection",
       "error_code": "request_failed",
       "retry_count": 0
     },
@@ -9826,20 +9728,80 @@
       "stage": "content",
       "error_code": "discovery_content_fetch_failed",
       "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_95e48d6f2116",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_95e48d6f2116",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_757596492666",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_757596492666",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_757596492666",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_514ef6e078a8",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_95e48d6f2116",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_f9c6851f9a3d",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_f9c6851f9a3d",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
+    },
+    {
+      "candidate_id": null,
+      "source_id": "discovery:weixinzs-mced:gh_757596492666",
+      "stage": "content",
+      "error_code": "discovery_content_fetch_failed",
+      "retry_count": 0
     }
   ],
   "views": {
-    "daily_event_ids": [
-      "evt_59b0e187-cb4b-4f3d-8b39-190912b5d964",
-      "evt_55c8e87c-f562-41f2-9569-cba488622c97",
-      "evt_d5bf9dcd-2478-4046-b84a-f8dc8c54c694",
-      "evt_e982b13d-4460-4898-a3f5-ec3fd18ccbaf",
-      "evt_c4cdf58c-c66c-454a-9550-6671cc336023",
-      "evt_32dee425-da19-4e17-b909-58a97192fd05",
-      "evt_bbeab362-5708-4377-97d1-ba410f5c6ac1",
-      "evt_297a1db6-8b86-40d2-8f79-209a382f62f2",
-      "evt_36710b28-317b-4e7b-96b2-c1004378dda1"
-    ],
+    "daily_event_ids": [],
     "hot_event_ids": [
       "evt_59b0e187-cb4b-4f3d-8b39-190912b5d964",
       "evt_55c8e87c-f562-41f2-9569-cba488622c97",
@@ -9910,17 +9872,17 @@
     ]
   },
   "metrics": {
-    "collected_hits": 667,
-    "canonical_duplicates": 5,
-    "first": 26,
-    "update": 4,
-    "duplicate": 0,
-    "backfill": 28,
-    "pending": 554,
-    "rejected": 50,
-    "failed": 2,
-    "moa_escalations": 503,
-    "model_calls": 1141,
+    "collected_hits": 548,
+    "canonical_duplicates": 3,
+    "first": 0,
+    "update": 0,
+    "duplicate": 1,
+    "backfill": 0,
+    "pending": 544,
+    "rejected": 0,
+    "failed": 69,
+    "moa_escalations": 0,
+    "model_calls": 0,
     "provider_configuration": {
       "qwen": {
         "provider": "qwen",
@@ -9973,19 +9935,19 @@
     },
     "acceptance_passed": true,
     "acceptance_fixture_sha256": "fa7f0b72dd7c539b774cd8df56c52c639da58a71af2e6002b39d27cc06b88f1e",
-    "deferred": 42,
-    "released": 45,
-    "collection_ms": 262311,
-    "enrichment_ms": 896357,
-    "processing_ms": 7843971,
-    "total_ms": 9029875,
+    "deferred": 0,
+    "released": 0,
+    "collection_ms": 68777,
+    "enrichment_ms": 262170,
+    "processing_ms": 38427,
+    "total_ms": 369568,
     "coverage_gaps": 1,
-    "candidate_total": 980,
+    "candidate_total": 1043,
     "event_total": 282,
     "evidence_total": 451,
     "review_backlog": 0,
     "stalled_candidates": 0,
-    "errors": 472,
+    "errors": 550,
     "estimated_model_cost": null,
     "gate_open": true
   },
